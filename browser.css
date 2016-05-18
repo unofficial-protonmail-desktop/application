@@ -1,0 +1,272 @@
+html {
+    overflow: hidden;
+}
+
+/* Fix "Back to main page" header */
+
+#pm_header {
+    display: none;
+}
+
+/* don't show outline on clickable elements
+ * except in the delete/mute modal so that we know what we are selecting */
+
+a, *[role="button"] {
+    outline: none !important;
+}
+
+/*!
+Dark theme by MatCore, original template from
+ProtonMail Custom Theme - Black Rock modified by Jack.A
+*/
+
+
+/* Login page */
+
+html.darkMode .pm_panel.alt {
+    background: rgb(57, 57, 69);
+}
+
+/* Frame (topbar and sidebar.) */
+
+html.darkMode header#pm_header-desktop {
+    background: #21242E;
+}
+html.darkMode body section.sidebar {
+    background: #21242E;
+}
+html.darkMode header#pm_header-desktop a.logo {
+    background: #21242E;
+}
+
+/* Search bar */
+
+html.darkMode form.searchForm fieldset {
+    border-radius: 2px;
+    background-color: #21242E;
+}
+html.darkMode form.searchForm fieldset button[type=“button”] {
+    color: #b53232;
+    background-color: #21242E;
+    border-radius: 2px 0 0 2px;
+}
+html.darkMode form.searchForm fieldset #closeAdvSearch, html.darkMode form.searchForm fieldset button[type=“submit”] {
+    color: #b53232;
+}
+html.darkMode form.searchForm fieldset button[type=“button”]:hover {
+    background-color: #b53232;
+}
+html.darkMode form.searchForm.adv fieldset #closeAdvSearch, html.darkMode form.searchForm.adv fieldset button[type=“submit”] {
+    background-color: #21242E;
+    border-radius: 2px 0 0 2px;
+}
+html.darkMode .pm_form .input-icon .fa {
+    color: #b53232;
+}
+html.darkMode form.searchForm fieldset button[type="button"]:hover {
+    background-color: #2E313A;
+}
+html.darkMode form.searchForm fieldset input.query {
+    background-color: #2E313A;
+}
+
+/* Top Navigation */
+
+html.darkMode .pm_button.primary {
+    background-color: #b53232;
+    border-color: #b53232;
+}
+html.darkMode .pm_button.primary:hover {
+    background-color: #b53232;
+    border-color: #b53232;
+    background-color: #b53232;
+}
+html.darkMode header#pm_header-desktop ul.navigation li a .fa {
+    color: #fff;
+}
+html.darkMode header#pm_header-desktop ul.navigation li a strong {
+    color: #fff;
+}
+
+/* TN Dropdown Menu */
+
+html.darkMode header#pm_header-desktop .pm_buttons .pm_button.primary {
+    background-color: #b53232 !important;
+    border-color: #b53232 !important;
+}
+
+/* TN Links Hover */
+
+html.darkMode header#pm_header-desktop ul.navigation li.active a, html.darkMode header#pm_header-desktop ul.navigation li:hover a {
+    border-top-color: #b53232 !important;
+}
+html.darkMode header#pm_header-desktop ul.navigation li.active a strong, html.darkMode header#pm_header-desktop ul.navigation li:hover a strong {
+    color: #b53232;
+}
+html.darkMode header#pm_header-desktop ul.navigation li.active a .fa, html.darkMode header#pm_header-desktop ul.navigation li:hover a .fa {
+    color: #b53232;
+}
+html.darkMode header#pm_header-desktop ul.navigation li.active a strong, html.darkMode header#pm_header-desktop ul.navigation li:hover a strong {
+    color: #b53232;
+}
+
+/* Sidebar Navigation */
+
+html.darkMode body section.sidebar ul.menu li.active a i.fa {
+    color: #b53232;
+}
+html.darkMode body section.sidebar ul.menu li a {
+    color: #fff;
+}
+html.darkMode body section.sidebar ul.menu li a:hover {
+    color: #b53232;
+}
+html.darkMode body section.sidebar div.footer div.link a {
+    color: #b53232;
+}
+html.darkMode body section.sidebar div.footer .bar em {
+    background-color: #b53232;
+}
+html.darkMode body section.sidebar div.footer div.storage strong {
+    color: #b53232;
+}
+
+/* Label Navigation */
+
+html.darkMode body section.sidebar div.labels ul li a:hover {
+    color: #b53232;
+}
+html.darkMode body section.sidebar div.labels ul li a {
+    color: #fff;
+}
+
+/* Settings Navigation */
+
+html.darkMode #pm_settings .pm_tabs li.active a.pm_button {
+    background: #fff !important;
+    color: #1c1c1c;
+}
+html.darkMode #pm_settings .pm_tabs li a.pm_button {
+    border-color: #1c1c1c;
+    background: #1c1c1c;
+    color: #fff;
+}
+html.darkMode #pm_settings .pm_tabs li a.pm_button:hover {
+    background: #373737;
+}
+html.darkMode #pm_settings .pm_tabs {
+    /*background: #2f2e2e;*/
+    background: #474747;
+}
+
+/* Dashboard Settings */
+
+html.darkMode #pm_settings #plans header .link {
+    color: #8cc63f;
+}
+html.darkMode #pm_settings #plans .plans .plan header {
+    background: #1c1c1c;
+    border: 1px solid #1c1c1c;
+}
+html.darkMode #pm_settings #plans .plans .plan .price, html.darkMode #pm_settings #plans .plans .plan h3 {
+    color: #1c1c1c;
+}
+html.darkMode .pm_button.primary.disabled, html.darkMode .pm_button.primary[disabled] {
+    background: #b53232;
+}
+html.darkMode .pm_button.primary:active, html.darkMode .pm_button.primary:focus {
+    background: #b53232;
+    border-color: #b53232;
+}
+html.protonmail .text-purple {
+    color: #b53232;
+}
+
+/* Label Settings */
+
+html.darkMode .pm_button.round {
+    border-radius: 2px;
+    border: 1px solid #7b7b7b;
+}
+html.darkMode .pm_button.round .fa {
+    color: #b53232;
+}
+
+/* Security Settings */
+
+html.darkMode .pm_button {
+    color: #1c1c1c;
+}
+html.darkMode .pm_table td {
+    color: #1c1c1c;
+}
+
+/* Contacts */
+
+html.darkMode .pm_table th a {
+    color: #1c1c1c;
+}
+html.darkMode .pm_table th .fa {
+    color: #1c1c1c;
+}
+
+/* Report Bug */
+
+html.darkMode .pm_toggle.off .off {
+    background: #b53232;
+}
+p a {
+    color: #b53232;
+}
+
+/* Links */
+
+html.darkMode .pm_button.link {
+    color: #b53232;
+}
+
+/* Inbox */
+
+html.darkMode .pm_buttons a {
+    color: #1c1c1c;
+}
+html.darkMode body #conversation-list-rows .conversation.read {
+    color: #1c1c1c !important;
+}
+
+/* Reading e-mail. */
+
+html.darkMode #conversation-view .message .toggleDetails {
+    color: #b53232;
+}
+
+/* Composing e-mail */
+
+html.darkMode #pm_composer .composer header {
+    background: #2c2b2b;
+}
+html.darkMode #pm_composer .composer header .pm_button {
+    color: #b53232;
+}
+html.darkMode #pm_composer .composer footer .pm_button.primary {
+    background: #b53232;
+}
+
+/* Notifications */
+
+html.darkMode body .cg-notify-message.notification-success {
+    background-color: #b53232;
+    border-color: #b53232;
+}
+
+/* Login page */
+
+html.darkMode #pm_login .pm_button.link {
+    color: white;
+}
+
+/* Selected element line */
+
+html.darkMode .conversation .selected-bar {
+    background: #B53232;
+}

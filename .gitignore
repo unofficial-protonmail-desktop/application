@@ -1,0 +1,5 @@
+node_modules
+.git
+npm-debug.log
+dist
+electron-packager
