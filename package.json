@@ -6,16 +6,12 @@
     "license": "MIT",
     "repository": "beatplus/protonmail",
     "author": {
-        "name": "Matthew Core <BeatPlus>",
+        "name": "Matthew Core <matcore@protonmail.com>",
         "email": "matcore@protonmail.com"
     },
     "scripts": {
         "test": "xo",
-        "start": "electron .",
-        "build": "npm run build:osx && npm run build:linux && npm run build:windows",
-        "build:osx": "electron-packager . --overwrite --asar --out=dist --ignore='^media$' --prune --platform=darwin --arch=x64 --icon=static/Icon.icns --app-bundle-id=com.sindresorhus.caprine --sign='Developer ID Application: Sindre Sorhus (YG56YK5RN5)' --app-version=$npm_package_version && cd dist/Pronmail-desktop-darwin-x64 && zip -ryXq9 ../Pronmail-desktop-osx-${npm_package_version}.zip Pronmail-desktop.app",
-        "build:linux": "electron-packager . --overwrite --asar --out=dist --ignore='^media$' --prune --platform=linux --arch=x64 --app-bundle-id=com.beatplus.pronmail-desktop --app-version=$npm_package_version && cd dist/Caprine-linux-x64/ && zip -ryq9 ../Pronmail-desktop-linux-${npm_package_version}.zip *",
-        "build:windows": "electron-packager . --overwrite --asar --out=dist --ignore='^media$' --prune --platform=win32 --arch=ia32 --icon=static/Icon.ico --version-string.ProductName=$npm_package_productName"
+        "start": "electron ."
     },
     "dependencies": {
         "electron-debug": "^0.7.0",
@@ -25,7 +21,6 @@
         "xo": "^0.15.1"
     },
     "devDependencies": {
-        "electron-packager": "^7.0.0",
         "electron-prebuilt": "*",
         "xo": "*"
     },

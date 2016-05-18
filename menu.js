@@ -40,7 +40,7 @@ const viewSubmenu = [{
 const helpSubmenu = [{
     label: `${appName} website`,
     click() {
-        shell.openExternal('https://github.com/BeatPlus/Protonmail-desktop');
+        shell.openExternal('https://github.com/BeatPlus/Protonmail');
     }
 }, {
     label: 'Report an issue',

@@ -20,7 +20,7 @@ Native notifications are working for all OS, you will receive a notification whe
 
 ### Version
 
-0.1.0
+0.1.1
 
 ## Dev and contributing
 

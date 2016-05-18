@@ -59,7 +59,7 @@ function checkMessages(title) {
     }
 
     // No new messages, do nothing.
-    if (messageCountOld && messageCount[1] === messageCountOld[1]) {
+    if (messageCountOld && messageCount[1] <= messageCountOld[1]) {
         updateBadge(0);
         return;
     }

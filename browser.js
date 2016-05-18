@@ -62,7 +62,7 @@ ipc.on('zoom-out', () => {
 /* Notifications */
 ipc.on('new-message-notification', (event, messageCount) => {
     let NotificationOptions = {};
-    if (messageCount === 1) {
+    if (messageCount === '1') {
         NotificationOptions = {
             title: 'New email',
             body: `You received ${messageCount} new email!`,
