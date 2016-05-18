@@ -67,9 +67,9 @@ if (process.platform !== 'darwin') {
             electron.dialog.showMessageBox({
                 title: `About ${appName}`,
                 message: `${appName} ${app.getVersion()}`,
-                detail: 'Unofficial Protonmail desktop app,created by Matthew Core',
-                icon: path.join(__dirname, 'static', process.platform === 'linux' ? 'Icon-linux-about.png' : 'Icon.png'),
-                buttons: ["Close"]
+                detail: 'Unofficial Protonmail desktop app,created by Matthew Core <BeatPlus>',
+                icon: path.join(__dirname, 'static', process.platform === 'linux' ? 'Icon-linux-about.png' : 'IconTray.png'),
+                buttons: ['Close']
             });
         }
     });
@@ -82,7 +82,7 @@ const MenuTpl = [{
         accelerator: 'CmdOrCtrl+N',
         click() {
             sendAction('new-email');
-        },
+        }
     }, {
         label: 'Close composer',
         accelerator: 'Esc',
@@ -98,6 +98,7 @@ const MenuTpl = [{
         type: 'separator'
     }, {
         label: 'Quit',
+        accelerator: 'CmdOrCtrl+Q',
         click() {
             app.quit();
         }

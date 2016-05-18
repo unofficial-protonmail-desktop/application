@@ -1,9 +1,9 @@
 'use strict';
+const path = require('path');
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
 const storage = electron.remote.require('./storage');
 const osxAppearance = require('electron-osx-appearance');
-const path = require('path');
 
 ipc.on('GoInbox', () => {
     // Go to Inbox/inbox
@@ -60,23 +60,24 @@ ipc.on('zoom-out', () => {
 });
 
 /* Notifications */
-ipc.on('new-message-notification', function(event, messageCount) {
-    if (messageCount > 1) {
-        var NotificationOptions = {
-            title: "New email",
-            body: "You received " + messageCount + " new email!",
+ipc.on('new-message-notification', (event, messageCount) => {
+    let NotificationOptions = {};
+    if (messageCount === 1) {
+        NotificationOptions = {
+            title: 'New email',
+            body: `You received ${messageCount} new email!`,
             icon: path.join(__dirname, 'static/Icon.png')
-        }
+        };
     } else {
-        var NotificationOptions = {
-            title: messageCount + "New emails",
-            body: "You received " + messageCount + " new emails!",
+        NotificationOptions = {
+            title: `${messageCount} new emails`,
+            body: `You received ${messageCount} new emails!`,
             icon: path.join(__dirname, 'static/Icon.png')
-        }
+        };
     }
 
-
-    new Notification(NotificationOptions.title, NotificationOptions);
+    const triggerNotification = new Notification(NotificationOptions.title, NotificationOptions);
+    triggerNotification();
 });
 
 function setDarkMode() {

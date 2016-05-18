@@ -12,7 +12,7 @@ require('electron-dl')();
 
 let mainWindow;
 let isQuitting = false;
-var oldtitle;
+let oldtitle;
 
 const isAlreadyRunning = app.makeSingleInstance(() => {
     if (mainWindow) {
@@ -28,41 +28,48 @@ if (isAlreadyRunning) {
     app.quit();
 }
 
-function updateBadge(title) {
-    // This is an ugly way to do it, it seems to work but needs to be improved.
-    // Limits: it actualyl does not work while you are not in the Inbox, may need some improvements
-
-    // How many new messages on new title?
-    const messageCount = (/\(([0-9]+)\)/).exec(title);
-    // How many messages I had?
-    const messageCountOld = (/\(([0-9]+)\)/).exec(oldtitle);
-
-    // No unread messages, do nothing
-    if (!messageCount) {
-        const indexCount = (/inbox/i).exec(title);
-        if (indexCount) {
-            oldtitle = 0;
-        }
-        return;
-    }
-
-    // No new messages, do nothing.
-    if (messageCountOld && messageCount[1] == messageCountOld[1]) {
-        return;
-    }
-
-    // Send notification when new message, if not focused
-    if (!mainWindow.isFocused()) {
-        mainWindow.webContents.send('new-message-notification', messageCount[1]);
-    }
-    oldtitle = title;
-
+function updateBadge(messageCount) {
     // Set badge
     if (process.platform === 'darwin') {
         app.dock.setBadge(messageCount ? messageCount[1] : '');
     } else {
         tray.setBadge(messageCount);
     }
+}
+
+function checkMessages(title) {
+    /* This is an ugly way to do it, it seems to work but needs to be improved.
+    Limits: it actualyl does not work while you are not in the Inbox, may need some improvements
+    Concerning badge update: Shall I clean badge if window is maximized?
+    */
+
+    // How many new messages on new title?
+    const messageCount = (/\(([0-9]+)\)/).exec(title);
+    // How many messages I had?
+    const messageCountOld = (/\(([0-9]+)\)/).exec(oldtitle);
+
+    // No unread messages, do nothing than setting badge to 0
+    if (!messageCount) {
+        const indexCount = (/inbox/i).exec(title);
+        if (indexCount) {
+            oldtitle = 0;
+            updateBadge(0);
+        }
+        return;
+    }
+
+    // No new messages, do nothing.
+    if (messageCountOld && messageCount[1] === messageCountOld[1]) {
+        updateBadge(0);
+        return;
+    }
+
+    // Send notification when new message, if not focused
+    if (!mainWindow.isFocused()) {
+        mainWindow.webContents.send('new-message-notification', messageCount[1]);
+        updateBadge(messageCount[1]);
+    }
+    oldtitle = title;
 }
 
 function createMainWindow() {
@@ -112,7 +119,7 @@ function createMainWindow() {
 
     win.on('page-title-updated', (e, title) => {
         e.preventDefault();
-        updateBadge(title);
+        checkMessages(title);
     });
 
     return win;
@@ -134,7 +141,6 @@ app.on('ready', () => {
         e.preventDefault();
         electron.shell.openExternal(url);
     });
-
 });
 
 app.on('activate', () => {
