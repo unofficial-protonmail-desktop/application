@@ -1,27 +1,20 @@
 {
-    "name": "Protonmail-Desktop",
-    "productName": "Protonmail desktop",
-    "version": "0.1.1",
-    "description": "Unofficial Protonmail desktop app",
-    "license": "MIT",
-    "repository": "beatplus/protonmail",
-    "author": {
-        "name": "Matthew Core <matcore@protonmail.com>",
-        "email": "matcore@protonmail.com"
+    "build": {
+        "app-bundle-id": "com.beatplus.pronmail-desktop"
     },
     "scripts": {
-        "test": "xo",
-        "start": "electron ."
-    },
-    "dependencies": {
-        "electron-debug": "^0.7.0",
-        "electron-dl": "^0.2.0",
-        "electron-osx-appearance": "^0.1.1",
-        "electron-prebuilt": "^1.1.0",
-        "xo": "^0.15.1"
+        "postinstall": "install-app-deps",
+        "pack": "build",
+        "dist": "build",
+        "dist:linux32": "build --platform linux --arch ia32",
+        "dist:win32": "build --platform win32 --arch ia32",
+        "dist:win64": "build --platform win32 --arch x64",
+        "test": "xo app",
+        "start": "electron app"
     },
     "devDependencies": {
-        "electron-prebuilt": "*",
+        "electron-builder": "^3.25.0",
+        "electron-prebuilt": "^1.1.0",
         "xo": "*"
     },
     "xo": {

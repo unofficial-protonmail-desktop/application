@@ -1,0 +1,21 @@
+{
+    "name": "Protonmail-Desktop",
+    "productName": "Protonmail Desktop",
+    "version": "0.1.1",
+    "description": "Unofficial Protonmail desktop app",
+    "license": "MIT",
+    "repository": "beatplus/protonmail",
+    "author": {
+        "name": "Matthew Core <matcore@protonmail.com>",
+        "email": "matcore@protonmail.com"
+    },
+    "dependencies": {
+        "electron-debug": "^0.7.0",
+        "electron-dl": "^0.2.0",
+        "electron-osx-appearance": "^0.1.1",
+        "electron-prebuilt": "^1.1.0"
+    },
+    "devDependencies": {
+        "electron-prebuilt": "*"
+    }
+}
