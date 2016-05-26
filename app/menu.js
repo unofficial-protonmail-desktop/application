@@ -54,7 +54,7 @@ ${app.getName()} ${app.getVersion()}
 Electron ${process.versions.electron}
 ${process.platform} ${process.arch} ${os.release()}`;
 
-        shell.openExternal(`https://github.com/BeatPlus/Protonmail-Desktop/issues/new?body=${encodeURIComponent(body)}`);
+        shell.openExternal(`https://github.com/BeatPlus/Protonmail/issues/new?body=${encodeURIComponent(body)}`);
     }
 }];
 
@@ -123,7 +123,7 @@ const MenuTpl = [{
         label: 'Toggle Dark Mode',
         accelerator: 'CmdOrCtrl+D',
         click() {
-            sendAction('dark-mode');
+            sendAction('toggle-dark-mode');
         }
     }, {
         label: 'Preferences',

@@ -10,12 +10,8 @@
         "email": "matcore@protonmail.com"
     },
     "dependencies": {
-        "electron-debug": "^0.7.0",
-        "electron-dl": "^0.2.0",
-        "electron-osx-appearance": "^0.1.1",
-        "electron-prebuilt": "^1.1.0"
-    },
-    "devDependencies": {
-        "electron-prebuilt": "*"
+        "electron-config": "^0.1.1",
+        "electron-debug": "^1.0.0",
+        "electron-dl": "^1.0.0"
     }
 }

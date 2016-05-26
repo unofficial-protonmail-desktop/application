@@ -4,7 +4,7 @@ const fs = require('fs');
 const electron = require('electron');
 const app = electron.app;
 const appMenu = require('./menu');
-const storage = require('./storage');
+const config = require('./config');
 const tray = require('./tray');
 
 require('electron-debug')();
@@ -73,10 +73,9 @@ function checkMessages(title) {
 }
 
 function createMainWindow() {
-    const lastWindowState = storage.get('lastWindowState') || {
-        width: 1300,
-        height: 850
-    };
+    const lastWindowState = config.get('lastWindowState');
+    const isDarkMode = config.get('darkMode');
+
 
     const win = new electron.BrowserWindow({
         title: app.getName(),
@@ -89,12 +88,12 @@ function createMainWindow() {
         minWidth: 1000,
         minHeight: 700,
         titleBarStyle: 'hidden-inset',
+        darkTheme: isDarkMode, // GTK+3
+        backgroundColor: isDarkMode ? '#192633' : '#fff',
+
         webPreferences: {
-            // fails without this because of CommonJS script detection
-            nodeIntegration: false,
             preload: path.join(__dirname, 'browser.js'),
-            // required for Facebook active ping thingy
-            webSecurity: false,
+            nodeIntegration: false,
             plugins: true
         }
     });
@@ -134,6 +133,7 @@ app.on('ready', () => {
 
     page.on('dom-ready', () => {
         page.insertCSS(fs.readFileSync(path.join(__dirname, 'browser.css'), 'utf8'));
+        page.insertCSS(fs.readFileSync(path.join(__dirname, 'themes/dark-mode.css'), 'utf8'));
         mainWindow.show();
     });
 
@@ -147,10 +147,11 @@ app.on('activate', () => {
     mainWindow.show();
 });
 
+
 app.on('before-quit', () => {
     isQuitting = true;
 
     if (!mainWindow.isFullScreen()) {
-        storage.set('lastWindowState', mainWindow.getBounds());
+        config.set('lastWindowState', mainWindow.getBounds());
     }
 });
