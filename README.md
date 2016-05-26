@@ -35,8 +35,12 @@ Pull request are accepted.
 ##### Known bugs
 There are some bugs I am aware of but could not find a fix for them. These include notifications not working when not in the inbox and Pantheon DE tray is not working properly for the moment.
 
-###### Commands
+## Running the App
+
+### Commands
 The installer is provided by *electon-builder*.
+
+This will work on OS X, Linux, and Windows. You will need [NodeJS](https://nodejs.org) to run this app/
 - Init: `$ npm install`
 - Run: `$ npm start`
 - Build Linux: `$ npm run dist:linux`
