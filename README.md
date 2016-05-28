@@ -4,7 +4,7 @@ ProtonMail Desktop
 
 ProtonMail Desktop is an **unofficial** app that emulates a native client for the ProtonMail e-mail service. Check out more about Protonmail in [their website](https://protonmail.com).
 
-I am not affiliated with ProtonMail team. All copyrights belong to their respective owners.
+We are not affiliated with ProtonMail team. All copyrights belong to their respective owners.
 
 This is an experiment from a main PHP coder, code may be bad and ugly. Most part of the initial core was modified from [sindresorhus/caprine](https://github.com/sindresorhus/caprine) repo.
 
@@ -43,9 +43,10 @@ The installer is provided by *electon-builder*.
 This will work on OS X, Linux, and Windows. You will need [NodeJS](https://nodejs.org) to run this app.
 - Init: `$ npm install`
 - Run: `$ npm start`
-- Build Linux: `$ npm run dist:linux`
-- Build Windows: `$ npm run dist:win64` `$ npm run dist:win32`
-- Build all: `$ npm dist`
+- Build Linux: `$ npm run dist:linux32`
+- Build Windows 32 bit: `$ npm run dist:win64`
+- Build Windows 64 bit: `$ npm run dist:win32`
+- Build all: `$ npm run dist`
 
 
 License
