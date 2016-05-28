@@ -30,10 +30,13 @@ Still in beta. 0.1.1
 Built with [Electron](http://electron.atom.io). There are two package.json, the *./package.json* contains the tools for creating installers and packages and the *app/package.json* the real dependencies. The code used for the final application is in /app.
 
 Any contribution or suggestion is accepted. Feel free to create any report for issues or app crashes. You can also use the report link provided in the application menu to create a crash report.
-Pull request are accepted.
+Pull requests are accepted.
 
 ##### Known bugs
-There are some bugs I am aware of but could not find a fix for them. These include notifications not working when not in the inbox and Pantheon DE tray is not working properly for the moment.
+
+* Pantheon Tray not working
+* Notifications not working while the Inbox is not selected
+* App won't build on OS X or Linux
 
 ## Running the App
 
