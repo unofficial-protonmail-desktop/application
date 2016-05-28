@@ -47,7 +47,6 @@ Temporary Items
 .apdisk
 
 # Custom dirs
-build
 dist
 node_modules
 *.log
