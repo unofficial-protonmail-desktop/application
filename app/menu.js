@@ -38,7 +38,7 @@ const viewSubmenu = [{
 }];
 
 const helpSubmenu = [{
-    label: `${appName} website`,
+    label: `${appName} Website`,
     click() {
         shell.openExternal('http://beatplus.github.io/Protonmail/');
     }
