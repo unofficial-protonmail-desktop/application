@@ -67,7 +67,7 @@ if (process.platform !== 'darwin') {
             electron.dialog.showMessageBox({
                 title: `About ${appName}`,
                 message: `${appName} ${app.getVersion()}`,
-                detail: 'Unofficial Protonmail desktop app,created by Matthew Core <BeatPlus>',
+                detail: 'Unofficial Protonmail desktop app, created by Matthew Core <BeatPlus> and Hayden Suarez-Davis <HaydenSD>.',
                 icon: path.join(__dirname, 'static', process.platform === 'linux' ? 'Icon-linux-about.png' : 'IconTray.png'),
                 buttons: ['Close']
             });
