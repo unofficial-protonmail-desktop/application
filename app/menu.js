@@ -40,9 +40,16 @@ const viewSubmenu = [{
 const helpSubmenu = [{
     label: `${appName} website`,
     click() {
-        shell.openExternal('https://github.com/BeatPlus/Protonmail');
+        shell.openExternal('http://beatplus.github.io/Protonmail/');
     }
-}, {
+},
+  {
+    label: `${appName} Source Code`,
+    click() {
+      shell.openExternal('https://github.com/BeatPlus/Protonmail')
+    }
+  },
+  {
     label: 'Report an issue',
     click() {
         const body = `
