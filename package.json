@@ -3,7 +3,7 @@
         "app-bundle-id": "com.beatplus.pronmail-desktop"
     },
     "scripts": {
-        "postinstall": "install-app-deps",
+        "prestart": "install-app-deps",
         "pack": "build",
         "dist": "build",
         "dist:linux32": "build --platform linux --arch ia32",
