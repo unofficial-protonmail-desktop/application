@@ -38,11 +38,18 @@ const viewSubmenu = [{
 }];
 
 const helpSubmenu = [{
-    label: `${appName} website`,
+    label: `${appName} Website`,
     click() {
-        shell.openExternal('https://github.com/BeatPlus/Protonmail');
+        shell.openExternal('http://beatplus.github.io/Protonmail/');
     }
-}, {
+},
+  {
+    label: `${appName} Source Code`,
+    click() {
+      shell.openExternal('https://github.com/BeatPlus/Protonmail')
+    }
+  },
+  {
     label: 'Report an issue',
     click() {
         const body = `
@@ -67,7 +74,7 @@ if (process.platform !== 'darwin') {
             electron.dialog.showMessageBox({
                 title: `About ${appName}`,
                 message: `${appName} ${app.getVersion()}`,
-                detail: 'Unofficial Protonmail desktop app,created by Matthew Core <BeatPlus>',
+                detail: 'Unofficial Protonmail desktop app, created by Matthew Core <BeatPlus> and Hayden Suarez-Davis <HaydenSD>.',
                 icon: path.join(__dirname, 'static', process.platform === 'linux' ? 'Icon-linux-about.png' : 'IconTray.png'),
                 buttons: ['Close']
             });
