@@ -40,7 +40,11 @@ Pull requests are accepted.
 
 ## Running the App
 
-### Commands
+### Executables
+
+You can find newer, buggier executables [here](https://github.com/BeatPlus/Protonmail/tree/executables). More stable, older executables can be found [here](https://github.com/BeatPlus/Protonmail/releases).
+
+### Compiling from source
 The installer is provided by *electon-builder*.
 
 This will work on OS X, Linux, and Windows. You will need [NodeJS](https://nodejs.org) to run this app.
