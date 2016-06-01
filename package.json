@@ -4,7 +4,7 @@
     "iconUrl": "https://raw.githubusercontent.com/BeatPlus/Protonmail/master/build/Icon.ico"
   },
   "scripts": {
-    "postinstall": "install-app-deps",
+    "postinstall": "cd app && npm install",
     "pack": "build",
     "dist": "build",
     "dist:linux32": "build --platform linux --arch ia32",
