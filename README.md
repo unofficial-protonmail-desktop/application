@@ -48,9 +48,10 @@ You can find newer, buggier executables [here](https://github.com/BeatPlus/Proto
 The installer is provided by *electon-builder*.
 
 This will work on OS X, Linux, and Windows. You will need [NodeJS](https://nodejs.org) to run this app.
-- Init: `$ npm install`
+- Install required packages: `$ npm install`
 - Run: `$ npm start`
-- Build Linux: `$ npm run dist:linux32`
+- Build Linux 32 bit: `$ npm run dist:linux32`
+- Build Linux 64 bit: `$ npm run dist:linux64`
 - Build Windows 32 bit: `$ npm run dist:win64`
 - Build Windows 64 bit: `$ npm run dist:win32`
 - Build all: `$ npm run dist`
