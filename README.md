@@ -54,6 +54,7 @@ This will work on OS X, Linux, and Windows. You will need [NodeJS](https://nodej
 - Build Linux 64 bit: `$ npm run dist:linux64`
 - Build Windows 32 bit: `$ npm run dist:win64`
 - Build Windows 64 bit: `$ npm run dist:win32`
+- Build OS X: `$ npm run dist:osx`
 - Build all: `$ npm run dist`
 
 
