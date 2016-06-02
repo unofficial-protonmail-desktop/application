@@ -31,7 +31,7 @@ ipc.on('close-composer', () => {
 
 /* Notifications */
 ipc.on('new-message-notification', (event, messageCount) => {
-    let NotificationOptions = {};
+/*    let NotificationOptions = {};
     if (messageCount === '1') {
         NotificationOptions = {
             title: 'New email',
@@ -45,7 +45,7 @@ ipc.on('new-message-notification', (event, messageCount) => {
             icon: path.join(__dirname, 'static/Icon.png')
         };
     }
-
+*/
     const triggerNotification = new Notification(NotificationOptions.title, NotificationOptions);
     triggerNotification();
 });
