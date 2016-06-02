@@ -7,7 +7,7 @@ const appMenu = require('./menu');
 const config = require('./config');
 const tray = require('./tray');
 
-if(require('electron-squirrel-startup')) return;
+if (require('electron-squirrel-startup')) return;
 
 require('electron-debug')();
 require('electron-dl')();
