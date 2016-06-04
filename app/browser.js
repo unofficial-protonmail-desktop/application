@@ -29,27 +29,6 @@ ipc.on('close-composer', () => {
     document.querySelector('.pm_button.link.close-button').click();
 });
 
-/* Notifications */
-ipc.on('new-message-notification', (event, messageCount) => {
-/*    let NotificationOptions = {};
-    if (messageCount === '1') {
-        NotificationOptions = {
-            title: 'New email',
-            body: `You received ${messageCount} new email!`,
-            icon: path.join(__dirname, 'static/Icon.png')
-        };
-    } else {
-        NotificationOptions = {
-            title: `${messageCount} new emails`,
-            body: `You received ${messageCount} new emails!`,
-            icon: path.join(__dirname, 'static/Icon.png')
-        };
-    }
-*/
-    const triggerNotification = new Notification(NotificationOptions.title, NotificationOptions);
-    triggerNotification();
-});
-
 function setDarkMode() {
     document.documentElement.classList.toggle('dark-mode', config.get('darkMode'));
 }
@@ -95,6 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const style = document.createElement('style');
     style.id = 'zoomFactor';
 
-    document.head.appendChild(style);
+    document.body.appendChild(style);
     setZoom(zoomFactor);
 });

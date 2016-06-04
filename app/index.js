@@ -40,11 +40,7 @@ function updateBadge(messageCount) {
 }
 
 function checkMessages(title) {
-    /* This is an ugly way to do it, it seems to work but needs to be improved.
-    Limits: it actualyl does not work while you are not in the Inbox, may need some improvements
-    Concerning badge update: Shall I clean badge if window is maximized?
-    */
-
+    // Update badge
     // How many new messages on new title?
     const messageCount = (/\(([0-9]+)\)/).exec(title);
     // How many messages I had?
@@ -66,18 +62,12 @@ function checkMessages(title) {
         return;
     }
 
-    // Send notification when new message, if not focused
-    if (!mainWindow.isFocused()) {
-        mainWindow.webContents.send('new-message-notification', messageCount[1]);
-        updateBadge(messageCount[1]);
-    }
     oldtitle = title;
 }
 
 function createMainWindow() {
     const lastWindowState = config.get('lastWindowState');
     const isDarkMode = config.get('darkMode');
-
 
     const win = new electron.BrowserWindow({
         title: app.getName(),
@@ -89,6 +79,7 @@ function createMainWindow() {
         icon: process.platform === 'linux' && path.join(__dirname, 'static/Icon.png'),
         minWidth: 1000,
         minHeight: 700,
+        autoHideMenuBar: true,
         titleBarStyle: 'hidden-inset',
         darkTheme: isDarkMode, // GTK+3
         backgroundColor: isDarkMode ? '#192633' : '#fff',
