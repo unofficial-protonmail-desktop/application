@@ -35,14 +35,13 @@ Pull requests are accepted.
 ##### Known bugs
 
 * Pantheon Tray not working
-* Notifications not working while the Inbox is not selected
-* App won't build on OS X or Linux
-
+* Config plugin not working correctly
+* 
 ## Running the App
 
 ### Executables
 
-You can find newer, buggier executables [here](https://github.com/BeatPlus/Protonmail/tree/executables). More stable, older executables can be found [here](https://github.com/BeatPlus/Protonmail/releases).
+You can find build lates buggier executables using commands below. More stable, older executables can be found [here](https://github.com/BeatPlus/Protonmail/releases).
 
 ### Compiling from source
 The installer is provided by *electon-builder*.
