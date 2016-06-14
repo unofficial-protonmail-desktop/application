@@ -36,7 +36,7 @@ Pull requests are accepted.
 
 * Pantheon Tray not working
 * Config plugin not working correctly
-* 
+
 ## Running the App
 
 ### Executables
