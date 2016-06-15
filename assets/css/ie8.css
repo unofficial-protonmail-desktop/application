@@ -1,0 +1,26 @@
+/*
+	Aerial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
+
+/* Header */
+
+	#header nav a {
+		position: relative;
+		border: solid 1px #fff;
+		border-radius: 100%;
+		-ms-behavior: url("assets/js/ie/PIE.htc");
+	}
+
+		#header nav a:before {
+			border: 0;
+		}
+
+/* Footer */
+
+	#footer {
+		background-image: url("images/ie/footer.png");
+		background-position: bottom left;
+		background-repeat: repeat-x;
+	}

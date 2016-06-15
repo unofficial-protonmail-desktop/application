@@ -1,47 +1,46 @@
----
-layout: page
-title: Protonmail Desktop
-subtitle: Unofficial electron wrapper for protonmail
-bigimg: /img/header.jpg
----
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Protonmail unofficial desktop app</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body class="loading">
+		<div id="wrapper">
+			<div id="bg"></div>
+			<div id="overlay"></div>
+			<div id="main">
 
-<div class="posts-list">
-  {% for post in paginator.posts %}
-  <article class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-	  <h2 class="post-title">{{ post.title }}</h2>
+				<!-- Header -->
+					<header id="header">
+						<h1>Unofficial Protonmail</h1>
+						<p>Multiplatform desktop app</p>
+						<nav>
+							<ul>
+								<li><a href="#" class="icon fa-windows"><span class="label">Windows</span></a></li>
+								<li><a href="#" class="icon fa-apple"><span class="label">MacOS</span></a></li>
+								<li><a href="#" class="icon fa-linux"><span class="label">Linux</span></a></li>
+								<li><a href="https://github.com/BeatPlus/Protonmail" class="icon fa-github"><span class="label">Github</span></a></li>
+							</ul>
+						</nav>
+					</header>
 
-	  {% if post.subtitle %}
-	  <h3 class="post-subtitle">
-	    {{ post.subtitle }}
-	  </h3>
-	  {% endif %}
-    </a>
+				<!-- Footer -->
+					<footer id="footer">
+						<span class="copyright">&copy; <a href="https://github.com/BeatPlus">Matthew C</a>. Design: <a href="http://html5up.net">html5up</a>.</span>
+					</footer>
 
-    <p class="post-meta">
-      Posted on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
-
-    <div class="post-entry">
-      {{ post.content | truncatewords: 50 | strip_html | xml_escape}}
-	  <a href="{{ post.url | prepend: site.baseurl }}" class="post-read-more">[Read&nbsp;More]</a>
-    </div>
-
-   </article>
-  {% endfor %}
-</div>
-
-{% if paginator.total_pages > 1 %}
-<ul class="pager main-pager">
-  {% if paginator.previous_page %}
-  <li class="previous">
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-  </li>
-  {% endif %}
-  {% if paginator.next_page %}
-  <li class="next">
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-  </li>
-  {% endif %}
-</ul>
-{% endif %}
+			</div>
+		</div>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script>
+			window.onload = function() { document.body.className = ''; }
+			window.ontouchmove = function() { return false; }
+			window.onorientationchange = function() { document.body.scrollTop = 0; }
+		</script>
+	</body>
+</html>
