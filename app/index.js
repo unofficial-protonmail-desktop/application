@@ -127,6 +127,9 @@ app.on('ready', () => {
     page.on('dom-ready', () => {
         page.insertCSS(fs.readFileSync(path.join(__dirname, 'browser.css'), 'utf8'));
         page.insertCSS(fs.readFileSync(path.join(__dirname, 'themes/dark-mode.css'), 'utf8'));
+        if (process.platform === 'darwin') {
+            page.insertCSS(fs.readFileSync(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
+        }
         mainWindow.show();
     });
 
