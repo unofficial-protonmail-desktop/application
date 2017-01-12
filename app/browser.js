@@ -2,7 +2,6 @@
 
 var electron = require('electron');
 
-// To substitute with env
 const config = require('./config');
 
 electron.ipcRenderer.on('GoInbox', () => {
@@ -78,12 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Activate Dark Mode if it was set before quitting
 	setDarkMode();
-
-	// Prevent flash of white on startup when in dark mode
-	// TODO: find a CSS only solution
-	if (config.get('darkMode')) {
-		document.documentElement.style.backgroundColor = '#192633';
-	}    
+   
 });
 
 }());
