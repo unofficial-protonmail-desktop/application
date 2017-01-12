@@ -10,7 +10,7 @@ const tray = require('./tray');
 if (require('electron-squirrel-startup')) return;
 
 require('electron-debug')();
-require('electron-dl')();
+require('electron-dl')({ saveAs: true });
 
 let mainWindow;
 let isQuitting = false;
