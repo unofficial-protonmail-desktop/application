@@ -1,4 +1,8 @@
 {
+  "build": {
+    "appId": "com.beatplus.pronmail-desktop",
+    "iconUrl": "https://raw.githubusercontent.com/BeatPlus/Protonmail/master/build/Icon.ico"
+  },  
   "name": "protonmail-desktop",
   "productName": "Protonmail Desktop",
   "description": "Unofficial electron wrapper for protonmail",
