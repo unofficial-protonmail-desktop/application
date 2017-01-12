@@ -1,18 +1,15 @@
-(function () {'use strict';
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+import os from 'os';
+import path from 'path';
+import { app, BrowserWindow, shell, Menu, dialog } from 'electron';
 
-var os = _interopDefault(require('os'));
-var path = _interopDefault(require('path'));
-var electron = require('electron');
-
-const appName = electron.app.getName();
+const appName = app.getName();
 const config = require('./config');
 
 
 
 function sendAction(action) {
-    const win = electron.BrowserWindow.getAllWindows()[0];
+    const win = BrowserWindow.getAllWindows()[0];
 
     if (process.platform === 'darwin') {
         win.restore();
@@ -44,12 +41,12 @@ const viewSubmenu = [{
 const helpSubmenu = [{
     label: `${appName} Website`,
     click() {
-        electron.shell.openExternal('http://beatplus.github.io/Protonmail/');
+        shell.openExternal('http://beatplus.github.io/Protonmail/');
     }
 }, {
     label: `${appName} Source Code`,
     click() {
-        electron.shell.openExternal('https://github.com/BeatPlus/Protonmail');
+        shell.openExternal('https://github.com/BeatPlus/Protonmail')
     }
 }, {
     label: 'Report an issue',
@@ -59,11 +56,11 @@ const helpSubmenu = [{
 
 -
 
-${electron.app.getName()} ${electron.app.getVersion()}
+${app.getName()} ${app.getVersion()}
 Electron ${process.versions.electron}
 ${process.platform} ${process.arch} ${os.release()}`;
 
-        electron.shell.openExternal(`https://github.com/BeatPlus/Protonmail/issues/new?body=${encodeURIComponent(body)}`);
+        shell.openExternal(`https://github.com/BeatPlus/Protonmail/issues/new?body=${encodeURIComponent(body)}`);
     }
 }];
 
@@ -73,9 +70,9 @@ if (process.platform !== 'darwin') {
     }, {
         label: `About ${appName}`,
         click() {
-            electron.dialog.showMessageBox({
+            dialog.showMessageBox({
                 title: `About ${appName}`,
-                message: `${appName} ${electron.app.getVersion()}`,
+                message: `${appName} ${app.getVersion()}`,
                 detail: 'Unofficial Protonmail desktop app, created by Matthew Core <BeatPlus> and Hayden Suarez-Davis <HaydenSD>.',
                 icon: path.join(__dirname, 'static', process.platform === 'linux' ? 'Icon-linux-about.png' : 'IconTray.png'),
                 buttons: ['Close']
@@ -122,7 +119,7 @@ const MenuTpl = [{
         label: 'Quit',
         accelerator: 'CmdOrCtrl+Q',
         click() {
-            electron.app.quit();
+            app.quit();
         }
     }]
 }, {
@@ -163,7 +160,4 @@ const MenuTpl = [{
     submenu: helpSubmenu
 }];
 
-module.exports = electron.Menu.buildFromTemplate(MenuTpl);
-
-}());
-//# sourceMappingURL=menu.js.map
+module.exports = Menu.buildFromTemplate(MenuTpl);

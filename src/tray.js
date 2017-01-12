@@ -1,11 +1,7 @@
-(function () {'use strict';
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var path = _interopDefault(require('path'));
-var electron = require('electron');
-
 // This file manages the tray system
+import path from 'path';
+import { app, Menu, Tray } from 'electron';
+
 let tray = null;
 
 exports.create = win => {
@@ -23,7 +19,7 @@ exports.create = win => {
 		}
 	};
 
-	const contextMenu = electron.Menu.buildFromTemplate([
+	const contextMenu = Menu.buildFromTemplate([
 		{
 			label: 'Toggle',
 			click() {
@@ -38,8 +34,8 @@ exports.create = win => {
 		}
 	]);
 
-	tray = new electron.Tray(iconPath);
-	tray.setToolTip(`${electron.app.getName()}`);
+	tray = new Tray(iconPath);
+	tray.setToolTip(`${app.getName()}`);
 	tray.setContextMenu(contextMenu);
 	tray.on('click', toggleWin);
 };
@@ -53,6 +49,3 @@ exports.setBadge = shouldDisplayUnread => {
 	const iconPath = path.join(__dirname, `static/${icon}`);
 	tray.setImage(iconPath);
 };
-
-}());
-//# sourceMappingURL=tray.js.map

@@ -1,63 +1,127 @@
-ProtonMail Desktop
-======
-![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/windows-screenshot.png "Protonmail Desktop on Windows 10")
+# electron-boilerplate [![Build Status](https://travis-ci.org/szwacz/electron-boilerplate.svg?branch=master)](https://travis-ci.org/szwacz/electron-boilerplate) [![Build status](https://ci.appveyor.com/api/projects/status/s9htc1k5ojkn08fr?svg=true)](https://ci.appveyor.com/project/szwacz/electron-boilerplate)
 
-ProtonMail Desktop is an **unofficial** app that emulates a native client for the ProtonMail e-mail service. Check out more about Protonmail in [their website](https://protonmail.com).
+A minimalistic yet comprehensive boilerplate application for [Electron runtime](http://electron.atom.io). Tested on macOS, Windows and Linux.  
 
-We are not affiliated with ProtonMail team. All copyrights belong to their respective owners.
+This project does not impose on you any framework (like Angular or React). It tries to give you only the 'electron' part of technology stack so you can pick your favorite technologies to build the actual app.
 
-This is an experiment from a main PHP coder, code may be bad and ugly. Most part of the initial core was modified from [sindresorhus/caprine](https://github.com/sindresorhus/caprine) repo.
+# Quick start
 
-### Features
+The only development dependency of this project is [Node.js](https://nodejs.org), so just make sure you have it installed.
+Then type few commands known to every Node developer...
+```
+git clone https://github.com/szwacz/electron-boilerplate.git
+cd electron-boilerplate
+npm install
+npm start
+```
+... and boom! You have a running desktop application on your screen.
 
-#### Background behaviour
-When closing the window, the app will continue running in the background. On OSX, app will be available in the dock and on WIN & Linux (depends on distro) in the tray. Right-click the dock/tray icon and choose Quit to completely quit the app. On OS X, click the dock icon to show the window. On Linux, right-click the tray icon and choose Toggle to toggle the window. On Windows, click the tray icon to toggle the window.
+# Structure of the project
 
-#### Dark mode
-You can toggle dark mode in the application menu or with <kbd>Cmd</kbd> <kbd>D</kbd> / <kbd>Ctrl</kbd> <kbd>D</kbd>.
+The application is split between two main folders...
 
-#### Native Notifications
-Native notifications are working for all OS, you will get a notification when you receive a new email and window is not focused (i.e. app minimized).
+`src` - this folder is intended for files which need to be transpiled or compiled (files which can't be used directly by Electron).
 
-![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/win-notification.png "Notifications on Windows 10")
+`app` - contains all static assets (put here images, css, html etc.) which don't need any pre-processing.
 
-### Version
+The build process compiles all stuff from the `src` folder and puts it into the `app` folder, so after the build has finished, your `app` folder contains the full, runnable application.
 
-Still in beta. 0.1.1
+Treat `src` and `app` folders like two halves of one bigger thing.
 
-## Dev and contributing
+The drawback of this design is that `app` folder contains some files which should be git-ignored and some which shouldn't (see `.gitignore` file). But thanks to this two-folders split development builds are much (much!) faster.
 
-Built with [Electron](http://electron.atom.io). There are two package.json, the *./package.json* contains the tools for creating installers and packages and the *app/package.json* the real dependencies. The code used for the final application is in /app.
+# Development
 
-Any contribution or suggestion is accepted. Feel free to create any report for issues or app crashes. You can also use the report link provided in the application menu to create a crash report.
-Pull requests are accepted.
+## Starting the app
 
-##### Known bugs
+```
+npm start
+```
 
-* Pantheon Tray not working
-* Config plugin not working correctly
+## Upgrading Electron version
 
-## Running the App
+The version of Electron runtime your app is using is declared in `package.json`:
+```json
+"devDependencies": {
+  "electron": "1.4.7"
+}
+```
+Side note: [Electron authors advise](http://electron.atom.io/docs/tutorial/electron-versioning/) to use fixed version here.
 
-### Executables
+## The build pipeline
 
-You can find build lates buggier executables using commands below. More stable, older executables can be found [here](https://github.com/BeatPlus/Protonmail/releases).
+Build process is founded upon [gulp](https://github.com/gulpjs/gulp) task runner and [rollup](https://github.com/rollup/rollup) bundler. There are two entry files for your code: `src/background.js` and `src/app.js`. Rollup will follow all `import` statements starting from those files and compile code of the whole dependency tree into one `.js` file for each entry point.
 
-### Compiling from source
-The installer is provided by *electon-builder*.
+You can [add as many more entry points as you like](https://github.com/szwacz/electron-boilerplate/blob/master/tasks/build_app.js#L16) (e.g. to split your app into modules).
 
-This will work on OS X, Linux, and Windows. You will need [NodeJS](https://nodejs.org) to run this app.
-- Install required packages: `$ npm install`
-- Run: `$ npm start`
-- Build Linux 32 bit: `$ npm run dist:linux32`
-- Build Linux 64 bit: `$ npm run dist:linux64`
-- Build Windows 32 bit: `$ npm run dist:win64`
-- Build Windows 64 bit: `$ npm run dist:win32`
-- Build OS X: `$ npm run dist:osx`
-- Build all: `$ npm run dist`
+By the way, [rollup has a lot of plugins](https://github.com/rollup/rollup/wiki/Plugins). You can add them in [this file](https://github.com/szwacz/electron-boilerplate/blob/master/tasks/bundle.js).
 
+## Adding npm modules to your app
 
-License
-----
-**MIT** See License.md  
-**Free Software, Hell Yeah!**
+Remember to respect the split between `dependencies` and `devDependencies` in `package.json` file. Only modules listed in `dependencies` will be included into distributable app.
+
+Side note: If the module you want to use in your app is a native one (not pure JavaScript but compiled C code or something) you should first  run `npm install name_of_npm_module --save` and then `npm run postinstall` to rebuild the module for Electron. This needs to be done only once when you're first time installing the module. Later on postinstall script will fire automatically with every `npm install`.
+
+## Working with modules
+
+Thanks to [rollup](https://github.com/rollup/rollup) you can (and should) use ES6 modules for all code in `src` folder. But because ES6 modules still aren't natively supported you can't use them in the `app` folder.
+
+Use ES6 syntax in the `src` folder like this:
+```js
+import myStuff from './my_lib/my_stuff';
+```
+
+But use CommonJS syntax in `app` folder. So the code from above should look as follows:
+```js
+var myStuff = require('./my_lib/my_stuff');
+```
+
+# Testing
+
+## Unit tests
+
+```
+npm test
+```
+
+Using [electron-mocha](https://github.com/jprichardson/electron-mocha) test runner with the [chai](http://chaijs.com/api/assert/) assertion library. This task searches for all files in `src` directory which respect pattern `*.spec.js`.
+
+## End to end tests
+
+```
+npm run e2e
+```
+
+Using [mocha](https://mochajs.org/) test runner and [spectron](http://electron.atom.io/spectron/). This task searches for all files in `e2e` directory which respect pattern `*.e2e.js`.
+
+## Code coverage
+
+```
+npm run coverage
+```
+
+Using [istanbul](http://gotwarlost.github.io/istanbul/) code coverage tool.
+
+You can set the reporter(s) by setting `ISTANBUL_REPORTERS` environment variable (defaults to `text-summary` and `html`). The report directory can be set with `ISTANBUL_REPORT_DIR` (defaults to `coverage`).
+
+## Continuous integration
+
+Electron [can be plugged](https://github.com/atom/electron/blob/master/docs/tutorial/testing-on-headless-ci.md) into CI systems. Here two CIs are preconfigured for you. [Travis CI](https://travis-ci.org/) tests on macOS and Linux, [App Veyor](https://www.appveyor.com) tests on Windows.
+
+# Making a release
+
+To package your app into an installer use command:
+
+```
+npm run release
+```
+
+It will start the packaging process for operating system you are running this command on. Ready for distribution file will be outputted to `dist` directory.
+
+You can create Windows installer only when running on Windows, the same is true for Linux and macOS. So to generate all three installers you need all three operating systems.
+
+All packaging actions are handled by [electron-builder](https://github.com/electron-userland/electron-builder). It has a lot of [customization options](https://github.com/electron-userland/electron-builder/wiki/Options), which you can declare under ["build" key in package.json file](https://github.com/szwacz/electron-boilerplate/blob/master/package.json#L2).
+
+# License
+
+Released under the MIT license.

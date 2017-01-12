@@ -1,31 +1,28 @@
-(function () {'use strict';
-
-var electron = require('electron');
-
+import { ipcRenderer as ipc } from 'electron';
 // To substitute with env
 const config = require('./config');
 
-electron.ipcRenderer.on('GoInbox', () => {
+ipc.on('GoInbox', () => {
     // Go to Inbox/inbox
     document.querySelector('a[href=\'/inbox\']').click();
 });
 
-electron.ipcRenderer.on('show-preferences', () => {
+ipc.on('show-preferences', () => {
     // Click preferences button
     document.querySelector('#tour-settings').click();
 });
 
-electron.ipcRenderer.on('new-email', () => {
+ipc.on('new-email', () => {
     // Click COMPOSE button
     document.querySelector('.compose.pm_button.primary').click();
 });
 
-electron.ipcRenderer.on('log-out', () => {
+ipc.on('log-out', () => {
     // Click hided logout button
     document.querySelector('.pm_button.primary.text-center').click();
 });
 
-electron.ipcRenderer.on('close-composer', () => {
+ipc.on('close-composer', () => {
     // Click COMPOSE button
     document.querySelector('.pm_button.link.close-button').click();
 });
@@ -34,16 +31,16 @@ function setDarkMode() {
     document.documentElement.classList.toggle('dark-mode', config.get('darkMode'));
 }
 
-electron.ipcRenderer.on('toggle-dark-mode', () => {
+ipc.on('toggle-dark-mode', () => {
     config.set('darkMode', !config.get('darkMode'));
     setDarkMode();
 });
 
-electron.ipcRenderer.on('zoom-reset', () => {
+ipc.on('zoom-reset', () => {
     setZoom(1.0);
 });
 
-electron.ipcRenderer.on('zoom-in', () => {
+ipc.on('zoom-in', () => {
     const zoomFactor = config.get('zoomFactor') + 0.1;
 
     if (zoomFactor < 1.6) {
@@ -51,7 +48,7 @@ electron.ipcRenderer.on('zoom-in', () => {
     }
 });
 
-electron.ipcRenderer.on('zoom-out', () => {
+ipc.on('zoom-out', () => {
     const zoomFactor = config.get('zoomFactor') - 0.1;
 
     if (zoomFactor >= 0.8) {
@@ -85,6 +82,3 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.documentElement.style.backgroundColor = '#192633';
 	}    
 });
-
-}());
-//# sourceMappingURL=browser.js.map
