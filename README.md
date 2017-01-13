@@ -1,6 +1,6 @@
 ProtonMail Desktop
 ======
-![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/windows-screenshot.png "Protonmail Desktop on Windows 10")
+![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/apple-screenshot.png "Protonmail Desktop on Windows 10")
 
 ProtonMail Desktop is an **unofficial** app that emulates a native client for the ProtonMail e-mail service. Check out more about Protonmail in [their website](https://protonmail.com).
 
@@ -19,23 +19,22 @@ You can toggle dark mode in the application menu or with <kbd>Cmd</kbd> <kbd>D</
 #### Native Notifications
 Native notifications are working for all OS, you will get a notification when you receive a new email and window is not focused (i.e. app minimized).
 
-![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/win-notification.png "Notifications on Windows 10")
+![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/win-notification.png "Notifications on Windows 10")![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/linux-notification.png "Notifications on Elementary OS")
 
 ### Version
 
-Still in beta. 0.1.1
+Beta 0.3.0
 
 ## Dev and contributing
 
-Built with [Electron](http://electron.atom.io). There are two package.json, the *./package.json* contains the tools for creating installers and packages and the *app/package.json* the real dependencies. The code used for the final application is in /app.
+Built with [Electron](http://electron.atom.io). The main skeleton of the app is based on [szwacz/electron-boilerplate](https://github.com/szwacz/electron-boilerplate). I strongly recommend reading the readme in his repo. Basically, the ES6 javascript files and less stylesheets can be found at `./src/` while the static files and those that do not need processing are in `./app/`.
 
 Any contribution or suggestion is accepted. Feel free to create any report for issues or app crashes. You can also use the report link provided in the application menu to create a crash report.
 Pull requests are accepted.
 
 ##### Known bugs
 
-* Pantheon Tray not working
-* Config plugin not working correctly
+* View headers inside an email does not work
 
 ## Running the App
 
@@ -44,17 +43,14 @@ Pull requests are accepted.
 You can find build lates buggier executables using commands below. More stable, older executables can be found [here](https://github.com/BeatPlus/Protonmail/releases).
 
 ### Compiling from source
-The installer is provided by *electon-builder*.
+The installer is provided by *electon-builder* and processed through gulp thanks to `electron-boilerplate`.
 
 This will work on OS X, Linux, and Windows. You will need [NodeJS](https://nodejs.org) to run this app.
 - Install required packages: `$ npm install`
 - Run: `$ npm start`
-- Build Linux 32 bit: `$ npm run dist:linux32`
-- Build Linux 64 bit: `$ npm run dist:linux64`
-- Build Windows 32 bit: `$ npm run dist:win64`
-- Build Windows 64 bit: `$ npm run dist:win32`
-- Build OS X: `$ npm run dist:osx`
-- Build all: `$ npm run dist`
+- Build: `$ npm run release`
+
+The building settings is in `./package.json` and additional configuration instructions can be found [here](https://github.com/electron-userland/electron-builder/wiki/Options). The building process will only create version for the current OS, therefore for creating MacOS, Windows and Linux you need to run the command from each OS.
 
 
 License
