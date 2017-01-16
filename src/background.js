@@ -137,7 +137,7 @@ app.on('ready', () => {
 		page.insertCSS(jetpack.read(path.join(__dirname, 'themes/dark-mode.css'), 'utf8'));
 
         if (process.platform === 'darwin') {
-            page.insertCSS(fs.readFileSync(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
+            page.insertCSS(jetpack.read(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
         }
         
 		if (argv.minimize) {
