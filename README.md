@@ -1,4 +1,4 @@
-ProtonMail Desktop
+ProtonMail Desktop [![license](https://img.shields.io/github/license/beatplus/protonmail.svg?style=flat-square)]()
 ======
 ![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/linux-screenshot.png "Protonmail Desktop on Windows 10")
 
