@@ -1,11 +1,12 @@
-'use strict';
-const os = require('os');
-const path = require('path');
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const shell = electron.shell;
+
+import os from 'os';
+import path from 'path';
+import { app, BrowserWindow, shell, Menu, dialog } from 'electron';
+
 const appName = app.getName();
+const config = require('./config');
+
+
 
 function sendAction(action) {
     const win = BrowserWindow.getAllWindows()[0];
@@ -69,7 +70,7 @@ if (process.platform !== 'darwin') {
     }, {
         label: `About ${appName}`,
         click() {
-            electron.dialog.showMessageBox({
+            dialog.showMessageBox({
                 title: `About ${appName}`,
                 message: `${appName} ${app.getVersion()}`,
                 detail: 'Unofficial Protonmail desktop app, created by Matthew Core <BeatPlus> and Hayden Suarez-Davis <HaydenSD>.',
@@ -78,6 +79,19 @@ if (process.platform !== 'darwin') {
             });
         }
     });
+
+	viewSubmenu.push({
+		type: 'separator'
+	}, {
+		type: 'checkbox',
+		label: 'Always on Top',
+		accelerator: 'Ctrl+Shift+T',
+		checked: config.get('alwaysOnTop'),
+		click(item, focusedWindow) {
+			config.set('alwaysOnTop', item.checked);
+			focusedWindow.setAlwaysOnTop(item.checked);
+		}
+	});    
 }
 
 const MenuTpl = [{
@@ -146,4 +160,4 @@ const MenuTpl = [{
     submenu: helpSubmenu
 }];
 
-module.exports = electron.Menu.buildFromTemplate(MenuTpl);
+module.exports = Menu.buildFromTemplate(MenuTpl);

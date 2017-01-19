@@ -1,8 +1,6 @@
-'use strict';
-const path = require('path');
-const electron = require('electron');
+import { ipcRenderer as ipc } from 'electron';
+// To substitute with env
 const config = require('./config');
-const ipc = electron.ipcRenderer;
 
 ipc.on('GoInbox', () => {
     // Go to Inbox/inbox
@@ -64,8 +62,6 @@ function setZoom(zoomFactor) {
     config.set('zoomFactor', zoomFactor);
 }
 
-// activate Dark Mode if it was set before quitting
-setDarkMode();
 
 // Inject a global style node to maintain zoom factor after conversation change.
 // Also set the zoom factor if it was set before quitting.
@@ -76,4 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.appendChild(style);
     setZoom(zoomFactor);
+
+	// Activate Dark Mode if it was set before quitting
+	setDarkMode();
+   
 });
