@@ -41,7 +41,7 @@ Pull requests are accepted.
 
 ### Executables
 
-You can find build lates buggier executables using commands below. More stable, older executables can be found [here](https://github.com/BeatPlus/Protonmail/releases).
+You can build your own executables from the latest source by running one of the commands below. More stable, older executables can be found [here](https://github.com/BeatPlus/Protonmail/releases).
 
 ### Compiling from source
 The installer is provided by *electon-builder*.
