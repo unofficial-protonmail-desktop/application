@@ -60,7 +60,7 @@
     "mocha": "^3.0.2",
     "rollup": "^0.41.4",
     "rollup-plugin-istanbul": "^1.1.0",
-    "source-map-support": "^0.4.2",
+    "source-map-support": "^0.4.11",
     "spectron": "^3.3.0"
   }
 }
