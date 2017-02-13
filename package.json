@@ -41,13 +41,14 @@
     "electron-context-menu": "^0.8.0",
     "electron-debug": "^1.1.0",
     "electron-dl": "^1.6.0",
-    "fs-jetpack": "^0.10.2",
+    "fs-jetpack": "^0.11.0",
     "minimist": "^1.2.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "electron": "^1.4.15",
-    "electron-builder": "^11.2.4",
+
+    "electron": "^1.4.7",
+    "electron-builder": "^13.6.0",
     "electron-mocha": "^3.0.0",
     "gulp": "^3.9.0",
     "gulp-batch": "^1.0.5",
@@ -60,7 +61,7 @@
     "mocha": "^3.0.2",
     "rollup": "^0.41.4",
     "rollup-plugin-istanbul": "^1.1.0",
-    "source-map-support": "^0.4.2",
-    "spectron": "^3.3.0"
+    "source-map-support": "^0.4.11",
+    "spectron": "^3.6.0"
   }
 }
