@@ -48,7 +48,7 @@
     "chai": "^3.5.0",
 
     "electron": "^1.4.7",
-    "electron-builder": "^14.1.1",
+    "electron-builder": "^15.1.0",
     "electron-mocha": "^3.0.0",
     "gulp": "^3.9.0",
     "gulp-batch": "^1.0.5",
