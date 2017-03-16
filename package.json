@@ -41,7 +41,7 @@
     "electron-context-menu": "^0.8.0",
     "electron-debug": "^1.1.0",
     "electron-dl": "^1.6.0",
-    "fs-jetpack": "^0.12.0",
+    "fs-jetpack": "^0.13.0",
     "minimist": "^1.2.0"
   },
   "devDependencies": {
