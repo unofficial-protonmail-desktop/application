@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "electron-config": "^0.2.1",
-    "electron-context-menu": "^0.8.0",
+    "electron-context-menu": "^0.9.0",
     "electron-debug": "^1.1.0",
     "electron-dl": "^1.6.0",
     "fs-jetpack": "^0.13.0",
