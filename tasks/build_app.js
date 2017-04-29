@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var less = require('gulp-less');
+var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 var batch = require('gulp-batch');
 var plumber = require('gulp-plumber');
@@ -15,17 +15,18 @@ var destDir = jetpack.cwd('./app');
 
 gulp.task('bundle', function () {
     return Promise.all([
-        bundle(srcDir.path('background.js'), destDir.path('background.js')),
+		bundle(srcDir.path('tabs.js'), destDir.path('tabs.js')),
+		bundle(srcDir.path('background.js'), destDir.path('background.js')),
         bundle(srcDir.path('tray.js'), destDir.path('tray.js')),
         bundle(srcDir.path('menu.js'), destDir.path('menu.js')),
         bundle(srcDir.path('browser.js'), destDir.path('browser.js')),
    ]);
 });
 
-gulp.task('less', function () {
-    return gulp.src(srcDir.path('stylesheets/main.less'))
+gulp.task('sass', function () {
+    return gulp.src(srcDir.path('stylesheets/*.scss'))
         .pipe(plumber())
-        .pipe(less())
+        .pipe(sass())
         .pipe(gulp.dest(destDir.path('stylesheets')));
 });
 
@@ -47,9 +48,9 @@ gulp.task('watch', function () {
     watch('src/**/*.js', batch(function (events, done) {
         gulp.start('bundle', beepOnError(done));
     }));
-    watch('src/**/*.less', batch(function (events, done) {
-        gulp.start('less', beepOnError(done));
+    watch('src/**/*.scss', batch(function (events, done) {
+        gulp.start('sass', beepOnError(done));
     }));
 });
 
-gulp.task('build', ['bundle', 'less', 'environment']);
+gulp.task('build', ['bundle', 'sass', 'environment']);
