@@ -40,12 +40,25 @@ exports.create = win => {
 	tray.on('click', toggleWin);
 };
 
-exports.setBadge = shouldDisplayUnread => {
-	if (process.platform === 'darwin' || !tray) {
+exports.setBadgeFromTitle = title => {
+	const extractedTitle = (/\(([0-9]+)\)/).exec(title);
+	const unreadCount = extractedTitle ? extractedTitle[1] : 0;
+
+	if (process.platform === 'darwin') {
+		setBadgeForDarwin(unreadCount);
+		return;
+	}
+	
+	if (!tray) {
+		console.warn('Couldnt find tray when setting badge');
 		return;
 	}
 
-	const icon = shouldDisplayUnread ? 'IconTrayUnread.png' : 'IconTray.png';
+	const icon = unreadCount ? 'IconTrayUnread.png' : 'IconTray.png';
 	const iconPath = path.join(__dirname, `static/${icon}`);
 	tray.setImage(iconPath);
+};
+
+const setBadgeForDarwin = unreadCount => {
+	app.dock.setBadge(unreadCount ? unreadCount : '');
 };

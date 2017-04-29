@@ -8,9 +8,13 @@ const config = require('./config');
 const appMenu = require('./menu');
 const tray = require('./tray');
 
-require('electron-debug')({enabled: env.debug});
 require('electron-dl')({saveAs: true});
 require('electron-context-menu')();
+
+if (env.debug) {
+	require('electron-reload')(__dirname);
+	require('electron-debug')({enabled: true});
+}
 
 let mainWindow;
 let isQuitting = false;
@@ -32,20 +36,6 @@ const isAlreadyRunning = app.makeSingleInstance(() => {
 
 if (isAlreadyRunning) {
 	app.quit();
-}
-
-function updateBadge(messageCount) {
-    // Set badge
-    if (process.platform === 'darwin') {
-        app.dock.setBadge(messageCount ? messageCount[1] : '');
-    } else {
-        tray.setBadge(messageCount);
-    }
-}
-
-function checkMessages(title) {
-  const messageCount = (/\(([0-9]+)\)/).exec(title);
-  updateBadge(messageCount);
 }
 
 function createMainWindow() {
@@ -91,7 +81,7 @@ function createMainWindow() {
 	
 	win.on('page-title-updated', (e, title) => {
 		e.preventDefault();
-		checkMessages(title);
+		tray.setBadgeFromTitle(title);
 	});
 
 	return win;
