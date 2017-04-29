@@ -45,32 +45,9 @@ function updateBadge(messageCount) {
 }
 
 function checkMessages(title) {
-    // Update badge
-    // How many new messages on new title?
-    const messageCount = (/\(([0-9]+)\)/).exec(title);
-    // How many messages I had?
-    const messageCountOld = (/\(([0-9]+)\)/).exec(oldtitle);
-
-    // No unread messages, do nothing than setting badge to 0
-    if (!messageCount) {
-        const indexCount = (/inbox/i).exec(title);
-        if (indexCount) {
-            oldtitle = 0;
-            updateBadge(0);
-        }
-        return;
-    }
-
-    // No new messages, do nothing.
-    if (messageCountOld && messageCount[1] <= messageCountOld[1]) {
-        updateBadge(0);
-        return;
-    }
-
-    oldtitle = title;
+  const messageCount = (/\(([0-9]+)\)/).exec(title);
+  updateBadge(messageCount);
 }
-
-
 
 function createMainWindow() {
 	const isDarkMode = config.get('darkMode');
