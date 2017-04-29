@@ -1,7 +1,13 @@
 import { ipcRenderer as ipc } from 'electron';
+const tabsHandler = require('./tabs');
 
 // To substitute with env
 const config = require('./config');
+
+ipc.on('create-account', (e) => {
+	console.log('event received');
+	e.sender.send('pong');
+});
 
 ipc.on('GoInbox', () => {
     // Go to Inbox/inbox
@@ -78,14 +84,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let tab = tabGroup.addTab({
       title: "my@email.com",
       src: "https://mail.protonmail.com/login",
-      visible: true
-    });
-    tab.activate();
+      visible: true,
+			closable: false
+    }).activate();
+    
     let tab2 = tabGroup.addTab({
       title: "my.second@email.com",
       src: "https://mail.protonmail.com/login",
-      visible: true
+      visible: true,
+			closable: false
     });
+    
+    tabsHandler.initiateTabs();
   
   // Activate Dark Mode if it was set before quitting
 	setDarkMode();

@@ -6,3 +6,9 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 indent_style = tab
+
+[*.{less,sass,scss}]
+indent_size = 4
+
+[tasks/*.js]
+indent_size = 4
