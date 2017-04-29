@@ -86,13 +86,13 @@ function createMainWindow() {
 		minWidth: 1000,
 		minHeight: 700,
 		alwaysOnTop: config.get('alwaysOnTop'),
-		titleBarStyle: 'hidden-inset',
+    titleBarStyle: 'hidden-inset',
 		autoHideMenuBar: true,
 		darkTheme: isDarkMode, // GTK+3
 		//backgroundColor: isDarkMode ? '#192633' : '#fff',
 		webPreferences: {
 			preload: path.join(__dirname, 'browser.js'),
-			nodeIntegration: false,
+			nodeIntegration: true,
 			plugins: true
 		}
 	});
@@ -101,7 +101,7 @@ function createMainWindow() {
 		win.setSheetOffset(40);
 	}
 
-    win.loadURL('https://mail.protonmail.com/login');
+    win.loadURL('file://' + __dirname + '/index.html');
 
 	win.on('close', e => {
 		if (!isQuitting) {

@@ -1,4 +1,5 @@
 import { ipcRenderer as ipc } from 'electron';
+
 // To substitute with env
 const config = require('./config');
 
@@ -62,7 +63,6 @@ function setZoom(zoomFactor) {
     config.set('zoomFactor', zoomFactor);
 }
 
-
 // Inject a global style node to maintain zoom factor after conversation change.
 // Also set the zoom factor if it was set before quitting.
 document.addEventListener('DOMContentLoaded', () => {
@@ -72,8 +72,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.appendChild(style);
     setZoom(zoomFactor);
-
-	// Activate Dark Mode if it was set before quitting
+    const TabGroup = require('electron-tabs');
+    
+    let tabGroup = new TabGroup();
+    let tab = tabGroup.addTab({
+      title: "my@email.com",
+      src: "https://mail.protonmail.com/login",
+      visible: true
+    });
+    tab.activate();
+    let tab2 = tabGroup.addTab({
+      title: "my.second@email.com",
+      src: "https://mail.protonmail.com/login",
+      visible: true
+    });
+  
+  // Activate Dark Mode if it was set before quitting
 	setDarkMode();
    
 });
