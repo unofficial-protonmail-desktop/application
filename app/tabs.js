@@ -6,7 +6,7 @@ exports.initiateTabs = () => {
 	document.addEventListener('click', (e) => {
 		if (e.target.parentElement.hasAttribute('action-add-account')) {
 			console.log('sending event');
-			electron.ipcRenderer.sendSync('create-account');
+			electron.ipcRenderer.send('createAccount');
 		}
 	});
 };

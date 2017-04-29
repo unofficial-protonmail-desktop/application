@@ -4,7 +4,7 @@ const tabsHandler = require('./tabs');
 // To substitute with env
 const config = require('./config');
 
-ipc.on('create-account', (e) => {
+ipc.on('createAccount', (e) => {
 	console.log('event received');
 	e.sender.send('pong');
 });
