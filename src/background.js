@@ -8,13 +8,12 @@ const config = require('./config');
 const appMenu = require('./menu');
 const tray = require('./tray');
 
-require('electron-debug')({enabled: config.debug});
+require('electron-debug')({enabled: env.debug});
 require('electron-dl')({saveAs: true});
 require('electron-context-menu')();
 
 let mainWindow;
 let isQuitting = false;
-let oldtitle;
 
 /*if (env.name !== 'production') {
     var userDataPath = app.getPath('userData');
@@ -75,8 +74,8 @@ function createMainWindow() {
 	if (process.platform === 'darwin') {
 		win.setSheetOffset(40);
 	}
-
-    win.loadURL('file://' + __dirname + '/index.html');
+	
+	win.loadURL('file://' + __dirname + '/index.html');
 
 	win.on('close', e => {
 		if (!isQuitting) {
@@ -89,11 +88,11 @@ function createMainWindow() {
 			}
 		}
 	});
-
-    win.on('page-title-updated', (e, title) => {
-        e.preventDefault();
-        checkMessages(title);
-    });
+	
+	win.on('page-title-updated', (e, title) => {
+		e.preventDefault();
+		checkMessages(title);
+	});
 
 	return win;
 }
@@ -110,18 +109,18 @@ app.on('ready', () => {
 	page.on('dom-ready', () => {
 		page.insertCSS(jetpack.read(path.join(__dirname, 'browser.css'), 'utf8'));
 		page.insertCSS(jetpack.read(path.join(__dirname, 'themes/dark-mode.css'), 'utf8'));
-
-        if (process.platform === 'darwin') {
-            page.insertCSS(jetpack.read(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
-        }
-        
+		
+		if (process.platform === 'darwin') {
+			page.insertCSS(jetpack.read(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
+		}
+  
 		if (argv.minimize) {
 			mainWindow.minimize();
 		} else {
 			mainWindow.show();
 		}
     
-    if (env.name === 'development') {
+    if (env.debug) {
       mainWindow.openDevTools();
     }
 	});
