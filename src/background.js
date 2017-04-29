@@ -3,14 +3,12 @@ import jetpack from 'fs-jetpack';
 import { app, BrowserWindow, Menu, shell } from 'electron';
 import createWindow from './helpers/window';
 
+const env = require('./env.json');
 const config = require('./config');
-//import env from './env';
-
 const appMenu = require('./menu');
 const tray = require('./tray');
 
-
-require('electron-debug')({enabled: true});
+require('electron-debug')({enabled: config.debug});
 require('electron-dl')({saveAs: true});
 require('electron-context-menu')();
 
@@ -145,6 +143,10 @@ app.on('ready', () => {
 		} else {
 			mainWindow.show();
 		}
+    
+    if (env.name === 'development') {
+      mainWindow.openDevTools();
+    }
 	});
 
 	page.on('new-window', (e, url) => {

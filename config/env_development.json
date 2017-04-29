@@ -1,4 +1,5 @@
 {
   "name": "development",
-  "description": "Add here any environment specific stuff you like."
+  "description": "Add here any environment specific stuff you like.",
+  "debug": true
 }
