@@ -1,8 +1,9 @@
-import { ipcRenderer as ipc } from 'electron';
+import { ipcRenderer as ipc, BrowserWindow } from 'electron';
 const tabsHandler = require('./sidebar');
 
 // To substitute with env
 const config = require('./config');
+
 
 ipc.on('GoInbox', () => {
     // Go to Inbox/inbox
@@ -73,26 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.appendChild(style);
     setZoom(zoomFactor);
-    const TabGroup = require('electron-tabs');
-    
-    let tabGroup = new TabGroup();
-    let tab = tabGroup.addTab({
-      title: "my@email.com",
-      src: "https://mail.protonmail.com/login",
-      visible: true,
-			closable: false
-    }).activate();
-    
-    let tab2 = tabGroup.addTab({
-      title: "my.second@email.com",
-      src: "https://mail.protonmail.com/login",
-      visible: true,
-			closable: false
-    });
-    
     tabsHandler.initiateTabs();
-  
-  // Activate Dark Mode if it was set before quitting
+	
+	// Activate Dark Mode if it was set before quitting
 	setDarkMode();
    
 });
