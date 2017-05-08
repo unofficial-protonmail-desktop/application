@@ -1,13 +1,8 @@
 import { ipcRenderer as ipc } from 'electron';
-const tabsHandler = require('./tabs');
+const tabsHandler = require('./sidebar');
 
 // To substitute with env
 const config = require('./config');
-
-ipc.on('createAccount', (e) => {
-	console.log('event received');
-	e.sender.send('pong');
-});
 
 ipc.on('GoInbox', () => {
     // Go to Inbox/inbox

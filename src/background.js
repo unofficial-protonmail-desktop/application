@@ -1,6 +1,6 @@
 import path from 'path';
 import jetpack from 'fs-jetpack';
-import { app, BrowserWindow, Menu, shell } from 'electron';
+import { app, BrowserWindow, Menu, shell, ipcRenderer } from 'electron';
 import createWindow from './helpers/window';
 
 const env = require('./env.json');
@@ -91,6 +91,7 @@ app.on('ready', () => {
 	Menu.setApplicationMenu(appMenu);
 	mainWindow = createMainWindow();
 	tray.create(mainWindow);
+	console.log('hej');
 
 	const page = mainWindow.webContents;
 
@@ -119,6 +120,15 @@ app.on('ready', () => {
 		e.preventDefault();
 		shell.openExternal(url);
 	});
+	
+	page.on('createAccount', () => {
+		console.log('event received');
+	});
+	
+});
+
+app.on('createAccount', () => {
+	console.log('event received');
 });
 
 app.on('activate', () => {
