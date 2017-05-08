@@ -2,7 +2,7 @@
   "name": "protonmail-desktop",
   "productName": "Protonmail Desktop",
   "description": "Unofficial electron wrapper for protonmail",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": {
     "name": "Matthew Core <matcore@protonmail.com>",
     "email": "matcore@protonmail.com"
@@ -13,9 +13,11 @@
   "main": "app/background.js",
   "build": {
     "appId": "com.beatplus.pronmail-desktop",
-    "iconUrl": "https://raw.githubusercontent.com/BeatPlus/Protonmail/master/build/Icon.ico",
     "linux": {
       "target": "deb"
+    },
+    "win": {
+      "icon": "build/Icon.ico"
     },
     "files": [
       "app/**/*",
