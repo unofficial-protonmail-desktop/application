@@ -47,32 +47,9 @@ function updateBadge(messageCount) {
 }
 
 function checkMessages(title) {
-    // Update badge
-    // How many new messages on new title?
-    const messageCount = (/\(([0-9]+)\)/).exec(title);
-    // How many messages I had?
-    const messageCountOld = (/\(([0-9]+)\)/).exec(oldtitle);
-
-    // No unread messages, do nothing than setting badge to 0
-    if (!messageCount) {
-        const indexCount = (/inbox/i).exec(title);
-        if (indexCount) {
-            oldtitle = 0;
-            updateBadge(0);
-        }
-        return;
-    }
-
-    // No new messages, do nothing.
-    if (messageCountOld && messageCount[1] <= messageCountOld[1]) {
-        updateBadge(0);
-        return;
-    }
-
-    oldtitle = title;
+  const messageCount = (/\(([0-9]+)\)/).exec(title);
+  updateBadge(messageCount);
 }
-
-
 
 function createMainWindow() {
 	const isDarkMode = config.get('darkMode');
@@ -96,6 +73,25 @@ function createMainWindow() {
 			plugins: true
 		}
 	});
+
+  /**
+	 * Trick to make the window draggable
+   * https://github.com/electron/electron/pull/5557
+   */
+  const titleBarHack =
+          'var div = document.createElement("div");' +
+          'div.style.position = "absolute";' +
+          'div.style.top = 0;' +
+          'div.style.height = "23px";' +
+          'div.style.width = "100%";' +
+          'div.style["-webkit-app-region"] = "drag";' +
+          'document.body.appendChild(div);';
+
+  win.webContents.on('did-finish-load', function () {
+    if (process.platform === 'darwin') {
+      win.webContents.executeJavaScript(titleBarHack);
+    }
+  });
 
 	if (process.platform === 'darwin') {
 		win.setSheetOffset(40);
