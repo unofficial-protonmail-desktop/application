@@ -1,6 +1,6 @@
 import path from 'path';
 import jetpack from 'fs-jetpack';
-import { app, BrowserWindow, Menu, shell, ipcRenderer } from 'electron';
+import { app, BrowserWindow, Menu, shell, ipcMain } from 'electron';
 import createWindow from './helpers/window';
 
 const env = require('./env.json');
@@ -24,6 +24,7 @@ let isQuitting = false;
     app.setPath('userData', userDataPath + ' (' + env.name + ')');
 }
 */
+
 const isAlreadyRunning = app.makeSingleInstance(() => {
 	if (mainWindow) {
 		if (mainWindow.isMinimized()) {
@@ -139,15 +140,6 @@ app.on('ready', () => {
 		e.preventDefault();
 		shell.openExternal(url);
 	});
-	
-	page.on('createAccount', () => {
-		console.log('event received');
-	});
-	
-});
-
-app.on('createAccount', () => {
-	console.log('event received');
 });
 
 app.on('activate', () => {
