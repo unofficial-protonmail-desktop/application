@@ -1,28 +1,33 @@
 (function () {'use strict';
 
-require('electron');
+const swal = require('sweetalert');
 
 exports.initiateTabs = () => {
 	const TabGroup = require('electron-tabs');
+	const tabGroup = new TabGroup();
 
 	function createTab(name, active = false) {
-		const tabGroup = new TabGroup();
 		const tab = tabGroup.addTab({
 			title: name,
-			src: "https://mail.protonmail.com/login",
+			src: "https://mail.protonmail.com/login?",
 			visible: true,
-			closable: false
+			closable: false,
+			active: active
 		});
-		
-		if (active)  {
-			tab.activate();
-		}
 	}
 	
-	document.addEventListener('click', (e) => {
-		if (e.target.parentElement.hasAttribute('action-add-account')) {
-			createTab('my@email.com');
-		}
+	document.querySelector("[action-add-account]").addEventListener("click", function (e) {
+		swal({
+			title: "Account name",
+			text: "Enter the name of your ProtonMail account",
+			type: "input",
+			confirmButtonText: "Add account",
+			
+		}, function (name) {
+			if (name !== false) {
+				createTab(name);
+			}
+		});
 	});
 };
 

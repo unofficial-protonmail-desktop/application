@@ -1,6 +1,6 @@
 import path from 'path';
 import jetpack from 'fs-jetpack';
-import { app, BrowserWindow, Menu, shell, ipcMain } from 'electron';
+import {app, Menu, shell} from 'electron';
 import createWindow from './helpers/window';
 
 const env = require('./env.json');
@@ -111,7 +111,6 @@ app.on('ready', () => {
 	Menu.setApplicationMenu(appMenu);
 	mainWindow = createMainWindow();
 	tray.create(mainWindow);
-	console.log('hej');
 
 	const page = mainWindow.webContents;
 
