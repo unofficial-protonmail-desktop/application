@@ -1,6 +1,6 @@
 ProtonMail Desktop [![license](https://img.shields.io/github/license/beatplus/protonmail.svg?style=flat-square)]()
 ======
-![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/linux-screenshot.png "Protonmail Desktop on Windows 10")
+![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/linux-screenshot.png "Protonmail Desktop on Linux")
 
 ProtonMail Desktop is an **unofficial** app that emulates a native client for the ProtonMail e-mail service. Check out more about Protonmail in [their website](https://protonmail.com).
 
