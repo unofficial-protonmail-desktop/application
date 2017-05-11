@@ -1,6 +1,8 @@
 import { ipcRenderer as ipc } from 'electron';
 // To substitute with env
-const config = require('./config');
+
+const Config = require('electron-config');
+const config = new Config();
 
 ipc.on('GoInbox', () => {
     // Go to Inbox/inbox
