@@ -43,6 +43,7 @@
     "electron-dl": "^1.9.0",
     "electron-tabs": "^0.6.0",
     "fs-jetpack": "^0.13.0",
+    "gulp-sass": "^3.1.0",
     "minimist": "^1.2.0",
     "sweetalert": "^1.1.3"
   },
