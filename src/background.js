@@ -3,7 +3,8 @@ import jetpack from 'fs-jetpack';
 import { app, BrowserWindow, Menu, shell } from 'electron';
 import createWindow from './helpers/window';
 
-const config = require('./config');
+const Config = require('electron-config');
+const config = new Config();
 //import env from './env';
 
 const appMenu = require('./menu');
