@@ -15,8 +15,8 @@ var destDir = jetpack.cwd('./app');
 
 gulp.task('bundle', function () {
     return Promise.all([
-		bundle(srcDir.path('sidebar.js'), destDir.path('sidebar.js')),
 		bundle(srcDir.path('background.js'), destDir.path('background.js')),
+		bundle(srcDir.path('sidebar.js'), destDir.path('sidebar.js')),
         bundle(srcDir.path('tray.js'), destDir.path('tray.js')),
         bundle(srcDir.path('menu.js'), destDir.path('menu.js')),
         bundle(srcDir.path('browser.js'), destDir.path('browser.js')),

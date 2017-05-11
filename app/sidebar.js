@@ -1,55 +1,64 @@
 (function () {'use strict';
 
-const swal = require('sweetalert');
+Object.defineProperty(exports, '__esModule', { value: true });
 
-exports.initiateTabs = () => {
-	const TabGroup = require('electron-tabs');
-	const tabGroup = new TabGroup();
+class Sidebar {
+	constructor(page) {
+		const TabGroup = require('electron-tabs');
+		this.tabGroup = new TabGroup();
+		
+		this.addEventListenerForAddAccount();
+	}
 	
-	document.querySelector("[action-add-account]").addEventListener("click", () => addAccount());
+	addEventListenerForAddAccount() {
+		document.querySelector("[action-add-account]").addEventListener("click", () => this.addAccount());
+	}
 
-	const addAccount = () => {
+	addAccount() {
+		const swal = require('sweetalert');
 		const options = {
 			title: "Account name",
 			text: "Enter the name of your ProtonMail account",
 			type: "input",
 			confirmButtonText: "Add account",
 		};
-		const onConfirmCallback = (name) => !!name ? createTab(name) : null;
-
+		const onConfirmCallback = (name) => !!name ? this.createTab(name) : null;
+		
 		swal(options, onConfirmCallback);
-	};
+	}
 	
-	const createTab = (name, active = false) => {
-		tabGroup.addTab({
+	createTab(name, active = false) {
+		this.tabGroup.addTab({
 			title: name,
 			src: "https://mail.protonmail.com/login?",
 			visible: true,
 			closable: false,
 			active: true,
-			ready: (tab) => onTabReady(tab)
+			ready: (tab) => this.onTabReady(tab)
 		});
-	};
-
-	const onTabReady = (tab) => {
-		const domReadyEvent = () => {
-			prefillUsernameInLoginForm(tab.webview.getWebContents(), tab.title);
-			
-			tab.webview.removeEventListener('dom-ready', domReadyEvent);
-		};
-
-		tab.webview.addEventListener('dom-ready', domReadyEvent);
-	};
+	}
 	
-	const prefillUsernameInLoginForm = (webContents, username) => {
+	onTabReady(tab) {
+		const domReadyEvent = () => {
+			this.prefillUsernameInLoginForm(tab.webview.getWebContents(), tab.title);
+			
+			tab.webview.removeEventListener("dom-ready", domReadyEvent);
+		};
+		
+		tab.webview.addEventListener("dom-ready", domReadyEvent);
+	}
+	
+	prefillUsernameInLoginForm(webContents, username) {
 		for (let character of username) {
 			webContents.sendInputEvent({
-				type: 'char',
+				type: "char",
 				keyCode: character
 			});
 		}
-	};
-};
+	}
+}
+
+exports.Sidebar = Sidebar;
 
 }());
 //# sourceMappingURL=sidebar.js.map

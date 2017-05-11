@@ -1,5 +1,5 @@
 import { ipcRenderer as ipc, BrowserWindow } from 'electron';
-const tabsHandler = require('./sidebar');
+import { Sidebar } from './sidebar';
 
 // To substitute with env
 const config = require('./config');
@@ -74,9 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.appendChild(style);
     setZoom(zoomFactor);
-    tabsHandler.initiateTabs();
+    const sidebar = new Sidebar();
 	
 	// Activate Dark Mode if it was set before quitting
 	setDarkMode();
-   
 });
