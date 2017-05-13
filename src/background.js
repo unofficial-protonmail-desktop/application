@@ -3,8 +3,10 @@ import jetpack from 'fs-jetpack';
 import {app, Menu, shell} from 'electron';
 import createWindow from './helpers/window';
 
-const env = require('./env.json');
-const config = require('./config');
+const Config = require('electron-config');
+const config = new Config();
+//import env from './env';
+
 const appMenu = require('./menu');
 const tray = require('./tray');
 
@@ -51,7 +53,7 @@ function createMainWindow() {
 		minWidth: 1000,
 		minHeight: 700,
 		alwaysOnTop: config.get('alwaysOnTop'),
-    titleBarStyle: 'hidden-inset',
+		titleBarStyle: 'hidden-inset',
 		autoHideMenuBar: true,
 		darkTheme: isDarkMode, // GTK+3
 		//backgroundColor: isDarkMode ? '#192633' : '#fff',

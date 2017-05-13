@@ -2,7 +2,9 @@ import { ipcRenderer as ipc, BrowserWindow } from 'electron';
 import { Sidebar } from './sidebar';
 
 // To substitute with env
-const config = require('./config');
+
+const Config = require('electron-config');
+const config = new Config();
 
 
 ipc.on('GoInbox', () => {
