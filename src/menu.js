@@ -4,8 +4,8 @@ import path from 'path';
 import { app, BrowserWindow, shell, Menu, dialog } from 'electron';
 
 const appName = app.getName();
-const config = require('./config');
-
+const Config = require('electron-config');
+const config = new Config();
 
 
 function sendAction(action) {
