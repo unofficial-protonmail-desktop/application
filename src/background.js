@@ -5,8 +5,8 @@ import createWindow from './helpers/window';
 
 const Config = require('electron-config');
 const config = new Config();
-//import env from './env';
 
+const env = require('./env');
 const appMenu = require('./menu');
 const tray = require('./tray');
 
