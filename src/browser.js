@@ -1,8 +1,11 @@
-import { ipcRenderer as ipc } from 'electron';
+import { ipcRenderer as ipc, BrowserWindow } from 'electron';
+import { Sidebar } from './sidebar';
+
 // To substitute with env
 
 const Config = require('electron-config');
 const config = new Config();
+
 
 ipc.on('GoInbox', () => {
     // Go to Inbox/inbox
@@ -64,7 +67,6 @@ function setZoom(zoomFactor) {
     config.set('zoomFactor', zoomFactor);
 }
 
-
 // Inject a global style node to maintain zoom factor after conversation change.
 // Also set the zoom factor if it was set before quitting.
 document.addEventListener('DOMContentLoaded', () => {
@@ -74,8 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.appendChild(style);
     setZoom(zoomFactor);
-
+    const sidebar = new Sidebar();
+	
 	// Activate Dark Mode if it was set before quitting
 	setDarkMode();
-   
 });
