@@ -1,4 +1,5 @@
 @import "sweetalert/dev/sweetalert.scss";
+
 html,
 body {
     width: 100%;
@@ -26,9 +27,6 @@ button.pm-button {
     z-index: 1;
     outline: none;
     &.action {
-        box-sizing: border-box;
-        display: inline-block;
-        transition: all .3s ease-out;
         cursor: pointer;
         z-index: 1;
         height: 40px;
@@ -36,15 +34,8 @@ button.pm-button {
         font-size: 25px;
         text-align: center;
         width: 100%;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-radius: 2px;
-        line-height: 16px;
-        text-decoration: none;
         margin-bottom: 15px;
-        vertical-align: middle;
         color: #fff;
-        background-color: transparent;
         border-color: transparent;
     }
     &.lg {

@@ -3,61 +3,70 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 class Sidebar {
-	constructor(page) {
-		const TabGroup = require('electron-tabs');
-		this.tabGroup = new TabGroup();
+    constructor(page) {
+        const TabGroup = require('electron-tabs');
+        const dragula = require("dragula");
 
-		this.addEventListenerForAddAccount();
-	}
+        this.tabGroup = new TabGroup({
+            ready: function(tabGroup) {
+                dragula([tabGroup.tabContainer], {
+                    direction: "vertical",
+                    mirrorContainer: document.querySelector(".etabs-tabs")
+                });
+            }
+        });
 
-	addEventListenerForAddAccount() {
-		document.querySelector("[action-add-account]").addEventListener("click", () => this.addAccount());
-	}
+        this.addEventListenerForAddAccount();
+    }
 
-	addAccount() {
-		const swal = require('sweetalert');
-		const options = {
-			title: "Account name",
-			text: "Enter the name of your ProtonMail account",
-			type: "input",
-			confirmButtonText: "Add account",
-			showCancelButton: true,
-      allowOutsideClick: true,
-      close
-		};
-		const onConfirmCallback = (name) => !!name ? this.createTab(name.substr(0,1)) : null;
+    addEventListenerForAddAccount() {
+        document.querySelector("[action-add-account]").addEventListener("click", () => this.addAccount());
+    }
 
-		swal(options, onConfirmCallback);
-	}
+    addAccount() {
+        const swal = require('sweetalert');
+        const options = {
+            title: "Account name",
+            text: "Enter the name of your ProtonMail account",
+            type: "input",
+            confirmButtonText: "Add account",
+            showCancelButton: true,
+            allowOutsideClick: true,
+            close
+        };
+        const onConfirmCallback = (name) => !!name ? this.createTab(name.substr(0, 1)) : null;
 
-	createTab(name, active = false) {
-		this.tabGroup.addTab({
-			title: name,
-			src: "https://mail.protonmail.com/login?",
-			visible: true,
-			active: true,
-			ready: (tab) => this.onTabReady(tab)
-		});
-	}
+        swal(options, onConfirmCallback);
+    }
 
-	onTabReady(tab) {
-		const domReadyEvent = () => {
-			this.prefillUsernameInLoginForm(tab.webview.getWebContents(), tab.title);
+    createTab(name, active = false) {
+        this.tabGroup.addTab({
+            title: name,
+            src: "https://mail.protonmail.com/login?",
+            visible: true,
+            active: true,
+            ready: (tab) => this.onTabReady(tab)
+        });
+    }
 
-			tab.webview.removeEventListener("dom-ready", domReadyEvent);
-		};
+    onTabReady(tab) {
+        const domReadyEvent = () => {
+            this.prefillUsernameInLoginForm(tab.webview.getWebContents(), tab.title);
 
-		tab.webview.addEventListener("dom-ready", domReadyEvent);
-	}
+            tab.webview.removeEventListener("dom-ready", domReadyEvent);
+        };
 
-	prefillUsernameInLoginForm(webContents, username) {
-		for (let character of username) {
-			webContents.sendInputEvent({
-				type: "char",
-				keyCode: character
-			});
-		}
-	}
+        tab.webview.addEventListener("dom-ready", domReadyEvent);
+    }
+
+    prefillUsernameInLoginForm(webContents, username) {
+        for (let character of username) {
+            webContents.sendInputEvent({
+                type: "char",
+                keyCode: character
+            });
+        }
+    }
 }
 
 exports.Sidebar = Sidebar;
