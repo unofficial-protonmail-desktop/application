@@ -22,6 +22,8 @@ class Sidebar {
 			type: "input",
 			confirmButtonText: "Add account",
 			showCancelButton: true,
+      allowOutsideClick: true,
+      close
 		};
 		const onConfirmCallback = (name) => !!name ? this.createTab(name.substr(0,1)) : null;
 
@@ -33,7 +35,6 @@ class Sidebar {
 			title: name,
 			src: "https://mail.protonmail.com/login?",
 			visible: true,
-			closable: false,
 			active: true,
 			ready: (tab) => this.onTabReady(tab)
 		});
