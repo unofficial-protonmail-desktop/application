@@ -1,11 +1,9 @@
-
 import os from 'os';
 import path from 'path';
 import { app, BrowserWindow, shell, Menu, dialog } from 'electron';
 
 const appName = app.getName();
-const Config = require('electron-config');
-const config = new Config();
+const config = require('./config');
 
 
 function sendAction(action) {
@@ -80,18 +78,18 @@ if (process.platform !== 'darwin') {
         }
     });
 
-	viewSubmenu.push({
-		type: 'separator'
-	}, {
-		type: 'checkbox',
-		label: 'Always on Top',
-		accelerator: 'Ctrl+Shift+T',
-		checked: config.get('alwaysOnTop'),
-		click(item, focusedWindow) {
-			config.set('alwaysOnTop', item.checked);
-			focusedWindow.setAlwaysOnTop(item.checked);
-		}
-	});    
+    viewSubmenu.push({
+        type: 'separator'
+    }, {
+        type: 'checkbox',
+        label: 'Always on Top',
+        accelerator: 'Ctrl+Shift+T',
+        checked: config.get('alwaysOnTop'),
+        click(item, focusedWindow) {
+            config.set('alwaysOnTop', item.checked);
+            focusedWindow.setAlwaysOnTop(item.checked);
+        }
+    });
 }
 
 const MenuTpl = [{
