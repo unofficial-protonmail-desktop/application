@@ -17,6 +17,7 @@ gulp.task('bundle', () => {
         bundle(srcDir.path('sidebar.js'), destDir.path('sidebar.js')),
         bundle(srcDir.path('tray.js'), destDir.path('tray.js')),
         bundle(srcDir.path('menu.js'), destDir.path('menu.js')),
+        bundle(srcDir.path('config.js'), destDir.path('config.js')),
         bundle(srcDir.path('browser.js'), destDir.path('browser.js')),
   ]);
 });

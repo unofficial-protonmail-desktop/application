@@ -1,105 +1,123 @@
 @import "sweetalert/dev/sweetalert.scss";
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-	line-height: 1;
-	font: 14px/1.714285714285714 "Helvetica Neue",Arial,Helvetica,sans-serif;
-	color: #505061;
-	font-weight: 400;
+    line-height: 1;
+    font: 14px/1.714285714285714 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    color: #505061;
+    font-weight: 400;
 }
 
 button.pm-button {
-	text-decoration: none;
-	color: rgba(255, 255, 255, 0.7);
-	padding: 0 10px;
-	height: 35px;
-	line-height: 35px;
-	box-sizing: border-box;
-	display: inline-block;
-	font-size: 12px;
-	background-color: transparent;
-	transition: all .3s ease-out;
-	cursor: pointer;
-	box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
-	z-index: 1;
-	outline: none;
-
-	&.action {
-		box-sizing: border-box;
-		display: inline-block;
-		transition: all .3s ease-out;
-		cursor: pointer;
-		z-index: 1;
-		height: 40px;
-		min-height: 40px;
-		font-size: 12px;
-		text-align: center;
-		width: 100%;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		border-radius: 2px;
-		line-height: 16px;
-		padding: 10px 0;
-		text-decoration: none;
-		margin-bottom: 15px;
-		vertical-align: middle;
-		color: #fff;
-		background-color: transparent;
-		border-color: #fff;
-		box-shadow: inset 0 0 0 1px #fff;
-		border-width: 1px;	}
-
-	&.lg {
-		height: 50px;
-		line-height: 50px;
-		font-size: 16px;
-	}
-
-	&.active {
-		color: #fff;
-		font-weight: 800;
-	}
-
-	div {
-		display: flex;
-		justify-content: center;
-		align-content: center;
-		align-items: center;
-	}
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0 10px;
+    height: 35px;
+    line-height: 35px;
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 12px;
+    background-color: transparent;
+    transition: all .3s ease-out;
+    cursor: pointer;
+    z-index: 1;
+    outline: none;
+    &.action {
+        cursor: pointer;
+        z-index: 1;
+        height: 40px;
+        min-height: 40px;
+        font-size: 25px;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 15px;
+        color: #fff;
+        border-color: transparent;
+    }
+    &.lg {
+        height: 60px;
+        line-height: 15px;
+        font-size: 16px;
+    }
+    &.active {
+        color: #fff;
+        font-weight: 800;
+    }
+    div {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
 }
 
 .view-container {
-	display: flex;
-	align-items: stretch;
-	height: 100vh;
-
-	.sidenav,
-	.etabs-views {
-	}
-
-	.sidenav {
-		background: darken(#505061, 10%);
-		padding: 40px 20px;
-		flex: 1;
-
-		.etabs-tabs {
-			.etabs-tab {
-				@extend button.pm-button;
-				@extend button.lg;
-				display: block;
-
-				&.active {
-					color: #fff;
-				}
-			}
-		}
-	}
-
-	.etabs-views {
-		flex: 4;
-	}
+    user-select: none;
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+    .sidenav,
+    .etabs-views {}
+    .sidenav {
+        background: darken(#505061, 10%);
+        padding: 40px 10px;
+        width: 60px;
+        .etabs-tabs {
+            .etabs-tab {
+                @extend button.pm-button;
+                @extend button.lg;
+                display: block;
+                &.active span.etabs-tab-title {
+                    color: #fff;
+                    box-shadow: 0 0 0 2px #fff;
+                }
+                & button.etabs-tab-button-close {
+                    position: relative;
+                    top: -45px;
+                    left: 30px;
+                    border: 0;
+                    background: red;
+                    border-radius: 100px;
+                    padding: 1px 3px;
+                    color: white;
+                    cursor: pointer;
+                    visibility: hidden;
+                    transition: visibility 0s, opacity 0.2s linear;
+                    opacity: 0;
+                }
+                &:hover button.etabs-tab-button-close {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+            .etabs-tab-title {
+                background: #9397cd;
+                border-radius: 10%;
+                padding: 12px;
+                text-transform: uppercase;
+                text-align: center;
+                display: block;
+                &:hover {
+                    box-shadow: 0 0 0 3px #9397cd;
+                }
+            }
+        }
+    }
+    .etabs-views {
+        flex: 4;
+    }
+    .settings-container {
+        position: absolute;
+        bottom: 0;
+        padding: 15px;
+        color: #fff;
+        .settings-button:hover {
+            box-shadow: 0px 1px 0 0px white;
+            cursor: pointer;
+        }
+    }
 }
-
