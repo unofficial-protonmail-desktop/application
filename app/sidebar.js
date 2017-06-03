@@ -34,16 +34,16 @@ class Sidebar {
         const that = this;
 
         tabSettingsArray.map(function(savedtab) {
-            that.tabGroup.addTab({
-                title: savedtab.title.substr(0, 1),
-                src: "https://mail.protonmail.com/login?",
-                visible: true,
-                active: false,
-                ready: (tab) => {
-                    postSettingsArray.push({ id: tab.id, title: savedtab.title, active: savedtab.active });
-                    that.onTabReady(tab, savedtab.title);
-                }
-            });
+          that.tabGroup.addTab({
+            title: savedtab.title.substr(0, 1),
+            src: "https://mail.protonmail.com/login?",
+            visible: true,
+            active: false,
+            ready: (tab) => {
+              postSettingsArray.push({ id: tab.id, title: savedtab.title, active: savedtab.active });
+              that.onTabReady(tab, savedtab.title);
+            }
+          });
         });
         config.set("SavedTabs", postSettingsArray);
     }
