@@ -19,12 +19,12 @@ ipc.on('show-preferences', () => {
 
 ipc.on('new-email', () => {
     // Click COMPOSE button
-    document.querySelector('.compose.pm_button.primary').click();
+    document.querySelector('.sidebar-btn-compose').click();
 });
 
 ipc.on('log-out', () => {
     // Click hided logout button
-    document.querySelector('.pm_button.primary.text-center').click();
+    document.querySelector('.navigationUser-logout').click();
 });
 
 ipc.on('close-composer', () => {
