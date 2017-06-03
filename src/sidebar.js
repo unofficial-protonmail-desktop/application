@@ -31,12 +31,12 @@ export class Sidebar {
         const tabSettingsArray = config.get('SavedTabs');
         const postSettingsArray = [];
 
-        tabSettingsArray.map((savedtab) => {
+        tabSettingsArray.map((savedtab, index) => {
           this.tabGroup.addTab({
             title: savedtab.title.substr(0, 1),
             src: "https://mail.protonmail.com/login?",
             visible: true,
-            active: false,
+            active: !index,
             ready: (tab) => {
               postSettingsArray.push({ id: tab.id, title: savedtab.title, active: savedtab.active });
               this.onTabReady(tab, savedtab.title);
