@@ -48,7 +48,8 @@ The installer is provided by *electon-builder* and processed through gulp thanks
 This will work on OS X, Linux, and Windows. You will need [NodeJS](https://nodejs.org) to run this app.
 - Install required packages: `$ npm install`
 - Run: `$ npm start`
-- Build: `$ npm run release`
+- Build Local: `$ npm run release-local`
+- Build and upload to github: `$ npm run release`
 
 The building settings is in `./package.json` and additional configuration instructions can be found [here](https://github.com/electron-userland/electron-builder/wiki/Options). The building process will only create version for the current OS, therefore for creating MacOS, Windows and Linux you need to run the command from each OS.
 
