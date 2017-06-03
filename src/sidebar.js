@@ -1,3 +1,6 @@
+const tray = require('./tray');
+var {ipcRenderer, remote} = require('electron');
+
 export class Sidebar {
     constructor(page) {
         const TabGroup = require('electron-tabs');
@@ -16,30 +19,29 @@ export class Sidebar {
             });
 
         this.addEventListenerForAddAccount();
-        this.onTabStart();
+        this.initiateTabs();
 
     }
 
-    onTabStart() {
+    initiateTabs() {
       /* This is an ugly way to do it, but as electron-tabs does not allow
       setting the ID, in order to have the same tabs ID on the saved json and
       the generated we need to resave once we reload the saved tabs. */
         const config = require('./config');
         const tabSettingsArray = config.get('SavedTabs');
         const postSettingsArray = [];
-        const that = this;
 
-        tabSettingsArray.map(function(savedtab) {
-            that.tabGroup.addTab({
-                title: savedtab.title.substr(0, 1),
-                src: "https://mail.protonmail.com/login?",
-                visible: true,
-                active: false,
-                ready: (tab) => {
-                    postSettingsArray.push({ id: tab.id, title: savedtab.title, active: savedtab.active });
-                    that.onTabReady(tab, savedtab.title);
-                }
-            });
+        tabSettingsArray.map((savedtab) => {
+          this.tabGroup.addTab({
+            title: savedtab.title.substr(0, 1),
+            src: "https://mail.protonmail.com/login?",
+            visible: true,
+            active: false,
+            ready: (tab) => {
+              postSettingsArray.push({ id: tab.id, title: savedtab.title, active: savedtab.active });
+              this.onTabReady(tab, savedtab.title);
+            }
+          });
         });
         config.set("SavedTabs", postSettingsArray);
     }
@@ -106,6 +108,8 @@ export class Sidebar {
         };
 
         tab.webview.addEventListener("dom-ready", domReadyEvent);
+        
+        tab.webview.addEventListener("page-title-updated", event => this.onTabTitleUpdate(tab, event.title));
     }
 
     prefillUsernameInLoginForm(webContents, username) {
@@ -115,5 +119,22 @@ export class Sidebar {
                 keyCode: character
             });
         }
+    }
+    
+    onTabTitleUpdate(tab, title) {
+      let totalCount = 0;
+      
+      for (let tab of this.tabGroup.tabs) {
+        let extractedTitle = (/\(([0-9]+)\)/).exec(tab.webview.getTitle());
+        let unreadCount = extractedTitle ? parseInt(extractedTitle[1]) : 0;
+
+        totalCount += unreadCount;
+        /**
+         * electron-tabs doesnt have support for setBadge, PR sent to electron-tabs
+         */
+//        tab.setBadge(unreadCount ? unreadCount : '');
+      }
+  
+      ipcRenderer.send('set-badge', totalCount);
     }
 }

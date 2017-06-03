@@ -1,10 +1,12 @@
 // This file manages the tray system
 import path from 'path';
-import { app, Menu, Tray } from 'electron';
+import { app, Menu, Tray, ipcMain } from 'electron';
 
 let tray = null;
 
 exports.create = win => {
+  ipcMain.on('set-badge', (event, arg) => setBadge(arg));
+
 	if (process.platform === 'darwin' || tray) {
 		return;
 	}
@@ -40,25 +42,18 @@ exports.create = win => {
 	tray.on('click', toggleWin);
 };
 
-exports.setBadgeFromTitle = title => {
-	const extractedTitle = (/\(([0-9]+)\)/).exec(title);
-	const unreadCount = extractedTitle ? extractedTitle[1] : 0;
-
-	if (process.platform === 'darwin') {
-		setBadgeForDarwin(unreadCount);
-		return;
-	}
-	
-	if (!tray) {
-		console.warn('Couldnt find tray when setting badge');
-		return;
-	}
-
-	const icon = unreadCount ? 'IconTrayUnread.png' : 'IconTray.png';
-	const iconPath = path.join(__dirname, `static/${icon}`);
-	tray.setImage(iconPath);
-};
-
-const setBadgeForDarwin = unreadCount => {
-	app.dock.setBadge(unreadCount ? unreadCount : '');
+const setBadge = unreadCount => {
+  if (process.platform === 'darwin') {
+    app.dock.setBadge(unreadCount ? unreadCount.toString() : '');
+    return;
+  }
+  
+  if (!tray) {
+    console.warn('Couldnt find tray when setting badge');
+    return;
+  }
+  
+  const icon = unreadCount ? 'IconTrayUnread.png' : 'IconTray.png';
+  const iconPath = path.join(__dirname, `static/${icon}`);
+  tray.setImage(iconPath);
 };

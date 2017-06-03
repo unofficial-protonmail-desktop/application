@@ -60,21 +60,23 @@ button.pm-button {
     display: flex;
     align-items: stretch;
     height: 100vh;
-    .sidenav,
-    .etabs-views {}
+
     .sidenav {
         background: darken(#505061, 10%);
         padding: 40px 10px;
         width: 60px;
+
         .etabs-tabs {
             .etabs-tab {
                 @extend button.pm-button;
                 @extend button.lg;
                 display: block;
+
                 &.active span.etabs-tab-title {
                     color: #fff;
                     box-shadow: 0 0 0 2px #fff;
                 }
+
                 & button.etabs-tab-button-close {
                     position: relative;
                     top: -45px;
@@ -89,11 +91,13 @@ button.pm-button {
                     transition: visibility 0s, opacity 0.2s linear;
                     opacity: 0;
                 }
+
                 &:hover button.etabs-tab-button-close {
                     visibility: visible;
                     opacity: 1;
                 }
             }
+
             .etabs-tab-title {
                 background: #9397cd;
                 border-radius: 10%;
@@ -107,9 +111,11 @@ button.pm-button {
             }
         }
     }
+
     .etabs-views {
         flex: 4;
     }
+
     .settings-container {
         position: absolute;
         bottom: 0;
