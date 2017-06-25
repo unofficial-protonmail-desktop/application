@@ -5,7 +5,7 @@ const open = require('open');
 export class Sidebar {
     constructor(page) {
         const TabGroup = require('electron-tabs');
-        const dragula = require("dragula");
+        const dragula = require('dragula');
 
         this.tabGroup = new TabGroup({
                 ready: function(tabGroup) {
@@ -15,13 +15,10 @@ export class Sidebar {
                     });
                 }
             })
-            .on("tab-removed", (tab, tabGroup) => {
-                this.onTabRemoved(tab);
-            });
+            .on('tab-removed', this.onTabRemoved.bind(null));
 
         this.addEventListenerForAddAccount();
         this.initiateTabs();
-
     }
 
     initiateTabs() {
@@ -98,7 +95,6 @@ export class Sidebar {
                 config.set("SavedTabs", config.get("SavedTabs").concat(tabSettingsArray));
             }
         });
-
     }
 
     onTabReady(tab, name) {
@@ -130,8 +126,8 @@ export class Sidebar {
     onTabTitleUpdate(tab, title) {
       let totalCount = 0;
       
-      for (let tab of this.tabGroup.tabs) {
-        let extractedTitle = (/\(([0-9]+)\)/).exec(tab.webview.getTitle());
+      for (let _tab of this.tabGroup.tabs) {
+        let extractedTitle = (/\(([0-9]+)\)/).exec(_tab.webview.getTitle());
         let unreadCount = extractedTitle ? parseInt(extractedTitle[1]) : 0;
 
         totalCount += unreadCount;
