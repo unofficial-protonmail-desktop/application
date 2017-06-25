@@ -131,11 +131,6 @@ app.on('ready', () => {
       mainWindow.openDevTools();
     }
 	});
-
-	page.on('new-window', (e, url) => {
-		e.preventDefault();
-		shell.openExternal(url);
-	});
 });
 
 app.on('activate', () => {

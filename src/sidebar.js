@@ -1,5 +1,6 @@
 const tray = require('./tray');
 var {ipcRenderer, remote} = require('electron');
+const open = require('open');
 
 export class Sidebar {
     constructor(page) {
@@ -110,6 +111,11 @@ export class Sidebar {
         tab.webview.addEventListener("dom-ready", domReadyEvent);
         
         tab.webview.addEventListener("page-title-updated", event => this.onTabTitleUpdate(tab, event.title));
+  
+        tab.webview.addEventListener('new-window', (e) => {
+          e.preventDefault();
+          open(e.url);
+        });
     }
 
     prefillUsernameInLoginForm(webContents, username) {
