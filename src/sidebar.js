@@ -1,5 +1,5 @@
-const tray = require('./tray');
-var {ipcRenderer, remote} = require('electron');
+import { ContextMenuHandler } from './context-menu-handler';
+const { ipcRenderer } = require('electron');
 const open = require('open');
 
 export class Sidebar {
@@ -16,7 +16,6 @@ export class Sidebar {
                 }
             })
             .on('tab-removed', this.onTabRemoved.bind(null));
-
         this.addEventListenerForAddAccount();
         this.initiateTabs();
     }
@@ -43,7 +42,7 @@ export class Sidebar {
         });
         config.set("SavedTabs", postSettingsArray);
     }
-
+    
     onTabRemoved(tab) {
         const config = require('./config');
 
@@ -72,7 +71,6 @@ export class Sidebar {
             confirmButtonText: "Add account",
             showCancelButton: true,
             allowOutsideClick: true,
-            close
         };
         const onConfirmCallback = (name) => !!name ? this.createTab(name) : null;
 
@@ -98,20 +96,40 @@ export class Sidebar {
     }
 
     onTabReady(tab, name) {
-        const domReadyEvent = () => {
-            this.prefillUsernameInLoginForm(tab.webview.getWebContents(), name);
+      const domReadyEvent = () => {
+          this.prefillUsernameInLoginForm(tab.webview.getWebContents(), name);
 
-            tab.webview.removeEventListener("dom-ready", domReadyEvent);
-        };
+          tab.webview.removeEventListener("dom-ready", domReadyEvent);
+      };
 
+      this.prepareContextMenu(tab);
+      tab.tabElements.title.setAttribute('tab-id', tab.id);
         tab.webview.addEventListener("dom-ready", domReadyEvent);
-        
         tab.webview.addEventListener("page-title-updated", event => this.onTabTitleUpdate(tab, event.title));
-  
         tab.webview.addEventListener('new-window', (e) => {
           e.preventDefault();
           open(e.url);
         });
+    }
+    
+    prepareContextMenu(tab) {
+      const functionName = 'sidebarItemContextMenu';
+  
+      tab.tabElements.title.setAttribute('prepend-context-menu', functionName);
+      tab.tabElements.title.setAttribute('tab-id', tab.id);
+
+      const tabs = this.tabGroup.tabs;
+      ContextMenuHandler.addContextMenu(functionName, (params, browserWindow, targetElement) => {
+        return [{
+          label: 'Remove tab',
+          visible: true,
+          click: () => {
+            const tabId = parseInt(targetElement.getAttribute('tab-id'));
+            const tab = tabs.find(_tab => _tab.id === tabId);
+            tab.close();
+          },
+        }];
+      });
     }
 
     prefillUsernameInLoginForm(webContents, username) {
@@ -123,7 +141,7 @@ export class Sidebar {
         }
     }
     
-    onTabTitleUpdate(tab, title) {
+    onTabTitleUpdate(tab) {
       let totalCount = 0;
       
       for (let _tab of this.tabGroup.tabs) {
@@ -131,10 +149,7 @@ export class Sidebar {
         let unreadCount = extractedTitle ? parseInt(extractedTitle[1]) : 0;
 
         totalCount += unreadCount;
-        /**
-         * electron-tabs doesnt have support for setBadge, PR sent to electron-tabs
-         */
-//        tab.setBadge(unreadCount ? unreadCount : '');
+        tab.setBadge(unreadCount ? unreadCount : '');
       }
   
       ipcRenderer.send('set-badge', totalCount);

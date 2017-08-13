@@ -77,24 +77,29 @@ button.pm-button {
                     box-shadow: 0 0 0 2px #fff;
                 }
 
-                & button.etabs-tab-button-close {
+                .etabs-tab-button-close {
+                    display: none;
+                }
+
+                .etabs-tab-badge {
                     position: relative;
                     top: -45px;
                     left: 30px;
                     border: 0;
                     background: red;
                     border-radius: 100px;
-                    padding: 1px 3px;
+                    padding: 1px 6px 2px;
                     color: white;
                     cursor: pointer;
-                    visibility: hidden;
-                    transition: visibility 0s, opacity 0.2s linear;
-                    opacity: 0;
-                }
-
-                &:hover button.etabs-tab-button-close {
                     visibility: visible;
                     opacity: 1;
+                    font-size: 16px;
+                    line-height: 1em;
+                    font-weight: normal;
+
+                    &.hidden {
+                        display: none;
+                    }
                 }
             }
 
