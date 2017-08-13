@@ -11,7 +11,6 @@ const appMenu = require('./menu');
 const tray = require('./tray');
 
 require('electron-dl')({saveAs: true});
-require('electron-context-menu')();
 
 if (env.debug) {
 	require('electron-reload')(__dirname);
