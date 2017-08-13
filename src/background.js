@@ -1,29 +1,31 @@
 import path from 'path';
 import jetpack from 'fs-jetpack';
-import { app, BrowserWindow, Menu, shell } from 'electron';
+import {app, Menu, shell} from 'electron';
 import createWindow from './helpers/window';
 
 const Config = require('electron-config');
 const config = new Config();
-//import env from './env';
 
+const env = require('./env');
 const appMenu = require('./menu');
 const tray = require('./tray');
 
-
-require('electron-debug')({enabled: true});
 require('electron-dl')({saveAs: true});
-require('electron-context-menu')();
+
+if (env.debug) {
+	require('electron-reload')(__dirname);
+	require('electron-debug')({enabled: true});
+}
 
 let mainWindow;
 let isQuitting = false;
-let oldtitle;
 
 /*if (env.name !== 'production') {
     var userDataPath = app.getPath('userData');
     app.setPath('userData', userDataPath + ' (' + env.name + ')');
 }
 */
+
 const isAlreadyRunning = app.makeSingleInstance(() => {
 	if (mainWindow) {
 		if (mainWindow.isMinimized()) {
@@ -36,20 +38,6 @@ const isAlreadyRunning = app.makeSingleInstance(() => {
 
 if (isAlreadyRunning) {
 	app.quit();
-}
-
-function updateBadge(messageCount) {
-    // Set badge
-    if (process.platform === 'darwin') {
-        app.dock.setBadge(messageCount ? messageCount[1] : '');
-    } else {
-        tray.setBadge(messageCount);
-    }
-}
-
-function checkMessages(title) {
-  const messageCount = (/\(([0-9]+)\)/).exec(title);
-  updateBadge(messageCount);
 }
 
 function createMainWindow() {
@@ -70,7 +58,7 @@ function createMainWindow() {
 		//backgroundColor: isDarkMode ? '#192633' : '#fff',
 		webPreferences: {
 			preload: path.join(__dirname, 'browser.js'),
-			nodeIntegration: false,
+			nodeIntegration: true,
 			plugins: true
 		}
 	});
@@ -97,8 +85,8 @@ function createMainWindow() {
 	if (process.platform === 'darwin') {
 		win.setSheetOffset(40);
 	}
-
-    win.loadURL('https://mail.protonmail.com/login');
+	
+	win.loadURL('file://' + __dirname + '/index.html');
 
 	win.on('close', e => {
 		if (!isQuitting) {
@@ -111,12 +99,7 @@ function createMainWindow() {
 			}
 		}
 	});
-
-    win.on('page-title-updated', (e, title) => {
-        e.preventDefault();
-        checkMessages(title);
-    });
-
+	
 	return win;
 }
 
@@ -132,21 +115,20 @@ app.on('ready', () => {
 	page.on('dom-ready', () => {
 		page.insertCSS(jetpack.read(path.join(__dirname, 'browser.css'), 'utf8'));
 		page.insertCSS(jetpack.read(path.join(__dirname, 'themes/dark-mode.css'), 'utf8'));
-
-        if (process.platform === 'darwin') {
-            page.insertCSS(jetpack.read(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
-        }
-        
+		
+		if (process.platform === 'darwin') {
+			page.insertCSS(jetpack.read(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
+		}
+  
 		if (argv.minimize) {
 			mainWindow.minimize();
 		} else {
 			mainWindow.show();
 		}
-	});
-
-	page.on('new-window', (e, url) => {
-		e.preventDefault();
-		shell.openExternal(url);
+    
+    if (env.debug) {
+      mainWindow.openDevTools();
+    }
 	});
 });
 

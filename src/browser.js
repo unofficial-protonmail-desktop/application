@@ -1,32 +1,42 @@
-import { ipcRenderer as ipc } from 'electron';
+import { ipcRenderer as ipc, BrowserWindow } from 'electron';
+import { Sidebar } from './sidebar';
+
 // To substitute with env
 
 const Config = require('electron-config');
 const config = new Config();
 
+const clickElement = (selector) => {
+  const el = document.querySelector(selector);
+  
+  if (el) {
+    el.click();
+  }
+};
+
 ipc.on('GoInbox', () => {
     // Go to Inbox/inbox
-    document.querySelector('a[href=\'/inbox\']').click();
+    clickElement('a[href=\'/inbox\']');
 });
 
 ipc.on('show-preferences', () => {
     // Click preferences button
-    document.querySelector('#tour-settings').click();
+    clickElement('#tour-settings');
 });
 
 ipc.on('new-email', () => {
     // Click COMPOSE button
-    document.querySelector('.sidebar-btn-compose').click();
+    clickElement('.sidebar-btn-compose');
 });
 
 ipc.on('log-out', () => {
     // Click hided logout button
-    document.querySelector('.navigationUser-logout').click();
+    clickElement('.navigationUser-logout');
 });
 
 ipc.on('close-composer', () => {
     // Click COMPOSE button
-    document.querySelector('.pm_button.link.close-button').click();
+    clickElement('.pm_button.link.close-button');
 });
 
 function setDarkMode() {
@@ -64,7 +74,6 @@ function setZoom(zoomFactor) {
     config.set('zoomFactor', zoomFactor);
 }
 
-
 // Inject a global style node to maintain zoom factor after conversation change.
 // Also set the zoom factor if it was set before quitting.
 document.addEventListener('DOMContentLoaded', () => {
@@ -72,10 +81,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const style = document.createElement('style');
     style.id = 'zoomFactor';
 
+    /*const webview = document.createElement("webview");
+    webview.src = 'file://' + __dirname + '/settings.html';
+    webview.className = 'visible';
+    document.querySelector(".etabs-views").appendChild(webview);
+    */
+
     document.body.appendChild(style);
     setZoom(zoomFactor);
 
-	// Activate Dark Mode if it was set before quitting
-	setDarkMode();
-   
+    // Activate Dark Mode if it was set before quitting
+    setDarkMode();
+  
+    setTimeout(() => new Sidebar(), 0);
 });
