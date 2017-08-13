@@ -105,7 +105,7 @@ export class Sidebar {
       this.prepareContextMenu(tab);
       tab.tabElements.title.setAttribute('tab-id', tab.id);
         tab.webview.addEventListener("dom-ready", domReadyEvent);
-        tab.webview.addEventListener("page-title-updated", event => this.onTabTitleUpdate(tab, event.title));
+        tab.webview.addEventListener("page-title-updated", () => this.onTabTitleUpdate());
         tab.webview.addEventListener('new-window', (e) => {
           e.preventDefault();
           open(e.url);
@@ -141,7 +141,7 @@ export class Sidebar {
         }
     }
     
-    onTabTitleUpdate(tab) {
+    onTabTitleUpdate() {
       let totalCount = 0;
       
       for (let _tab of this.tabGroup.tabs) {
@@ -149,7 +149,7 @@ export class Sidebar {
         let unreadCount = extractedTitle ? parseInt(extractedTitle[1]) : 0;
 
         totalCount += unreadCount;
-        tab.setBadge(unreadCount ? unreadCount : '');
+        _tab.setBadge(unreadCount ? unreadCount : '');
       }
   
       ipcRenderer.send('set-badge', totalCount);
