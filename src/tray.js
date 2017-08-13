@@ -1,6 +1,6 @@
 // This file manages the tray system
-import path from 'path';
 import { app, Menu, Tray, ipcMain } from 'electron';
+import { ICONS } from './icons';
 
 let tray = null;
 
@@ -10,8 +10,6 @@ exports.create = win => {
 	if (process.platform === 'darwin' || tray) {
 		return;
 	}
-
-	const iconPath = path.join(__dirname, 'static/IconTray.png');
 
 	const toggleWin = () => {
 		if (win.isVisible()) {
@@ -36,7 +34,7 @@ exports.create = win => {
 		}
 	]);
 
-	tray = new Tray(iconPath);
+	tray = new Tray(ICONS.TRAY);
 	tray.setToolTip(`${app.getName()}`);
 	tray.setContextMenu(contextMenu);
 	tray.on('click', toggleWin);
@@ -53,7 +51,5 @@ const setBadge = unreadCount => {
     return;
   }
   
-  const icon = unreadCount ? 'IconTrayUnread.png' : 'IconTray.png';
-  const iconPath = path.join(__dirname, `static/${icon}`);
-  tray.setImage(iconPath);
+  tray.setImage(unreadCount ? ICONS.TRAY_UNREAD : ICONS.TRAY);
 };
