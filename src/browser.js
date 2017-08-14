@@ -1,8 +1,7 @@
 import { ipcRenderer as ipc, BrowserWindow } from 'electron';
 import { Sidebar } from './sidebar';
 
-// To substitute with env
-
+require('electron-context-menu-handler')();
 const Config = require('electron-config');
 const config = new Config();
 

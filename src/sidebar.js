@@ -1,4 +1,4 @@
-import { ContextMenuHandler } from './context-menu-handler';
+const ContextMenuHandler = require('electron-context-menu-handler/context-menu-handler');
 const { ipcRenderer } = require('electron');
 const open = require('open');
 
@@ -119,7 +119,7 @@ export class Sidebar {
       tab.tabElements.title.setAttribute('tab-id', tab.id);
 
       const tabs = this.tabGroup.tabs;
-      ContextMenuHandler.addContextMenu(functionName, (params, browserWindow, targetElement) => {
+      ContextMenuHandler.addPrependContextMenu(functionName, (params, browserWindow, targetElement) => {
         return [{
           label: 'Remove tab',
           visible: true,

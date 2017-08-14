@@ -2,7 +2,7 @@
   "name": "protonmail-desktop",
   "productName": "Protonmail Desktop",
   "description": "Unofficial electron wrapper for Protonmail",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "author": {
     "name": "Matthew Core <matcore@protonmail.com>",
     "email": "matcore@protonmail.com"
@@ -43,6 +43,7 @@
     "dragula": "^3.7.2",
     "electron-config": "^1.0.0",
     "electron-context-menu": "^0.9.1",
+    "electron-context-menu-handler": "^1.0.3",
     "electron-debug": "^1.1.0",
     "electron-dl": "^1.9.0",
     "electron-tabs": "^0.7.0",
