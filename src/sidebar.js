@@ -133,12 +133,7 @@ export class Sidebar {
     }
 
     prefillUsernameInLoginForm(webContents, username) {
-        for (let character of username) {
-            webContents.sendInputEvent({
-                type: "char",
-                keyCode: character
-            });
-        }
+      webContents.executeJavaScript(`document.querySelector('[name=username]').value = '${username}'`);
     }
     
     onTabTitleUpdate() {
