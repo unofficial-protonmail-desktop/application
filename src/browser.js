@@ -1,10 +1,7 @@
 import { ipcRenderer as ipc, BrowserWindow } from 'electron';
 import { Sidebar } from './sidebar';
 
-// To substitute with env
-
-const Config = require('electron-config');
-const config = new Config();
+const settings = require('electron-settings');
 
 const clickElement = (selector) => {
   const el = document.querySelector(selector);
@@ -40,11 +37,11 @@ ipc.on('close-composer', () => {
 });
 
 function setDarkMode() {
-    document.documentElement.classList.toggle('dark-mode', config.get('darkMode'));
+    document.documentElement.classList.toggle('dark-mode', settings.get('darkMode'));
 }
 
 ipc.on('toggle-dark-mode', () => {
-    config.set('darkMode', !config.get('darkMode'));
+    settings.set('darkMode', !settings.get('darkMode'));
     setDarkMode();
 });
 
@@ -53,7 +50,7 @@ ipc.on('zoom-reset', () => {
 });
 
 ipc.on('zoom-in', () => {
-    const zoomFactor = config.get('zoomFactor') + 0.1;
+    const zoomFactor = settings.get('zoomFactor') + 0.1;
 
     if (zoomFactor < 1.6) {
         setZoom(zoomFactor);
@@ -61,7 +58,7 @@ ipc.on('zoom-in', () => {
 });
 
 ipc.on('zoom-out', () => {
-    const zoomFactor = config.get('zoomFactor') - 0.1;
+    const zoomFactor = settings.get('zoomFactor') - 0.1;
 
     if (zoomFactor >= 0.8) {
         setZoom(zoomFactor);
@@ -71,13 +68,13 @@ ipc.on('zoom-out', () => {
 function setZoom(zoomFactor) {
     const node = document.getElementById('zoomFactor');
     node.textContent = `#wrapper {zoom: ${zoomFactor} !important}`;
-    config.set('zoomFactor', zoomFactor);
+    settings.set('zoomFactor', zoomFactor);
 }
 
 // Inject a global style node to maintain zoom factor after conversation change.
 // Also set the zoom factor if it was set before quitting.
 document.addEventListener('DOMContentLoaded', () => {
-    const zoomFactor = config.get('zoomFactor') || 1.0;
+    const zoomFactor = settings.get('zoomFactor') || 1.0;
     const style = document.createElement('style');
     style.id = 'zoomFactor';
 
