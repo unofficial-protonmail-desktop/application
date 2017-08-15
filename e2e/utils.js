@@ -1,15 +1,22 @@
 import electron from 'electron';
 import { Application } from 'spectron';
 
-const beforeEach = function () {
+const beforeEach = async function (env = {}) {
   this.timeout(10000);
   this.app = new Application({
     path: electron,
     args: ['.'],
     startTimeout: 10000,
     waitTimeout: 10000,
+    env: Object.assign(env, {
+      DEBUG: 'false',
+      NAME: 'TEST',
+    }),
   });
-  return this.app.start();
+  
+  await this.app.start();
+  
+  return this.app;
 };
 
 const afterEach = function () {

@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import testUtils from './utils';
+import { AddCommands } from './commands';
 
 describe('multiple accounts', function () {
   this.timeout(20000);
@@ -22,15 +23,6 @@ describe('multiple accounts', function () {
       .then(text => {
         expect(typeof text).equal('string');
         expect(text.toLowerCase()).equal(accountName.slice(0, 1).toLowerCase());
-      });
-  });
-  
-  it('should load stored accounts', function () {
-    return this.app.client.waitUntilWindowLoaded()
-      .waitForVisible('.etabs-tabs')
-      .elements('.etabs-tabs .etabs-tab')
-      .then(tabs => {
-        expect(tabs.value.length).equal(1);
       });
   });
 });
