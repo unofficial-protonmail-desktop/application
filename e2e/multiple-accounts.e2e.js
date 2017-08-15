@@ -22,12 +22,6 @@ describe('multiple accounts', function () {
       .then(text => {
         expect(typeof text).equal('string');
         expect(text.toLowerCase()).equal(accountName.slice(0, 1).toLowerCase());
-      })
-      .then(() => {
-        const webContents = this.app.webContents.getAllWebContents();
-        expect(webContents.length).equal(1);
-        
-        return Promise.resole(webContents[0]);
       });
   });
   
