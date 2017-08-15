@@ -31,11 +31,6 @@ gulp.task('sass', () => {
   .pipe(gulp.dest(destDir.path('stylesheets')));
 });
 
-gulp.task('environment', () => {
-  const configFile = `config/env_${utils.getEnvName()}.json`;
-  projectDir.copy(configFile, destDir.path('env.json'), { overwrite: true });
-});
-
 gulp.task('watch', () => {
   const beepOnError = (done) => {
     return (err) => {
@@ -54,4 +49,4 @@ gulp.task('watch', () => {
   }));
 });
 
-gulp.task('build', ['bundle', 'sass', 'environment']);
+gulp.task('build', ['bundle', 'sass']);

@@ -47,6 +47,7 @@ The installer is provided by *electon-builder* and processed through gulp thanks
 
 This will work on OS X, Linux, and Windows. You will need [NodeJS](https://nodejs.org) to run this app.
 - Install required packages: `$ npm install`
+- Copy .env.example to .env: `$ cp .env.example .env`
 - Run: `$ npm start`
 - Build Local: `$ npm run release-local`
 - Build and upload to github: `$ npm run release`

@@ -31,7 +31,7 @@ export class Sidebar {
         tabSettingsArray.map((savedtab, index) => {
           this.tabGroup.addTab({
             title: savedtab.title.substr(0, 1),
-            src: "https://mail.protonmail.com/login?",
+            src: process.env.PROTONMAIL_LOGIN_URL,
             visible: true,
             active: !index,
             ready: (tab) => {
@@ -40,21 +40,19 @@ export class Sidebar {
             }
           });
         });
-        config.set("SavedTabs", postSettingsArray);
+        settings.set("SavedTabs", postSettingsArray);
     }
     
     onTabRemoved(tab) {
-        const config = require('./config');
+        const tabSettingsArray = settings.get('SavedTabs', []);
 
-        const tabSettingsArray = config.get('SavedTabs');
-
-        for (var i = 0; i < tabSettingsArray.length; i++)
+        for (let i = 0; i < tabSettingsArray.length; i++)
             if (tabSettingsArray[i].id === tab.id) {
                 tabSettingsArray.splice(i, 1);
                 break;
             }
 
-        config.set("SavedTabs", tabSettingsArray);
+        settings.set("SavedTabs", tabSettingsArray);
     }
 
     addEventListenerForAddAccount() {
@@ -82,7 +80,7 @@ export class Sidebar {
 
         this.tabGroup.addTab({
             title: name.substr(0, 1),
-            src: "https://mail.protonmail.com/login?",
+            src: process.env.PROTONMAIL_LOGIN_URL,
             visible: true,
             active: true,
             ready: (tab) => {
