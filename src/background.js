@@ -6,25 +6,22 @@ import createWindow from './helpers/window';
 const Config = require('electron-config');
 const config = new Config();
 
-const env = require('./env');
 const appMenu = require('./menu');
 const tray = require('./tray');
 
 require('electron-dl')({saveAs: true});
 
-if (env.debug) {
+if (process.env.NAME !== 'TEST') {
+  require('dotenv').load();
+}
+
+if (process.env.DEBUG === 'true') {
 	require('electron-reload')(__dirname);
 	require('electron-debug')({enabled: true});
 }
 
 let mainWindow;
 let isQuitting = false;
-
-/*if (env.name !== 'production') {
-    var userDataPath = app.getPath('userData');
-    app.setPath('userData', userDataPath + ' (' + env.name + ')');
-}
-*/
 
 const isAlreadyRunning = app.makeSingleInstance(() => {
 	if (mainWindow) {
@@ -126,7 +123,7 @@ app.on('ready', () => {
 			mainWindow.show();
 		}
     
-    if (env.debug) {
+    if (process.env.DEBUG === 'true') {
       mainWindow.openDevTools();
     }
 	});
