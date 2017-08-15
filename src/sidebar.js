@@ -1,6 +1,7 @@
 import { ContextMenuHandler } from './context-menu-handler';
 const { ipcRenderer } = require('electron');
 const open = require('open');
+const settings = require('electron-settings');
 
 export class Sidebar {
     constructor(page) {
@@ -24,8 +25,7 @@ export class Sidebar {
       /* This is an ugly way to do it, but as electron-tabs does not allow
       setting the ID, in order to have the same tabs ID on the saved json and
       the generated we need to resave once we reload the saved tabs. */
-        const config = require('./config');
-        const tabSettingsArray = config.get('SavedTabs');
+        const tabSettingsArray = settings.get('SavedTabs', []);
         const postSettingsArray = [];
 
         tabSettingsArray.map((savedtab, index) => {
@@ -76,8 +76,6 @@ export class Sidebar {
     }
 
     createTab(name, active = false) {
-        const config = require('./config');
-
         this.tabGroup.addTab({
             title: name.substr(0, 1),
             src: process.env.PROTONMAIL_LOGIN_URL,
@@ -85,10 +83,8 @@ export class Sidebar {
             active: true,
             ready: (tab) => {
                 this.onTabReady(tab, name);
-
                 const tabSettingsArray = [{ id: tab.id, title: name, active: tab.active }];
-
-                config.set("SavedTabs", config.get("SavedTabs").concat(tabSettingsArray));
+                settings.set("SavedTabs", settings.get("SavedTabs", []).concat(tabSettingsArray));
             }
         });
     }
