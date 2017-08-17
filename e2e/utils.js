@@ -1,26 +1,25 @@
-import electron from 'electron';
 import { Application } from 'spectron';
 
-const beforeEach = async function (env = {}) {
-  this.timeout(10000);
+const path = require('path');
+
+const beforeEach = function (env = {}) {
+  this.timeout(50000);
   this.app = new Application({
-    path: electron,
+    path: path.resolve('dist/linux-unpacked/protonmail-desktop'),
     args: ['.'],
-    startTimeout: 10000,
-    waitTimeout: 10000,
+    startTimeout: 50000,
+    waitTimeout: 50000,
     env: Object.assign(env, {
       DEBUG: 'false',
       NAME: 'TEST',
     }),
   });
-  
-  await this.app.start();
-  
-  return this.app;
+
+  return this.app.start();
 };
 
 const afterEach = function () {
-  this.timeout(10000);
+  this.timeout(50000);
   if (this.app && this.app.isRunning()) {
     return this.app.stop();
   }
