@@ -36,6 +36,13 @@ Pull requests are accepted.
 
 * View headers inside an email does not work
 
+### Testing
+e2e testing runs with [Spectron](https://github.com/electron/spectron) inside a [Docker](https://docker.com) container.
+- `$ docker build -t protonmail-desktop-e2e --rm .`
+- `$ docker run protonmail-desktop-e2e`
+
+All features should be covered within the tests.
+
 ## Running the App
 
 ### Executables
