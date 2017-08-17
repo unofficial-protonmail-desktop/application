@@ -12,13 +12,11 @@ require('electron-dl')({saveAs: true});
 
 migrateSettings();
 
-if (process.env.NAME !== 'TEST') {
-  require('dotenv').load();
-} else {
+if (process.env.NAME === 'test') {
   settings.deleteAll();
 }
 
-if (process.env.DEBUG === 'true') {
+if (process.env.NAME === 'development') {
 	require('electron-reload')(__dirname);
 	require('electron-debug')({enabled: true});
 }
@@ -126,7 +124,7 @@ app.on('ready', () => {
 			mainWindow.show();
 		}
     
-    if (process.env.DEBUG === 'true') {
+    if (process.env.NAME === 'development') {
       mainWindow.openDevTools();
     }
 	});
