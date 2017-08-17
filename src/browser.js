@@ -1,6 +1,7 @@
 import { ipcRenderer as ipc, BrowserWindow } from 'electron';
 import { Sidebar } from './sidebar';
 
+require('electron-context-menu-handler')();
 const settings = require('electron-settings');
 
 const clickElement = (selector) => {
