@@ -4,7 +4,7 @@ html {
 
 /* Fix "Back to main page" header */
 
-#pm_header {
+header.pm_opensans {
     display: none;
 }
 

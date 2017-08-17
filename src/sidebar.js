@@ -1,4 +1,4 @@
-import { ContextMenuHandler } from './context-menu-handler';
+const ContextMenuHandler = require('electron-context-menu-handler/context-menu-handler');
 const { ipcRenderer } = require('electron');
 const open = require('open');
 const settings = require('electron-settings');
@@ -90,8 +90,12 @@ export class Sidebar {
     }
 
     onTabReady(tab, name) {
+      const path = require('path');
+      const jetpack = require('fs-jetpack');
+
       const domReadyEvent = () => {
           this.prefillUsernameInLoginForm(tab.webview.getWebContents(), name);
+          tab.webview.insertCSS(jetpack.read(path.join(__dirname, './browser.css'), 'utf8'));
 
           tab.webview.removeEventListener("dom-ready", domReadyEvent);
       };
@@ -113,7 +117,7 @@ export class Sidebar {
       tab.tabElements.title.setAttribute('tab-id', tab.id);
 
       const tabs = this.tabGroup.tabs;
-      ContextMenuHandler.addContextMenu(functionName, (params, browserWindow, targetElement) => {
+      ContextMenuHandler.addPrependContextMenu(functionName, (params, browserWindow, targetElement) => {
         return [{
           label: 'Remove tab',
           visible: true,
