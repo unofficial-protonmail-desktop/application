@@ -100,20 +100,27 @@ export class Sidebar {
       const jetpack = require('fs-jetpack');
 
       const domReadyEvent = () => {
-          this.prefillUsernameInLoginForm(tab.webview.getWebContents(), name);
-          tab.webview.insertCSS(jetpack.read(path.join(__dirname, './browser.css'), 'utf8'));
+        tab.webview.insertCSS(jetpack.read(path.join(__dirname, './browser.css'), 'utf8'));
+        tab.webview.removeEventListener("dom-ready", domReadyEvent);
+  
+        const isLoadingWatcher = setInterval(() => {
+          if (tab.webview.isLoading()) {
+            return;
+          }
 
-          tab.webview.removeEventListener("dom-ready", domReadyEvent);
+          this.prefillUsernameInLoginForm(tab.webview.getWebContents(), name);
+          clearInterval(isLoadingWatcher);
+        }, 100);
       };
 
       this.prepareContextMenu(tab);
       tab.tabElements.title.setAttribute('tab-id', tab.id);
-        tab.webview.addEventListener("dom-ready", domReadyEvent);
-        tab.webview.addEventListener("page-title-updated", () => this.onTabTitleUpdate());
-        tab.webview.addEventListener('new-window', (e) => {
-          e.preventDefault();
-          open(e.url);
-        });
+      tab.webview.addEventListener("dom-ready", domReadyEvent);
+      tab.webview.addEventListener("page-title-updated", () => this.onTabTitleUpdate());
+      tab.webview.addEventListener('new-window', (e) => {
+        e.preventDefault();
+        open(e.url);
+      });
     }
     
     prepareContextMenu(tab) {
