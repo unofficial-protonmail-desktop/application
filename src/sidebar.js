@@ -143,7 +143,7 @@ export class Sidebar {
     
           _usernameElem.value = _username;
           clearInterval(_usernameElemWatcher);
-        }, 10);
+        }, 100);
       };
       
       webContents.executeJavaScript('('.concat(injectedPrefiller, `('${username}'))`));
