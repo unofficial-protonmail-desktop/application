@@ -85,17 +85,16 @@ button.pm-button {
                     position: relative;
                     top: -45px;
                     left: 30px;
-                    border: 0;
+                    height: 20px;
+                    width: 20px;
+                    text-align: center;
+                    vertical-align: middle;
+                    display: table-cell;
                     background: red;
-                    border-radius: 100px;
-                    padding: 1px 6px 2px;
+                    border-radius: 50%;
                     color: white;
-                    cursor: pointer;
-                    visibility: visible;
-                    opacity: 1;
-                    font-size: 16px;
+                    font: normal 12px Arial;
                     line-height: 1em;
-                    font-weight: normal;
 
                     &.hidden {
                         display: none;
