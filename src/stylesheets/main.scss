@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1;
-    font: 14px/1.714285714285714 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font: 14px/1.714285714285714 Arial, Helvetica, sans-serif;
     color: #505061;
     font-weight: 400;
 }
@@ -85,17 +85,16 @@ button.pm-button {
                     position: relative;
                     top: -45px;
                     left: 30px;
-                    border: 0;
+                    height: 20px;
+                    width: 20px;
+                    text-align: center;
+                    vertical-align: middle;
+                    display: table-cell;
                     background: red;
-                    border-radius: 100px;
-                    padding: 1px 6px 2px;
+                    border-radius: 50%;
                     color: white;
-                    cursor: pointer;
-                    visibility: visible;
-                    opacity: 1;
-                    font-size: 16px;
+                    font: normal 12px Arial;
                     line-height: 1em;
-                    font-weight: normal;
 
                     &.hidden {
                         display: none;

@@ -92,22 +92,21 @@ export class Sidebar {
     onTabReady(tab, name) {
       const path = require('path');
       const jetpack = require('fs-jetpack');
-
+      
       const domReadyEvent = () => {
-          this.prefillUsernameInLoginForm(tab.webview.getWebContents(), name);
-          tab.webview.insertCSS(jetpack.read(path.join(__dirname, './browser.css'), 'utf8'));
-
-          tab.webview.removeEventListener("dom-ready", domReadyEvent);
+        tab.webview.insertCSS(jetpack.read(path.join(__dirname, './browser.css'), 'utf8'));
+        tab.webview.removeEventListener("dom-ready", domReadyEvent);
+        this.prefillUsernameInLoginForm(tab.webview.getWebContents(), name);
       };
 
       this.prepareContextMenu(tab);
       tab.tabElements.title.setAttribute('tab-id', tab.id);
-        tab.webview.addEventListener("dom-ready", domReadyEvent);
-        tab.webview.addEventListener("page-title-updated", () => this.onTabTitleUpdate());
-        tab.webview.addEventListener('new-window', (e) => {
-          e.preventDefault();
-          open(e.url);
-        });
+      tab.webview.addEventListener("dom-ready", domReadyEvent);
+      tab.webview.addEventListener("page-title-updated", () => this.onTabTitleUpdate());
+      tab.webview.addEventListener('new-window', (e) => {
+        e.preventDefault();
+        open(e.url);
+      });
     }
     
     prepareContextMenu(tab) {
@@ -131,7 +130,17 @@ export class Sidebar {
     }
 
     prefillUsernameInLoginForm(webContents, username) {
-      webContents.executeJavaScript(`document.querySelector('[name=username]').value = '${username}'`);
+      const injectedPrefiller = function (_username) {
+        const _usernameElemWatcher = setInterval(() => {
+          const _usernameElem = document.querySelector('[name=username]');
+          if (!_usernameElem) return;
+    
+          _usernameElem.value = _username;
+          clearInterval(_usernameElemWatcher);
+        }, 100);
+      };
+      
+      webContents.executeJavaScript('('.concat(injectedPrefiller, `('${username}'))`));
     }
     
     onTabTitleUpdate() {
