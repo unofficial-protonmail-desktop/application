@@ -16,7 +16,9 @@ export class Sidebar {
                     });
                 }
             })
-            .on('tab-removed', this.onTabRemoved.bind(null));
+            .on('tab-removed', this.onTabRemoved.bind(null))
+            .on('tab-active', this.onTabActive.bind(null));
+  
         this.addEventListenerForAddAccount();
         this.initiateTabs();
     }
@@ -107,6 +109,10 @@ export class Sidebar {
         e.preventDefault();
         open(e.url);
       });
+    }
+    
+    onTabActive(tab) {
+      tab.webview.focus();
     }
     
     prepareContextMenu(tab) {
