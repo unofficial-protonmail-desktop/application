@@ -11,7 +11,7 @@ const beforeEach = function (env = {}) {
     waitTimeout: 50000,
     env: Object.assign(env, {
       DEBUG: 'false',
-      NAME: 'TEST',
+      NAME: 'test',
     }),
   });
 
