@@ -33,7 +33,7 @@ export class Sidebar {
         tabSettingsArray.map((savedtab, index) => {
           this.tabGroup.addTab({
             title: savedtab.title.substr(0, 1),
-            src: 'https://mail.protonmail.com/inbox',
+            src: 'https://mail.protonmail.com/login',
             visible: true,
             active: !index,
             ready: (tab) => {
@@ -80,7 +80,7 @@ export class Sidebar {
     createTab(name, active = false) {
         this.tabGroup.addTab({
             title: name.substr(0, 1),
-            src: 'https://mail.protonmail.com/inbox',
+            src: 'https://mail.protonmail.com/login',
             visible: true,
             active: true,
             ready: (tab) => {
