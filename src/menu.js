@@ -3,7 +3,7 @@ import path from 'path';
 import { app, BrowserWindow, shell, Menu, dialog } from 'electron';
 
 const appName = app.getName();
-const config = require('./config');
+const settings = require('electron-settings');
 
 
 function sendAction(action) {
@@ -84,9 +84,9 @@ if (process.platform !== 'darwin') {
         type: 'checkbox',
         label: 'Always on Top',
         accelerator: 'Ctrl+Shift+T',
-        checked: config.get('alwaysOnTop'),
+        checked: settings.get('alwaysOnTop'),
         click(item, focusedWindow) {
-            config.set('alwaysOnTop', item.checked);
+            settings.set('alwaysOnTop', item.checked);
             focusedWindow.setAlwaysOnTop(item.checked);
         }
     });

@@ -1,6 +1,7 @@
 const ContextMenuHandler = require('electron-context-menu-handler/context-menu-handler');
 const { ipcRenderer } = require('electron');
 const open = require('open');
+const settings = require('electron-settings');
 
 export class Sidebar {
     constructor(page) {
@@ -15,7 +16,9 @@ export class Sidebar {
                     });
                 }
             })
-            .on('tab-removed', this.onTabRemoved.bind(null));
+            .on('tab-removed', this.onTabRemoved.bind(null))
+            .on('tab-active', this.onTabActive.bind(null));
+  
         this.addEventListenerForAddAccount();
         this.initiateTabs();
     }
@@ -24,14 +27,13 @@ export class Sidebar {
       /* This is an ugly way to do it, but as electron-tabs does not allow
       setting the ID, in order to have the same tabs ID on the saved json and
       the generated we need to resave once we reload the saved tabs. */
-        const config = require('./config');
-        const tabSettingsArray = config.get('SavedTabs');
+        const tabSettingsArray = settings.get('SavedTabs', []);
         const postSettingsArray = [];
 
         tabSettingsArray.map((savedtab, index) => {
           this.tabGroup.addTab({
             title: savedtab.title.substr(0, 1),
-            src: "https://mail.protonmail.com/login?",
+            src: 'https://mail.protonmail.com/login',
             visible: true,
             active: !index,
             ready: (tab) => {
@@ -40,21 +42,19 @@ export class Sidebar {
             }
           });
         });
-        config.set("SavedTabs", postSettingsArray);
+        settings.set("SavedTabs", postSettingsArray);
     }
     
     onTabRemoved(tab) {
-        const config = require('./config');
+        const tabSettingsArray = settings.get('SavedTabs', []);
 
-        const tabSettingsArray = config.get('SavedTabs');
-
-        for (var i = 0; i < tabSettingsArray.length; i++)
+        for (let i = 0; i < tabSettingsArray.length; i++)
             if (tabSettingsArray[i].id === tab.id) {
                 tabSettingsArray.splice(i, 1);
                 break;
             }
 
-        config.set("SavedTabs", tabSettingsArray);
+        settings.set("SavedTabs", tabSettingsArray);
     }
 
     addEventListenerForAddAccount() {
@@ -78,19 +78,15 @@ export class Sidebar {
     }
 
     createTab(name, active = false) {
-        const config = require('./config');
-
         this.tabGroup.addTab({
             title: name.substr(0, 1),
-            src: "https://mail.protonmail.com/login?",
+            src: 'https://mail.protonmail.com/login',
             visible: true,
             active: true,
             ready: (tab) => {
                 this.onTabReady(tab, name);
-
                 const tabSettingsArray = [{ id: tab.id, title: name, active: tab.active }];
-
-                config.set("SavedTabs", config.get("SavedTabs").concat(tabSettingsArray));
+                settings.set("SavedTabs", settings.get("SavedTabs", []).concat(tabSettingsArray));
             }
         });
     }
@@ -113,6 +109,10 @@ export class Sidebar {
         e.preventDefault();
         open(e.url);
       });
+    }
+    
+    onTabActive(tab) {
+      tab.webview.focus();
     }
     
     prepareContextMenu(tab) {
