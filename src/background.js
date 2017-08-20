@@ -2,29 +2,27 @@ import path from 'path';
 import jetpack from 'fs-jetpack';
 import {app, Menu, shell} from 'electron';
 import createWindow from './helpers/window';
+import { migrateSettings } from './migrate-settings';
 
-const Config = require('electron-config');
-const config = new Config();
-
-const env = require('./env');
+const settings = require('electron-settings');
 const appMenu = require('./menu');
 const tray = require('./tray');
 
 require('electron-dl')({saveAs: true});
 
-if (env.debug) {
+migrateSettings();
+
+if (process.env.NAME === 'test') {
+  settings.deleteAll();
+}
+
+if (process.env.NAME === 'development') {
 	require('electron-reload')(__dirname);
 	require('electron-debug')({enabled: true});
 }
 
 let mainWindow;
 let isQuitting = false;
-
-/*if (env.name !== 'production') {
-    var userDataPath = app.getPath('userData');
-    app.setPath('userData', userDataPath + ' (' + env.name + ')');
-}
-*/
 
 const isAlreadyRunning = app.makeSingleInstance(() => {
 	if (mainWindow) {
@@ -41,7 +39,7 @@ if (isAlreadyRunning) {
 }
 
 function createMainWindow() {
-	const isDarkMode = config.get('darkMode');
+	const isDarkMode = settings.get('darkMode');
 
 	const win = new createWindow('main', {
 		title: app.getName(),
@@ -51,7 +49,7 @@ function createMainWindow() {
 		icon: process.platform === 'linux' && path.join(__dirname, 'static/Icon.png'),
 		minWidth: 1000,
 		minHeight: 700,
-		alwaysOnTop: config.get('alwaysOnTop'),
+		alwaysOnTop: settings.get('alwaysOnTop'),
 		titleBarStyle: 'hidden-inset',
 		autoHideMenuBar: true,
 		darkTheme: isDarkMode, // GTK+3
@@ -126,7 +124,7 @@ app.on('ready', () => {
 			mainWindow.show();
 		}
     
-    if (env.debug) {
+    if (process.env.NAME === 'development') {
       mainWindow.openDevTools();
     }
 	});

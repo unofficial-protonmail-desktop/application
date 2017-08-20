@@ -4,6 +4,7 @@ const watch = require('gulp-watch');
 const batch = require('gulp-batch');
 const plumber = require('gulp-plumber');
 const jetpack = require('fs-jetpack');
+const argv = require('minimist')(process.argv);
 const bundle = require('./bundle');
 const utils = require('./utils');
 
@@ -11,13 +12,14 @@ const projectDir = jetpack;
 const srcDir = jetpack.cwd('./src');
 const destDir = jetpack.cwd('./app');
 
+process.env.NAME = argv.env || 'development';
+
 gulp.task('bundle', () => {
   return Promise.all([
         bundle(srcDir.path('background.js'), destDir.path('background.js')),
         bundle(srcDir.path('sidebar.js'), destDir.path('sidebar.js')),
         bundle(srcDir.path('tray.js'), destDir.path('tray.js')),
         bundle(srcDir.path('menu.js'), destDir.path('menu.js')),
-        bundle(srcDir.path('config.js'), destDir.path('config.js')),
         bundle(srcDir.path('browser.js'), destDir.path('browser.js')),
   ]);
 });
@@ -29,11 +31,6 @@ gulp.task('sass', () => {
     includePaths: ['node_modules']
   }))
   .pipe(gulp.dest(destDir.path('stylesheets')));
-});
-
-gulp.task('environment', () => {
-  const configFile = `config/env_${utils.getEnvName()}.json`;
-  projectDir.copy(configFile, destDir.path('env.json'), { overwrite: true });
 });
 
 gulp.task('watch', () => {
@@ -54,4 +51,4 @@ gulp.task('watch', () => {
   }));
 });
 
-gulp.task('build', ['bundle', 'sass', 'environment']);
+gulp.task('build', ['bundle', 'sass']);
