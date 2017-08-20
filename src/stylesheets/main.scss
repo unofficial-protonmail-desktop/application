@@ -99,6 +99,10 @@ button.pm-button {
                     &.hidden {
                         display: none;
                     }
+                    sub {
+                        position: absolute;
+                        bottom: 0;
+                    }
                 }
             }
 

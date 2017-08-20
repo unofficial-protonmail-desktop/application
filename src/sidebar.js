@@ -157,6 +157,8 @@ export class Sidebar {
         let unreadCount = extractedTitle ? parseInt(extractedTitle[1]) : 0;
 
         totalCount += unreadCount;
+        unreadCount = (unreadCount > 99) ? '99<sub>+</sub>' : unreadCount;
+
         _tab.setBadge(unreadCount ? unreadCount : '');
       }
   
