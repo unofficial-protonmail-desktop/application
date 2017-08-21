@@ -2,8 +2,9 @@ os:
   - linux
   - osx
 
-node_js:
- - "8"
+language: node_js
+
+node_js: 8
 
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
