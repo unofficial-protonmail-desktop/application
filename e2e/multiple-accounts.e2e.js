@@ -16,9 +16,9 @@ describe('multiple accounts', function () {
       .click('button.add-account')
       .waitForVisible('.sweet-alert input[type=text]')
       .setValue('.sweet-alert input[type=text]', accountName)
-      .pause(200)
+      .pause(500)
       .click('button.confirm')
-      .pause(200)
+      .pause(500)
       .getText('.etabs-tabs .etabs-tab-title')
       .then(text => {
         expect(typeof text).equal('string');

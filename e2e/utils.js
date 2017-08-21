@@ -1,11 +1,11 @@
 import { Application } from 'spectron';
 
-const path = require('path');
+const electron = require('electron');
 
 const beforeEach = function (env = {}) {
   this.timeout(50000);
   this.app = new Application({
-    path: path.resolve('dist/linux-unpacked/protonmail-desktop'),
+    path: electron,
     args: ['.'],
     startTimeout: 50000,
     waitTimeout: 50000,
