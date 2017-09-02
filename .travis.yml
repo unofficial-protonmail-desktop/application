@@ -28,10 +28,6 @@ script:
   - npm install
   - npm run e2e
 
-cache:
-  directories:
-    - node_modules
-
 notifications:
   email:
     on_success: never
