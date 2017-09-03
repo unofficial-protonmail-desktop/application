@@ -13,7 +13,8 @@ cache:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install npm
+  # npm 5.4 fails due to https://github.com/npm/npm/issues/18287
+  - npm install npm@5.3
   - .\node_modules\.bin\npm install
 
 test_script:
