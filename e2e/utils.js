@@ -1,5 +1,7 @@
 import { Application } from 'spectron';
 
+const path = require('path');
+const fs = require('fs');
 const electron = require('electron');
 
 const beforeEach = function (env = {}) {
@@ -26,7 +28,24 @@ const afterEach = function () {
   return undefined;
 };
 
+const saveErrorShot = function (e) {
+  const filename = `errorShot-${this.test.parent.title}-${this.test.title}-${new Date().toISOString()}.png`
+    .replace(/\s/g, '_')
+    .replace(/:/g, '');
+
+  this.app.browserWindow.capturePage().then(imageBuffer => {
+    fs.writeFile(filename, imageBuffer, error => {
+      if (error) throw error;
+
+      console.info(`Screenshot saved: ${process.cwd()}/${filename}`);
+    });
+  });
+
+  throw e;
+};
+
 export default {
   beforeEach,
   afterEach,
+  saveErrorShot,
 };
