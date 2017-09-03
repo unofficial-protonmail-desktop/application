@@ -21,3 +21,12 @@ test_script:
   - .\node_modules\.bin\npm --version
   - .\node_modules\.bin\npm test
   - .\node_modules\.bin\npm run e2e
+
+on_failure:
+  - for /f usebackq %F in (`npm config get cache`) do echo %F
+  - echo %NPM_CONFIG_PATH%
+  - 7z a e2e_test_logs.zip %APPVEYOR_BUILD_FOLDER%\*.logs %APPVEYOR_BUILD_FOLDER%\errorShot-*.png %NPM_CONFIG_PATH%\_logs\*.log
+
+artifacts:
+  - path: e2e_test_logs.zip
+    name: e2eTestLogs
