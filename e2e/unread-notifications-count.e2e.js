@@ -2,8 +2,6 @@ import { expect } from 'chai';
 import testUtils from './utils';
 import { AddCommands } from './commands';
 
-const path = require('path');
-
 (process.env.PROTONMAIL_TEST_USERNAME ? describe : describe.skip)('unread notifications', function () {
   const expectUnreadEmails = 2;
   this.timeout(200000);
@@ -36,11 +34,12 @@ const path = require('path');
       .keys('gd')
       .pause(2000)
       .keys('gi')
-      .waitForVisible('.etabs-tabs .etabs-tab-badge')
-      .getText('.etabs-tabs .etabs-tab-badge')
+      .then(() => this.app.client.waitForVisible('.etabs-tabs .etabs-tab-badge'))
+      .then(() => this.app.client.getText('.etabs-tabs .etabs-tab-badge'))
       .then(text => {
         expect(Number(text[0])).equal(expectUnreadEmails);
         expect(text[1]).equal('');
-      });
+      })
+      .catch(testUtils.saveErrorShot.bind(this));
   });
 });

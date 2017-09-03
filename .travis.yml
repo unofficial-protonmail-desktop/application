@@ -11,6 +11,11 @@ before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
 
+after_failure:
+  - curl -sL https://raw.githubusercontent.com/travis-ci/artifacts/master/install | bash
+  - artifacts upload $(git ls-files -o | grep -Fv -e node_modules -e dist -e app -e e2e)
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then artifacts upload $(ls $(npm config get cache)/_logs/); fi
+
 script:
   - node --version
   - npm --version
