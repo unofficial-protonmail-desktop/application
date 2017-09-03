@@ -12,9 +12,6 @@ require('electron-dl')({saveAs: true});
 
 migrateSettings();
 
-if (process.env.NAME === 'test') {
-  settings.deleteAll();
-}
 
 if (process.env.NAME === 'development') {
 	require('electron-reload')(__dirname);
@@ -39,6 +36,10 @@ if (isAlreadyRunning) {
 }
 
 function createMainWindow() {
+  if (process.env.NAME === 'test') {
+    settings.deleteAll();
+  }
+
 	const isDarkMode = settings.get('darkMode');
 
 	const win = new createWindow('main', {
@@ -83,7 +84,7 @@ function createMainWindow() {
 	if (process.platform === 'darwin') {
 		win.setSheetOffset(40);
 	}
-	
+
 	win.loadURL('file://' + __dirname + '/index.html');
 
 	win.on('close', e => {
@@ -97,7 +98,7 @@ function createMainWindow() {
 			}
 		}
 	});
-	
+
 	return win;
 }
 
@@ -113,17 +114,17 @@ app.on('ready', () => {
 	page.on('dom-ready', () => {
 		page.insertCSS(jetpack.read(path.join(__dirname, 'browser.css'), 'utf8'));
 		page.insertCSS(jetpack.read(path.join(__dirname, 'themes/dark-mode.css'), 'utf8'));
-		
+
 		if (process.platform === 'darwin') {
 			page.insertCSS(jetpack.read(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
 		}
-  
+
 		if (argv.minimize) {
 			mainWindow.minimize();
 		} else {
 			mainWindow.show();
 		}
-    
+
     if (process.env.NAME === 'development') {
       mainWindow.openDevTools();
     }
