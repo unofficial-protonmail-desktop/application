@@ -22,10 +22,12 @@ after_failure:
   - artifacts upload $(git ls-files -o | grep -Fv -e node_modules -e dist -e app -e e2e)
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then artifacts upload $(ls $(npm config get cache)/_logs/); fi
 
+install:
+  - npm install
+
 script:
   - node --version
   - npm --version
-  - npm install
   - npm run e2e
 
 notifications:
