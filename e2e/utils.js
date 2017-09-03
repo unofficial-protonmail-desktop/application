@@ -11,6 +11,8 @@ const beforeEach = function (env = {}) {
     args: ['.'],
     startTimeout: 50000,
     waitTimeout: 50000,
+    chromeDriverLogPath: process.cwd().concat('chrome-driver.log'),
+    webdriverLogPath: process.cwd(),
     env: Object.assign(env, {
       DEBUG: 'false',
       NAME: 'test',
