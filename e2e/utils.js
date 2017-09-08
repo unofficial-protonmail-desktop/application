@@ -1,14 +1,18 @@
 import { Application } from 'spectron';
 
 const path = require('path');
+const fs = require('fs');
+const electron = require('electron');
 
 const beforeEach = function (env = {}) {
   this.timeout(50000);
   this.app = new Application({
-    path: path.resolve('dist/linux-unpacked/protonmail-desktop'),
+    path: electron,
     args: ['.'],
     startTimeout: 50000,
     waitTimeout: 50000,
+    chromeDriverLogPath: process.cwd().concat('chrome-driver.log'),
+    webdriverLogPath: process.cwd(),
     env: Object.assign(env, {
       DEBUG: 'false',
       NAME: 'test',
@@ -26,7 +30,24 @@ const afterEach = function () {
   return undefined;
 };
 
+const saveErrorShot = function (e) {
+  const filename = `errorShot-${this.test.parent.title}-${this.test.title}-${new Date().toISOString()}.png`
+    .replace(/\s/g, '_')
+    .replace(/:/g, '');
+
+  this.app.browserWindow.capturePage().then(imageBuffer => {
+    fs.writeFile(filename, imageBuffer, error => {
+      if (error) throw error;
+
+      console.info(`Screenshot saved: ${process.cwd()}/${filename}`);
+    });
+  });
+
+  throw e;
+};
+
 export default {
   beforeEach,
   afterEach,
+  saveErrorShot,
 };

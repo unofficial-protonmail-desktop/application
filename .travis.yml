@@ -2,17 +2,33 @@ os:
   - linux
   - osx
 
-node_js:
- - "4"
+osx_image: xcode8.3
+
+language: node_js
+
+node_js: 8
 
 before_script:
- - chmod +x ./scripts/travis-build.sh
+  # Workaround for prevent MacOS job failure, https://github.com/travis-ci/travis-ci/issues/6307
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rvm get stable; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install rpm; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
 
-script: ./scripts/travis-build.sh
+after_failure:
+  - curl -sL https://raw.githubusercontent.com/travis-ci/artifacts/master/install | bash
+  - artifacts upload $(git ls-files -o | grep -Fv -e node_modules -e dist -e app -e e2e)
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then artifacts upload $(ls $(npm config get cache)/_logs/); fi
 
-cache:
-  directories:
-    - node_modules
+install:
+  - npm install
+
+script:
+  - node --version
+  - npm --version
+  - npm run e2e
 
 notifications:
   email:
