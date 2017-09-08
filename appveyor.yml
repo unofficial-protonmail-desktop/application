@@ -6,18 +6,27 @@ skip_tags: true
 
 environment:
   matrix:
-    - nodejs_version: "6"
+    - nodejs_version: 8
 
 cache:
-  - node_modules -> package.json
+  - node_modules -> package-lock.json
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install npm
+  # npm 5.4 fails due to https://github.com/npm/npm/issues/18287
+  - npm install npm@5.3
   - .\node_modules\.bin\npm install
 
 test_script:
   - node --version
   - .\node_modules\.bin\npm --version
-  - .\node_modules\.bin\npm test
   - .\node_modules\.bin\npm run e2e
+
+on_failure:
+  - for /f usebackq %F in (`npm config get cache`) do echo %F
+  - echo %NPM_CONFIG_PATH%
+  - 7z a e2e_test_logs.zip %APPVEYOR_BUILD_FOLDER%\*.logs %APPVEYOR_BUILD_FOLDER%\errorShot-*.png %NPM_CONFIG_PATH%\_logs\*.log
+
+artifacts:
+  - path: e2e_test_logs.zip
+    name: e2eTestLogs
