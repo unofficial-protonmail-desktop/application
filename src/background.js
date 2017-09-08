@@ -5,7 +5,6 @@ import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
 
 const settings = require('electron-settings');
-const appMenu = require('./menu');
 const tray = require('./tray');
 
 require('electron-dl')({saveAs: true});
@@ -103,6 +102,7 @@ function createMainWindow() {
 }
 
 app.on('ready', () => {
+  const appMenu = require('./menu');
 	Menu.setApplicationMenu(appMenu);
 	mainWindow = createMainWindow();
 	tray.create(mainWindow);

@@ -22,9 +22,9 @@ import { AddCommands } from './commands';
       .click('.etabs-tabs .etabs-tab:first-child')
       .pause(5000)
       .keys(['Tab'])
-      .pause(1000)
+      .pause(2000)
       .keys(process.env.PROTONMAIL_TEST_PASSWORD)
-      .pause(1000)
+      .pause(2000)
       .keys(['Enter'])
       .pause(10000)
       /**
