@@ -6,8 +6,6 @@ ProtonMail Desktop is an **unofficial** app that emulates a native client for th
 
 We are not affiliated with ProtonMail team. All copyrights belong to their respective owners.
 
-This is an experiment from a main PHP coder, code may be bad and ugly. Most part of the initial core was modified from [sindresorhus/caprine](https://github.com/sindresorhus/caprine) repo.
-
 ### Features
 
 #### Background behaviour
@@ -23,7 +21,7 @@ Native notifications are working for all OS, you will get a notification when yo
 
 ### Version
 
-Beta 0.3.0
+Beta 0.5.1
 
 ## Dev and contributing
 
@@ -52,13 +50,13 @@ You can build your own executables from the latest source by running one of the 
 ### Compiling from source
 The installer is provided by *electon-builder* and processed through gulp thanks to `electron-boilerplate`.
 
-This will work on OS X, Linux, and Windows. You will need [NodeJS](https://nodejs.org) to run this app.
-- Install required packages: `$ npm install`
-- Run: `$ npm start`
-- Build Local: `$ npm run release-local`
-- Build and upload to github: `$ npm run release`
+This will work on OS X, Linux, and Windows. You will need [Yarn](https://yarnpkg.com/en/docs/install) to run this app.
+- Install required packages: `$ yarn install`
+- Run: `$ yarn start`
+- Package in a distributable format: `$ yarn run dist`
+- Generate package directory without distributable: `$ yarn run pack`
 
-The building settings is in `./package.json` and additional configuration instructions can be found [here](https://github.com/electron-userland/electron-builder/wiki/Options). The building process will only create version for the current OS, therefore for creating MacOS, Windows and Linux you need to run the command from each OS.
+The building settings is in `./package.json` and additional configuration instructions can be found [here](https://github.com/electron-userland/electron-builder/wiki/Options). The building process will only create version for the current OS. For creating MacOS, Windows and Linux distributable you need to run the command from each OS.
 
 
 License
