@@ -1691,7 +1691,7 @@ gulp-watch@^4.3.5:
     vinyl "^1.2.0"
     vinyl-file "^2.0.0"
 
-gulp@^3.9.0:
+gulp@^3.9.1:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/gulp/-/gulp-3.9.1.tgz#571ce45928dd40af6514fc4011866016c13845b4"
   dependencies:
@@ -3467,7 +3467,7 @@ source-map-resolve@^0.3.0:
     source-map-url "~0.3.0"
     urix "~0.1.0"
 
-source-map-support@^0.4.0, source-map-support@^0.4.14, source-map-support@^0.4.16:
+source-map-support@^0.4.0, source-map-support@^0.4.15, source-map-support@^0.4.16:
   version "0.4.17"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.17.tgz#6f2150553e6375375d0ccb3180502b78c18ba430"
   dependencies:

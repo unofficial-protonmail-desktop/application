@@ -9,23 +9,22 @@ environment:
     - nodejs_version: 8
 
 cache:
-  - node_modules -> package-lock.json
+  - node_modules
+  - "%LOCALAPPDATA%/Yarn"
+  - '%USERPROFILE%\.electron'
+
 
 install:
-  - ps: Install-Product node $env:nodejs_version
-  # npm 5.4 fails due to https://github.com/npm/npm/issues/18287
-  - npm install npm@5.3
-  - .\node_modules\.bin\npm install
+  - ps: Install-Product node $env:node_version
+  - yarn install
 
 test_script:
   - node --version
-  - .\node_modules\.bin\npm --version
-  - .\node_modules\.bin\npm run e2e
+  - yarn --version
+  - yarn run e2e
 
 on_failure:
-  - for /f usebackq %F in (`npm config get cache`) do echo %F
-  - echo %NPM_CONFIG_PATH%
-  - 7z a e2e_test_logs.zip %APPVEYOR_BUILD_FOLDER%\*.logs %APPVEYOR_BUILD_FOLDER%\errorShot-*.png %NPM_CONFIG_PATH%\_logs\*.log
+  - 7z a e2e_test_logs.zip %APPVEYOR_BUILD_FOLDER%\*.logs %APPVEYOR_BUILD_FOLDER%\errorShot-*.png /*.log
 
 artifacts:
   - path: e2e_test_logs.zip
