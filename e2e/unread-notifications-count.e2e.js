@@ -18,6 +18,8 @@ import { AddCommands } from './commands';
     await this.app.client.addAccount(process.env.PROTONMAIL_TEST_USERNAME);
     await this.app.client.addAccount(process.env.PROTONMAIL_TEST_USERNAME);
 
+    await this.app.client.pause(1000);
+
     return this.app.client
       .click('.etabs-tabs .etabs-tab:first-child')
       .pause(5000)
