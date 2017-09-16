@@ -8,6 +8,11 @@ language: node_js
 
 node_js: 8
 
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
 before_script:
   # Workaround for prevent MacOS job failure, https://github.com/travis-ci/travis-ci/issues/6307
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -; fi
@@ -20,15 +25,15 @@ before_script:
 after_failure:
   - curl -sL https://raw.githubusercontent.com/travis-ci/artifacts/master/install | bash
   - artifacts upload $(git ls-files -o | grep -Fv -e node_modules -e dist -e app -e e2e)
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then artifacts upload $(ls $(npm config get cache)/_logs/); fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then artifacts upload /*.log); fi
 
 install:
-  - npm install
+  - yarn install
 
 script:
   - node --version
-  - npm --version
-  - npm run e2e
+  - yarn --version
+  - yarn run e2e
 
 notifications:
   email:
