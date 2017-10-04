@@ -1047,8 +1047,8 @@ electron-settings@^3.1.1:
     jsonfile "^4.0.0"
 
 electron-tabs@^0.7.0:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/electron-tabs/-/electron-tabs-0.7.2.tgz#6426ca7be6dca2c24f13c1a2277c232e16c20c3e"
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/electron-tabs/-/electron-tabs-0.7.3.tgz#3c2f783bdf5f99c7ed370a14260415fab1aa7781"
 
 electron-window@^0.8.0:
   version "0.8.1"
