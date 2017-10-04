@@ -8,7 +8,8 @@ export const AddCommands = {
         .waitForVisible('.sweet-alert input[type=text]')
         .setValue('.sweet-alert input[type=text]', accountName)
         .pause(500)
-        .click('button.confirm');
+        .click('button.confirm')
+        .pause(500);
     });
   },
 };
