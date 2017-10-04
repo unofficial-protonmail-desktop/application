@@ -25,6 +25,7 @@ test_script:
 
 on_failure:
   - 7z a e2e_test_logs.zip %APPVEYOR_BUILD_FOLDER%\*.logs %APPVEYOR_BUILD_FOLDER%\errorShot-*.png /*.log
+  - appveyor PushArtifact e2e_test_logs.zip
 
 artifacts:
   - path: e2e_test_logs.zip
