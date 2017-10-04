@@ -98,6 +98,7 @@ export class Sidebar {
       const domReadyEvent = () => {
         tab.webview.insertCSS(jetpack.read(path.join(__dirname, './browser.css'), 'utf8'));
         tab.webview.removeEventListener("dom-ready", domReadyEvent);
+        tab.webview.focus();
         this.prefillUsernameInLoginForm(tab.webview.getWebContents(), name);
       };
 
