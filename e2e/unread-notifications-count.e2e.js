@@ -5,6 +5,7 @@ import { AddCommands } from './commands';
 (process.env.PROTONMAIL_TEST_USERNAME ? describe : describe.skip)('unread notifications', function () {
   const expectUnreadEmails = 2;
   this.timeout(200000);
+  this.retries(3);
 
   beforeEach(testUtils.beforeEach);
   afterEach(testUtils.afterEach);
@@ -20,8 +21,11 @@ import { AddCommands } from './commands';
 
     await this.app.client.pause(1000);
 
+    // Appveyor fails if we chain commands after click
+    await this.app.client
+      .click('.etabs-tabs .etabs-tab:first-child');
+
     return this.app.client
-      .click('.etabs-tabs .etabs-tab:first-child')
       .pause(5000)
       .keys(['Tab'])
       .pause(2000)
