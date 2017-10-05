@@ -11,7 +11,7 @@ const beforeEach = function (env = {}) {
     args: ['.'],
     startTimeout: 50000,
     waitTimeout: 50000,
-    chromeDriverLogPath: process.cwd().concat('chrome-driver.log'),
+    chromeDriverLogPath: process.cwd().concat('/chrome-driver.log'),
     webdriverLogPath: process.cwd(),
     env: Object.assign(env, {
       DEBUG: 'false',
@@ -46,8 +46,21 @@ const saveErrorShot = function (e) {
   throw e;
 };
 
+const printElectronLogs = function (e) {
+    this.app.client.getMainProcessLogs()
+      .then(logs => logs.forEach(log => console.log(log)));
+
+    this.app.client.getRenderProcessLogs()
+      .then(logs => logs.forEach(function (log) {
+        console.log(log.message)
+        console.log(log.source)
+        console.log(log.level)
+      }));
+};
+
 export default {
   beforeEach,
   afterEach,
   saveErrorShot,
+  printElectronLogs,
 };
