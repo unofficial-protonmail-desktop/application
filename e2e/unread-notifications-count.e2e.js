@@ -42,6 +42,9 @@ import { AddCommands } from './commands';
         expect(Number(text[0])).equal(expectUnreadEmails);
         expect(text[1]).equal('');
       })
-      .catch(testUtils.saveErrorShot.bind(this));
+      .catch(() => {
+        testUtils.saveErrorShot.bind(this);
+        testUtils.printElectronLogs.bind(this);
+      })
   });
 });
