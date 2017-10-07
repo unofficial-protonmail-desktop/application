@@ -1,4 +1,4 @@
-import { ipcRenderer as ipc, BrowserWindow } from 'electron';
+import { ipcRenderer as ipc } from 'electron';
 import { Sidebar } from './sidebar';
 
 require('electron-context-menu-handler')();
