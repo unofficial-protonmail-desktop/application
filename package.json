@@ -13,6 +13,7 @@
   "main": "app/background.js",
   "build": {
     "appId": "com.beatplus.pronmail-desktop",
+    "publish": ["github"],
     "linux": {
       "target": [
         "deb",
@@ -42,6 +43,7 @@
     "postinstall": "electron-builder install-app-deps",
     "build": "gulp build",
     "prerelease": "gulp build --env=production",
+    "release": "electron-builder -p onTagOrDraft",
     "dist": "electron-builder",
     "pack": "electron-builder --dir",
     "start": "gulp start --env=development",
