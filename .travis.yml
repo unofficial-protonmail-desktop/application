@@ -42,6 +42,9 @@ script:
   - yarn --version
   - yarn run e2e
   - |
+    if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      yarn release
+    fi
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       docker run --rm \
         --env-file <(env | grep -iE 'DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_') \
