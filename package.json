@@ -22,7 +22,11 @@
         "snap",
         "pacman",
         "freebsd"
-      ]
+      ],
+      "category": "Office"
+    },
+    "mac": {
+      "category": "public.app-category.productivity"
     },
     "win": {
       "icon": "build/Icon.ico"
