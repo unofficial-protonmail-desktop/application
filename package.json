@@ -14,7 +14,15 @@
   "build": {
     "appId": "com.beatplus.pronmail-desktop",
     "linux": {
-      "target": "deb"
+      "target": [
+        "deb",
+        "rpm",
+        "tar.gz",
+        "AppImage",
+        "snap",
+        "pacman",
+        "freebsd"
+      ]
     },
     "win": {
       "icon": "build/Icon.ico"
