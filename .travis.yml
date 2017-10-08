@@ -2,22 +2,29 @@ os:
   - linux
   - osx
 
-osx_image: xcode8.3
+sudo: required
+dist: trusty
+osx_image: xcode9.0
 
 language: node_js
-
 node_js: 8
+
+services:
+  - docker
+
+env:
+  global:
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
 cache:
   yarn: true
   directories:
     - node_modules
+    - $HOME/.cache/electron
+    - $HOME/.cache/electron-builder
 
 before_script:
-  # Workaround for prevent MacOS job failure, https://github.com/travis-ci/travis-ci/issues/6307
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rvm get stable; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install rpm; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
@@ -34,6 +41,26 @@ script:
   - node --version
   - yarn --version
   - yarn run e2e
+  - |
+    if [ ! -z "$TRAVIS_TAG" ]; then
+      if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+        yarn release
+      fi
+      if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+        docker run --rm \
+          --env-file <(env | grep -iE 'DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_') \
+          --env ELECTRON_CACHE="/root/.cache/electron" \
+          --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder" \
+          -v ${PWD}:/project \
+          -v ~/.cache/electron:/root/.cache/electron \
+          -v ~/.cache/electron-builder:/root/.cache/electron-builder \
+          electronuserland/builder:wine \
+          /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release --linux --win"
+      fi
+    fi
+
+before_cache:
+  - rm -rf $HOME/.cache/electron-builder/wine
 
 notifications:
   email:

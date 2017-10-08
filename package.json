@@ -13,8 +13,21 @@
   "main": "app/background.js",
   "build": {
     "appId": "com.beatplus.pronmail-desktop",
+    "publish": ["github"],
     "linux": {
-      "target": "deb"
+      "target": [
+        "deb",
+        "rpm",
+        "tar.gz",
+        "AppImage",
+        "snap",
+        "pacman",
+        "freebsd"
+      ],
+      "category": "Office"
+    },
+    "mac": {
+      "category": "public.app-category.productivity"
     },
     "win": {
       "icon": "build/Icon.ico"
@@ -30,6 +43,7 @@
     "postinstall": "electron-builder install-app-deps",
     "build": "gulp build",
     "prerelease": "gulp build --env=production",
+    "release": "electron-builder -p onTagOrDraft",
     "dist": "electron-builder",
     "pack": "electron-builder --dir",
     "start": "gulp start --env=development",
