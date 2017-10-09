@@ -11,11 +11,12 @@ const tray = require('./tray');
 require('electron-dl')({saveAs: true});
 
 migrateSettings();
-initiateAutoUpdater();
 
 if (process.env.NAME === 'development') {
 	require('electron-reload')(__dirname);
 	require('electron-debug')({enabled: true});
+} else {
+	initiateAutoUpdater();
 }
 
 let mainWindow;
