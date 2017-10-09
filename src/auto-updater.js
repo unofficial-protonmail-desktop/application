@@ -9,6 +9,21 @@ export const initiateAutoUpdater = () => {
     autoUpdater.checkForUpdates();
   });
 
+  autoUpdater.on('error', error => {
+    console.error(error);
+
+    dialog.showMessageBox(null, {
+      type: 'error',
+      title: 'Something went wrong',
+      message: 'Ops! ProtonMail Desktops auto updater failed. Check ' +
+      'https://github.com/protonmail-desktop/application for the latest updates and ' +
+      'please create an issue.',
+      buttons: [
+        'Okey'
+      ]
+    }, response => true);
+  });
+
   autoUpdater.on('update-downloaded', updateInfo => {
     dialog.showMessageBox(null, {
       type: 'info',
