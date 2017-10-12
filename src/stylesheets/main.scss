@@ -10,6 +10,7 @@ body {
     font: 14px/1.714285714285714 Arial, Helvetica, sans-serif;
     color: #505061;
     font-weight: 400;
+    background-color: #505061;
 }
 
 button.pm-button {
@@ -60,6 +61,9 @@ button.pm-button {
     display: flex;
     align-items: stretch;
     height: 100vh;
+    background-image: url('../static/mountain.png'), url('../static/pm-logo.png');
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom right, center center;
 
     .sidenav {
         background: darken(#505061, 10%);
@@ -70,7 +74,7 @@ button.pm-button {
             .etabs-tab {
                 @extend button.pm-button;
                 @extend button.lg;
-                display: block;
+                display: none;
 
                 &.active span.etabs-tab-title {
                     color: #fff;
@@ -116,6 +120,9 @@ button.pm-button {
                 &:hover {
                     box-shadow: 0 0 0 3px #9397cd;
                 }
+            }
+            .visible {
+                display: block;
             }
         }
     }
