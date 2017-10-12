@@ -79,12 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const style = document.createElement('style');
     style.id = 'zoomFactor';
 
-    /*const webview = document.createElement("webview");
-    webview.src = 'file://' + __dirname + '/settings.html';
-    webview.className = 'visible';
-    document.querySelector(".etabs-views").appendChild(webview);
-    */
-
     document.body.appendChild(style);
     setZoom(zoomFactor);
 
