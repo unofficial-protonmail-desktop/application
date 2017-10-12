@@ -1,6 +1,6 @@
 import path from 'path';
 import jetpack from 'fs-jetpack';
-import {app, Menu, shell} from 'electron';
+import { app, Menu } from 'electron';
 import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
 import { initiateAutoUpdater } from './auto-updater';
