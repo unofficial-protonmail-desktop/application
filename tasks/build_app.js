@@ -25,7 +25,10 @@ gulp.task('bundle', () => {
 });
 
 gulp.task('sass', () => {
-  return gulp.src(srcDir.path('stylesheets/main.scss'))
+  return gulp.src([
+    srcDir.path('stylesheets/main.scss'),
+    srcDir.path('stylesheets/settings.scss'),
+    ])
   .pipe(plumber())
   .pipe(sass({
     includePaths: ['node_modules']

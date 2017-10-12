@@ -2,6 +2,10 @@ const ContextMenuHandler = require('electron-context-menu-handler/context-menu-h
 const { ipcRenderer } = require('electron');
 const open = require('open');
 const settings = require('electron-settings');
+const SettingsObj = {
+  isSettingsOpen: false,
+  SettingsTabId: null
+}
 
 export class Sidebar {
     constructor(page) {
@@ -20,6 +24,7 @@ export class Sidebar {
             .on('tab-active', this.onTabActive.bind(null));
   
         this.addEventListenerForAddAccount();
+        this.addEventListenerForSettingsPanel();
         this.initiateTabs();
     }
 
@@ -163,5 +168,30 @@ export class Sidebar {
       }
   
       ipcRenderer.send('set-badge', totalCount);
+    }
+
+    addEventListenerForSettingsPanel() {
+        document.querySelector("[action-open-settings]").addEventListener("click", () => this.openSettingsPanel());
+    }
+
+    openSettingsPanel(){
+
+      const path = require('path');
+      if(!SettingsObj.SettingsTabId){
+
+        this.tabGroup.addTab({
+            title: 'Settings',
+            src: path.join(__dirname, 'settings.html'),
+            visible: false,
+            badge: false,
+            active: true,
+            ready: (tab) => {
+             // SettingsObj.SettingsTabId = tab.
+              SettingsObj.SettingsTabId = tab.id;
+            }
+        })
+      } else {
+        this.tabGroup.getTab(SettingsObj.SettingsTabId).activate();
+      }
     }
 }
