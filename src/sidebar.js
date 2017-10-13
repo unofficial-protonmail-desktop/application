@@ -18,7 +18,7 @@ export class Sidebar {
             })
             .on('tab-removed', this.onTabRemoved.bind(null))
             .on('tab-active', this.onTabActive.bind(null));
-  
+
         this.addEventListenerForAddAccount();
         this.initiateTabs();
     }
@@ -44,7 +44,7 @@ export class Sidebar {
         });
         settings.set("SavedTabs", postSettingsArray);
     }
-    
+
     onTabRemoved(tab) {
         const tabSettingsArray = settings.get('SavedTabs', []);
 
@@ -94,7 +94,7 @@ export class Sidebar {
     onTabReady(tab, name) {
       const path = require('path');
       const jetpack = require('fs-jetpack');
-      
+
       const domReadyEvent = () => {
         tab.webview.insertCSS(jetpack.read(path.join(__dirname, './browser.css'), 'utf8'));
         tab.webview.removeEventListener("dom-ready", domReadyEvent);
@@ -109,15 +109,18 @@ export class Sidebar {
         e.preventDefault();
         open(e.url);
       });
+      require('electron-context-menu')({
+        window: tab.webview,
+      });
     }
-    
+
     onTabActive(tab) {
       tab.webview.focus();
     }
-    
+
     prepareContextMenu(tab) {
       const functionName = 'sidebarItemContextMenu';
-  
+
       tab.tabElements.title.setAttribute('prepend-context-menu', functionName);
       tab.tabElements.title.setAttribute('tab-id', tab.id);
 
@@ -140,18 +143,18 @@ export class Sidebar {
         const _usernameElemWatcher = setInterval(() => {
           const _usernameElem = document.querySelector('[name=username]');
           if (!_usernameElem) return;
-    
+
           _usernameElem.value = _username;
           clearInterval(_usernameElemWatcher);
         }, 100);
       };
-      
+
       webContents.executeJavaScript('('.concat(injectedPrefiller, `('${username}'))`));
     }
-    
+
     onTabTitleUpdate() {
       let totalCount = 0;
-      
+
       for (let _tab of this.tabGroup.tabs) {
         let extractedTitle = (/\(([0-9]+)\)/).exec(_tab.webview.getTitle());
         let unreadCount = extractedTitle ? parseInt(extractedTitle[1]) : 0;
@@ -161,7 +164,7 @@ export class Sidebar {
 
         _tab.setBadge(unreadCount ? unreadCount : '');
       }
-  
+
       ipcRenderer.send('set-badge', totalCount);
     }
 }
