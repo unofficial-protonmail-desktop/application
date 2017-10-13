@@ -15,7 +15,9 @@ migrateSettings();
 if (process.env.NAME === 'development') {
 	require('electron-reload')(__dirname);
 	require('electron-debug')({enabled: true});
-} else {
+}
+
+if (process.env.NAME === 'production') {
 	initiateAutoUpdater();
 }
 
