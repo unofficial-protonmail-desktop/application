@@ -12,6 +12,9 @@ import { AddCommands } from './commands';
 
   it('should display accurate unread emails in the sidebar', async function () {
     AddCommands.addAccount.call(this);
+
+    await this.app.client.waitUntilWindowLoaded();
+
     /**
      * We need to create to accounts since the webview wont get focus (which we need)
      * after an account is created.
