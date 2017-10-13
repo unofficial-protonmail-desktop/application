@@ -41,6 +41,7 @@
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
+    "precommit": "eslint src --fix",
     "build": "gulp build",
     "prerelease": "gulp build --env=production",
     "release": "electron-builder -p onTagOrDraft",
@@ -60,6 +61,7 @@
     "electron-dl": "^1.9.0",
     "electron-settings": "^3.1.1",
     "electron-tabs": "^0.7.0",
+    "eslint": "^4.8.0",
     "fs-jetpack": "^1.2.0",
     "gulp-sass": "^3.1.0",
     "minimist": "^1.2.0",
@@ -78,6 +80,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.5",
+    "husky": "^0.14.3",
     "istanbul": "^0.4.5",
     "minimist": "^1.2.0",
     "mocha": "^3.5.0",
