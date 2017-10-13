@@ -47,6 +47,7 @@
     "postinstall": "electron-builder install-app-deps",
     "precommit": "eslint src --fix",
     "build": "gulp build",
+    "eslint": "eslint src",
     "prerelease": "gulp build --env=production",
     "release": "electron-builder -p onTagOrDraft",
     "dist": "electron-builder",
