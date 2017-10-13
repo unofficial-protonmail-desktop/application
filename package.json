@@ -36,7 +36,7 @@
       "app/**/*",
       "app/static/*",
       "node_modules/**/*",
-      "package.json"
+      "yarn.lock"
     ]
   },
   "scripts": {
