@@ -7,37 +7,37 @@ let tray = null;
 exports.create = win => {
   ipcMain.on('set-badge', (event, arg) => setBadge(arg));
 
-	if (process.platform === 'darwin' || tray) {
-		return;
-	}
+  if (process.platform === 'darwin' || tray) {
+    return;
+  }
 
-	const toggleWin = () => {
-		if (win.isVisible()) {
-			win.hide();
-		} else {
-			win.show();
-		}
-	};
+  const toggleWin = () => {
+    if (win.isVisible()) {
+      win.hide();
+    } else {
+      win.show();
+    }
+  };
 
-	const contextMenu = Menu.buildFromTemplate([
-		{
-			label: 'Toggle',
-			click() {
-				toggleWin();
-			}
-		},
-		{
-			type: 'separator'
-		},
-		{
-			role: 'quit'
-		}
-	]);
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Toggle',
+      click() {
+        toggleWin();
+      }
+    },
+    {
+      type: 'separator'
+    },
+    {
+      role: 'quit'
+    }
+  ]);
 
-	tray = new Tray(ICONS.TRAY);
-	tray.setToolTip(`${app.getName()}`);
-	tray.setContextMenu(contextMenu);
-	tray.on('click', toggleWin);
+  tray = new Tray(ICONS.TRAY);
+  tray.setToolTip(`${app.getName()}`);
+  tray.setContextMenu(contextMenu);
+  tray.on('click', toggleWin);
 };
 
 const setBadge = unreadCount => {
@@ -45,11 +45,10 @@ const setBadge = unreadCount => {
     app.dock.setBadge(unreadCount ? unreadCount.toString() : '');
     return;
   }
-  
+
   if (!tray) {
-    console.warn('Couldnt find tray when setting badge');
     return;
   }
-  
+
   tray.setImage(unreadCount ? ICONS.TRAY_UNREAD : ICONS.TRAY);
 };

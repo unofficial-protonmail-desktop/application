@@ -1,167 +1,102 @@
 import os from 'os';
 import path from 'path';
-import { app, BrowserWindow, shell, Menu, dialog } from 'electron';
+import { app, shell, Menu, dialog } from 'electron';
 
 const appName = app.getName();
 const settings = require('electron-settings');
+const packageJson = require('../package.json');
 
-
-function sendAction(action) {
-    const win = BrowserWindow.getAllWindows()[0];
-
-    if (process.platform === 'darwin') {
-        win.restore();
-    }
-
-    win.webContents.send(action);
-}
-
-const viewSubmenu = [{
-    label: 'Reset Text Size',
-    accelerator: 'CmdOrCtrl+0',
-    click() {
-        sendAction('zoom-reset');
-    }
-}, {
-    label: 'Increase Text Size',
-    accelerator: 'CmdOrCtrl+Plus',
-    click() {
-        sendAction('zoom-in');
-    }
-}, {
-    label: 'Decrease Text Size',
-    accelerator: 'CmdOrCtrl+-',
-    click() {
-        sendAction('zoom-out');
-    }
-}];
-
-const helpSubmenu = [{
-    label: `${appName} Website`,
-    click() {
-        shell.openExternal('http://beatplus.github.io/Protonmail/');
-    }
-}, {
-    label: `${appName} Source Code`,
-    click() {
-        shell.openExternal('https://github.com/BeatPlus/Protonmail')
-    }
-}, {
-    label: 'Report an issue',
-    click() {
-        const body = `
+const fileAnIssueTemplate = `
 <!-- Please succinctly describe your issue and steps to reproduce it. -->
 
 -
 
 ${app.getName()} ${app.getVersion()}
 Electron ${process.versions.electron}
-${process.platform} ${process.arch} ${os.release()}`;
+${process.platform} ${process.arch} ${os.release()}
+`;
 
-        shell.openExternal(`https://github.com/BeatPlus/Protonmail/issues/new?body=${encodeURIComponent(body)}`);
-    }
-}];
-
-if (process.platform !== 'darwin') {
-    helpSubmenu.push({
-        type: 'separator'
-    }, {
-        label: `About ${appName}`,
-        click() {
-            dialog.showMessageBox({
-                title: `About ${appName}`,
-                message: `${appName} ${app.getVersion()}`,
-                detail: 'Unofficial Protonmail desktop app, created by Matthew Core <BeatPlus> and Hayden Suarez-Davis <HaydenSD>.',
-                icon: path.join(__dirname, 'static', process.platform === 'linux' ? 'Icon-linux-about.png' : 'IconTray.png'),
-                buttons: ['Close']
-            });
-        }
-    });
-
-    viewSubmenu.push({
-        type: 'separator'
-    }, {
+const MenuTpl = [
+  {
+    label: 'File',
+    submenu: [
+      ...(process.platform === 'darwin' ? [{ role: 'about' }] : []),
+      { role: 'quit' },
+    ]
+  },
+  {
+    label: 'Edit',
+    submenu: [
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' },
+      { role: 'pasteandmatchstyle' },
+      { role: 'delete' },
+      { role: 'selectall' },
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      { role: 'resetzoom' },
+      { role: 'zoomin' },
+      { role: 'zoomout' },
+    ],
+  },
+  {
+    role: 'window',
+    submenu: [
+      { role: 'minimize' },
+      { role: 'close' },
+    ]
+  },
+  {
+    label: 'Help',
+    role: 'help',
+    submenu: [
+      {
+        label: `${appName} Website`,
+        click: () => shell.openExternal(packageJson.homepage),
+      },
+      {
+        label: `${appName} Source Code`,
+        click: () => shell.openExternal(packageJson.repository.url),
+      },
+      {
+        label: 'Report an issue',
+        click: () => shell.openExternal(`${packageJson.repository.url}/issues/new?body=${encodeURIComponent(fileAnIssueTemplate)}`)
+      },
+      { type: 'separator' },
+      {
         type: 'checkbox',
         label: 'Always on Top',
         accelerator: 'Ctrl+Shift+T',
         checked: settings.get('alwaysOnTop'),
         click(item, focusedWindow) {
-            settings.set('alwaysOnTop', item.checked);
-            focusedWindow.setAlwaysOnTop(item.checked);
-        }
-    });
-}
-
-const MenuTpl = [{
-    label: 'File',
-    submenu: [{
-        label: 'Compose new email',
-        accelerator: 'CmdOrCtrl+N',
-        click() {
-            sendAction('new-email');
-        }
-    }, {
-        label: 'Close composer',
-        accelerator: 'Esc',
-        click() {
-            sendAction('close-composer');
-        }
-    }, {
-        label: 'Log Out',
-        click() {
-            sendAction('log-out');
-        }
-    }, {
-        type: 'separator'
-    }, {
-        label: 'Quit',
-        accelerator: 'CmdOrCtrl+Q',
-        click() {
-            app.quit();
-        }
-    }]
-}, {
-    label: 'Edit',
-    submenu: [{
-        label: 'Cut',
-        accelerator: 'CmdOrCtrl+X',
-        role: 'cut'
-    }, {
-        label: 'Copy',
-        accelerator: 'CmdOrCtrl+C',
-        role: 'copy'
-    }, {
-        label: 'Paste',
-        accelerator: 'CmdOrCtrl+V',
-        role: 'paste'
-    }, {
-        type: 'separator'
-    }, {
-        label: 'Toggle Dark Mode',
-        accelerator: 'CmdOrCtrl+D',
-        click() {
-            sendAction('toggle-dark-mode');
-        }
-    }, {
-        label: 'Preferences',
-        accelerator: 'CmdOrCtrl+,',
-        click() {
-            sendAction('show-preferences');
-        }
-    }]
-}, {
-    label: 'View',
-    submenu: viewSubmenu
-}, {
-    role: 'window',
-    submenu: [
-      {role: 'minimize'},
-      {role: 'close'}
-    ]
-}, {
-    label: 'Help',
-    role: 'help',
-    submenu: helpSubmenu
-}];
+          settings.set('alwaysOnTop', item.checked);
+          focusedWindow.setAlwaysOnTop(item.checked);
+        },
+      },
+      ...(process.platform === 'darwin' ? [] : [
+        { type: 'separator' },
+        {
+          label: `About ${appName}`,
+          click() {
+            dialog.showMessageBox({
+              title: `About ${appName}`,
+              message: `${appName} ${app.getVersion()}`,
+              detail: 'Unofficial Protonmail desktop app, created by Matthew Core <BeatPlus> and Hayden Suarez-Davis <HaydenSD>.',
+              icon: path.join(__dirname, 'static', process.platform === 'linux' ? 'Icon-linux-about.png' : 'IconTray.png'),
+              buttons: ['Close']
+            });
+          },
+        },
+      ]),
+    ],
+  }
+];
 
 module.exports = Menu.buildFromTemplate(MenuTpl);

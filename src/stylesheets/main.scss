@@ -1,0 +1,144 @@
+@import "sweetalert/dev/sweetalert.scss";
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font: 14px/1.714285714285714 Arial, Helvetica, sans-serif;
+    color: #505061;
+    font-weight: 400;
+    background-color: #505061;
+}
+
+button.pm-button {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0 10px;
+    height: 35px;
+    line-height: 35px;
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 12px;
+    background-color: transparent;
+    transition: all .3s ease-out;
+    cursor: pointer;
+    z-index: 1;
+    outline: none;
+    &.action {
+        cursor: pointer;
+        z-index: 1;
+        height: 40px;
+        min-height: 40px;
+        font-size: 25px;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 15px;
+        color: #fff;
+        border-color: transparent;
+    }
+    &.lg {
+        height: 60px;
+        line-height: 15px;
+        font-size: 16px;
+    }
+    &.active {
+        color: #fff;
+        font-weight: 800;
+    }
+    div {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+}
+
+.view-container {
+    user-select: none;
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+    background-image: url('../static/mountain.png'), url('../static/pm-logo.png');
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom right, center center;
+
+    .sidenav {
+        background: darken(#505061, 10%);
+        padding: 40px 10px;
+        width: 60px;
+
+        .etabs-tabs {
+            .etabs-tab {
+                @extend button.pm-button;
+                @extend button.lg;
+                display: none;
+
+                &.active span.etabs-tab-title {
+                    color: #fff;
+                    box-shadow: 0 0 0 2px #fff;
+                }
+
+                .etabs-tab-button-close {
+                    display: none;
+                }
+
+                .etabs-tab-badge {
+                    position: relative;
+                    top: -45px;
+                    left: 30px;
+                    height: 20px;
+                    width: 20px;
+                    text-align: center;
+                    vertical-align: middle;
+                    display: table-cell;
+                    background: red;
+                    border-radius: 50%;
+                    color: white;
+                    font: normal 12px Arial;
+                    line-height: 1em;
+
+                    &.hidden {
+                        display: none;
+                    }
+                    sub {
+                        position: absolute;
+                        bottom: 0;
+                    }
+                }
+            }
+
+            .etabs-tab-title {
+                background: #9397cd;
+                border-radius: 10%;
+                padding: 12px;
+                text-transform: uppercase;
+                text-align: center;
+                display: block;
+                &:hover {
+                    box-shadow: 0 0 0 3px #9397cd;
+                }
+            }
+            .visible {
+                display: block;
+            }
+        }
+    }
+
+    .etabs-views {
+        flex: 4;
+    }
+
+    .settings-container {
+        position: absolute;
+        bottom: 0;
+        padding: 15px;
+        color: #fff;
+        .settings-button:hover {
+            box-shadow: 0px 1px 0 0px white;
+            cursor: pointer;
+        }
+    }
+}
