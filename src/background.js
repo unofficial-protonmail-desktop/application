@@ -3,6 +3,7 @@ import jetpack from 'fs-jetpack';
 import { app, Menu } from 'electron';
 import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
+import { initiateAutoUpdater } from './auto-updater';
 
 const settings = require('electron-settings');
 const tray = require('./tray');
@@ -11,10 +12,13 @@ require('electron-dl')({saveAs: true});
 
 migrateSettings();
 
-
 if (process.env.NAME === 'development') {
 	require('electron-reload')(__dirname);
 	require('electron-debug')({enabled: true});
+}
+
+if (process.env.NAME === 'production') {
+	initiateAutoUpdater();
 }
 
 let mainWindow;
