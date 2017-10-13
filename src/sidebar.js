@@ -109,6 +109,9 @@ export class Sidebar {
       e.preventDefault();
       open(e.url);
     });
+    require('electron-context-menu')({
+      window: tab.webview,
+    });
   }
 
   onTabActive(tab) {
