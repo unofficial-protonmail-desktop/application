@@ -1,4 +1,4 @@
-import { ICONS } from "./icons";
+import { ICONS } from './icons';
 
 const { app, dialog, nativeImage }  = require('electron');
 const { autoUpdater } = require('electron-updater');
@@ -10,18 +10,17 @@ export const initiateAutoUpdater = () => {
   });
 
   autoUpdater.on('error', error => {
-    console.error(error);
-
     dialog.showMessageBox(null, {
       type: 'error',
       title: 'Something went wrong',
       message: 'Ops! ProtonMail Desktops auto updater failed. Check ' +
       'https://github.com/protonmail-desktop/application for the latest updates and ' +
       'please create an issue.',
+      details: JSON.stringify(error),
       buttons: [
         'Okey'
       ]
-    }, response => true);
+    }, () => true);
   });
 
   autoUpdater.on('update-downloaded', updateInfo => {
