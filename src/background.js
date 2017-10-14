@@ -13,29 +13,29 @@ require('electron-dl')({saveAs: true});
 migrateSettings();
 
 if (process.env.NAME === 'development') {
-	require('electron-reload')(__dirname);
-	require('electron-debug')({enabled: true});
+  require('electron-reload')(__dirname);
+  require('electron-debug')({enabled: true});
 }
 
 if (process.env.NAME === 'production') {
-	initiateAutoUpdater();
+  initiateAutoUpdater();
 }
 
 let mainWindow;
 let isQuitting = false;
 
 const isAlreadyRunning = app.makeSingleInstance(() => {
-	if (mainWindow) {
-		if (mainWindow.isMinimized()) {
-			mainWindow.restore();
-		}
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
 
-		mainWindow.show();
-	}
+    mainWindow.show();
+  }
 });
 
 if (isAlreadyRunning) {
-	app.quit();
+  app.quit();
 }
 
 function createMainWindow() {
@@ -43,29 +43,29 @@ function createMainWindow() {
     settings.deleteAll();
   }
 
-	const isDarkMode = settings.get('darkMode');
+  const isDarkMode = settings.get('darkMode');
 
-	const win = new createWindow('main', {
-		title: app.getName(),
-		show: false,
-		width: 1300,
-		height: 850,
-		icon: process.platform === 'linux' && path.join(__dirname, 'static/Icon.png'),
-		minWidth: 1000,
-		minHeight: 700,
-		alwaysOnTop: settings.get('alwaysOnTop'),
-		titleBarStyle: 'hidden-inset',
-		autoHideMenuBar: true,
-		darkTheme: isDarkMode, // GTK+3
-		//backgroundColor: isDarkMode ? '#192633' : '#fff',
-		webPreferences: {
-			preload: path.join(__dirname, 'browser.js'),
-			nodeIntegration: true,
-			plugins: true
-		}
-	});
+  const win = new createWindow('main', {
+    title: app.getName(),
+    show: false,
+    width: 1300,
+    height: 850,
+    icon: process.platform === 'linux' && path.join(__dirname, 'static/Icon.png'),
+    minWidth: 1000,
+    minHeight: 700,
+    alwaysOnTop: settings.get('alwaysOnTop'),
+    titleBarStyle: 'hidden-inset',
+    autoHideMenuBar: true,
+    darkTheme: isDarkMode, // GTK+3
+    //backgroundColor: isDarkMode ? '#192633' : '#fff',
+    webPreferences: {
+      preload: path.join(__dirname, 'browser.js'),
+      nodeIntegration: true,
+      plugins: true
+    }
+  });
 
-  /**
+    /**
 	 * Trick to make the window draggable
    * https://github.com/electron/electron/pull/5557
    */
@@ -84,63 +84,63 @@ function createMainWindow() {
     }
   });
 
-	if (process.platform === 'darwin') {
-		win.setSheetOffset(40);
-	}
+  if (process.platform === 'darwin') {
+    win.setSheetOffset(40);
+  }
 
-	win.loadURL('file://' + __dirname + '/index.html');
+  win.loadURL('file://' + __dirname + '/index.html');
 
-	win.on('close', e => {
-		if (!isQuitting) {
-			e.preventDefault();
+  win.on('close', e => {
+    if (!isQuitting) {
+      e.preventDefault();
 
-			if (process.platform === 'darwin') {
-				app.hide();
-			} else {
-				win.hide();
-			}
-		}
-	});
+      if (process.platform === 'darwin') {
+        app.hide();
+      } else {
+        win.hide();
+      }
+    }
+  });
 
-	return win;
+  return win;
 }
 
 app.on('ready', () => {
   const appMenu = require('./menu');
-	Menu.setApplicationMenu(appMenu);
-	mainWindow = createMainWindow();
-	tray.create(mainWindow);
+  Menu.setApplicationMenu(appMenu);
+  mainWindow = createMainWindow();
+  tray.create(mainWindow);
 
-	const page = mainWindow.webContents;
+  const page = mainWindow.webContents;
 
-	const argv = require('minimist')(process.argv.slice(1));
+  const argv = require('minimist')(process.argv.slice(1));
 
-	page.on('dom-ready', () => {
-		page.insertCSS(jetpack.read(path.join(__dirname, 'browser.css'), 'utf8'));
-		page.insertCSS(jetpack.read(path.join(__dirname, 'themes/dark-mode.css'), 'utf8'));
+  page.on('dom-ready', () => {
+    page.insertCSS(jetpack.read(path.join(__dirname, 'browser.css'), 'utf8'));
+    page.insertCSS(jetpack.read(path.join(__dirname, 'themes/dark-mode.css'), 'utf8'));
 
-		if (process.platform === 'darwin') {
-			page.insertCSS(jetpack.read(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
-		}
+    if (process.platform === 'darwin') {
+      page.insertCSS(jetpack.read(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
+    }
 
-		if (argv.minimize) {
-			mainWindow.minimize();
-		} else {
-			mainWindow.show();
-		}
+    if (argv.minimize) {
+      mainWindow.minimize();
+    } else {
+      mainWindow.show();
+    }
 
     if (process.env.NAME === 'development') {
       mainWindow.openDevTools();
     }
-	});
+  });
 });
 
 app.on('activate', () => {
-	mainWindow.show();
+  mainWindow.show();
 });
 
 app.on('before-quit', () => {
-    isQuitting = true;
+  isQuitting = true;
 });
 
 
