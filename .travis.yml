@@ -44,7 +44,7 @@ script:
   - yarn run e2e
   - |
     if [ ! -z "$TRAVIS_TAG" ]; then
-      - yarn prerelease
+      yarn prerelease
       if [ "$TRAVIS_OS_NAME" == "osx" ]; then
         yarn release
       fi
