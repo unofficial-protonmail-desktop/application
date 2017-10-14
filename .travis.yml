@@ -42,9 +42,9 @@ script:
   - yarn --version
   - yarn eslint
   - yarn run e2e
-  - export NAME=production
   - |
     if [ ! -z "$TRAVIS_TAG" ]; then
+      - yarn prerelease
       if [ "$TRAVIS_OS_NAME" == "osx" ]; then
         yarn release
       fi
@@ -57,7 +57,7 @@ script:
           -v ~/.cache/electron:/root/.cache/electron \
           -v ~/.cache/electron-builder:/root/.cache/electron-builder \
           electronuserland/builder:wine \
-          /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release --linux --win"
+          /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release --linux --win --ia32 --x64"
       fi
     fi
 
