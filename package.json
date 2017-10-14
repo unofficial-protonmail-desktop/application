@@ -20,13 +20,37 @@
     "publish": ["github"],
     "linux": {
       "target": [
-        "deb",
-        "rpm",
-        "tar.gz",
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        {
+          "target": "rpm",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        {
+          "target": "freebsd",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
         "AppImage",
         "snap",
-        "pacman",
-        "freebsd"
+        "pacman"
       ],
       "category": "Office"
     },
@@ -34,7 +58,16 @@
       "category": "public.app-category.productivity"
     },
     "win": {
-      "icon": "build/Icon.ico"
+      "icon": "build/Icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
     },
     "files": [
       "app/**/*",
