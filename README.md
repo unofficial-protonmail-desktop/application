@@ -1,6 +1,6 @@
 ProtonMail Desktop [![license](https://img.shields.io/github/license/beatplus/protonmail.svg?style=flat-square)]()
 ======
-![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/linux-screenshot.png "Protonmail Desktop on Linux")
+![Protonmail Desktop on Linux](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/linux-screenshot.png)
 
 ProtonMail Desktop is an **unofficial** app that emulates a native client for the ProtonMail e-mail service. Check out more about Protonmail in [their website](https://protonmail.com).
 
@@ -17,7 +17,7 @@ You can toggle dark mode in the application menu or with <kbd>Cmd</kbd> <kbd>D</
 #### Native Notifications
 Native notifications are working for all OS, you will get a notification when you receive a new email and window is not focused (i.e. app minimized).
 
-![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/win-notification.png "Notifications on Windows 10")![alt text](https://raw.githubusercontent.com/BeatPlus/Protonmail/master/media/linux-notification.png "Notifications on Elementary OS")
+![Notifications on Windows 10](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/win-notification.png)![Notifications on Elementary OS](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/linux-notification.png)
 
 ### Version
 
