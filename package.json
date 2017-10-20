@@ -115,6 +115,7 @@
     "electron-builder": "^19.27.7",
     "electron-mocha": "^4.0.0",
     "electron-reload": "^1.1.0",
+    "eslint-plugin-mocha": "^4.11.0",
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-batch": "^1.0.5",
