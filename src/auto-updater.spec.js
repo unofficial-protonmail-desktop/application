@@ -1,4 +1,4 @@
-import { initiateAutoUpdater } from "./auto-updater";
+import { initiateAutoUpdater } from './auto-updater';
 
 const { app, dialog }  = require('electron');
 const { autoUpdater } = require('electron-updater');
