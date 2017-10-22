@@ -29,7 +29,7 @@ describe('AutoUpdater', () => {
     sinon.stub(dialog, 'showMessageBox');
 
     initiateAutoUpdater();
-    autoUpdater.emit('error');
+    autoUpdater.emit('error', {});
 
     expect(dialog.showMessageBox).to.have.been.called;
     dialog.showMessageBox.restore();
