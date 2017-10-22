@@ -13,16 +13,16 @@ describe('AutoUpdater', () => {
   it('should check for updates on app ready', done => {
     sinon.stub(autoUpdater, 'checkForUpdates');
 
-    app.on('ready', () => {
-      setTimeout(() => {
-
-        expect(autoUpdater.checkForUpdates).to.have.been.called;
-        done();
-      });
-    });
-
     initiateAutoUpdater();
+
     app.emit('ready');
+
+    setTimeout(() => {
+
+      expect(autoUpdater.checkForUpdates).to.have.been.called;
+      autoUpdater.checkForUpdates.restore();
+      done();
+    });
   });
 
   it('should show a dialog when an error occurs', () => {
