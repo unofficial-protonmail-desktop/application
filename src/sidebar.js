@@ -1,6 +1,5 @@
 const ContextMenuHandler = require('electron-context-menu-handler/context-menu-handler');
-const { ipcRenderer } = require('electron');
-const open = require('open');
+const { ipcRenderer, shell } = require('electron');
 const settings = require('electron-settings');
 
 export class Sidebar {
@@ -105,9 +104,9 @@ export class Sidebar {
     tab.tabElements.title.setAttribute('tab-id', tab.id);
     tab.webview.addEventListener('dom-ready', domReadyEvent);
     tab.webview.addEventListener('page-title-updated', () => this.onTabTitleUpdate());
-    tab.webview.addEventListener('new-window', (e) => {
-      e.preventDefault();
-      open(e.url);
+    tab.webview.addEventListener('new-window', event => {
+      event.preventDefault();
+      shell.openExternal(event.url);
     });
     require('electron-context-menu')({
       window: tab.webview,
