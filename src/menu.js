@@ -44,6 +44,10 @@ const MenuTpl = [
       { role: 'resetzoom' },
       { role: 'zoomin' },
       { role: 'zoomout' },
+      { label: 'Togge sidebar', 
+        accelerator: 'CmdOrCtrl+Shift+h',
+        click: (menuItem, currentWindow) => currentWindow.webContents.send('toggleSidebar')
+      }
     ],
   },
   {
