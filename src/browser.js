@@ -8,9 +8,18 @@ function setDarkMode() {
   document.documentElement.classList.toggle('dark-mode', settings.get('darkMode'));
 }
 
+function setSidebar() {
+  document.querySelector('.sidenav').classList.toggle('hidden', settings.get('isSidebarHidden'));  
+}
+
 ipc.on('toggle-dark-mode', () => {
   settings.set('darkMode', !settings.get('darkMode'));
   setDarkMode();
+});
+
+ipc.on('toggleSidebar', () => {
+  settings.set('isSidebarHidden', !settings.get('isSidebarHidden'));
+  setSidebar();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,4 +27,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setDarkMode();
 
   setTimeout(() => new Sidebar(), 0);
+  if(settings.get('isSidebarHidden')) setSidebar();
 });

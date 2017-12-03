@@ -68,6 +68,10 @@ button.pm-button {
         padding: 40px 10px;
         width: 60px;
 
+        &.hidden {
+            display: none;
+        }
+
         .etabs-tabs {
             .etabs-tab {
                 @extend button.pm-button;
