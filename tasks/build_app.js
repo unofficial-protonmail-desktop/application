@@ -17,6 +17,7 @@ process.env.NAME = argv.env || 'development';
 gulp.task('bundle', () => {
   return Promise.all([
         bundle(srcDir.path('background.js'), destDir.path('background.js')),
+        bundle(srcDir.path('settings.js'), destDir.path('settings.js')),
         bundle(srcDir.path('sidebar.js'), destDir.path('sidebar.js')),
         bundle(srcDir.path('tray.js'), destDir.path('tray.js')),
         bundle(srcDir.path('menu.js'), destDir.path('menu.js')),

@@ -12,6 +12,7 @@ Thumbs.db
 /app/menu.js
 /app/tray.js
 /app/background.js
+/app/settings.js
 /app/sidebar.js
 /app/env.json
 /app/**/*.map
