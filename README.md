@@ -53,6 +53,7 @@ The installer is provided by *electon-builder* and processed through gulp thanks
 This will work on OS X, Linux, and Windows. You will need [Yarn](https://yarnpkg.com/en/docs/install) to run this app.
 - Install required packages: `$ yarn install`
 - Run: `$ yarn start`
+- Build: `$ yarn build`
 - Package in a distributable format: `$ yarn run dist`
 - Generate package directory without distributable: `$ yarn run pack`
 
