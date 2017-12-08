@@ -14,10 +14,10 @@ describe('multiple accounts', function () {
     return this.app.client.waitUntilWindowLoaded()
       .then(() => this.app.client.waitForVisible('button.add-account', 10000))
       .click('button.add-account')
-      .then(() => this.app.client.waitForVisible('.sweet-alert input[type=text]'))
-      .setValue('.sweet-alert input[type=text]', accountName)
+      .then(() => this.app.client.waitForVisible('.swal2-input'))
+      .setValue('.swal2-input', accountName)
       .pause(500)
-      .click('button.confirm')
+      .click('.swal2-confirm')
       .pause(500)
       .getText('.etabs-tabs .etabs-tab-title')
       .then(text => {
