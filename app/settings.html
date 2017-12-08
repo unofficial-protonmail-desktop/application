@@ -1,19 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Settings</title>
-    <link rel="stylesheet" type="text/css" href="stylesheets/settings.css">
-    </head>
+  <meta charset="UTF-8">
+  <title>Settings</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/settings.css">
+</head>
 <body>
   <center>
     <div class="m-nav m-colored">
-      <li><a>Main</a></li>
-      <li><a>About</a></li>
+      <ul class="tabs">
+        <li><a href="#tab-one" class="is-active">Main</a></li>
+        <li><a href="#tab-two">About</a></li>
+      </ul>
     </div>
     <div class="panel">
-    	<p>Hello World!</p>
+      <section class="tab-content" id="tab-one">
+            <h1>Hello World!</h1>
+                <button id="openFile" onclick="openFile();">Open</button>
+              We are using node <script>document.write(process.versions.node)</script>,
+              Chrome <script>document.write(process.versions.chrome)</script>,
+              and Electron <script>document.write(process.versions.electron)</script>.
+
+        <h2>Toggle 'em</h2>
+        <ul>
+          <li class="tg-list-item">
+            <input class="tgl tgl-light" id="cb1" type="checkbox"/>
+            <label class="tgl-btn" for="cb1"></label>
+          </li>
+        </ul>
+      </section>
+      <section class="tab-content" id="tab-two">
+        <h1>Tab two content</h1>
+        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper.</p>
+      </section>
+      <section class="tab-content" id="tab-three">
+        <h1>Tab three content</h1>
+        <p>Nulla vitae elit libero, a pharetra augue. Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere consectetur est at lobortis.</p>
+      </section>
     </div>
   </center>
+
+  <script>
+
+    const settings = require('electron-settings');
+    const dialog = require( 'electron' ).dialog;
+
+    alert(settings.get('darkMode'));
+
+
+  </script>
+
+  <script type="text/javascript">
+  
+    var tabLinks = document.querySelectorAll('ul.tabs li a');
+
+    for (var i = 0; i < tabLinks.length; i++) { 
+      tabLinks[i].onclick = function() {
+        var target = this.getAttribute('href').replace('#', '');
+        var sections = document.querySelectorAll('section.tab-content');
+        
+        for(var j=0; j < sections.length; j++) {
+          sections[j].style.display = 'none';
+        }
+        
+        document.getElementById(target).style.display = 'block';
+        
+        for(var k=0; k < tabLinks.length; k++) {
+          tabLinks[k].removeAttribute('class');
+        }
+        
+        this.setAttribute('class', 'is-active');
+        
+        return false;
+      }
+    };    
+  </script>
+
 </body>
+
 </html>

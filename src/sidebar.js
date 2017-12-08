@@ -4,7 +4,7 @@ const settings = require('electron-settings');
 const SettingsObj = {
   isSettingsOpen: false,
   SettingsTabId: null
-}
+};
 
 export class Sidebar {
   constructor() {
@@ -171,7 +171,7 @@ export class Sidebar {
   }
   
   addEventListenerForSettingsPanel() {
-      document.querySelector("[action-open-settings]").addEventListener("click", () => this.openSettingsPanel());
+    document.querySelector('[action-open-settings]').addEventListener('click', () => this.openSettingsPanel());
   }
 
   openSettingsPanel(){
@@ -180,16 +180,19 @@ export class Sidebar {
     if(!SettingsObj.SettingsTabId){
 
       this.tabGroup.addTab({
-          title: 'Settings',
-          src: path.join(__dirname, 'settings.html'),
-          visible: false,
-          badge: false,
-          active: true,
-          ready: (tab) => {
-           // SettingsObj.SettingsTabId = tab.
-            SettingsObj.SettingsTabId = tab.id;
-          }
-      })
+        title: 'Settings',
+        src: path.join(__dirname, 'settings.html'),
+        visible: false,
+        badge: false,
+        active: true,
+        webviewAttributes: {
+          'nodeintegration': true
+        },
+        ready: (tab) => {
+          // SettingsObj.SettingsTabId = tab.
+          SettingsObj.SettingsTabId = tab.id;
+        }
+      });
     } else {
       this.tabGroup.getTab(SettingsObj.SettingsTabId).activate();
     }
