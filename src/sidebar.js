@@ -169,7 +169,7 @@ export class Sidebar {
     }
     ipcRenderer.send('set-badge', totalCount);
   }
-  
+
   addEventListenerForSettingsPanel() {
     document.querySelector('[action-open-settings]').addEventListener('click', () => this.openSettingsPanel());
   }
@@ -186,7 +186,8 @@ export class Sidebar {
         badge: false,
         active: true,
         webviewAttributes: {
-          'nodeintegration': true
+          nodeintegration: true,
+          disablewebsecurity: true,
         },
         ready: (tab) => {
           // SettingsObj.SettingsTabId = tab.
