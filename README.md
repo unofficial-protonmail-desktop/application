@@ -11,9 +11,6 @@ We are not affiliated with ProtonMail team. All copyrights belong to their respe
 #### Background behaviour
 When closing the window, the app will continue running in the background. On OSX, app will be available in the dock and on WIN & Linux (depends on distro) in the tray. Right-click the dock/tray icon and choose Quit to completely quit the app. On OS X, click the dock icon to show the window. On Linux, right-click the tray icon and choose Toggle to toggle the window. On Windows, click the tray icon to toggle the window.
 
-#### Dark mode
-You can toggle dark mode in the application menu or with <kbd>Cmd</kbd> <kbd>D</kbd> / <kbd>Ctrl</kbd> <kbd>D</kbd>.
-
 #### Native Notifications
 Native notifications are working for all OS, you will get a notification when you receive a new email and window is not focused (i.e. app minimized).
 
