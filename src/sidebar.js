@@ -66,19 +66,18 @@ export class Sidebar {
   }
 
   addAccount() {
-    const swal = require('sweetalert');
+    const swal = require('sweetalert2');
 
     const options = {
       title: 'Account name',
       text: 'Enter the name of your ProtonMail account',
-      type: 'input',
+      input: 'text',
       confirmButtonText: 'Add account',
       showCancelButton: true,
-      allowOutsideClick: true,
     };
     const onConfirmCallback = (name) => name ? this.createTab(name) : null;
 
-    swal(options, onConfirmCallback);
+    swal(options).then((result) => onConfirmCallback(result.value));
   }
 
   createTab(name) {
@@ -195,5 +194,4 @@ export class Sidebar {
       this.tabGroup.getTab(SettingsObj.SettingsTabId).activate();
     }
   }
-
 }
