@@ -5,11 +5,11 @@ export const AddCommands = {
         .waitForVisible('button.add-account', 10000)
         .pause(500)
         .click('button.add-account')
-        .waitForVisible('.sweet-alert input[type=text]')
-        .setValue('.sweet-alert input[type=text]', accountName)
+        .waitForVisible('.swal2-input')
+        .setValue('.swal2-input', accountName)
         .pause(500)
-        .click('button.confirm')
-        .waitForVisible('.sweet-alert input[type=text]', undefined, true)
+        .click('.swal2-confirm')
+        .waitForVisible('.swal2-input', undefined, true)
     });
   },
 };
