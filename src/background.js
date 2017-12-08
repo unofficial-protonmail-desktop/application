@@ -35,7 +35,7 @@ const isAlreadyRunning = app.makeSingleInstance(() => {
 });
 
 if (isAlreadyRunning) {
-  app.quit();
+  app.exit();
 }
 
 function createMainWindow() {
@@ -142,5 +142,3 @@ app.on('activate', () => {
 app.on('before-quit', () => {
   isQuitting = true;
 });
-
-
