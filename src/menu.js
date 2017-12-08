@@ -21,7 +21,9 @@ const MenuTpl = [
     label: 'File',
     submenu: [
       ...(process.platform === 'darwin' ? [{ role: 'about' }] : []),
-      { role: 'quit' },
+      { role: 'quit',
+        accelerator: 'CommandOrControl+Q'
+      },
     ]
   },
   {
