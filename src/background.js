@@ -17,7 +17,7 @@ if (process.env.NAME === 'development') {
   require('electron-debug')({enabled: true});
 }
 
-if (process.env.NAME === 'production') {
+if (!process.env.NAME) {
   initiateAutoUpdater();
 }
 
