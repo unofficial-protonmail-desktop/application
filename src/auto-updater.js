@@ -5,6 +5,7 @@ const { autoUpdater } = require('electron-updater');
 
 export const initiateAutoUpdater = () => {
   autoUpdater.autoDownload = true;
+
   app.on('ready', () => {
     autoUpdater.checkForUpdates();
   });
@@ -28,7 +29,7 @@ export const initiateAutoUpdater = () => {
       type: 'info',
       title: 'Update of Protonmail Desktop available!',
       message: `Protonmail Desktop ${updateInfo.version} is ready to be installed!`,
-      detail: updateInfo.releaseNotes,
+      detail: updateInfo.releaseNotes.replace(/<[^>]+>/g, ''),
       buttons: [
         'Install update and restart app',
         'Postpone this update',
