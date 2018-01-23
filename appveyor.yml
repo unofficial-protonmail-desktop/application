@@ -9,7 +9,6 @@ environment:
     - nodejs_version: 8
 
 cache:
-  - node_modules
   - "%LOCALAPPDATA%/Yarn"
   - '%USERPROFILE%\.electron'
 
