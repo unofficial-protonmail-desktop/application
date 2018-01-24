@@ -10,26 +10,27 @@ const expect = chai.expect;
 chai.use(sinonChai);
 
 describe('AutoUpdater', () => {
-  it('should check for updates on app ready', done => {
+  it('should check for updates on app ready', () => {
     sinon.stub(autoUpdater, 'checkForUpdates');
+    sinon.spy(app, 'on');
 
     initiateAutoUpdater();
 
-    app.emit('ready');
+    const onAppReadyCb = app.on.getCalls().filter(call => call.calledWith('ready')).pop().args[1];
+    onAppReadyCb();
 
-    setTimeout(() => {
-
-      expect(autoUpdater.checkForUpdates).to.have.been.called;
-      autoUpdater.checkForUpdates.restore();
-      done();
-    });
+    expect(autoUpdater.checkForUpdates).to.have.been.called;
+    autoUpdater.checkForUpdates.restore();
   });
 
   it('should show a dialog when an error occurs', () => {
     sinon.stub(dialog, 'showMessageBox');
+    sinon.spy(autoUpdater, 'on');
 
     initiateAutoUpdater();
-    autoUpdater.emit('error', {});
+
+    const onAutoUpdaterErrorCb = autoUpdater.on.getCalls().filter(call => call.calledWith('error')).pop().args[1];
+    onAutoUpdaterErrorCb();
 
     expect(dialog.showMessageBox).to.have.been.called;
     dialog.showMessageBox.restore();
@@ -39,7 +40,7 @@ describe('AutoUpdater', () => {
     sinon.stub(dialog, 'showMessageBox');
 
     initiateAutoUpdater();
-    autoUpdater.emit('update-downloaded', {});
+    autoUpdater.emit('update-downloaded', { releaseNotes: '' });
 
     expect(dialog.showMessageBox).to.have.been.called;
     dialog.showMessageBox.restore();
