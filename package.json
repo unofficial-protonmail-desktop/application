@@ -112,7 +112,7 @@
     "chai": "^4.1.0",
     "electron": "1.7.11",
     "electron-builder": "19.54.0",
-    "electron-mocha": "^4.0.0",
+    "electron-mocha": "5.0.0",
     "electron-reload": "^1.1.0",
     "eslint-plugin-mocha": "^4.11.0",
     "fs": "0.0.1-security",
