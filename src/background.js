@@ -1,6 +1,6 @@
 import path from 'path';
 import jetpack from 'fs-jetpack';
-import { app, Menu } from 'electron';
+import { app, Menu, ipcMain } from 'electron';
 import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
 import { initiateAutoUpdater } from './auto-updater';
@@ -133,6 +133,13 @@ app.on('ready', () => {
       mainWindow.openDevTools();
     }
   });
+});
+
+ipcMain.once('listen-for-browser-window-focus', event => {
+  app.on('browser-window-focus', () => {
+    event.sender.send('browser-window-focus');
+  });
+
 });
 
 app.on('activate', () => {
