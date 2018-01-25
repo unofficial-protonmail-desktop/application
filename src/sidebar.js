@@ -20,6 +20,7 @@ export class Sidebar {
 
     this.addEventListenerForAddAccount();
     this.initiateTabs();
+    this.listenForBrowserWindowFocus();
   }
 
   initiateTabs() {
@@ -41,7 +42,20 @@ export class Sidebar {
         }
       });
     });
+
     settings.set('SavedTabs', postSettingsArray);
+  }
+
+  listenForBrowserWindowFocus() {
+    ipcRenderer.send('listen-for-browser-window-focus');
+
+    ipcRenderer.on('browser-window-focus', () => {
+      const activeTab = this.tabGroup.getActiveTab();
+
+      if (activeTab) {
+        activeTab.webview.focus();
+      }
+    });
   }
 
   onTabRemoved(tab) {
