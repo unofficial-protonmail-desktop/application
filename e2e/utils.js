@@ -8,7 +8,7 @@ const beforeEach = function (env = {}) {
   this.timeout(50000);
   this.app = new Application({
     path: electron,
-    args: ['.'],
+    args: ['.', 'test'],
     startTimeout: 50000,
     waitTimeout: 50000,
     chromeDriverLogPath: process.cwd().concat('/chrome-driver.log'),
