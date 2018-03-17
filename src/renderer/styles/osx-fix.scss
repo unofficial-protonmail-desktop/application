@@ -1,12 +1,14 @@
 /* Fix the Protonmail logo for MacOS issues - Thanks to @pwnsdx  */
 
 header#pm_header-desktop a.logo img {
-    margin-top: 40px!important;
+  margin-top: 40px !important;
 }
+
 body section.sidebar {
-    padding-top: 20px!important;
+  padding-top: 20px !important;
 }
+
 header#pm_header-desktop,
 #pm_settings .pm_tabs {
-    background: #505061!important;
+  background: #505061 !important;
 }
