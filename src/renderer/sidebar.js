@@ -108,7 +108,7 @@ export class Sidebar {
     const jetpack = require('fs-jetpack');
 
     const domReadyEvent = () => {
-      tab.webview.insertCSS(jetpack.read(path.join(__dirname, './browser.css'), 'utf8'));
+      tab.webview.insertCSS(jetpack.read(path.join(__dirname, 'styles/pm_webclient-overrides.css'), 'utf8'));
       tab.webview.removeEventListener('dom-ready', domReadyEvent);
       this.prefillUsernameInLoginForm(tab.webview.getWebContents(), name);
     };
