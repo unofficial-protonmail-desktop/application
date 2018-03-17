@@ -90,7 +90,7 @@ function createMainWindow() {
     win.setSheetOffset(40);
   }
 
-  win.loadURL('file://' + __dirname + '/index.html');
+  win.loadURL('http://localhost:8080');
 
   win.on('close', e => {
     if (!isQuitting) {
