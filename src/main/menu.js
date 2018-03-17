@@ -4,7 +4,7 @@ import { app, shell, Menu, dialog } from 'electron';
 
 const appName = app.getName();
 const settings = require('electron-settings');
-const packageJson = require('../package.json');
+const packageJson = require('../../package.json');
 
 const fileAnIssueTemplate = `
 <!-- Please succinctly describe your issue and steps to reproduce it. -->
@@ -95,7 +95,7 @@ const MenuTpl = [
               title: `About ${appName}`,
               message: `${appName} ${app.getVersion()}`,
               detail: 'Unofficial Protonmail desktop app, created by Matthew Core <BeatPlus> and Hayden Suarez-Davis <HaydenSD>.',
-              icon: path.join(__dirname, 'static', process.platform === 'linux' ? 'Icon-linux-about.png' : 'IconTray.png'),
+              icon: path.join(__dirname, 'images', process.platform === 'linux' ? 'Icon-linux-about.png' : 'IconTray.png'),
               buttons: ['Close']
             });
           },

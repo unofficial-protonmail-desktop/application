@@ -1,10 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
   target: 'electron-main',
-  entry: path.join(__dirname, '../src/background.js'),
+  entry: path.join(__dirname, '../src/main/index.js'),
 
   output: {
     path: path.join(__dirname, '../app'),
@@ -12,6 +13,12 @@ module.exports = {
   },
 
   plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '../src/main/images'),
+        to: path.join(__dirname, '../app/images'),
+      },
+    ]),
     new webpack.EnvironmentPlugin({
 //      NODE_ENV: 'production',
 //      NAME: 'production',
