@@ -9,12 +9,12 @@ module.exports = {
   target: 'electron-renderer',
 
   entry: [
-    path.join(__dirname, '../src/browser.js'),
+    path.join(__dirname, '../src/renderer/index.js'),
   ],
 
   output: {
     path: path.join(__dirname, '../app'),
-    filename: 'browser.js',
+    filename: 'renderer.js',
   },
 
   module: {
@@ -52,7 +52,7 @@ module.exports = {
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../src/index.html'),
+      template: path.join(__dirname, '../src/renderer/index.html'),
     }),
   ],
 };
