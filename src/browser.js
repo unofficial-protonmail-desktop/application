@@ -1,5 +1,6 @@
 import { ipcRenderer as ipc } from 'electron';
 import { Sidebar } from './sidebar';
+import './stylesheets/main.scss';
 
 require('electron-context-menu-handler')();
 const settings = require('electron-settings');
