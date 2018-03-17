@@ -7,6 +7,7 @@ const env = process.env.NAME;
 module.exports = {
   devtool: env === 'production' ? false : 'source-map',
   target: 'electron-renderer',
+  mode: env,
 
   entry: [
     path.join(__dirname, '../src/renderer/index.js'),
@@ -34,6 +35,9 @@ module.exports = {
           },
           {
             loader: 'css-loader',
+            options: {
+              modules: true,
+            },
           },
           {
             loader: 'sass-loader',

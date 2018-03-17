@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   devtool: 'source-map',
   target: 'electron-main',
+  mode: process.env.NAME,
   entry: path.join(__dirname, '../src/main/index.js'),
 
   output: {
