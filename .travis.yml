@@ -50,7 +50,7 @@ install:
 script:
   - node --version
   - yarn --version
-  - yarn eslint
+  - yarn lint
   - yarn test
   - yarn build:prod
   - yarn e2e
