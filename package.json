@@ -92,7 +92,7 @@
     "lint:css": "stylelint --config config/stylelint.config.js src/renderer/**/*.{css,scss}",
     "lint:js": "eslint src",
     "pack": "electron-builder --dir",
-    "start": "webpack-dev-server --config config/webpack.renderer.js | electron -r babel-register src/main/index.js",
+    "start": "cross-env NAME=development webpack-dev-server --config config/webpack.renderer.js --hot | electron -r babel-register src/main/index.js",
     "test": "electron-mocha --require babel-core/register src/main/**.spec.js",
     "coverage": "yarn test -- -R scripts/istanbul-reporter",
     "e2e": "mocha e2e/*.e2e.js --trace-warnings --full-trace --require babel-core/register"
@@ -136,6 +136,7 @@
     "path": "^0.12.7",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-hot-loader": "^4.0.0",
     "sass-loader": "^6.0.7",
     "sinon": "^4.0.1",
     "sinon-chai": "^2.14.0",
