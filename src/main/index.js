@@ -1,5 +1,4 @@
 import path from 'path';
-import jetpack from 'fs-jetpack';
 import { app, Menu, ipcMain } from 'electron';
 import electronReload from 'electron-reload';
 import electronDebug from 'electron-debug';
@@ -53,7 +52,7 @@ function createMainWindow() {
     show: false,
     width: 1300,
     height: 850,
-    icon: process.platform === 'linux' && path.join(__dirname, 'static/Icon.png'),
+    icon: process.platform === 'linux' && path.join(__dirname, 'images/Icon.png'),
     minWidth: 1000,
     minHeight: 700,
     alwaysOnTop: settings.get('alwaysOnTop'),
@@ -62,7 +61,7 @@ function createMainWindow() {
     darkTheme: isDarkMode, // GTK+3
     //backgroundColor: isDarkMode ? '#192633' : '#fff',
     webPreferences: {
-      preload:  './browser.js',
+      preload:  './renderer.js',
       nodeIntegration: true,
       plugins: true
     }
@@ -118,13 +117,6 @@ app.on('ready', () => {
   const argv = require('minimist')(process.argv.slice(1));
 
   page.on('dom-ready', () => {
-    page.insertCSS(jetpack.read(path.join(__dirname, 'browser.css'), 'utf8'));
-    page.insertCSS(jetpack.read(path.join(__dirname, 'themes/dark-mode.css'), 'utf8'));
-
-    if (process.platform === 'darwin') {
-      page.insertCSS(jetpack.read(path.join(__dirname, 'themes/osx-fix.css'), 'utf8'));
-    }
-
     if (argv.minimize) {
       mainWindow.minimize();
     } else {

@@ -57,10 +57,11 @@
       "category": "Office"
     },
     "mac": {
-      "category": "public.app-category.productivity"
+      "category": "public.app-category.productivity",
+      "icon": "src/main/images/Icon.icns"
     },
     "win": {
-      "icon": "build/Icon.ico",
+      "icon": "src/main/images/Icon.ico",
       "target": [
         {
           "target": "nsis",
@@ -90,7 +91,7 @@
     "dist": "electron-builder",
     "pack": "electron-builder --dir",
     "start": "electron .",
-    "test": "electron-mocha --require babel-core/register src/**.spec.js",
+    "test": "electron-mocha --require babel-core/register src/main/**.spec.js",
     "coverage": "yarn test -- -R scripts/istanbul-reporter",
     "e2e": "mocha e2e/*.e2e.js --trace-warnings --full-trace --require babel-core/register"
   },
@@ -113,6 +114,7 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.6.1",
     "chai": "^4.1.0",
+    "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "electron": "1.7.11",

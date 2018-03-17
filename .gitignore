@@ -7,16 +7,7 @@ Thumbs.db
 .env
 
 # ignore everything in 'app' folder what had been generated from 'src' folder
-/app/stylesheets
-/app/browser.js
-/app/menu.js
-/app/tray.js
-/app/background.js
-/app/sidebar.js
-/app/env.json
-/app/index.html
-/app/**/*.map
-
+/app
 /dist
 
 /coverage
