@@ -45,17 +45,17 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rvm get stable; fi
 
 install:
-  - yarn install
+  - yarn
 
 script:
   - node --version
   - yarn --version
   - yarn eslint
   - yarn test
-  - yarn run e2e
+  - yarn build:prod
+  - yarn e2e
   - |
     if [ ! -z "$TRAVIS_TAG" ]; then
-      yarn prerelease
       if [ "$TRAVIS_OS_NAME" == "osx" ]; then
         yarn release
       fi
