@@ -1,43 +1,50 @@
 html {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 /* Fix "Back to main page" header */
 
 header.pm_opensans {
-    display: none;
+  display: none;
 }
 
 /* don't show outline on clickable elements
  * except in the delete/mute modal so that we know what we are selecting */
 
-a, *[role="button"] {
-    outline: none !important;
+a,
+*[role="button"] {
+  outline: none !important;
 }
 
 /* Better looking tabs for a desktop app */
-#pm_settings { margin-right:-1px; }
+#pm_settings {
+  margin-right: -1px;
+}
+
 #pm_settings .pm_tabs {
-     padding:0;
-     margin:0;
-     background:#505061;
+  padding: 0;
+  margin: 0;
+  background: #505061;
 }
+
 #pm_settings .pm_tabs li a.pm_button {
-	border-color: transparent;
-	border: 0;
-	background:transparent;
-	color:rgba(255,255,255,.8);
-	font-size: .70rem;
+  border-color: transparent;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.7rem;
 }
+
 #pm_settings .pm_tabs li a.pm_button:hover {
-	color:rgba(255,255,255,.8);
-	background: rgba(255, 255, 255, .1);
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
 }
+
 #pm_settings .pm_tabs li.active a.pm_button {
-	color:#505061;
-	font-weight:500;
-	-webkit-border-top-left-radius: 4px;
-	-webkit-border-top-right-radius: 4px;
-	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;
+  color: #505061;
+  font-weight: 500;
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
