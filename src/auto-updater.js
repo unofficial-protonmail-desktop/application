@@ -1,7 +1,7 @@
-import { ICONS } from './icons';
-
 const { app, dialog, nativeImage }  = require('electron');
 const { autoUpdater } = require('electron-updater');
+
+const { ICONS } = require('./icons');
 
 export const initiateAutoUpdater = () => {
   autoUpdater.autoDownload = true;

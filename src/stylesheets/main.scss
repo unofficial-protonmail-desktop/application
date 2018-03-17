@@ -59,7 +59,7 @@ button.pm-button {
     display: flex;
     align-items: stretch;
     height: 100vh;
-    background-image: url('../static/mountain.png'), url('../static/pm-logo.png');
+    background-image: url('../../app/static/mountain.png'), url('../../app/static/pm-logo.png');
     background-repeat: no-repeat, no-repeat;
     background-position: bottom right, center center;
 

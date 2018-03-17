@@ -1,20 +1,23 @@
 import path from 'path';
 import jetpack from 'fs-jetpack';
 import { app, Menu, ipcMain } from 'electron';
+import electronReload from 'electron-reload';
+import electronDebug from 'electron-debug';
 import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
 import { initiateAutoUpdater } from './auto-updater';
+import appMenu from './menu';
+import tray from './tray';
 
 const settings = require('electron-settings');
-const tray = require('./tray');
 
 require('electron-dl')({saveAs: true});
 
 migrateSettings();
 
 if (process.env.NAME === 'development') {
-  require('electron-reload')(__dirname);
-  require('electron-debug')({enabled: true});
+  electronReload(__dirname);
+  electronDebug({enabled: true});
 }
 
 if (!process.env.NAME) {
@@ -39,7 +42,7 @@ if (isAlreadyRunning) {
 }
 
 function createMainWindow() {
-  if (process.env.NAME === 'test') {
+  if (process.argv.indexOf('test') !== -1) {
     settings.deleteAll();
   }
 
@@ -59,7 +62,7 @@ function createMainWindow() {
     darkTheme: isDarkMode, // GTK+3
     //backgroundColor: isDarkMode ? '#192633' : '#fff',
     webPreferences: {
-      preload: path.join(__dirname, 'browser.js'),
+      preload:  './browser.js',
       nodeIntegration: true,
       plugins: true
     }
@@ -106,7 +109,6 @@ function createMainWindow() {
 }
 
 app.on('ready', () => {
-  const appMenu = require('./menu');
   Menu.setApplicationMenu(appMenu);
   mainWindow = createMainWindow();
   tray.create(mainWindow);

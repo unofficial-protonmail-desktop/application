@@ -105,4 +105,4 @@ const MenuTpl = [
   }
 ];
 
-module.exports = Menu.buildFromTemplate(MenuTpl);
+export default Menu.buildFromTemplate(MenuTpl);

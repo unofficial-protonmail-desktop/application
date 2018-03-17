@@ -1,5 +1,3 @@
-import { initiateAutoUpdater } from './auto-updater';
-
 const { app, dialog }  = require('electron');
 const { autoUpdater } = require('electron-updater');
 const chai = require('chai');
@@ -8,6 +6,8 @@ const sinonChai = require('sinon-chai');
 const expect = chai.expect;
 
 chai.use(sinonChai);
+
+const { initiateAutoUpdater } = require('./auto-updater');
 
 describe('AutoUpdater', () => {
   it('should check for updates on app ready', () => {

@@ -15,12 +15,13 @@ cache:
 
 install:
   - ps: Install-Product node $env:node_version
-  - yarn install
+  - yarn
 
 test_script:
   - node --version
   - yarn --version
-  - yarn run e2e
+  - yarn build:prod
+  - yarn e2e
 
 on_failure:
   - 7z a e2e_test_logs.zip %APPVEYOR_BUILD_FOLDER%\*.log %APPVEYOR_BUILD_FOLDER%\errorShot-*.png

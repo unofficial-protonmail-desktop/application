@@ -4,40 +4,42 @@ import { ICONS } from './icons';
 
 let tray = null;
 
-exports.create = win => {
-  ipcMain.on('set-badge', (event, arg) => setBadge(arg));
+export default {
+  create: win => {
+    ipcMain.on('set-badge', (event, arg) => setBadge(arg));
 
-  if (process.platform === 'darwin' || tray) {
-    return;
-  }
-
-  const toggleWin = () => {
-    if (win.isVisible()) {
-      win.hide();
-    } else {
-      win.show();
+    if (process.platform === 'darwin' || tray) {
+      return;
     }
-  };
 
-  const contextMenu = Menu.buildFromTemplate([
-    {
-      label: 'Toggle',
-      click() {
-        toggleWin();
+    const toggleWin = () => {
+      if (win.isVisible()) {
+        win.hide();
+      } else {
+        win.show();
       }
-    },
-    {
-      type: 'separator'
-    },
-    {
-      role: 'quit'
-    }
-  ]);
+    };
 
-  tray = new Tray(ICONS.TRAY);
-  tray.setToolTip(`${app.getName()}`);
-  tray.setContextMenu(contextMenu);
-  tray.on('click', toggleWin);
+    const contextMenu = Menu.buildFromTemplate([
+      {
+        label: 'Toggle',
+        click() {
+          toggleWin();
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'quit'
+      }
+    ]);
+
+    tray = new Tray(ICONS.TRAY);
+    tray.setToolTip(`${app.getName()}`);
+    tray.setContextMenu(contextMenu);
+    tray.on('click', toggleWin);
+  },
 };
 
 const setBadge = unreadCount => {
