@@ -23,6 +23,8 @@ if (!process.env.NAME) {
   initiateAutoUpdater();
 }
 
+require('electron-context-menu')();
+
 let mainWindow;
 let isQuitting = false;
 
@@ -68,7 +70,7 @@ function createMainWindow() {
   });
 
     /**
-	 * Trick to make the window draggable
+   * Trick to make the window draggable
    * https://github.com/electron/electron/pull/5557
    */
   const titleBarHack =
