@@ -7,7 +7,7 @@ body {
   line-height: 1;
   font-size: 14px/1.714285714285714;
   font-family: Arial, Helvetica, sans-serif;
-  color: #505061;
+  color: #fff;
   font-weight: 400;
   background-color: #505061;
 }
@@ -67,16 +67,6 @@ body {
   // background-image: url('../images/mountain.png'), url('../images/pm-logo.png');
   background-repeat: no-repeat, no-repeat;
   background-position: bottom right, center center;
-
-  .sidenav {
-    background: darken(#505061, 10%);
-    padding: 40px 10px;
-    width: 60px;
-
-    &.hidden {
-      display: none;
-    }
-  }
 
   .etabs-views {
     flex: 4;
