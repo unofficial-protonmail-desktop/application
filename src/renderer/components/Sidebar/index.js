@@ -31,13 +31,9 @@ const Sidebar = ({
   </div>;
 
 Sidebar.propTypes = {
-  accounts: PropTypes.array,
+  accounts: PropTypes.array.isRequired,
   onAddAccount: PropTypes.func.isRequired,
   onSelectAccount: PropTypes.func.isRequired,
-};
-
-Sidebar.defaultProps = {
-  accounts: [],
 };
 
 export default Sidebar;
