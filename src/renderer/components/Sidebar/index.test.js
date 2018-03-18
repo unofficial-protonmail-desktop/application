@@ -7,16 +7,11 @@ import Sidebar from './';
 
 describe('components/Sidebar', () => {
   it('should display an accurate add account button', () => {
-    const onAddAccount = sinon.spy();
     const context = shallow(<Sidebar
       accounts={[]}
-      onAddAccount={onAddAccount}
-      onSelectAccount={onAddAccount}
     />);
 
-    context.find('button').at(0).simulate('click');
-
-    expect(onAddAccount).to.have.been.called;
+    expect(context.find('Link[to="/add-account"]').length).to.equal(1);
   });
 
   it('should list all accounts', () => {
@@ -27,14 +22,13 @@ describe('components/Sidebar', () => {
     ];
     const context = shallow(<Sidebar
       accounts={accounts}
-      onAddAccount={sinon.spy()}
       onSelectAccount={sinon.spy()}
     />);
 
     accounts
       .map(account => account.charAt(0))
       .forEach((a, index) => {
-        expect(context.find('button').at(index + 1).text()).to.equal(a);
+        expect(context.find('button').at(index).text()).to.equal(a);
       });
   });
 
@@ -43,11 +37,10 @@ describe('components/Sidebar', () => {
     const onSelectAccount = sinon.spy();
     const context = shallow(<Sidebar
       accounts={[account]}
-      onAddAccount={sinon.spy()}
       onSelectAccount={onSelectAccount}
     />);
 
-    context.find('button').at(1).simulate('click');
+    context.find('button').at(0).simulate('click');
 
     expect(onSelectAccount).to.have.been.calledWith(account);
   });
@@ -55,7 +48,6 @@ describe('components/Sidebar', () => {
   it('should display a settings button', () => {
     const context = shallow(<Sidebar
       accounts={[]}
-      onAddAccount={sinon.spy()}
       onSelectAccount={sinon.spy()}
     />);
 

@@ -6,18 +6,14 @@ import styles from './style.scss';
 
 const Sidebar = ({
   accounts,
-  onAddAccount,
   onSelectAccount,
 }) =>
   <div className={styles.container}>
-    <button
-      className={styles.tab}
-      onClick={onAddAccount}
-    >
+    <Link to="/add-account" className={styles.tab}>
       <div>
         <span>+</span>
       </div>
-    </button>
+    </Link>
 
     {accounts
       .map((account, index) => (
@@ -40,7 +36,6 @@ const Sidebar = ({
 
 Sidebar.propTypes = {
   accounts: PropTypes.array.isRequired,
-  onAddAccount: PropTypes.func.isRequired,
   onSelectAccount: PropTypes.func.isRequired,
 };
 
