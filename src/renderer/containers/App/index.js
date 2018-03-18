@@ -4,6 +4,7 @@ import { createStore } from 'redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AppState from './reducer';
+import AddAccount from '../AddAccount';
 import Wrapper from '../../components/Wrapper';
 import Sidebar from '../Sidebar';
 import Settings from '../Settings';
@@ -18,6 +19,7 @@ export default function App() {
           <Sidebar />
 
           <Route path="/settings" component={Settings} />
+          <Route path="/add-account" component={AddAccount} />
         </Wrapper>
       </Router>
     </Provider>
