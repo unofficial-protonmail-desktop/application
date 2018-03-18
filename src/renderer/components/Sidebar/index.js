@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 import styles from './style.scss';
 
-const Sidebar = ({ onAddAccount }) =>
+const Sidebar = ({
+  accounts,
+  onAddAccount,
+  onSelectAccount,
+}) =>
   <div className={styles.container}>
     <button
       className={styles.tab}
@@ -13,10 +17,27 @@ const Sidebar = ({ onAddAccount }) =>
         <span>+</span>
       </div>
     </button>
+
+    {accounts
+      .map((account, index) => (
+        <button
+          key={index}
+          className={styles.tab}
+          onClick={onSelectAccount.bind(this, account)}
+        >
+          {account.charAt(0)}
+        </button>
+      ))}
   </div>;
 
 Sidebar.propTypes = {
-  onAddAccount: PropTypes.func,
+  accounts: PropTypes.array,
+  onAddAccount: PropTypes.func.isRequired,
+  onSelectAccount: PropTypes.func.isRequired,
+};
+
+Sidebar.defaultProps = {
+  accounts: [],
 };
 
 export default Sidebar;
