@@ -1,19 +1,15 @@
 import { connect } from 'react-redux';
-import { ADD_ACCOUNT } from './App/types';
 import Sidebar from '../components/Sidebar';
 
 const mapStateToProps = state => {
   return {
-    accounts: Object.values(state.accounts),
+    accounts: Object.values(state.accounts)
+      .map(account => account.username),
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = () => {
   return {
-    onAddAccount: account => dispatch({
-      type: ADD_ACCOUNT,
-      account,
-    }),
     onSelectAccount: () => null,
   };
 };
