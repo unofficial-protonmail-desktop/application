@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { ADD_ACCOUNT, REMOVE_ACCOUNT } from './types';
+import { ADD_ACCOUNT, REMOVE_ACCOUNT, UPDATE_SETTINGS } from './types';
 import App from './reducer';
 
 describe('containers/App/reducer', () => {
@@ -23,5 +23,20 @@ describe('containers/App/reducer', () => {
       username: 'bob',
     };
     expect(App({ accounts: { [account.username]: account } }, { account, type: REMOVE_ACCOUNT }).accounts).to.eql({});
+  });
+
+  it('should provide default settings as initial state', () => {
+    expect(App(undefined, {}).settings).to.eql({
+      darkTheme: false,
+    });
+  });
+
+  it('should store setting upon UPDATE_SETTINGS', () => {
+    const key = 'lightTheme';
+    const value = false;
+
+    expect(App({}, { key, value, type: UPDATE_SETTINGS }).settings).to.eql({
+      [key]: value,
+    });
   });
 });

@@ -1,7 +1,10 @@
-import { ADD_ACCOUNT, REMOVE_ACCOUNT } from './types';
+import { ADD_ACCOUNT, REMOVE_ACCOUNT, UPDATE_SETTINGS } from './types';
 
 const initialState = {
-  accounts: {}
+  accounts: {},
+  settings: {
+    darkTheme: false,
+  },
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +22,14 @@ export default (state = initialState, action) => {
     return {
       ...state,
       accounts,
+    };
+  case UPDATE_SETTINGS:
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        [action.key]: action.value,
+      },
     };
   }
 
