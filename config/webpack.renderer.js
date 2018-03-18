@@ -59,4 +59,8 @@ module.exports = {
       template: path.join(__dirname, '../src/renderer/index.html'),
     }),
   ],
+
+  devServer: {
+    historyApiFallback: true,
+  },
 };
