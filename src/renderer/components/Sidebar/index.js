@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import styles from './style.scss';
 
@@ -28,6 +29,13 @@ const Sidebar = ({
           {account.charAt(0)}
         </button>
       ))}
+
+    <Link
+      to="/settings"
+      className={styles.tab}
+    >
+      Settings
+    </Link>
   </div>;
 
 Sidebar.propTypes = {

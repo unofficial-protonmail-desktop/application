@@ -6,7 +6,7 @@ import sinon from 'sinon';
 import Sidebar from './';
 
 describe('components/Sidebar', () => {
-  it('should display an accureate add account button', () => {
+  it('should display an accurate add account button', () => {
     const onAddAccount = sinon.spy();
     const context = shallow(<Sidebar
       accounts={[]}
@@ -50,5 +50,15 @@ describe('components/Sidebar', () => {
     context.find('button').at(1).simulate('click');
 
     expect(onSelectAccount).to.have.been.calledWith(account);
+  });
+
+  it('should display a settings button', () => {
+    const context = shallow(<Sidebar
+      accounts={[]}
+      onAddAccount={sinon.spy()}
+      onSelectAccount={sinon.spy()}
+    />);
+
+    expect(context.find('Link[to="/settings"]').length).to.equal(1);
   });
 });
