@@ -1,3 +1,4 @@
+/* eslint-disable */
 const ContextMenuHandler = require('electron-context-menu-handler/context-menu-handler');
 const { ipcRenderer, shell } = require('electron');
 const settings = require('electron-settings');
