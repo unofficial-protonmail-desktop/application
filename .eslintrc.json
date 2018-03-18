@@ -1,33 +1,43 @@
 {
     "env": {
-        "browser": true,
-        "es6": true,
-        "node": true,
-        "mocha": true
+      "browser": true,
+      "es6": true,
+      "node": true,
+      "mocha": true
     },
     "extends": "eslint:recommended",
     "plugins": [
       "mocha"
     ],
     "parserOptions": {
-        "sourceType": "module"
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      }
     },
     "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
+      "no-unused-vars": [
+        "error",
+        {
+          "ignoreRestSiblings": true
+        }
+      ],
+      "no-case-declarations": [0],
+      "indent": [
+        "error",
+        2
+      ],
+      "linebreak-style": [
+        "error",
+        "unix"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ]
     }
 }
