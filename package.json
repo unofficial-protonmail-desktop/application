@@ -79,6 +79,12 @@
       "yarn.lock"
     ]
   },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/src/renderer/tests/setup.js",
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "identity-obj-proxy"
+    }
+  },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "precommit": "eslint src --fix",
@@ -94,6 +100,7 @@
     "pack": "electron-builder --dir",
     "start": "cross-env NAME=development webpack-dev-server --config config/webpack.renderer.js --hot | electron -r babel-register src/main/index.js",
     "test": "electron-mocha --require babel-core/register src/main/**.spec.js",
+    "test:renderer": "jest src/renderer",
     "coverage": "yarn test -- -R scripts/istanbul-reporter",
     "e2e": "mocha e2e/*.e2e.js --trace-warnings --full-trace --require babel-core/register"
   },
@@ -124,12 +131,16 @@
     "electron-builder": "19.54.0",
     "electron-mocha": "5.0.0",
     "electron-reload": "^1.1.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint-plugin-mocha": "^4.11.0",
     "eslint-plugin-react": "^7.7.0",
     "fs": "0.0.1-security",
     "html-webpack-plugin": "^3.0.6",
     "husky": "^0.14.3",
+    "identity-obj-proxy": "^3.0.0",
     "istanbul": "^0.4.5",
+    "jest": "^22.4.2",
     "minimist": "^1.2.0",
     "mocha": "^3.5.0",
     "node-sass": "^4.7.2",
