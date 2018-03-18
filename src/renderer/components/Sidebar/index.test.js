@@ -9,6 +9,7 @@ describe('components/Sidebar', () => {
   it('should display an accureate add account button', () => {
     const onAddAccount = sinon.spy();
     const context = shallow(<Sidebar
+      accounts={[]}
       onAddAccount={onAddAccount}
       onSelectAccount={onAddAccount}
     />);
