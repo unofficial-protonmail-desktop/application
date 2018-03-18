@@ -1,256 +1,279 @@
-
 /*!
 Dark theme by MatCore, original template from
 ProtonMail Custom Theme - Black Rock modified by Jack.A
 */
 
-
-/* Login page */
-
-html.dark-mode .pm_panel.alt {
-    background: rgb(57, 57, 69);
-}
-
-/* Frame (topbar and sidebar.) */
-
-html.dark-mode header#pm_header-desktop {
-    background: #21242E;
-}
-html.dark-mode body section.sidebar {
-    background: #21242E;
-}
-html.dark-mode header#pm_header-desktop a.logo {
-    background: #21242E;
-}
-
-/* Search bar */
-
-html.dark-mode form.searchForm fieldset {
-    border-radius: 2px;
-    background-color: #21242E;
-}
-html.dark-mode form.searchForm fieldset button[type=“button”] {
-    color: #b53232;
-    background-color: #21242E;
-    border-radius: 2px 0 0 2px;
-}
-html.dark-mode form.searchForm fieldset #closeAdvSearch, html.dark-mode form.searchForm fieldset button[type=“submit”] {
-    color: #b53232;
-}
-html.dark-mode form.searchForm fieldset button[type=“button”]:hover {
-    background-color: #b53232;
-}
-html.dark-mode form.searchForm.adv fieldset #closeAdvSearch, html.dark-mode form.searchForm.adv fieldset button[type=“submit”] {
-    background-color: #21242E;
-    border-radius: 2px 0 0 2px;
-}
-html.dark-mode .pm_form .input-icon .fa {
-    color: #b53232;
-}
-html.dark-mode form.searchForm fieldset button[type="button"]:hover {
-    background-color: #2E313A;
-}
-html.dark-mode form.searchForm fieldset input.query {
-    background-color: #2E313A;
-}
-
-/* Top Navigation */
-
-html.dark-mode .pm_button.primary {
-    background-color: #b53232;
-    border-color: #b53232;
-}
-html.dark-mode .pm_button.primary:hover {
-    background-color: #b53232;
-    border-color: #b53232;
-    background-color: #b53232;
-}
-html.dark-mode header#pm_header-desktop ul.navigation li a .fa {
-    color: #fff;
-}
-html.dark-mode header#pm_header-desktop ul.navigation li a strong {
-    color: #fff;
-}
-
-/* TN Dropdown Menu */
-
-html.dark-mode header#pm_header-desktop .pm_buttons .pm_button.primary {
-    background-color: #b53232 !important;
-    border-color: #b53232 !important;
-}
-
-/* TN Links Hover */
-
-html.dark-mode header#pm_header-desktop ul.navigation li.active a, html.dark-mode header#pm_header-desktop ul.navigation li:hover a {
-    border-top-color: #b53232 !important;
-}
-html.dark-mode header#pm_header-desktop ul.navigation li.active a strong, html.dark-mode header#pm_header-desktop ul.navigation li:hover a strong {
-    color: #b53232;
-}
-html.dark-mode header#pm_header-desktop ul.navigation li.active a .fa, html.dark-mode header#pm_header-desktop ul.navigation li:hover a .fa {
-    color: #b53232;
-}
-html.dark-mode header#pm_header-desktop ul.navigation li.active a strong, html.dark-mode header#pm_header-desktop ul.navigation li:hover a strong {
-    color: #b53232;
-}
-
-/* Sidebar Navigation */
-
-html.dark-mode body section.sidebar ul.menu li.active a i.fa {
-    color: #b53232;
-}
-html.dark-mode body section.sidebar ul.menu li a {
-    color: #fff;
-}
-html.dark-mode body section.sidebar ul.menu li a:hover {
-    color: #b53232;
-}
-html.dark-mode body section.sidebar div.footer div.link a {
-    color: #b53232;
-}
-html.dark-mode body section.sidebar div.footer .bar em {
-    background-color: #b53232;
-}
-html.dark-mode body section.sidebar div.footer div.storage strong {
-    color: #b53232;
-}
-
-/* Label Navigation */
-
-html.dark-mode body section.sidebar div.labels ul li a:hover {
-    color: #b53232;
-}
-html.dark-mode body section.sidebar div.labels ul li a {
-    color: #fff;
-}
-
-/* Settings Navigation */
-
-html.dark-mode #pm_settings .pm_tabs li.active a.pm_button {
-    background: #fff !important;
-    color: #1c1c1c;
-}
-html.dark-mode #pm_settings .pm_tabs li a.pm_button {
-    border-color: #1c1c1c;
-    background: #1c1c1c;
-    color: #fff;
-}
-html.dark-mode #pm_settings .pm_tabs li a.pm_button:hover {
-    background: #373737;
-}
-html.dark-mode #pm_settings .pm_tabs {
-    /*background: #2f2e2e;*/
-    background: #474747;
-}
-
-/* Dashboard Settings */
-
-html.dark-mode #pm_settings #plans header .link {
-    color: #8cc63f;
-}
-html.dark-mode #pm_settings #plans .plans .plan header {
-    background: #1c1c1c;
-    border: 1px solid #1c1c1c;
-}
-html.dark-mode #pm_settings #plans .plans .plan .price, html.dark-mode #pm_settings #plans .plans .plan h3 {
-    color: #1c1c1c;
-}
-html.dark-mode .pm_button.primary.disabled, html.dark-mode .pm_button.primary[disabled] {
-    background: #b53232;
-}
-html.dark-mode .pm_button.primary:active, html.dark-mode .pm_button.primary:focus {
-    background: #b53232;
-    border-color: #b53232;
-}
 html.protonmail .text-purple {
+  color: #b53232;
+}
+
+html.dark-mode body {
+  p a {
     color: #b53232;
-}
+  }
 
-/* Label Settings */
+  .pm_panel.alt {
+    background: rgb(57, 57, 69);
+  }
 
-html.dark-mode .pm_button.round {
-    border-radius: 2px;
-    border: 1px solid #7b7b7b;
-}
-html.dark-mode .pm_button.round .fa {
-    color: #b53232;
-}
+  .pm_buttons {
+    a {
+      color: #1c1c1c;
+    }
+  }
 
-/* Security Settings */
+  .pm_table {
+    td {
+      color: #1c1c1c;
+    }
 
-html.dark-mode .pm_button {
+    th {
+      a,
+      .fa {
+        color: #1c1c1c;
+      }
+    }
+  }
+
+  .pm_button {
     color: #1c1c1c;
-}
-html.dark-mode .pm_table td {
-    color: #1c1c1c;
-}
 
-/* Contacts */
+    &.primary {
+      background-color: #b53232;
+      border-color: #b53232;
 
-html.dark-mode .pm_table th a {
-    color: #1c1c1c;
-}
-html.dark-mode .pm_table th .fa {
-    color: #1c1c1c;
-}
+      &:active,
+      &:focus,
+      &:hover {
+        border-color: #b53232;
+        background-color: #b53232;
+      }
 
-/* Report Bug */
+      &.disabled,
+      &[disabled] {
+        background-color: #b53232;
+      }
+    }
 
-html.dark-mode .pm_toggle.off .off {
-    background: #b53232;
-}
-p a {
-    color: #b53232;
-}
+    &.round {
+      border-radius: 2px;
+      border: 1px solid #7b7b7b;
 
-/* Links */
+      .fa {
+        color: #b53232;
+      }
+    }
 
-html.dark-mode .pm_button.link {
-    color: #b53232;
-}
+    &.link {
+      color: #fff;
+    }
+  }
 
-/* Inbox */
+  .pm_form .input-icon .fa {
+    color: #b53231;
+  }
 
-html.dark-mode .pm_buttons a {
-    color: #1c1c1c;
-}
-html.dark-mode body #conversation-list-rows .conversation.read {
+  .pm_toggle {
+    &.off {
+      .off {
+        background: #b53232;
+      }
+    }
+  }
+
+  section.sidebar {
+    background: #21242e;
+
+    ul.menu {
+      li {
+        a {
+          color: #fff;
+
+          &:hover {
+            color: #b53232;
+          }
+        }
+
+        &.active {
+          a {
+            i.fa {
+              color: #b53232;
+            }
+          }
+        }
+      }
+    }
+
+    div.footer {
+      div.link a {
+        color: #b53232;
+      }
+
+      .bar em {
+        background-color: #b53232;
+      }
+
+      div.storage strong {
+        color: #b53232;
+      }
+
+      div.labels {
+        ul li {
+          a {
+            color: #fff;
+
+            &:hover {
+              color: #b53232;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #pm_composer .composer {
+    header {
+      background: #2c2b2b;
+
+      .pm_button {
+        color: #b53232;
+      }
+    }
+
+    footer {
+      .pm_button.primary {
+        background: #b53232;
+      }
+    }
+  }
+
+  #pm_settings {
+    .pm_tabs {
+      background: #474747;
+
+      li {
+        a.pm_button {
+          border-color: #1c1c1c;
+          background: #1c1c1c;
+          color: #fff;
+
+          :hover {
+            background: #373737;
+          }
+        }
+
+        &.active {
+          a.pm_button {
+            background: #fff !important;
+            color: #1c1c1c;
+          }
+        }
+      }
+    }
+
+    #plans {
+      header .link {
+        color: #8cc63f;
+      }
+
+      .plans .plan {
+        header {
+          background: #1c1c1c;
+          border: 1px solid #1c1c1c;
+        }
+
+        h3,
+        .price {
+          color: #1c1c1c;
+        }
+      }
+    }
+  }
+
+  header#pm_header-desktop {
+    background: #21242e;
+
+    a.logo {
+      background: #21242e;
+    }
+
+    ul.navigation li {
+      a {
+        .fa,
+        strong {
+          color: #fff;
+        }
+      }
+
+      &:hover,
+      &.active {
+        a {
+          border-top-color: #b53232 !important;
+
+          .fa,
+          strong {
+            color: #b53232;
+          }
+        }
+      }
+    }
+
+    .pm_buttons .pm_button.primary {
+      background-color: #b53232 !important;
+      border-color: #b53232 !important;
+    }
+  }
+
+  form.searchForm {
+    fieldset {
+      border-radius: 2px;
+      background-color: #21242e;
+
+      button[type=“button”] {
+        color: #b53232;
+        background-color: #21242e;
+        border-radius: 2px 0 0 2px;
+
+        &:hover {
+          background-color: #2e313a;
+        }
+      }
+
+      #closeAdvSearch,
+      button[type=“submit”] {
+        color: #b53232;
+      }
+
+      input.query {
+        background-color: #2e313a;
+      }
+    }
+
+    &.adv {
+      fieldset {
+        #closeAdvSearch,
+        button[type=“submit”] {
+          background-color: #21242e;
+          border-radius: 2px 0 0 2px;
+        }
+      }
+    }
+  }
+
+  #conversation-list-rows .conversation.read {
     color: #1c1c1c !important;
-}
+  }
 
-/* Reading e-mail. */
-
-html.dark-mode #conversation-view .message .toggleDetails {
+  #conversation-view .message .toggleDetails {
     color: #b53232;
-}
+  }
 
-/* Composing e-mail */
-
-html.dark-mode #pm_composer .composer header {
-    background: #2c2b2b;
-}
-html.dark-mode #pm_composer .composer header .pm_button {
-    color: #b53232;
-}
-html.dark-mode #pm_composer .composer footer .pm_button.primary {
-    background: #b53232;
-}
-
-/* Notifications */
-
-html.dark-mode body .cg-notify-message.notification-success {
+  .cg-notify-message.notification-success {
     background-color: #b53232;
     border-color: #b53232;
-}
+  }
 
-/* Login page */
-
-html.dark-mode #pm_login .pm_button.link {
-    color: white;
-}
-
-/* Selected element line */
-
-html.dark-mode .conversation .selected-bar {
-    background: #B53232;
+  .conversation .selected-bar {
+    background: #b53232;
+  }
 }

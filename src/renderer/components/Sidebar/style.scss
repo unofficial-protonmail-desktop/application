@@ -26,7 +26,9 @@
       background: red;
       border-radius: 50%;
       color: white;
-      font: normal 12px Arial;
+      font-weight: normal;
+      font-size: 12px;
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1em;
 
       &.hidden {
