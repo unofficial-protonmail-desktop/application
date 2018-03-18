@@ -4,6 +4,7 @@ import { createStore } from 'redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AppState from './reducer';
+import Wrapper from '../../components/Wrapper';
 import Sidebar from '../Sidebar';
 import Settings from '../Settings';
 
@@ -13,11 +14,11 @@ export default function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div>
+        <Wrapper>
           <Sidebar />
 
           <Route path="/settings" component={Settings} />
-        </div>
+        </Wrapper>
       </Router>
     </Provider>
   );

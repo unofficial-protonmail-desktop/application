@@ -1,9 +1,25 @@
-@import "../../styles/base.scss";
-
 .container {
+  background: darken(#505061, 10%);
+  padding: 40px 10px;
+
   .tab {
-    @extend %pm-button;
-    @extend %pm-button.lg;
+    text-decoration: none;
+    padding: 0 10px;
+    line-height: 40px;
+    box-sizing: border-box;
+    display: inline-block;
+    background-color: transparent;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+    outline: none;
+    height: 40px;
+    min-height: 40px;
+    font-size: 25px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15px;
+    color: #fff;
+    border-color: transparent;
 
     &.active span.etabs-tab-title {
       color: #fff;
