@@ -50,6 +50,7 @@ install:
 script:
   - node --version
   - yarn --version
+  - yarn commitlint-travis
   - yarn lint
   - yarn test
   - yarn build:prod
