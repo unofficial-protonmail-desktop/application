@@ -48,7 +48,7 @@ export class WebviewHandler {
     }
 
     if (this.addedWebviews.indexOf(name) === -1) {
-      this._addWebview(name);
+      this.addWebview(name);
     }
 
     this.container.querySelectorAll('webview')
@@ -62,7 +62,11 @@ export class WebviewHandler {
     return this.container.querySelector(`[data-name='${name}']`);
   }
 
-  _addWebview(name) {
+  addWebview(name) {
+    if (!this.container) {
+      return this._queueCommand(this.displayView.bind(this, name));
+    }
+
     const webview = document.createElement('webview');
     webview.setAttribute('src', 'https://mail.protonmail.com/');
     webview.setAttribute('style', webviewStyle);
@@ -75,6 +79,8 @@ export class WebviewHandler {
 
     this.container.appendChild(webview);
     this.addedWebviews = [...this.addedWebviews, name];
+
+    return webview;
   }
 
   _queueCommand(cmd) {

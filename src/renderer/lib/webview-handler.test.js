@@ -125,26 +125,6 @@ describe('lib/WebviewHandler', () => {
       expect(webviewHandler._queueCommand).to.have.been.called;
     });
 
-    it('should add webview if it doesnt exist', () => {
-      const name = 'ragnar';
-      sinon.spy(webviewHandler, '_addWebview');
-
-      webviewHandler.displayView(name);
-
-      expect(webviewHandler._addWebview).to.have.been.calledWith(name);
-    });
-
-    it('should not add webview if it already exists', () => {
-      const name = 'jesper';
-      sinon.spy(webviewHandler, '_addWebview');
-      sinon.stub(webviewHandler, '_getWebview').returns({ style: {} });
-      webviewHandler.addedWebviews = [name];
-
-      webviewHandler.displayView(name);
-
-      expect(webviewHandler._addWebview).to.not.have.been.called;
-    });
-
     it('should set accurate visibility value to all webviews', () => {
       const name = 'sigrid';
       const webviewToBeDisplayed = { style: {} };
@@ -181,12 +161,21 @@ describe('lib/WebviewHandler', () => {
     });
   });
 
-  describe('_addWebview', () => {
+  describe('addWebview', () => {
     let webviewHandler;
 
     beforeEach(() => {
       webviewHandler = WebviewHandler.create();
       webviewHandler.container = { appendChild: sinon.spy() };
+    });
+
+    it('should queue command and return if container doesnt exist', () => {
+      sinon.spy(webviewHandler, '_queueCommand');
+      webviewHandler.container = null;
+
+      webviewHandler.addWebview('name');
+
+      expect(webviewHandler._queueCommand).to.have.been.called;
     });
 
     it('should create webview element and append to container', () => {
@@ -197,7 +186,9 @@ describe('lib/WebviewHandler', () => {
       const name = 'beatrice';
       sinon.stub(document, 'createElement').returns(mockElem);
 
-      webviewHandler._addWebview(name);
+      const webview = webviewHandler.addWebview(name);
+
+      expect(webview).to.equal(mockElem);
 
       expect(document.createElement).to.have.been.calledWith('webview');
       expect(mockElem.setAttribute).to.have.been.calledWith('src', 'https://mail.protonmail.com/');
