@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import webviewHandler from '../../lib/webview-handler';
@@ -11,7 +11,9 @@ import Sidebar from '../Sidebar';
 import Settings from '../Settings';
 import MailBox from '../MailBox';
 
-const store = createStore(AppState);
+import WebviewsMw from '../../middlewares/Webviews';
+
+const store = createStore(AppState, applyMiddleware(WebviewsMw));
 
 export default class App extends React.Component {
   setWebviewContainerElem(elem) {
