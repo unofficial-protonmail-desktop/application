@@ -132,6 +132,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.0",
+    "chai-enzyme": "^1.0.0-beta.0",
     "commitizen": "^2.9.6",
     "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.1.4",
