@@ -18,7 +18,7 @@ const Sidebar = ({
       .map((account, index) => (
         <Link
           key={index}
-          className={styles.tab}
+          className={styles.AccountBadge}
           to={`/mailbox/${account}`}
         >
           {account.charAt(0)}
@@ -27,9 +27,9 @@ const Sidebar = ({
 
     <Link
       to="/settings"
-      className={styles.tab}
+      className={styles.SettingsTab}
     >
-      Settings
+      settings
     </Link>
   </div>;
 
