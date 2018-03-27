@@ -14,6 +14,7 @@
 .container {
   background: darken(#505061, 10%);
   padding: 40px 10px;
+  user-select: none;
 
   .tab {
     @extend %tab-shared;
@@ -66,8 +67,6 @@
 
 .AccountBadge {
   @extend %tab-shared;
-
-  background: #9397cd;
   border-radius: 10%;
   padding: 12px;
   text-transform: uppercase;
@@ -76,8 +75,17 @@
   margin: 12px 0 12px 0;
 
   &:hover {
-    box-shadow: 0 0 0 3px #9397cd;
+    box-shadow: 0 0 0 2px #9397cd;
   }
+
+  &:nth-child(even) {
+    background: #9397cd;
+  }
+
+  &:nth-child(odd) {
+    background: #5e63a5;
+  }
+
 }
 
 .SettingsTab {
