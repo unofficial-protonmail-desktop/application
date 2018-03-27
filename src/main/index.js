@@ -6,6 +6,7 @@ import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
 import { initiateAutoUpdater } from './auto-updater';
 import tray from './tray';
+import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
 const settings = require('electron-settings');
 
@@ -109,6 +110,17 @@ function createMainWindow() {
 }
 
 app.on('ready', () => {
+  if (process.env.NAME === 'development') {
+    /* eslint-disable no-console */
+    [REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]
+      .forEach(extension =>
+        installExtension(extension)
+          .then((name) => console.log(`Added Extension:  ${name}`))
+          .catch((err) => console.log('An error occurred: ', err))
+      );
+    /* eslint-enable no-console */
+  }
+
   Menu.setApplicationMenu(require('./menu'));
   mainWindow = createMainWindow();
   tray.create(mainWindow);
