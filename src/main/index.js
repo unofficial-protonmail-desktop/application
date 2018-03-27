@@ -5,7 +5,6 @@ import electronDebug from 'electron-debug';
 import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
 import { initiateAutoUpdater } from './auto-updater';
-import appMenu from './menu';
 import tray from './tray';
 
 const settings = require('electron-settings');
@@ -110,7 +109,7 @@ function createMainWindow() {
 }
 
 app.on('ready', () => {
-  Menu.setApplicationMenu(appMenu);
+  Menu.setApplicationMenu(require('./menu'));
   mainWindow = createMainWindow();
   tray.create(mainWindow);
 
