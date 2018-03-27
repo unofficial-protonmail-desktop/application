@@ -6,7 +6,7 @@ import {
 import { monitorWebview } from './actions';
 
 const createdWebviews = {};
-const WebviewsMiddleware = dispatch => next => action => {
+const WebviewsMiddleware = ({ dispatch }) => next => action => {
 
   switch (action.type) {
   case DISPLAY_WEBVIEW:
