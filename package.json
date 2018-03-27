@@ -132,6 +132,6 @@
     "sinon": "^4.0.1",
     "sinon-chai": "^2.14.0",
     "source-map-support": "^0.4.15",
-    "spectron": "^3.7.2"
+    "spectron": "^3.8.0"
   }
 }
