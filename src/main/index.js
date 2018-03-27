@@ -1,6 +1,5 @@
 import path from 'path';
 import { app, Menu, ipcMain } from 'electron';
-import electronReload from 'electron-reload';
 import electronDebug from 'electron-debug';
 import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
@@ -15,7 +14,6 @@ require('electron-dl')({saveAs: true});
 migrateSettings();
 
 if (process.env.NAME === 'development') {
-  electronReload(__dirname);
   electronDebug({enabled: true});
 }
 
