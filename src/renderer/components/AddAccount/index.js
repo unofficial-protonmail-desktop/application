@@ -42,6 +42,7 @@ export default class AddAccount extends React.Component {
               className={styles.form__field}
               value={this.state.username}
               placeholder="Enter e-mail or username"
+              autoFocus
               onChange={this.handleUsernameChange.bind(this)}
             />
 
