@@ -1,9 +1,9 @@
 import path from 'path';
 import jetpack from 'fs-jetpack';
 import { app, Menu, ipcMain } from 'electron';
+import { autoUpdater } from 'electron-updater';
 import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
-import { initiateAutoUpdater } from './auto-updater';
 
 const settings = require('electron-settings');
 const tray = require('./tray');
@@ -18,7 +18,7 @@ if (process.env.NAME === 'development') {
 }
 
 if (!process.env.NAME) {
-  initiateAutoUpdater();
+  autoUpdater.checkForUpdatesAndNotify();
 }
 
 let mainWindow;
