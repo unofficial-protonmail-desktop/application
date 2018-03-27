@@ -119,6 +119,7 @@
     "fs-jetpack": "^1.2.0",
     "minimist": "^1.2.0",
     "react-router-dom": "^4.2.2",
+    "redux-thunk": "^2.2.0",
     "sweetalert2": "7.6.2"
   },
   "devDependencies": {

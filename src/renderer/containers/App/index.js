@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import thunk from 'redux-thunk';
 
 import webviewHandler from '../../lib/webview-handler';
 import AppState from './reducer';
@@ -16,7 +17,7 @@ import WebviewsMw from '../../middlewares/Webviews';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   AppState, 
-  composeEnhancers(applyMiddleware(WebviewsMw)),
+  composeEnhancers(applyMiddleware(WebviewsMw, thunk)),
 );
 
 export default class App extends React.Component {
