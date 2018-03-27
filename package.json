@@ -142,7 +142,6 @@
     "electron-builder": "19.54.0",
     "electron-devtools-installer": "^2.2.3",
     "electron-mocha": "5.0.0",
-    "electron-reload": "^1.1.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint-plugin-mocha": "^4.11.0",
