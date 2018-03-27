@@ -45,10 +45,10 @@ export default class AddAccount extends React.Component {
               onChange={this.handleUsernameChange.bind(this)}
             />
 
-          <label
-           className={styles.form__label}
-           htmlFor="username"
-           >Enter e-mail or username</label>
+            <label
+              className={styles.form__label}
+              htmlFor="username"
+            >Enter e-mail or username</label>
 
           </div>
 
