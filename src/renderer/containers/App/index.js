@@ -1,10 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import thunk from 'redux-thunk';
 
 import webviewHandler from '../../lib/webview-handler';
+import history from '../../history';
 import AppState from './reducer';
 import AddAccount from '../AddAccount';
 import Wrapper from '../../components/Wrapper';
@@ -29,7 +30,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <Wrapper>
             <Sidebar />
 
