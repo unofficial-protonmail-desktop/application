@@ -1,16 +1,15 @@
 %tab-shared {
-    text-decoration: none;
-    padding: 0 10px;
-    box-sizing: border-box;
-    background-color: transparent;
-    transition: all 0.3s ease-out;
-    cursor: pointer;
-    outline: none;
-    text-align: center;
-    color: #fff;
-    border-color: transparent;
+  text-decoration: none;
+  padding: 0 10px;
+  box-sizing: border-box;
+  background-color: transparent;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  color: #fff;
+  border-color: transparent;
 }
-
 
 .container {
   background: darken(#505061, 10%);
@@ -18,6 +17,7 @@
 
   .tab {
     @extend %tab-shared;
+
     width: 100%;
     display: inline-block;
     margin-bottom: 15px;
@@ -66,23 +66,25 @@
 
 .AccountBadge {
   @extend %tab-shared;
-    background: #9397cd;
-    border-radius: 10%;
-    padding: 12px;
-    text-transform: uppercase;
-    text-align: center;
-    display: block;
-    margin: 12px 0 12px 0;
-    
-    &:hover {
-      box-shadow: 0 0 0 3px #9397cd;
-    }  
+
+  background: #9397cd;
+  border-radius: 10%;
+  padding: 12px;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  margin: 12px 0 12px 0;
+
+  &:hover {
+    box-shadow: 0 0 0 3px #9397cd;
+  }
 }
 
 .SettingsTab {
-    @extend %tab-shared;
-    font-size: 12px;
-    position: absolute;
-    bottom: 10px;
-    left: 0;
+  @extend %tab-shared;
+
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
 }
