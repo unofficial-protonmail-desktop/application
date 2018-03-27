@@ -21,7 +21,7 @@ describe('middlewares/Webviews', () => {
   it('should call next action', () => {
     const action = { ac: 'tion' };
 
-    Webviews()(next)(action);
+    Webviews({ dispatch })(next)(action);
 
     expect(next).to.have.been.calledWith(action);
   });
@@ -39,7 +39,7 @@ describe('middlewares/Webviews', () => {
     sandbox.stub(WebviewHandler, 'show');
     sandbox.stub(WebviewHandler, 'displayView');
 
-    Webviews(dispatch)(next)(action);
+    Webviews({ dispatch })(next)(action);
 
     expect(actions.monitorWebview).to.have.been.calledWith(mockWebview, name);
     expect(dispatch).to.have.been.calledWith(mockAction);
@@ -47,7 +47,7 @@ describe('middlewares/Webviews', () => {
     actions.monitorWebview.resetHistory();
     dispatch.resetHistory();
 
-    Webviews(dispatch)(next)(action);
+    Webviews({ dispatch })(next)(action);
 
     expect(actions.monitorWebview).to.not.have.been.called;
     expect(dispatch).to.not.have.been.called;
@@ -58,7 +58,7 @@ describe('middlewares/Webviews', () => {
     sandbox.stub(WebviewHandler, 'show');
     sandbox.stub(WebviewHandler, 'displayView');
 
-    Webviews(dispatch)(next)({
+    Webviews({ dispatch })(next)({
       type: DISPLAY_WEBVIEW,
       name,
     });
@@ -69,7 +69,7 @@ describe('middlewares/Webviews', () => {
 
   it('should call WebviewHandler upon HIDE_WEBVIEWS', () => {
     sandbox.stub(WebviewHandler, 'hide');
-    Webviews()(next)({
+    Webviews({ dispatch })(next)({
       type: HIDE_WEBVIEWS,
     });
 
