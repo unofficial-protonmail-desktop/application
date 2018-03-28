@@ -127,7 +127,7 @@ describe('lib/WebviewHandler', () => {
 
     it('should set accurate visibility value to all webviews', () => {
       const name = 'sigrid';
-      const webviewToBeDisplayed = { style: {} };
+      const webviewToBeDisplayed = { style: {}, focus: sinon.spy() };
       const webviewsToBeHidden = [{ style: {} }, { style: {} }];
       const webviews = webviewsToBeHidden.concat(webviewToBeDisplayed);
       sinon.stub(webviewHandler, '_getWebview').returns(webviewToBeDisplayed);
@@ -139,6 +139,15 @@ describe('lib/WebviewHandler', () => {
       expect(webviewToBeDisplayed.style.visibility).to.equal('visible');
       webviewsToBeHidden
         .forEach(webview => expect(webview.style.visibility).to.equal('hidden'));
+    });
+
+    it('should focus webview', () => {
+      const mockWebview = { focus: sinon.spy(), style: {} };
+      sinon.stub(webviewHandler, '_getWebview').returns(mockWebview);
+
+      webviewHandler.displayView(name);
+
+      expect(mockWebview.focus).to.have.been.calledWith();
     });
   });
 
