@@ -5,6 +5,7 @@ import WebviewHandler from '../../lib/webview-handler';
 import {
   DISPLAY_WEBVIEW,
   HIDE_WEBVIEWS,
+  RELOAD_WEBVIEW,
 } from './types';
 import * as actions from './actions';
 import Webviews from './';
@@ -74,5 +75,16 @@ describe('middlewares/Webviews', () => {
     });
 
     expect(WebviewHandler.hide).to.have.been.calledWith();
+  });
+
+  it('should call WebviewHandler upon RELOAD_WEBVIEW', () => {
+    const name = 'amanda';
+    sandbox.stub(WebviewHandler, 'reload');
+    Webviews({ dispatch })(next)({
+      type: RELOAD_WEBVIEW,
+      name,
+    });
+
+    expect(WebviewHandler.reload).to.have.been.calledWith(name);
   });
 });

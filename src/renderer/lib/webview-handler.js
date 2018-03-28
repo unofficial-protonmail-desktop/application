@@ -72,11 +72,6 @@ export class WebviewHandler {
     webview.setAttribute('style', webviewStyle);
     webview.setAttribute('data-name', name);
 
-    /**
-     * TODO: Add event listeners to handle errors.
-     * Tentatively this is done with a redux middleware.
-     */
-
     this.container.appendChild(webview);
     this.addedWebviews = [...this.addedWebviews, name];
 
