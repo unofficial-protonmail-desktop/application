@@ -56,6 +56,7 @@ export class WebviewHandler {
         elem.style.visibility = 'hidden';
       });
     this._getWebview(name).style.visibility = 'visible';
+    this._getWebview(name).focus();
   }
 
   _getWebview(name) {
