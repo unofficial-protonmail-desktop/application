@@ -18,7 +18,7 @@ describe('components/MailBox', () => {
     };
   });
 
-  it('should call prop displayWebview upon mount', () => {
+  it('should call prop displayWebview upon mount if error is falsy', () => {
     const username = 'jan';
     const displayWebview = sinon.spy();
     shallow(<MailBox
@@ -28,6 +28,17 @@ describe('components/MailBox', () => {
     />);
 
     expect(displayWebview).to.have.been.calledWith(username);
+  });
+
+  it('should not call prop displayWebview upon mount if error is truthy', () => {
+    const displayWebview = sinon.spy();
+    shallow(<MailBox
+      {...defaultProps}
+      displayWebview={displayWebview}
+      error={{ err: 'or' }}
+    />);
+
+    expect(displayWebview).to.not.have.been.called;
   });
 
   it('should display view with updated username', () => {
@@ -63,7 +74,7 @@ describe('components/MailBox', () => {
   });
 
   it('should display a message when there\'s an error', () => {
-    const error = 'The page could not be loaded';
+    const error = { errorDescription: 'The page could not be loaded' };
     const onReload = sinon.spy();
     const username = 'astrid';
     const context = shallow(<MailBox
@@ -73,11 +84,26 @@ describe('components/MailBox', () => {
       username={username}
     />);
 
-    expect(context.text()).to.contain(error);
+    expect(context.text()).to.contain(error.errorDescription);
     expect(context.find('button').text()).to.contain('Reload');
 
     context.find('button').simulate('click');
     expect(onReload).to.have.been.calledWith(username);
+  });
+
+  it('should hide the webviews when an error has arrived', () => {
+    const displayWebview = sinon.spy();
+    const hideWebviews = sinon.spy();
+    const context = shallow(<MailBox
+      {...defaultProps}
+      {...{ displayWebview, hideWebviews }}
+    />);
+    displayWebview.resetHistory();
+
+    context.setProps({ error: { errorDescription: 'bad' } });
+
+    expect(displayWebview).to.not.have.been.called;
+    expect(hideWebviews).to.have.been.calledWith();
   });
 
   it('should display webview when the error has disappeared', () => {
@@ -86,7 +112,7 @@ describe('components/MailBox', () => {
     const context = shallow(<MailBox
       {...defaultProps}
       displayWebview={displayWebview}
-      error="Bad stuff"
+      error={{ message: '' }}
       username={username}
     />);
 
