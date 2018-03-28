@@ -2,6 +2,7 @@ import WebviewHandler from '../../lib/webview-handler';
 import {
   DISPLAY_WEBVIEW,
   HIDE_WEBVIEWS,
+  RELOAD_WEBVIEW,
 } from './types';
 import { monitorWebview } from './actions';
 
@@ -21,6 +22,9 @@ const WebviewsMiddleware = ({ dispatch }) => next => action => {
     break;
   case HIDE_WEBVIEWS:
     WebviewHandler.hide();
+    break;
+  case RELOAD_WEBVIEW:
+    WebviewHandler.reload(action.name);
     break;
   }
 

@@ -7,8 +7,8 @@ import {
 } from '../middlewares/Webviews/types';
 import MailBox from '../components/MailBox';
 
-const mapStateToProps = state => ({
-  error: state.webviewError,
+const mapStateToProps = (state, ownProps) => ({
+  error: (state.webviewStatuses[ownProps.username] || {}).error,
 });
 
 const mapDispatchToProps = dispatch => ({
