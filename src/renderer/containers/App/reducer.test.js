@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 
+import { RELOAD_WEBVIEW, WEBVIEW_ERROR } from '../../middlewares/Webviews/types';
 import { ADD_ACCOUNT, REMOVE_ACCOUNT, UPDATE_SETTINGS } from './types';
 import App from './reducer';
 
@@ -18,7 +19,7 @@ describe('containers/App/reducer', () => {
     });
   });
 
-  it('should remve account frmo store upon REMOVE_ACCOUNT', () => {
+  it('should remve account from store upon REMOVE_ACCOUNT', () => {
     const account = {
       username: 'bob',
     };
@@ -37,6 +38,29 @@ describe('containers/App/reducer', () => {
 
     expect(App({}, { key, value, type: UPDATE_SETTINGS }).settings).to.eql({
       [key]: value,
+    });
+  });
+
+  it('should assign an empty object to webviewStatuses as initial value', () => {
+    expect(App(undefined, {}).webviewStatuses).to.eql({});
+  });
+
+  it('should clear webviewStatuses for username upon RELOAD_WEBVIEW', () => {
+    const name = 'jesper';
+    const initialState = { 
+      webviewStatuses: { 
+        [name]: { error: '' },
+      },
+    };
+    expect(App(initialState, { type: RELOAD_WEBVIEW, name }).webviewStatuses[name]).to.eql({});
+  });
+
+  it('should store webview error in webviewStatuses upon WEBVIEW_ERROR', () => {
+    const name = 'albin';
+    const error = 'this is the error';
+
+    expect(App(undefined, { type: WEBVIEW_ERROR, name, error }).webviewStatuses[name]).to.eql({
+      error,
     });
   });
 });

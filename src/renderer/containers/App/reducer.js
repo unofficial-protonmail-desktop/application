@@ -1,3 +1,4 @@
+import { RELOAD_WEBVIEW, WEBVIEW_ERROR } from '../../middlewares/Webviews/types';
 import { ADD_ACCOUNT, REMOVE_ACCOUNT, UPDATE_SETTINGS } from './types';
 
 const initialState = {
@@ -5,6 +6,7 @@ const initialState = {
   settings: {
     darkTheme: false,
   },
+  webviewStatuses: {},
 };
 
 export default (state = initialState, action) => {
@@ -29,6 +31,24 @@ export default (state = initialState, action) => {
       settings: {
         ...state.settings,
         [action.key]: action.value,
+      },
+    };
+  case RELOAD_WEBVIEW:
+    return {
+      ...state,
+      webviewStatuses: {
+        ...state.webviewStatuses,
+        [action.name]: {},
+      },
+    };
+  case WEBVIEW_ERROR:
+    return {
+      ...state,
+      webviewStatuses: {
+        ...state.webviewStatuses,
+        [action.name]: {
+          error: action.error,
+        },
       },
     };
   }

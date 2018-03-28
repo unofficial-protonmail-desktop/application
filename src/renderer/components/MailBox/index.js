@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 export default class MailBox extends React.Component {
   static propTypes = {
     displayWebview: PropTypes.func.isRequired,
-    error: PropTypes.string,
+    error: PropTypes.object,
     hideWebviews: PropTypes.func.isRequired,
     onReload: PropTypes.func.isRequired,
     username: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
-    error: '',
+    error: null,
   };
 
   constructor(props) {
@@ -21,16 +21,22 @@ export default class MailBox extends React.Component {
   }
 
   componentDidMount() {
-    this.props.displayWebview(this.props.username);
+    if (!this.props.error) {
+      this.props.displayWebview(this.props.username);
+    }
   }
 
   componentWillReceiveProps({ error, username }) {
-    if (this.props.username !== username) {
-      this.props.displayWebview(username);
-    }
+    if (error) {
+      this.props.hideWebviews();
+    } else {
+      if (this.props.username !== username) {
+        this.props.displayWebview(username);
+      }
 
-    if (!error && error !== this.props.error) {
-      this.props.displayWebview(username);
+      if (error !== this.props.error) {
+        this.props.displayWebview(username);
+      }
     }
   }
 
@@ -48,7 +54,7 @@ export default class MailBox extends React.Component {
         <div>
           <h1>Are you connected?</h1>
           <p>Login page couldnt be loaded due to the following error:</p>
-          <p>{this.props.error}</p>
+          <p>{this.props.error.errorDescription}</p>
           <p>Please check your internet connection and try to reload the page.</p>
           <button onClick={this.handleReload}>Reload</button>
         </div>
