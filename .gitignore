@@ -5,6 +5,7 @@ Thumbs.db
 *.swp
 .idea
 .env
+package-lock.json
 
 # ignore everything in 'app' folder what had been generated from 'src' folder
 /app
