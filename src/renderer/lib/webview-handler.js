@@ -1,3 +1,5 @@
+import cssOverrides from 'css-to-string-loader!css-loader!./webview-handler-overrides.css';
+
 const webviewStyle = 'position: absolute; top: 0; right: 0; bottom: 0; left: 0; visibility: hidden;';
 const containerStyleVisible = 'position: relative; height: 100%;';
 const containerStyleHidden = 'position: absolute; height: 0;';
@@ -72,6 +74,12 @@ export class WebviewHandler {
     webview.setAttribute('src', 'https://mail.protonmail.com/');
     webview.setAttribute('style', webviewStyle);
     webview.setAttribute('data-name', name);
+
+    const insertCSS = () => {
+      webview.insertCSS(cssOverrides, 'utf8');
+      webview.removeEventListener('did-finish-load', insertCSS);
+    };
+    webview.addEventListener('did-finish-load', insertCSS);
 
     this.container.appendChild(webview);
     this.addedWebviews = [...this.addedWebviews, name];
