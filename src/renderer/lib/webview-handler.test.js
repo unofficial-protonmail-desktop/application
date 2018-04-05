@@ -171,6 +171,7 @@ describe('lib/WebviewHandler', () => {
   });
 
   describe('addWebview', () => {
+    const sandbox = sinon.createSandbox();
     let webviewHandler;
 
     beforeEach(() => {
@@ -178,8 +179,12 @@ describe('lib/WebviewHandler', () => {
       webviewHandler.container = { appendChild: sinon.spy() };
     });
 
+    afterEach(() => {
+      sandbox.restore();
+    });
+
     it('should queue command and return if container doesnt exist', () => {
-      sinon.spy(webviewHandler, '_queueCommand');
+      sandbox.spy(webviewHandler, '_queueCommand');
       webviewHandler.container = null;
 
       webviewHandler.addWebview('name');
@@ -193,7 +198,7 @@ describe('lib/WebviewHandler', () => {
         addEventListener: sinon.spy(),
       };
       const name = 'beatrice';
-      sinon.stub(document, 'createElement').returns(mockElem);
+      sandbox.stub(document, 'createElement').returns(mockElem);
 
       const webview = webviewHandler.addWebview(name);
 
@@ -206,6 +211,29 @@ describe('lib/WebviewHandler', () => {
 
       expect(webviewHandler.container.appendChild).to.have.been.calledWith(mockElem);
       expect(webviewHandler.addedWebviews).to.eql([name]);
+    });
+
+    it('should inject custom CSS when the webview has finished to load', () => {
+      const mockElem = {
+        addEventListener: sinon.spy(),
+        insertCSS: sinon.spy(),
+        removeEventListener: sinon.spy(),
+        setAttribute: sinon.spy(),
+      };
+      sandbox.stub(document, 'createElement').returns(mockElem);
+
+      const webview = webviewHandler.addWebview('lars');
+
+      expect(webview.addEventListener).to.have.been.calledWith('did-finish-load', sinon.match.func);
+
+      const insertCSSFn = webview.addEventListener.getCalls()
+        .filter(call => call.args[0] === 'did-finish-load')
+        .map(call => call.args[1])
+        .pop();
+      insertCSSFn();
+
+      expect(webview.insertCSS).to.have.been.calledWith(sinon.match.any, 'utf8');
+      expect(webview.removeEventListener).to.have.been.calledWith('did-finish-load', insertCSSFn);
     });
   });
 });
