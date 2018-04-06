@@ -1,4 +1,5 @@
 import cssOverrides from 'css-to-string-loader!css-loader!./webview-handler-overrides.css';
+import prefillUsername from './webview-handler-prefill-username';
 
 const webviewStyle = 'position: absolute; top: 0; right: 0; bottom: 0; left: 0; visibility: hidden;';
 const containerStyleVisible = 'position: relative; height: 100%;';
@@ -75,11 +76,12 @@ export class WebviewHandler {
     webview.setAttribute('style', webviewStyle);
     webview.setAttribute('data-name', name);
 
-    const insertCSS = () => {
+    const domReadyCb = () => {
       webview.insertCSS(cssOverrides, 'utf8');
-      webview.removeEventListener('did-finish-load', insertCSS);
+      webview.executeJavaScript('('.concat(prefillUsername, '(\'', name, '\'))'));
+      webview.removeEventListener('dom-ready', domReadyCb);
     };
-    webview.addEventListener('did-finish-load', insertCSS);
+    webview.addEventListener('dom-ready', domReadyCb);
 
     this.container.appendChild(webview);
     this.addedWebviews = [...this.addedWebviews, name];
