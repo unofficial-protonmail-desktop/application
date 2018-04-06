@@ -1,5 +1,5 @@
 import { RELOAD_WEBVIEW, WEBVIEW_ERROR } from '../../middlewares/Webviews/types';
-import { ADD_ACCOUNT, REMOVE_ACCOUNT, UPDATE_SETTINGS } from './types';
+import { ADD_ACCOUNT, REMOVE_ACCOUNT, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
 
 const initialState = {
   accounts: {},
@@ -48,6 +48,18 @@ export default (state = initialState, action) => {
         ...state.webviewStatuses,
         [action.name]: {
           error: action.error,
+        },
+      },
+    };
+
+  case UPDATE_UNREAD_EMAILS:
+    return {
+      ...state,
+      accounts: {
+        ...state.accounts,
+        [action.username]: {
+          ...state.accounts[action.username],
+          unreadEmails: action.unreadEmails,
         },
       },
     };

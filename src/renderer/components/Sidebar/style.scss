@@ -36,32 +36,6 @@
       display: none;
     }
 
-    .etabs-tab-badge {
-      position: relative;
-      top: -45px;
-      left: 30px;
-      height: 20px;
-      width: 20px;
-      text-align: center;
-      vertical-align: middle;
-      display: table-cell;
-      background: red;
-      border-radius: 50%;
-      color: white;
-      font-weight: normal;
-      font-size: 12px;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1em;
-
-      &.hidden {
-        display: none;
-      }
-
-      sub {
-        position: absolute;
-        bottom: 0;
-      }
-    }
   }
 }
 
@@ -85,7 +59,33 @@
   &:nth-child(odd) {
     background: #5e63a5;
   }
+}
 
+.NotificationBadge {
+  position: relative;
+  top: -45px;
+  left: 30px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  background: red;
+  border-radius: 50%;
+  color: white;
+  font-weight: normal;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1em;
+
+  &.hidden {
+    display: none;
+  }
+
+  sub {
+    position: absolute;
+    bottom: 0;
+  }
 }
 
 .SettingsTab {

@@ -15,18 +15,32 @@ describe('components/Sidebar', () => {
 
   it('should list all accounts', () => {
     const accounts = [
-      'matthew',
-      'viking',
-      'rod.stewart',
+      { username: 'matthew' },
+      { username: 'viking' },
+      { username: 'rod.stewart' },
     ];
     const context = shallow(<Sidebar
       accounts={accounts}
     />);
 
     accounts
-      .forEach((username) => {
+      .forEach(({ username }) => {
         expect(context.find(`Link[to="/mailbox/${username}"]`).length).to.equal(1);
       });
+  });
+
+  it('should display a notifications badge when unreadEmails is given', () => {
+    const unreadEmails = 12;
+    const accounts = [
+      { username: 'karin' },
+      { username: 'lisa', unreadEmails },
+    ];
+    const context = shallow(<Sidebar
+      accounts={accounts}
+    />);
+
+    expect(context.find('span.NotificationBadge').length).to.equal(1);
+    expect(context.find('span.NotificationBadge').text()).to.equal(unreadEmails.toString());
   });
 
   it('should display a settings button', () => {
