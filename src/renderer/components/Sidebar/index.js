@@ -15,13 +15,15 @@ const Sidebar = ({
     </Link>
 
     {accounts
-      .map((account, index) => (
+      .map(({ username, unreadEmails }, index) => (
         <Link
           key={index}
           className={styles.AccountBadge}
-          to={`/mailbox/${account}`}
+          to={`/mailbox/${username}`}
         >
-          {account.charAt(0)}
+          {username.charAt(0)}
+
+          {unreadEmails && <span className={styles.NotificationBadge}>{unreadEmails}</span>}
         </Link>
       ))}
 

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { RELOAD_WEBVIEW, WEBVIEW_ERROR } from '../../middlewares/Webviews/types';
-import { ADD_ACCOUNT, REMOVE_ACCOUNT, UPDATE_SETTINGS } from './types';
+import { ADD_ACCOUNT, REMOVE_ACCOUNT, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
 import App from './reducer';
 
 describe('containers/App/reducer', () => {
@@ -62,5 +62,13 @@ describe('containers/App/reducer', () => {
     expect(App(undefined, { type: WEBVIEW_ERROR, name, error }).webviewStatuses[name]).to.eql({
       error,
     });
+  });
+  
+  it('should store unreadEmails upon UPDATE_UNREAD_EMAILS', () => {
+    const username = 'mona';
+    const unreadEmails = 2018;
+    const initialState = { accounts: { [username]: {} } };
+
+    expect(App(initialState, { type: UPDATE_UNREAD_EMAILS, username, unreadEmails }).accounts[username].unreadEmails).to.equal(unreadEmails);
   });
 });
