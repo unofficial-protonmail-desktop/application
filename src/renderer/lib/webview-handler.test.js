@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { WebviewHandler } from './webview-handler';
+import prefillUsername from './webview-handler-prefill-username';
 
 describe('lib/WebviewHandler', () => {
   describe('create', () => {
@@ -213,9 +214,10 @@ describe('lib/WebviewHandler', () => {
       expect(webviewHandler.addedWebviews).to.eql([name]);
     });
 
-    it('should inject custom CSS when the webview has finished to load', () => {
+    it('should inject custom CSS when the DOM is ready', () => {
       const mockElem = {
         addEventListener: sinon.spy(),
+        executeJavaScript: sinon.spy(),
         insertCSS: sinon.spy(),
         removeEventListener: sinon.spy(),
         setAttribute: sinon.spy(),
@@ -224,16 +226,41 @@ describe('lib/WebviewHandler', () => {
 
       const webview = webviewHandler.addWebview('lars');
 
-      expect(webview.addEventListener).to.have.been.calledWith('did-finish-load', sinon.match.func);
+      expect(webview.addEventListener).to.have.been.calledWith('dom-ready', sinon.match.func);
 
       const insertCSSFn = webview.addEventListener.getCalls()
-        .filter(call => call.args[0] === 'did-finish-load')
+        .filter(call => call.args[0] === 'dom-ready')
         .map(call => call.args[1])
         .pop();
       insertCSSFn();
 
       expect(webview.insertCSS).to.have.been.calledWith(sinon.match.any, 'utf8');
-      expect(webview.removeEventListener).to.have.been.calledWith('did-finish-load', insertCSSFn);
+      expect(webview.removeEventListener).to.have.been.calledWith('dom-ready', insertCSSFn);
+    });
+
+    it('should prefill the username when the DOM is ready', () => {
+      const mockElem = {
+        addEventListener: sinon.spy(),
+        executeJavaScript: sinon.spy(),
+        insertCSS: sinon.spy(),
+        removeEventListener: sinon.spy(),
+        setAttribute: sinon.spy(),
+      };
+      const username = 'anders';
+      sandbox.stub(document, 'createElement').returns(mockElem);
+
+      const webview = webviewHandler.addWebview(username);
+
+      expect(webview.addEventListener).to.have.been.calledWith('dom-ready', sinon.match.func);
+
+      const domReadyFn = webview.addEventListener.getCalls()
+        .filter(call => call.args[0]=== 'dom-ready')
+        .map(call => call.args[1])
+        .pop();
+      domReadyFn();
+
+      expect(webview.executeJavaScript).to.have.been.calledWith('('.concat(prefillUsername, `('${username}')`, ')'));
+      expect(webview.removeEventListener).to.have.been.calledWith('dom-ready', domReadyFn);
     });
   });
 });
