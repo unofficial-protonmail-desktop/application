@@ -6,6 +6,7 @@ import styles from './style.scss';
 
 const Sidebar = ({
   accounts,
+  location,
 }) =>
   <div className={styles.container}>
     <Link to="/add-account" className={styles.tab}>
@@ -15,12 +16,15 @@ const Sidebar = ({
     </Link>
 
     {accounts
-      .map(({ username, unreadEmails }, index) => (
+      .map(account => ({ ...account, path: `/mailbox/${account.username}` }))
+      .map(account => ({ ...account, isActive: account.path === location.pathname }))
+      .map(({ username, unreadEmails, path, isActive }, index) => (
         <Link
           key={index}
           className={styles.AccountBadge}
-          to={`/mailbox/${username}`}
+          to={path}
         >
+          {isActive && 'active'}
           {username.charAt(0)}
 
           {unreadEmails && <span className={styles.NotificationBadge}>{unreadEmails}</span>}
@@ -37,6 +41,7 @@ const Sidebar = ({
 
 Sidebar.propTypes = {
   accounts: PropTypes.array.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 export default Sidebar;
