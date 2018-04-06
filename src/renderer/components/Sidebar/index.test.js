@@ -21,6 +21,7 @@ describe('components/Sidebar', () => {
     ];
     const context = shallow(<Sidebar
       accounts={accounts}
+      location={{}}
     />);
 
     accounts
@@ -37,6 +38,7 @@ describe('components/Sidebar', () => {
     ];
     const context = shallow(<Sidebar
       accounts={accounts}
+      location={{}}
     />);
 
     expect(context.find('span.NotificationBadge').length).to.equal(1);
