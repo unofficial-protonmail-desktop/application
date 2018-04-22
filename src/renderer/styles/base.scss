@@ -59,6 +59,15 @@ body {
   }
 }
 
+:global .osx-drag-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 23px;
+  -webkit-app-region: drag;
+}
+
 .view-container {
   user-select: none;
   display: flex;
