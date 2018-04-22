@@ -1,3 +1,4 @@
+import { shell } from 'electron';
 import { UPDATE_UNREAD_EMAILS } from '../../containers/App/types';
 import { WEBVIEW_ERROR } from './types';
 
@@ -15,6 +16,11 @@ export const monitorWebview = (webview, name) => {
         username: name,
         unreadEmails,
       });
+    });
+
+    webview.addEventListener('new-window', event => {
+      event.preventDefault();
+      shell.openExternal(event.url);
     });
 
     webview.addEventListener('did-fail-load', error => {
