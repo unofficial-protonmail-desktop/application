@@ -1,9 +1,10 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { shell } from 'electron';
 
 import { UPDATE_UNREAD_EMAILS } from '../../containers/App/types';
 import { WEBVIEW_ERROR } from './types';
-import { monitorWebview } from './actions';
+import { monitorWebview, updateBadgeCount } from './actions';
 
 const getCbForEventListener = (mockWebview, name) =>
   mockWebview.addEventListener.getCalls()
@@ -73,26 +74,40 @@ describe('middlewares/Webviews/actions', () => {
         type: WEBVIEW_ERROR,
       });
     });
-  });
 
-  it('should dispatch UPDATE_UNREAD_EMAILS upon `page-title-updated` containing `Inbox`', () => {
-    const username = 'johan';
-    const unreadEmails = 1337;
+    it('should dispatch UPDATE_UNREAD_EMAILS upon `page-title-updated` containing `Inbox`', () => {
+      const username = 'johan';
+      const unreadEmails = 1337;
 
-    monitorWebview(mockWebview, username)(dispatch);
+      monitorWebview(mockWebview, username)(dispatch);
 
-    expect(mockWebview.addEventListener).to.have.been.calledWith('page-title-updated', sinon.match.func);
+      expect(mockWebview.addEventListener).to.have.been.calledWith('page-title-updated', sinon.match.func);
 
-    getCbForEventListener(mockWebview, 'page-title-updated')({ title: `(${unreadEmails}) Outbox` });
+      getCbForEventListener(mockWebview, 'page-title-updated')({ title: `(${unreadEmails}) Outbox` });
 
-    expect(dispatch).to.not.have.been.called;
+      expect(dispatch).to.not.have.been.called;
 
-    getCbForEventListener(mockWebview, 'page-title-updated')({ title: `(${unreadEmails}) Inbox` });
-    expect(dispatch).to.have.been.calledWith({
-      type: UPDATE_UNREAD_EMAILS,
-      username,
-      unreadEmails,
+      getCbForEventListener(mockWebview, 'page-title-updated')({ title: `(${unreadEmails}) Inbox` });
+      expect(dispatch).to.have.been.calledWith({
+        type: UPDATE_UNREAD_EMAILS,
+        username,
+        unreadEmails,
+      });
     });
+
+    it('should open external pages in a browser', () => {
+      const url = 'https://sd.se/';
+      const preventDefault = sinon.spy();
+      sinon.stub(shell, 'openExternal');
+      monitorWebview(mockWebview, 'agnes')(dispatch);
+
+      expect(mockWebview.addEventListener).to.have.been.calledWith('new-window', sinon.match.func);
+      getCbForEventListener(mockWebview, 'new-window')({ preventDefault, url });
+
+      expect(preventDefault).to.have.been.calledWith();
+      expect(shell.openExternal).to.have.been.calledWith(url);
+    });
+  });
 
   });
 });
