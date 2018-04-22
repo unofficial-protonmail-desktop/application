@@ -67,25 +67,6 @@ function createMainWindow() {
     }
   });
 
-    /**
-   * Trick to make the window draggable
-   * https://github.com/electron/electron/pull/5557
-   */
-  const titleBarHack =
-          'var div = document.createElement("div");' +
-          'div.style.position = "absolute";' +
-          'div.style.top = 0;' +
-          'div.style.height = "23px";' +
-          'div.style.width = "100%";' +
-          'div.style["-webkit-app-region"] = "drag";' +
-          'document.body.appendChild(div);';
-
-  win.webContents.on('did-finish-load', function () {
-    if (process.platform === 'darwin') {
-      win.webContents.executeJavaScript(titleBarHack);
-    }
-  });
-
   if (process.platform === 'darwin') {
     win.setSheetOffset(40);
   }
