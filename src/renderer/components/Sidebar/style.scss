@@ -61,6 +61,14 @@
   }
 }
 
+.Active {
+  box-shadow: 0 0 0 2px #fff;
+
+  &:hover {
+    box-shadow: 0 0 0 2px #fff;
+  }
+}
+
 .NotificationBadge {
   position: relative;
   top: -45px;
