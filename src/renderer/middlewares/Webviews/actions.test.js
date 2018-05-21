@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { shell } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 
 import { UPDATE_UNREAD_EMAILS } from '../../containers/App/types';
 import { WEBVIEW_ERROR } from './types';
@@ -109,5 +109,14 @@ describe('middlewares/Webviews/actions', () => {
     });
   });
 
+  describe('updateBadgeCount', () => {
+    it('should send unread email count to main thread upon `page-title-updated` containing `Inbox`', () => {
+      sinon.spy(ipcRenderer, 'send');
+      const count = 13;
+
+      updateBadgeCount(count);
+
+      expect(ipcRenderer.send).to.have.been.calledWith('set-badge', count);
+    });
   });
 });
