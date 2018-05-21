@@ -9,11 +9,12 @@
   text-align: center;
   color: #fff;
   border-color: transparent;
+  margin-bottom: 15px;
 }
 
 .container {
   background: darken(#505061, 10%);
-  padding: 40px 10px;
+  padding: 40px 20px;
   user-select: none;
 
   .tab {
@@ -21,7 +22,6 @@
 
     width: 100%;
     display: inline-block;
-    margin-bottom: 15px;
     font-size: 25px;
     line-height: 40px;
     height: 40px;
@@ -46,7 +46,6 @@
   text-transform: uppercase;
   text-align: center;
   display: block;
-  margin: 12px 0 12px 0;
 
   &:hover {
     box-shadow: 0 0 0 2px #9397cd;
