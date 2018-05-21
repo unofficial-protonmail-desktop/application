@@ -1,1 +1,0 @@
-export const ADD_ACCOUNT = 'SETTINGS/ADD_ACCOUNT';

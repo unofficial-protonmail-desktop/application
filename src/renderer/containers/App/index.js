@@ -14,17 +14,35 @@ import Settings from '../Settings';
 import MailBox from '../MailBox';
 
 import WebviewsMw from '../../middlewares/Webviews';
+import PersistMw from '../../middlewares/StatePersist';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+let initialState;
+
+try {
+  initialState = JSON.parse(window.localStorage.getItem('appState'));
+} catch (error) {
+  initialState = {};
+}
+
 const store = createStore(
   AppState, 
-  composeEnhancers(applyMiddleware(WebviewsMw, thunk)),
+  initialState,
+  composeEnhancers(applyMiddleware(WebviewsMw, PersistMw, thunk)),
 );
 
 export default class App extends React.Component {
+  state = {
+    webviewReady: false,
+  };
+
   setWebviewContainerElem(elem) {
     if (webviewHandler.container) return;
     webviewHandler.attachTo(elem);
+
+    this.setState({
+      webviewReady: true,
+    });
   }
 
   render() {
@@ -38,7 +56,7 @@ export default class App extends React.Component {
             <Route path="/add-account" component={AddAccount} />
             <Route
               path="/mailbox/:username"
-              render={props => <MailBox
+              render={props => this.state.webviewReady && <MailBox
                 webviewHandler={webviewHandler}
                 {...props.match.params}
               />}
