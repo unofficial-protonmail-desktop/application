@@ -5,6 +5,7 @@ module.exports = {
   },
   globals: {
     module: true,
+    beforeAll: true
   },
   extends: [
     "plugin:react/recommended",
