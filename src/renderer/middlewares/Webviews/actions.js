@@ -1,4 +1,4 @@
-import { shell } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 import { UPDATE_UNREAD_EMAILS } from '../../containers/App/types';
 import { WEBVIEW_ERROR } from './types';
 
@@ -22,6 +22,10 @@ export const monitorWebview = (webview, name) => {
       event.preventDefault();
       shell.openExternal(event.url);
     });
+
+    /**
+     * TODO: Add context menu to webview?
+     */
 
     webview.addEventListener('did-fail-load', error => {
       dispatch({
@@ -53,4 +57,8 @@ export const monitorWebview = (webview, name) => {
       });
     });
   };
+};
+
+export const updateBadgeCount = count => {
+  ipcRenderer.send('set-badge', count);
 };

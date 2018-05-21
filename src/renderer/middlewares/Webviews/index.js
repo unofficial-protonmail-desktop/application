@@ -3,8 +3,9 @@ import {
   DISPLAY_WEBVIEW,
   HIDE_WEBVIEWS,
   RELOAD_WEBVIEW,
+  UPDATE_UNREAD_EMAILS,
 } from './types';
-import { monitorWebview } from './actions';
+import { monitorWebview, updateBadgeCount } from './actions';
 
 const createdWebviews = {};
 const WebviewsMiddleware = ({ dispatch }) => next => action => {
@@ -26,6 +27,8 @@ const WebviewsMiddleware = ({ dispatch }) => next => action => {
   case RELOAD_WEBVIEW:
     WebviewHandler.reload(action.name);
     break;
+  case UPDATE_UNREAD_EMAILS:
+    updateBadgeCount(action.unreadEmails);
   }
 
   return next(action);
