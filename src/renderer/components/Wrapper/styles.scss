@@ -1,5 +1,7 @@
+$sidebar-width: 80px;
+
 .container {
   height: 100vh;
   display: grid;
-  grid-template-columns: 60px calc(100% - 60px);
+  grid-template-columns: $sidebar-width calc(100% - #{$sidebar-width});
 }
