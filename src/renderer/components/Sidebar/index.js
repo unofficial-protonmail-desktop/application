@@ -21,10 +21,9 @@ const Sidebar = ({
       .map(({ username, unreadEmails, path, isActive }, index) => (
         <Link
           key={index}
-          className={styles.AccountBadge}
+          className={styles.AccountBadge.concat(' ' + (isActive ? styles.Active : ''))}
           to={path}
         >
-          {isActive && 'active'}
           {username.charAt(0)}
 
           {unreadEmails && <span className={styles.NotificationBadge}>{unreadEmails}</span>}
