@@ -1,10 +1,8 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router-dom';
 
 import webviewHandler from '../../lib/webview-handler';
 import history from '../../history';
-import store from '../../store';
 import AddAccount from '../AddAccount';
 import Wrapper from '../../components/Wrapper';
 import Sidebar from '../Sidebar';
@@ -27,24 +25,22 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <Router history={history}>
-          <Wrapper>
-            <Sidebar />
+      <Router history={history}>
+        <Wrapper>
+          <Sidebar />
 
-            <Route path="/settings" component={Settings} />
-            <Route path="/add-account" component={AddAccount} />
-            <Route
-              path="/mailbox/:username"
-              render={props => this.state.webviewReady && <MailBox
-                webviewHandler={webviewHandler}
-                {...props.match.params}
-              />}
-            />
-            <div ref={this.setWebviewContainerElem.bind(this)} />
-          </Wrapper>
-        </Router>
-      </Provider>
+          <Route path="/settings" component={Settings} />
+          <Route path="/add-account" component={AddAccount} />
+          <Route
+            path="/mailbox/:username"
+            render={props => this.state.webviewReady && <MailBox
+              webviewHandler={webviewHandler}
+              {...props.match.params}
+            />}
+          />
+          <div ref={this.setWebviewContainerElem.bind(this)} />
+        </Wrapper>
+      </Router>
     );
   }
 }
