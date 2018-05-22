@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { hot } from 'react-hot-loader';
 
+import store from './store';
 import App from './containers/App';
 
 import './styles/base.scss';
@@ -15,6 +17,8 @@ if (module.hot) {
 }
 
 ReactDOM.render(
-  <AppComponent />,
+  <Provider store={store}>
+    <AppComponent />
+  </Provider>,
   document.getElementById('root')
 );
