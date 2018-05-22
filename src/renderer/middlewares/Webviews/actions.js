@@ -1,4 +1,5 @@
 import { ipcRenderer, shell } from 'electron';
+import { updateIconBadge } from '../../containers/App/actions';
 import { UPDATE_UNREAD_EMAILS } from '../../containers/App/types';
 import { WEBVIEW_ERROR } from './types';
 
@@ -16,6 +17,8 @@ export const monitorWebview = (webview, name) => {
         username: name,
         unreadEmails,
       });
+
+      dispatch(updateIconBadge());
     });
 
     webview.addEventListener('new-window', event => {
