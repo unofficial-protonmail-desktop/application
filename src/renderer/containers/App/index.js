@@ -1,18 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Router, Route } from 'react-router-dom';
 
 import webviewHandler from '../../lib/webview-handler';
 import history from '../../history';
+import { updateIconBadge } from './actions';
+
 import AddAccount from '../AddAccount';
 import Wrapper from '../../components/Wrapper';
 import Sidebar from '../Sidebar';
 import Settings from '../Settings';
 import MailBox from '../MailBox';
 
-export default class App extends React.Component {
+class App extends React.Component {
+  propTypes = {
+    onMount: PropTypes.func.isRequired,
+  };
+
   state = {
     webviewReady: false,
   };
+
+  componentDidMount() {
+    this.props.onMount();
+  }
 
   setWebviewContainerElem(elem) {
     if (webviewHandler.container) return;
@@ -44,3 +56,12 @@ export default class App extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  onMount: () => dispatch(updateIconBadge()),
+});
+
+export default connect(
+  () => ({}),
+  mapDispatchToProps,
+)(App);
