@@ -14,7 +14,7 @@ import Settings from '../Settings';
 import MailBox from '../MailBox';
 
 class App extends React.Component {
-  propTypes = {
+  static propTypes = {
     onMount: PropTypes.func.isRequired,
   };
 
