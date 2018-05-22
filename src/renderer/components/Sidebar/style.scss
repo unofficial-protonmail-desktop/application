@@ -46,6 +46,7 @@
   text-transform: uppercase;
   text-align: center;
   display: block;
+  position: relative;
 
   &:hover {
     box-shadow: 0 0 0 2px #9397cd;
@@ -69,21 +70,21 @@
 }
 
 .NotificationBadge {
-  position: relative;
-  top: -45px;
-  left: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
   height: 20px;
   width: 20px;
+  line-height: 20px;
   text-align: center;
-  vertical-align: middle;
-  display: table-cell;
+  display: block;
   background: red;
   border-radius: 50%;
   color: white;
   font-weight: normal;
   font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
-  line-height: 1em;
+  transform: translate(50%, -50%);
 
   &.hidden {
     display: none;
