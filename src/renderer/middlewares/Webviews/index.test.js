@@ -68,6 +68,16 @@ describe('middlewares/Webviews', () => {
     expect(WebviewHandler.displayView).to.have.been.calledWith(name);
   });
 
+  it('should add an window event listener upon DISPLAY_WEBVIEW', () => {
+    sandbox.stub(window, 'addEventListener');
+    Webviews({ dispatch })(next)({
+      type: DISPLAY_WEBVIEW,
+      name: '',
+    });
+
+    expect(window.addEventListener).to.have.been.calledWith('focus', WebviewHandler.focusActive);
+  });
+
   it('should call WebviewHandler upon HIDE_WEBVIEWS', () => {
     sandbox.stub(WebviewHandler, 'hide');
     Webviews({ dispatch })(next)({
@@ -75,6 +85,16 @@ describe('middlewares/Webviews', () => {
     });
 
     expect(WebviewHandler.hide).to.have.been.calledWith();
+  });
+
+  it('should remove window event listener upon HIDE_WEBVIEWS', () => {
+    sandbox.stub(WebviewHandler, 'hide');
+    sandbox.stub(window, 'removeEventListener');
+    Webviews({ dispatch })(next)({
+      type: HIDE_WEBVIEWS,
+    });
+
+    expect(window.removeEventListener).to.have.been.calledWith('focus', WebviewHandler.focusActive);
   });
 
   it('should call WebviewHandler upon RELOAD_WEBVIEW', () => {

@@ -128,22 +128,28 @@ describe('lib/WebviewHandler', () => {
 
     it('should set accurate visibility value to all webviews', () => {
       const name = 'sigrid';
-      const webviewToBeDisplayed = { style: {}, focus: sinon.spy() };
-      const webviewsToBeHidden = [{ style: {} }, { style: {} }];
+      const webviewToBeDisplayed = document.createElement('webview');
+      const webviewsToBeHidden = [document.createElement('webview')];
       const webviews = webviewsToBeHidden.concat(webviewToBeDisplayed);
       sinon.stub(webviewHandler, '_getWebview').returns(webviewToBeDisplayed);
       sinon.stub(webviewHandler.container, 'querySelectorAll').returns(webviews);
+      sinon.spy(webviewToBeDisplayed, 'focus');
       webviewHandler.addedWebviews = [name];
 
       webviewHandler.displayView(name);
 
       expect(webviewToBeDisplayed.style.visibility).to.equal('visible');
+      expect(webviewToBeDisplayed.getAttribute('data-active')).to.equal('true');
       webviewsToBeHidden
-        .forEach(webview => expect(webview.style.visibility).to.equal('hidden'));
+        .forEach(webview => {
+          expect(webview.style.visibility).to.equal('hidden');
+          expect(webview.getAttribute('data-active')).to.equal(null);
+        });
     });
 
     it('should focus webview', () => {
-      const mockWebview = { focus: sinon.spy(), style: {} };
+      const mockWebview = document.createElement('webview');
+      sinon.spy(mockWebview, 'focus');
       sinon.stub(webviewHandler, '_getWebview').returns(mockWebview);
 
       webviewHandler.displayView(name);
@@ -261,6 +267,27 @@ describe('lib/WebviewHandler', () => {
 
       expect(webview.executeJavaScript).to.have.been.calledWith('('.concat(prefillUsername, `('${username}')`, ')'));
       expect(webview.removeEventListener).to.have.been.calledWith('dom-ready', domReadyFn);
+    });
+  });
+
+  describe('focusActive', () => {
+    const sandbox = sinon.createSandbox();
+    let webviewHandler;
+
+    beforeEach(() => {
+      webviewHandler = WebviewHandler.create();
+    });
+
+    afterEach(() => {
+      sandbox.restore();
+    });
+
+    it('should call focus on accurate element', () => {
+      const mockElem = { focus: sinon.spy() };
+      sandbox.stub(document, 'querySelector').returns(mockElem);
+      webviewHandler.focusActive();
+
+      expect(mockElem.focus).to.have.been.calledOnce;
     });
   });
 });
