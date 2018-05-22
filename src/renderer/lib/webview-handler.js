@@ -57,8 +57,10 @@ export class WebviewHandler {
     this.container.querySelectorAll('webview')
       .forEach(elem => {
         elem.style.visibility = 'hidden';
+        elem.removeAttribute('data-active');
       });
     this._getWebview(name).style.visibility = 'visible';
+    this._getWebview(name).setAttribute('data-active', true);
     this._getWebview(name).focus();
   }
 
@@ -87,6 +89,14 @@ export class WebviewHandler {
     this.addedWebviews = [...this.addedWebviews, name];
 
     return webview;
+  }
+
+  focusActive() {
+    const webview = document.querySelector('webview[data-active=true]');
+
+    if (webview) {
+      webview.focus();
+    }
   }
 
   _queueCommand(cmd) {
