@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import SidebarItem from '../SidebarItem';
 import styles from './style.scss';
 
 const Sidebar = ({
@@ -19,15 +20,13 @@ const Sidebar = ({
       .map(account => ({ ...account, path: `/mailbox/${account.username}` }))
       .map(account => ({ ...account, isActive: account.path === location.pathname }))
       .map(({ username, unreadEmails, path, isActive }, index) => (
-        <Link
+        <SidebarItem
           key={index}
-          className={styles.AccountBadge.concat(' ' + (isActive ? styles.Active : ''))}
-          to={path}
-        >
-          {username.charAt(0)}
-
-          {unreadEmails && <span className={styles.NotificationBadge}>{unreadEmails}</span>}
-        </Link>
+          href={path}
+          isActive={isActive}
+          unreadEmails={unreadEmails}
+          username={username}
+        />
       ))}
 
     <Link
