@@ -8,13 +8,6 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = () => {
-  return {
-    onSelectAccount: () => null,
-  };
-};
-
 export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps
 )(Sidebar));
