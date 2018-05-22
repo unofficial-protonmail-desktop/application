@@ -8,6 +8,7 @@ describe('components/Sidebar', () => {
   it('should display an accurate add account button', () => {
     const context = shallow(<Sidebar
       accounts={[]}
+      location={{}}
     />);
 
     expect(context.find('Link[to="/add-account"]').length).to.equal(1);
@@ -48,6 +49,7 @@ describe('components/Sidebar', () => {
   it('should display a settings button', () => {
     const context = shallow(<Sidebar
       accounts={[]}
+      location={{}}
     />);
 
     expect(context.find('Link[to="/settings"]').length).to.equal(1);
