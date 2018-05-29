@@ -7,6 +7,7 @@ import styles from './style.scss';
 
 const Sidebar = ({
   accounts,
+  onRemoveAccount,
   location,
 }) =>
   <div className={styles.container}>
@@ -24,6 +25,7 @@ const Sidebar = ({
           key={index}
           href={path}
           isActive={isActive}
+          onRemoveAccount={onRemoveAccount}
           unreadEmails={unreadEmails}
           username={username}
         />
@@ -39,6 +41,7 @@ const Sidebar = ({
 
 Sidebar.propTypes = {
   accounts: PropTypes.array.isRequired,
+  onRemoveAccount: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
 };
 
