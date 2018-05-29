@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import SidebarItem from './';
+import { SidebarItem } from './';
 
 describe('components/SidebarItem', () => {
   it('should display a notifications badge when unreadEmails is given', () => {
@@ -10,6 +10,8 @@ describe('components/SidebarItem', () => {
     const context = shallow(<SidebarItem
       href=""
       isActive={false}
+      onOpenMenu={() => {}}
+      onRemoveAccount={() => {}}
       unreadEmails={unreadEmails}
       username=""
     />);

@@ -23,7 +23,7 @@ describe('containers/App/reducer', () => {
     const account = {
       username: 'bob',
     };
-    expect(App({ accounts: { [account.username]: account } }, { account, type: REMOVE_ACCOUNT }).accounts).to.eql({});
+    expect(App({ accounts: { [account.username]: account } }, { username: account.username, type: REMOVE_ACCOUNT }).accounts).to.eql({});
   });
 
   it('should provide default settings as initial state', () => {
