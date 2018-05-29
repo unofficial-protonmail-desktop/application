@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
       },
     };
   case REMOVE_ACCOUNT:
-    const { [action.account.username]: omit, ...accounts } = state.accounts;
+    const { [action.username]: omit, ...accounts } = state.accounts;
     return {
       ...state,
       accounts,
