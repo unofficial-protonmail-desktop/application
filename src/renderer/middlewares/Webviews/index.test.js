@@ -99,12 +99,14 @@ describe('middlewares/Webviews', () => {
 
   it('should call WebviewHandler upon RELOAD_WEBVIEW', () => {
     const name = 'amanda';
+    sandbox.stub(WebviewHandler, 'show');
     sandbox.stub(WebviewHandler, 'reload');
     Webviews({ dispatch })(next)({
       type: RELOAD_WEBVIEW,
       name,
     });
 
+    expect(WebviewHandler.show).to.have.been.calledWith();
     expect(WebviewHandler.reload).to.have.been.calledWith(name);
   });
 });
