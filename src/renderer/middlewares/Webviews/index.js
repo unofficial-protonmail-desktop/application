@@ -28,6 +28,7 @@ const WebviewsMiddleware = ({ dispatch }) => next => action => {
     window.removeEventListener('focus', WebviewHandler.focusActive);
     break;
   case RELOAD_WEBVIEW:
+    WebviewHandler.show();
     WebviewHandler.reload(action.name);
     break;
   case UPDATE_UNREAD_EMAILS:
