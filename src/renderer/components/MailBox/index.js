@@ -21,9 +21,7 @@ export default class MailBox extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.error) {
-      this.props.displayWebview(this.props.username);
-    }
+    this.props.displayWebview(this.props.username);
   }
 
   componentWillReceiveProps({ error, username }) {
@@ -42,6 +40,10 @@ export default class MailBox extends React.Component {
 
   componentWillUnmount() {
     this.props.hideWebviews();
+
+    /**
+     * TODO: Clear error upon unmount
+     */
   }
 
   handleReload() {
