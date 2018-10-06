@@ -1,6 +1,4 @@
-build: off
-
-os: unstable
+image: Visual Studio 2015
 
 skip_tags: true
 
