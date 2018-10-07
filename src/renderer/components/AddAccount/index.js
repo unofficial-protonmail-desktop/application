@@ -28,7 +28,7 @@ export default class AddAccount extends React.Component {
     return (
       <div className={styles.AddAccountContainer}>
         <form
-          className={styles.formContainer}
+          className={`${styles.formContainer} add-account-form`}
           onSubmit={this.handleFormSubmit.bind(this)}
         >
 
