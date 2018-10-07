@@ -60,8 +60,8 @@ script:
         yarn release
       fi
       if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-        docker run --rm \
-          --env-file <(env | grep -iE 'NAME|DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CSC_|_TOKEN|_KEY|STRIP|BUILD_') \
+        ENVS=`env | grep -iE '^(DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_)([A-Z]|_)*=' | sed -n '/^[^\t]/s/=.*//p' | sed '/^$/d' | sed 's/^/-e /g' | tr '\n' ' '`
+        docker run $ENVS --rm \
           --env ELECTRON_CACHE="/root/.cache/electron" \
           --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder" \
           -v ${PWD}:/project \
