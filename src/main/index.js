@@ -5,7 +5,7 @@ import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
 import { initiateAutoUpdater } from './auto-updater';
 import tray from './tray';
-import menu from './menu';
+import getMenu from './get-menu';
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
 const settings = require('electron-settings');
@@ -43,7 +43,12 @@ if (isAlreadyRunning) {
 
 function createMainWindow() {
   if (process.argv.indexOf('test') !== -1) {
-    settings.deleteAll();
+    try {
+      settings.deleteAll();
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
   }
 
   const isDarkMode = settings.get('darkMode');
@@ -102,7 +107,7 @@ app.on('ready', () => {
     /* eslint-enable no-console */
   }
 
-  Menu.setApplicationMenu(menu);
+  Menu.setApplicationMenu(getMenu());
   mainWindow = createMainWindow();
   tray.create(mainWindow);
 
