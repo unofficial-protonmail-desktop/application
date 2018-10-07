@@ -2,7 +2,7 @@
   "name": "protonmail-desktop",
   "productName": "Protonmail Desktop",
   "description": "Unofficial Electron wrapper for ProtonMail",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "author": {
     "name": "Matthew Core <matcore@protonmail.com>",
     "email": "matcore@protonmail.com"
