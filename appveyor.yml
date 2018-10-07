@@ -1,20 +1,11 @@
-build: off
-
-os: unstable
-
 skip_tags: true
-
-environment:
-  matrix:
-    - nodejs_version: 8
 
 cache:
   - "%LOCALAPPDATA%/Yarn"
   - '%USERPROFILE%\.electron'
 
-
 install:
-  - ps: Install-Product node $env:node_version
+  - ps: Install-Product node 8
   - yarn
 
 test_script:
