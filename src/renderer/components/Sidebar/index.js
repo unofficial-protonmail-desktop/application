@@ -11,7 +11,7 @@ const Sidebar = ({
   location,
 }) =>
   <div className={styles.container}>
-    <Link to="/add-account" className={styles.tab}>
+    <Link to="/add-account" className={`${styles.tab} add-account`}>
       <div>
         <span>+</span>
       </div>
