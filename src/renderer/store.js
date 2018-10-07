@@ -8,9 +8,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 let initialState;
 
 try {
-  initialState = JSON.parse(window.localStorage.getItem('appState'));
+  initialState = JSON.parse(window.localStorage.getItem('appState')) || undefined;
 } catch (error) {
-  initialState = {};
+  initialState = undefined;
 }
 
 export default createStore(
