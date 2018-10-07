@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const env = process.env.NAME;
 
 module.exports = {
-  devtool: env === 'production' ? false : 'source-map',
+  devtool: 'source-map',
   target: 'electron-renderer',
   mode: env,
 
