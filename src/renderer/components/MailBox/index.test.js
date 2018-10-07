@@ -30,17 +30,6 @@ describe('components/MailBox', () => {
     expect(displayWebview).to.have.been.calledWith(username);
   });
 
-  it('should not call prop displayWebview upon mount if error is truthy', () => {
-    const displayWebview = sinon.spy();
-    shallow(<MailBox
-      {...defaultProps}
-      displayWebview={displayWebview}
-      error={{ err: 'or' }}
-    />);
-
-    expect(displayWebview).to.not.have.been.called;
-  });
-
   it('should display view with updated username', () => {
     const displayWebview = sinon.spy();
     const context = shallow(<MailBox
