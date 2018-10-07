@@ -12,14 +12,14 @@ describe('multiple accounts', function () {
     const accountName = 'awesomeMail';
 
     return this.app.client.waitUntilWindowLoaded()
-      .then(() => this.app.client.waitForVisible('button.add-account', 10000))
-      .click('button.add-account')
-      .then(() => this.app.client.waitForVisible('.swal2-input'))
-      .setValue('.swal2-input', accountName)
+      .then(() => this.app.client.waitForVisible('.add-account', 10000))
+      .click('.add-account')
+      .then(() => this.app.client.waitForVisible('.add-account-form'))
+      .setValue('[name=username]', accountName)
       .pause(500)
-      .click('.swal2-confirm')
+      .submitForm('.add-account-form')
       .pause(500)
-      .getText('.etabs-tabs .etabs-tab-title')
+      .getText(`[href*='${accountName}']`)
       .then(text => {
         expect(typeof text).equal('string');
         expect(text.toLowerCase()).equal(accountName.slice(0, 1).toLowerCase());
