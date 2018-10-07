@@ -5,6 +5,7 @@ import electronDebug from 'electron-debug';
 import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
 import tray from './tray';
+import menu from './menu';
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
 const settings = require('electron-settings');
@@ -61,7 +62,7 @@ function createMainWindow() {
     darkTheme: isDarkMode, // GTK+3
     //backgroundColor: isDarkMode ? '#192633' : '#fff',
     webPreferences: {
-      preload:  './renderer.js',
+      preload: './renderer.js',
       nodeIntegration: true,
       plugins: true
     }
@@ -71,7 +72,8 @@ function createMainWindow() {
     win.setSheetOffset(40);
   }
 
-  win.loadURL('http://localhost:8080');
+  const url = process.env.NAME === 'development' ? 'http://localhost:8080' : 'file://'.concat(__dirname, '/index.html');
+  win.loadURL(url);
 
   win.on('close', e => {
     if (!isQuitting) {
@@ -100,7 +102,7 @@ app.on('ready', () => {
     /* eslint-enable no-console */
   }
 
-  Menu.setApplicationMenu(require('./menu'));
+  Menu.setApplicationMenu(menu);
   mainWindow = createMainWindow();
   tray.create(mainWindow);
 
