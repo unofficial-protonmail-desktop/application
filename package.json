@@ -104,7 +104,7 @@
     "electron-updater": "2.19.1",
     "eslint": "^4.8.0",
     "fs-jetpack": "^1.2.0",
-    "gulp-sass": "^3.1.0",
+    "gulp-sass": "^4.0.1",
     "minimist": "^1.2.0",
     "sweetalert2": "7.6.2"
   },
