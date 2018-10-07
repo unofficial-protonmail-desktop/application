@@ -19,17 +19,13 @@ import { AddCommands } from './commands';
      * We need to create to accounts since the webview wont get focus (which we need)
      * after an account is created.
      */
-    await this.app.client.addAccount(process.env.PROTONMAIL_TEST_USERNAME);
-    await this.app.client.addAccount(process.env.PROTONMAIL_TEST_USERNAME);
+    const accountName = process.env.PROTONMAIL_TEST_USERNAME;
+    await this.app.client.addAccount(accountName);
 
     await this.app.client.pause(1000);
 
-    // Appveyor fails if we chain commands after click
-    await this.app.client
-      .click('.etabs-tabs .etabs-tab:first-child');
-
     return this.app.client
-      .pause(5000)
+      .pause(2000)
       .keys(['Tab'])
       .pause(2000)
       .keys(process.env.PROTONMAIL_TEST_PASSWORD)
@@ -43,8 +39,8 @@ import { AddCommands } from './commands';
       .keys('gd')
       .pause(2000)
       .keys('gi')
-      .then(() => this.app.client.waitForVisible('.etabs-tabs .etabs-tab-badge'))
-      .then(() => this.app.client.getText('.etabs-tabs .etabs-tab-badge'))
+      .then(() => this.app.client.waitForVisible('.notifications'))
+      .then(() => this.app.client.getText('.notifications'))
       .then(text => {
         expect(Number(text[0])).equal(expectUnreadEmails);
         expect(text[1]).equal('');
