@@ -62,7 +62,7 @@ function createMainWindow() {
     minWidth: 1000,
     minHeight: 700,
     alwaysOnTop: settings.get('alwaysOnTop'),
-    titleBarStyle: 'hidden-inset',
+    titleBarStyle: 'hiddenInset',
     autoHideMenuBar: true,
     darkTheme: isDarkMode, // GTK+3
     //backgroundColor: isDarkMode ? '#192633' : '#fff',
