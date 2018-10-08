@@ -3,5 +3,5 @@ $sidebar-width: 80px;
 .container {
   height: 100vh;
   display: grid;
-  grid-template-columns: $sidebar-width calc(100% - #{$sidebar-width});
+  grid-template-columns: minmax($sidebar-width, max-content) repeat(auto-fit, minmax($sidebar-width, 1fr)) 0;
 }

@@ -1,10 +1,11 @@
 import { RELOAD_WEBVIEW, WEBVIEW_ERROR } from '../../middlewares/Webviews/types';
-import { ADD_ACCOUNT, REMOVE_ACCOUNT, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
+import { ADD_ACCOUNT, REMOVE_ACCOUNT, TOGGLE_SIDEBAR, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
 
 const initialState = {
   accounts: {},
   settings: {
     darkTheme: false,
+    hideSidebar: false,
   },
   webviewStatuses: {},
 };
@@ -24,6 +25,14 @@ export default (state = initialState, action) => {
     return {
       ...state,
       accounts,
+    };
+  case TOGGLE_SIDEBAR:
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        hideSidebar: !state.settings.hideSidebar,
+      }
     };
   case UPDATE_SETTINGS:
     return {
