@@ -7,10 +7,11 @@ import styles from './style.scss';
 
 const Sidebar = ({
   accounts,
+  isHidden,
   onRemoveAccount,
   location,
 }) =>
-  <div className={styles.container}>
+  <div className={[styles.container, isHidden && styles.containerHidden].filter(v => !!v).join(' ')}>
     <Link to="/add-account" className={`${styles.tab} add-account`}>
       <div>
         <span>+</span>
@@ -41,6 +42,7 @@ const Sidebar = ({
 
 Sidebar.propTypes = {
   accounts: PropTypes.array.isRequired,
+  isHidden: PropTypes.bool.isRequired,
   onRemoveAccount: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
 };

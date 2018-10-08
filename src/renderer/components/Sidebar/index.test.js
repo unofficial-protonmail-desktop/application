@@ -5,12 +5,14 @@ import { expect } from 'chai';
 import Sidebar from './';
 
 describe('components/Sidebar', () => {
+  const defaultProps = {
+    accounts: [],
+    isHidden: false,
+    location: {},
+    onRemoveAccount: () => null
+  };
   it('should display an accurate add account button', () => {
-    const context = shallow(<Sidebar
-      accounts={[]}
-      location={{}}
-      onRemoveAccount={() => null}
-    />);
+    const context = shallow(<Sidebar {...defaultProps} />);
 
     expect(context.find('Link[to="/add-account"]').length).to.equal(1);
   });
@@ -22,11 +24,7 @@ describe('components/Sidebar', () => {
       { username: 'rod.stewart', unreadEmails: 3 },
     ];
     const onRemoveAccount = () => null;
-    const context = shallow(<Sidebar
-      accounts={accounts}
-      location={{}}
-      onRemoveAccount={onRemoveAccount}
-    />);
+    const context = shallow(<Sidebar {...defaultProps} accounts={accounts} onRemoveAccount={onRemoveAccount} />);
 
     accounts
       .forEach(({ username }, index) => {
@@ -39,11 +37,7 @@ describe('components/Sidebar', () => {
   });
 
   it('should display a settings button', () => {
-    const context = shallow(<Sidebar
-      accounts={[]}
-      location={{}}
-      onRemoveAccount={() => null}
-    />);
+    const context = shallow(<Sidebar {...defaultProps} />);
 
     expect(context.find('Link[to="/settings"]').length).to.equal(1);
   });
