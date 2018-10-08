@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { RELOAD_WEBVIEW, WEBVIEW_ERROR } from '../../middlewares/Webviews/types';
-import { ADD_ACCOUNT, REMOVE_ACCOUNT, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
+import { ADD_ACCOUNT, REMOVE_ACCOUNT, TOGGLE_SIDEBAR, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
 import App from './reducer';
 
 describe('containers/App/reducer', () => {
@@ -26,9 +26,19 @@ describe('containers/App/reducer', () => {
     expect(App({ accounts: { [account.username]: account } }, { username: account.username, type: REMOVE_ACCOUNT }).accounts).to.eql({});
   });
 
+  it('should toggle hideSidebar upon TOGGLE_SIDEBAR', () => {
+    const initialState = {
+      settings: {
+        hideSidebar: true,
+      }
+    };
+    expect(App(initialState, { type: TOGGLE_SIDEBAR }).settings.hideSidebar).to.equal(false);
+  });
+
   it('should provide default settings as initial state', () => {
     expect(App(undefined, {}).settings).to.eql({
       darkTheme: false,
+      hideSidebar: false,
     });
   });
 
@@ -36,7 +46,7 @@ describe('containers/App/reducer', () => {
     const key = 'lightTheme';
     const value = false;
 
-    expect(App({}, { key, value, type: UPDATE_SETTINGS }).settings).to.eql({
+    expect(App({}, { key, value, type: UPDATE_SETTINGS }).settings).to.contain({
       [key]: value,
     });
   });

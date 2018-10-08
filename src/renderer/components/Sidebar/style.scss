@@ -9,23 +9,26 @@
   text-align: center;
   color: #fff;
   border-color: transparent;
+  margin-left: 20px;
+  margin-right: 20px;
   margin-bottom: 15px;
 }
 
 .container {
   background: darken(#505061, 10%);
-  padding: 40px 20px;
+  padding: 40px 0;
   user-select: none;
+  will-change: width;
+  transition: width 200ms;
+  width: 80px;
+  overflow: hidden;
 
   .tab {
     @extend %tab-shared;
 
-    width: 100%;
     display: inline-block;
     font-size: 25px;
-    line-height: 40px;
-    height: 40px;
-    min-height: 40px;
+    padding: 12px;
 
     &.active span.etabs-tab-title {
       color: #fff;
@@ -36,6 +39,10 @@
       display: none;
     }
   }
+}
+
+.containerHidden {
+  width: 0;
 }
 
 .SettingsTab {
