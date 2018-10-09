@@ -114,15 +114,13 @@
     "electron-debug": "^1.1.0",
     "electron-dl": "^1.9.0",
     "electron-settings": "3.1.4",
-    "electron-tabs": "0.9.0",
     "electron-updater": "2.19.1",
     "eslint": "^4.8.0",
     "fs-jetpack": "^1.2.0",
     "history": "^4.7.2",
     "minimist": "^1.2.0",
     "react-router-dom": "^4.2.2",
-    "redux-thunk": "^2.2.0",
-    "sweetalert2": "7.6.2"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^6.1.3",
