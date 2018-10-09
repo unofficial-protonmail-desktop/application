@@ -2,7 +2,6 @@
   text-decoration: none;
   padding: 0 10px;
   box-sizing: border-box;
-  background-color: transparent;
   transition: all 0.3s ease-out;
   cursor: pointer;
   outline: none;
@@ -12,16 +11,19 @@
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 15px;
+  border-radius: 10%;
 }
 
 .container {
   background: darken(#505061, 10%);
-  padding: 40px 0;
+  padding: 40px 0 0;
   user-select: none;
   will-change: width;
   transition: width 200ms;
   width: 80px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   .tab {
     @extend %tab-shared;
@@ -49,7 +51,6 @@
   @extend %tab-shared;
 
   font-size: 12px;
-  position: absolute;
-  bottom: 10px;
-  left: 0;
+  background-color: #5e63a5;
+  margin-top: auto;
 }
