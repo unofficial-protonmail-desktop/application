@@ -61,6 +61,8 @@ module.exports = {
   ],
 
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      index: './app/index.html'
+    },
   },
 };
