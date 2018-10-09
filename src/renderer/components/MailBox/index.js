@@ -24,16 +24,16 @@ export default class MailBox extends React.Component {
     this.props.displayWebview(this.props.username);
   }
 
-  componentWillReceiveProps({ error, username }) {
-    if (error) {
+  componentDidUpdate(prevProps) {
+    if (this.props.error) {
       this.props.hideWebviews();
     } else {
-      if (this.props.username !== username) {
-        this.props.displayWebview(username);
+      if (this.props.username !== prevProps.username) {
+        this.props.displayWebview(this.props.username);
       }
 
-      if (error !== this.props.error) {
-        this.props.displayWebview(username);
+      if (prevProps.error !== this.props.error) {
+        this.props.displayWebview(this.props.username);
       }
     }
   }
