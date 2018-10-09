@@ -8,7 +8,9 @@ describe('renderer/middelwares/StatePersist', () => {
   const next = sandbox.spy();
 
   beforeAll(() => {
-    window.localStorage = window.localStorage || { setItem: () => undefined };
+    Object.defineProperty(global, '_localStorage', {
+      value: { setItem: () => undefined }
+    });
   });
 
   afterEach(() => {
@@ -24,11 +26,11 @@ describe('renderer/middelwares/StatePersist', () => {
 
   it('should store state in local storage', () => {
     const mockState = { mock: 'state' };
-    sandbox.stub(window.localStorage, 'setItem');
+    sandbox.stub(global._localStorage, 'setItem');
     StatePersist({ getState: () => mockState })(next)({ action: '' });
 
     expect(next).to.have.been.calledOnce;
-    expect(window.localStorage.setItem).to.have.been.calledWith('appState', JSON.stringify(mockState));
+    expect(global._localStorage.setItem).to.have.been.calledWith('appState', JSON.stringify(mockState));
     expect(next).calledBefore(window.localStorage.setItem);
   });
 });
