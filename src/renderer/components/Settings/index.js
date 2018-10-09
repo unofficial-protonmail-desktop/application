@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './styles.scss';
+
 export default class Settings extends React.Component {
   static propTypes = {
     darkTheme: PropTypes.bool.isRequired,
@@ -13,7 +15,7 @@ export default class Settings extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.Container}>
         <h1>Settings</h1>
 
         <input

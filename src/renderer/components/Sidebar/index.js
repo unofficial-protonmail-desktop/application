@@ -34,9 +34,9 @@ const Sidebar = ({
 
     <Link
       to="/settings"
-      className={styles.SettingsTab}
+      className={[styles.SettingsTab, styles.tab].join(' ')}
     >
-      settings
+      S
     </Link>
   </div>;
 
