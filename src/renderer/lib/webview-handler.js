@@ -1,5 +1,6 @@
-import cssOverrides from 'css-to-string-loader!css-loader!./webview-handler-overrides.css';
+import cssOverrides from '!!css-to-string-loader!css-loader!sass-loader!../styles/protonmail_com.scss';
 import prefillUsername from './webview-handler-prefill-username';
+import getInjectableClassNameToggler from './get-injectable-class-name-toggler';
 
 const webviewStyle = 'position: absolute; top: 0; right: 0; bottom: 0; left: 0; visibility: hidden;';
 const containerStyleVisible = 'position: relative; height: 100%;';
@@ -45,7 +46,7 @@ export class WebviewHandler {
     this._getWebview(name).reload();
   }
 
-  displayView(name) {
+  displayView(name, { classNames } = {}) {
     if (!this.container) {
       return this._queueCommand(this.displayView.bind(this, name));
     }
@@ -59,9 +60,24 @@ export class WebviewHandler {
         elem.style.visibility = 'hidden';
         elem.removeAttribute('data-active');
       });
-    this._getWebview(name).style.visibility = 'visible';
-    this._getWebview(name).setAttribute('data-active', true);
-    this._getWebview(name).focus();
+
+    const webview = this._getWebview(name);
+
+    if (classNames) {
+      const execJs = () => webview.executeJavaScript(getInjectableClassNameToggler(classNames));
+
+      try {
+        // This will throw an error if we're here before the element is properly
+        // attached to the DOM.
+        webview.isLoading();
+        execJs();
+      } catch (error) {
+        webview.addEventListener('dom-ready', execJs);
+      }
+    }
+    webview.style.visibility = 'visible';
+    webview.setAttribute('data-active', true);
+    webview.focus();
   }
 
   _getWebview(name) {
@@ -80,6 +96,7 @@ export class WebviewHandler {
 
     const domReadyCb = () => {
       webview.insertCSS(cssOverrides, 'utf8');
+
       webview.executeJavaScript('('.concat(prefillUsername, '(\'', name, '\'))'));
       webview.removeEventListener('dom-ready', domReadyCb);
     };

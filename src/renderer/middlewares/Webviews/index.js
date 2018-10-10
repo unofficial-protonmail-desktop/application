@@ -19,7 +19,11 @@ const WebviewsMiddleware = ({ dispatch }) => next => action => {
     }
 
     WebviewHandler.show();
-    WebviewHandler.displayView(action.name);
+    WebviewHandler.displayView(action.name, {
+      classNames: {
+        darkTheme: !!action.darkTheme
+      }
+    });
 
     window.addEventListener('focus', WebviewHandler.focusActive);
     break;
