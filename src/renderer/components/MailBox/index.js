@@ -22,7 +22,7 @@ export default class MailBox extends React.Component {
   }
 
   componentDidMount() {
-    this.props.displayWebview({ darkTheme: this.props.darkTheme });
+    this.handleDisplayWebview();
   }
 
   componentDidUpdate(prevProps) {
@@ -30,15 +30,11 @@ export default class MailBox extends React.Component {
       this.props.hideWebviews();
     } else {
       if (this.props.username !== prevProps.username) {
-        this.props.displayWebview({
-          darkTheme: this.props.darkTheme,
-        });
+        this.handleDisplayWebview();
       }
 
       if (prevProps.error !== this.props.error) {
-        this.props.displayWebview({
-          darkTheme: this.props.darkTheme,
-        });
+        this.handleDisplayWebview();
       }
     }
   }
@@ -49,6 +45,12 @@ export default class MailBox extends React.Component {
     /**
      * TODO: Clear error upon unmount
      */
+  }
+
+  handleDisplayWebview() {
+    this.props.displayWebview({
+      darkTheme: this.props.darkTheme,
+    });
   }
 
   handleReload() {
