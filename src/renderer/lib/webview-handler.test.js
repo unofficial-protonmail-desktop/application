@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
+import getInjectableClassNameToggler from './get-injectable-class-name-toggler';
 import { WebviewHandler } from './webview-handler';
 import prefillUsername from './webview-handler-prefill-username';
 
@@ -156,6 +157,50 @@ describe('lib/WebviewHandler', () => {
 
       expect(webviewToBeDisplayed.style.visibility).to.equal('visible');
       expect(webviewToBeDisplayed.getAttribute('data-active')).to.equal('true');
+    });
+
+    it('should inject JS to toggle classList if isLoading exec is fine', () => {
+      const webview = Object.assign(document.createElement('webview'), {
+        executeJavaScript: () => null,
+        isLoading: () => true,
+      });
+
+      sinon.stub(webviewHandler, '_getWebview').returns(webview);
+      sinon.stub(webview, 'executeJavaScript');
+      const classNames = {
+        jesper: false,
+        urban: true,
+      };
+
+      webviewHandler.displayView('random', { classNames });
+
+      expect(webview.executeJavaScript).to.have.been.calledWith(
+        getInjectableClassNameToggler(classNames)
+      );
+    });
+
+    it('should inject JS to toggle classList upon dom-ready if isLoading exec is throws error', () => {
+      const webview = Object.assign(document.createElement('webview'), {
+        executeJavaScript: () => null,
+        isLoading: () => { throw Error(); },
+      });
+
+      sinon.stub(webviewHandler, '_getWebview').returns(webview);
+      sinon.stub(webview, 'addEventListener');
+      sinon.stub(webview, 'executeJavaScript');
+      const classNames = {
+        lisa: false,
+        mats: true,
+      };
+
+      webviewHandler.displayView('random', { classNames });
+
+      expect(webview.executeJavaScript).to.not.have.been.called;
+      expect(webview.addEventListener).to.have.been.calledWith('dom-ready');
+      webview.addEventListener.lastCall.args[1]();
+      expect(webview.executeJavaScript).to.have.been.calledWith(
+        getInjectableClassNameToggler(classNames)
+      );
     });
 
     it('should focus webview', () => {
