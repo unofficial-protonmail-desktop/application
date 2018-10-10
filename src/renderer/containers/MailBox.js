@@ -9,12 +9,14 @@ import MailBox from '../components/MailBox';
 
 const mapStateToProps = (state, ownProps) => ({
   error: (state.webviewStatuses[ownProps.username] || {}).error,
+  darkTheme: state.settings.darkTheme
 });
 
-const mapDispatchToProps = dispatch => ({
-  displayWebview: name => dispatch({
+const mapDispatchToProps = (dispatch, { username }) => ({
+  displayWebview: ({ darkTheme }) => dispatch({
     type: DISPLAY_WEBVIEW,
-    name,
+    darkTheme,
+    name: username,
   }),
   hideWebviews: () => dispatch({
     type: HIDE_WEBVIEWS,
