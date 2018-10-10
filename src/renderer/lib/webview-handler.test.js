@@ -126,11 +126,27 @@ describe('lib/WebviewHandler', () => {
       expect(webviewHandler._queueCommand).to.have.been.called;
     });
 
-    it('should set accurate visibility value to all webviews', () => {
+    it('should set accurate visibility value to webviews that sould be hidden', () => {
+      const name = 'sigrid';
+      const webviewsToBeHidden = [document.createElement('webview'), document.createElement('webview')];
+      const webviews = [document.createElement('webview'), ...webviewsToBeHidden];
+      sinon.stub(webviewHandler, '_getWebview').returns(webviews[0]);
+      sinon.stub(webviewHandler.container, 'querySelectorAll').returns(webviews);
+      webviewHandler.addedWebviews = [name];
+
+      webviewHandler.displayView(name);
+
+      webviewsToBeHidden
+        .forEach(webview => {
+          expect(webview.style.visibility).to.equal('hidden');
+          expect(webview.getAttribute('data-active')).to.equal(null);
+        });
+    });
+
+    it('should set accurate visibility value webview that sould be displayed', () => {
       const name = 'sigrid';
       const webviewToBeDisplayed = document.createElement('webview');
-      const webviewsToBeHidden = [document.createElement('webview')];
-      const webviews = webviewsToBeHidden.concat(webviewToBeDisplayed);
+      const webviews = [document.createElement('webview')].concat(webviewToBeDisplayed);
       sinon.stub(webviewHandler, '_getWebview').returns(webviewToBeDisplayed);
       sinon.stub(webviewHandler.container, 'querySelectorAll').returns(webviews);
       sinon.spy(webviewToBeDisplayed, 'focus');
@@ -140,11 +156,6 @@ describe('lib/WebviewHandler', () => {
 
       expect(webviewToBeDisplayed.style.visibility).to.equal('visible');
       expect(webviewToBeDisplayed.getAttribute('data-active')).to.equal('true');
-      webviewsToBeHidden
-        .forEach(webview => {
-          expect(webview.style.visibility).to.equal('hidden');
-          expect(webview.getAttribute('data-active')).to.equal(null);
-        });
     });
 
     it('should focus webview', () => {
