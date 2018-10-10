@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class MailBox extends React.Component {
   static propTypes = {
+    darkTheme: PropTypes.bool.isRequired,
     displayWebview: PropTypes.func.isRequired,
     error: PropTypes.object,
     hideWebviews: PropTypes.func.isRequired,
@@ -21,7 +22,7 @@ export default class MailBox extends React.Component {
   }
 
   componentDidMount() {
-    this.props.displayWebview(this.props.username);
+    this.props.displayWebview({ darkTheme: this.props.darkTheme });
   }
 
   componentDidUpdate(prevProps) {
@@ -29,11 +30,15 @@ export default class MailBox extends React.Component {
       this.props.hideWebviews();
     } else {
       if (this.props.username !== prevProps.username) {
-        this.props.displayWebview(this.props.username);
+        this.props.displayWebview({
+          darkTheme: this.props.darkTheme,
+        });
       }
 
       if (prevProps.error !== this.props.error) {
-        this.props.displayWebview(this.props.username);
+        this.props.displayWebview({
+          darkTheme: this.props.darkTheme,
+        });
       }
     }
   }

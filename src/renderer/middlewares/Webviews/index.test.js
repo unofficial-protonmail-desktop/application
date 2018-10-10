@@ -31,12 +31,14 @@ describe('middlewares/Webviews', () => {
     const name = 'jens';
     const mockAction = { mon: 'itor' };
     const mockWebview = { web: 'view' };
+    const darkTheme = true;
     const action = {
       type: DISPLAY_WEBVIEW,
+      darkTheme,
       name,
     };
     sandbox.stub(actions, 'monitorWebview').returns(mockAction);
-    sandbox.stub(WebviewHandler, 'addWebview').returns(mockWebview);
+    sandbox.stub(WebviewHandler, 'addWebview').callsFake((n) => name === n && mockWebview);
     sandbox.stub(WebviewHandler, 'show');
     sandbox.stub(WebviewHandler, 'displayView');
 
@@ -59,13 +61,19 @@ describe('middlewares/Webviews', () => {
     sandbox.stub(WebviewHandler, 'show');
     sandbox.stub(WebviewHandler, 'displayView');
 
+    const darkTheme = true;
     Webviews({ dispatch })(next)({
       type: DISPLAY_WEBVIEW,
+      darkTheme,
       name,
     });
 
     expect(WebviewHandler.show).to.have.been.calledWith();
-    expect(WebviewHandler.displayView).to.have.been.calledWith(name);
+    expect(WebviewHandler.displayView).to.have.been.calledWith(name, {
+      classNames: {
+        darkTheme
+      }
+    });
   });
 
   it('should add an window event listener upon DISPLAY_WEBVIEW', () => {

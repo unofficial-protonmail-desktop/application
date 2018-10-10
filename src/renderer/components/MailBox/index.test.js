@@ -10,6 +10,7 @@ describe('components/MailBox', () => {
 
   beforeEach(() => {
     defaultProps = {
+      darkTheme: false,
       displayWebview: sinon.spy(),
       hideWebviews: sinon.spy(),
       onReload: sinon.spy(),
@@ -19,21 +20,23 @@ describe('components/MailBox', () => {
   });
 
   it('should call prop displayWebview upon mount if error is falsy', () => {
-    const username = 'jan';
+    const darkTheme = true;
     const displayWebview = sinon.spy();
     shallow(<MailBox
       {...defaultProps}
-      username={username}
+      darkTheme={darkTheme}
       displayWebview={displayWebview}
     />);
 
-    expect(displayWebview).to.have.been.calledWith(username);
+    expect(displayWebview).to.have.been.calledWith({ darkTheme });
   });
 
   it('should display view with updated username', () => {
     const displayWebview = sinon.spy();
+    const darkTheme = false;
     const context = shallow(<MailBox
       {...defaultProps}
+      darkTheme={darkTheme}
       username="jan"
       displayWebview={displayWebview}
     />);
@@ -42,7 +45,7 @@ describe('components/MailBox', () => {
 
     context.setProps({ username });
 
-    expect(displayWebview).to.have.been.calledWith(username);
+    expect(displayWebview).to.have.been.calledWith({ darkTheme });
 
     context.setProps({ username });
 
@@ -98,8 +101,10 @@ describe('components/MailBox', () => {
   it('should display webview when the error has disappeared', () => {
     const username = 'rudolf';
     const displayWebview = sinon.spy();
+    const darkTheme = true;
     const context = shallow(<MailBox
       {...defaultProps}
+      darkTheme={darkTheme}
       displayWebview={displayWebview}
       error={{ message: '' }}
       username={username}
@@ -109,6 +114,8 @@ describe('components/MailBox', () => {
 
     context.setProps({ error: null });
 
-    expect(displayWebview).to.have.been.called;
+    expect(displayWebview).to.have.been.calledWith({
+      darkTheme,
+    });
   });
 });
