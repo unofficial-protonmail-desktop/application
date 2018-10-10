@@ -6,32 +6,21 @@ import sinon from 'sinon';
 import Settings from './';
 
 describe('components/Settings', () => {
-  it('should display a checkbox for dark theme', () => {
-    const context = shallow(<Settings
-      darkTheme={true}
-      onChangeSetting={sinon.spy()}
-    />);
+  const defaultProps = {
+    darkTheme: false,
+    onChangeSetting: () => null,
+  };
 
-    expect(context.find('input[name="darkTheme"]').length).to.equal(1);
-  });
-
-  it('should call onUpdateSetting upon changing a setting', () => {
+  it('should call onChangeSetting upon toggling checkbox for dark theme', () => {
     const onChangeSetting = sinon.spy();
-    const context = shallow(<Settings
-      darkTheme={true}
-      onChangeSetting={onChangeSetting}
-    />);
+    const wrapper = shallow(<Settings {...defaultProps} onChangeSetting={onChangeSetting} />);
 
-    context.find('input').forEach(input => {
-      const event = {
-        target: {
-          name: input.prop('name'),
-          checked: true,
-        },
-      };
-      input.simulate('change', event);
+    const name = 'darkTheme';
+    const checked = true;
+    const event = { target: { name, checked } };
+    wrapper.find(`input[name="${name}"]`).simulate('change', event);
 
-      expect(onChangeSetting).to.have.been.called;
-    });
+    expect(onChangeSetting).to.have.been.calledWith(name, checked);
   });
+
 });
