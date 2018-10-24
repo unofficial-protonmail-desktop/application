@@ -1,3 +1,11 @@
 .Container {
   padding: 20px;
 }
+
+.FormControl {
+  padding-bottom: 20px;
+
+  :global label {
+    padding-left: 10px;
+  }
+}

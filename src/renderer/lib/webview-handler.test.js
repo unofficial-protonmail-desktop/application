@@ -262,13 +262,14 @@ describe('lib/WebviewHandler', () => {
       };
       const name = 'beatrice';
       sandbox.stub(document, 'createElement').returns(mockElem);
+      const url =  'https://something.protonmail.com/';
 
-      const webview = webviewHandler.addWebview(name);
+      const webview = webviewHandler.addWebview(name, url);
 
       expect(webview).to.equal(mockElem);
 
       expect(document.createElement).to.have.been.calledWith('webview');
-      expect(mockElem.setAttribute).to.have.been.calledWith('src', 'https://mail.protonmail.com/');
+      expect(mockElem.setAttribute).to.have.been.calledWith('src', url);
       expect(mockElem.setAttribute).to.have.been.calledWith('style', sinon.match(/absolute/));
       expect(mockElem.setAttribute).to.have.been.calledWith('data-name', name);
 

@@ -12,6 +12,9 @@ const containerStyleHidden = 'position: absolute; height: 0;';
  */
 
 export class WebviewHandler {
+  protonMailUrl =  'https://mail.protonmail.com/';
+  protonMailBetaUrl =  'https://beta.protonmail.com/';
+
   static create() {
     const webviewHandler = new WebviewHandler();
     webviewHandler.container = null;
@@ -52,6 +55,9 @@ export class WebviewHandler {
     }
 
     if (this.addedWebviews.indexOf(name) === -1) {
+      /**
+       * TODO: Remove? Is this ever reached?
+       */
       this.addWebview(name);
     }
 
@@ -84,13 +90,13 @@ export class WebviewHandler {
     return this.container.querySelector(`[data-name='${name}']`);
   }
 
-  addWebview(name) {
+  addWebview(name, url) {
     if (!this.container) {
-      return this._queueCommand(this.displayView.bind(this, name));
+      return this._queueCommand(this.displayView.bind(this, name, url));
     }
 
     const webview = document.createElement('webview');
-    webview.setAttribute('src', 'https://mail.protonmail.com/');
+    webview.setAttribute('src', url);
     webview.setAttribute('style', webviewStyle);
     webview.setAttribute('data-name', name);
 

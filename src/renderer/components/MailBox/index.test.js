@@ -15,6 +15,7 @@ describe('components/MailBox', () => {
       hideWebviews: sinon.spy(),
       onReload: sinon.spy(),
       reloadWebview: sinon.spy(),
+      useProtonMailBeta: false,
       username: 'jan.banan',
     };
   });
@@ -22,30 +23,40 @@ describe('components/MailBox', () => {
   it('should call prop displayWebview upon mount if error is falsy', () => {
     const darkTheme = true;
     const displayWebview = sinon.spy();
+    const useProtonMailBeta = true;
     shallow(<MailBox
       {...defaultProps}
       darkTheme={darkTheme}
       displayWebview={displayWebview}
+      useProtonMailBeta={useProtonMailBeta}
     />);
 
-    expect(displayWebview).to.have.been.calledWith({ darkTheme });
+    expect(displayWebview).to.have.been.calledWith({
+      darkTheme,
+      useBeta: useProtonMailBeta,
+    });
   });
 
   it('should display view with updated username', () => {
     const displayWebview = sinon.spy();
     const darkTheme = false;
+    const useProtonMailBeta = true;
     const context = shallow(<MailBox
       {...defaultProps}
       darkTheme={darkTheme}
       username="jan"
       displayWebview={displayWebview}
+      useProtonMailBeta={useProtonMailBeta}
     />);
     displayWebview.resetHistory();
     const username = 'albert';
 
     context.setProps({ username });
 
-    expect(displayWebview).to.have.been.calledWith({ darkTheme });
+    expect(displayWebview).to.have.been.calledWith({
+      darkTheme,
+      useBeta: useProtonMailBeta,
+    });
 
     context.setProps({ username });
 
@@ -102,11 +113,13 @@ describe('components/MailBox', () => {
     const username = 'rudolf';
     const displayWebview = sinon.spy();
     const darkTheme = true;
+    const useProtonMailBeta = false;
     const context = shallow(<MailBox
       {...defaultProps}
       darkTheme={darkTheme}
       displayWebview={displayWebview}
       error={{ message: '' }}
+      useProtonMailBeta={useProtonMailBeta}
       username={username}
     />);
 
@@ -116,6 +129,7 @@ describe('components/MailBox', () => {
 
     expect(displayWebview).to.have.been.calledWith({
       darkTheme,
+      useBeta: useProtonMailBeta,
     });
   });
 });
