@@ -4,6 +4,7 @@ import Settings from '../components/Settings';
 
 const mapStateToProps = ({ settings }) => ({
   darkTheme: settings.darkTheme,
+  useProtonMailBeta: settings.useProtonMailBeta,
 });
 
 const mapDispatchToProps = dispatch => ({

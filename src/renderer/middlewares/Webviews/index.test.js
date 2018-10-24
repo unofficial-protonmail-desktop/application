@@ -72,7 +72,7 @@ describe('middlewares/Webviews', () => {
     expect(WebviewHandler.displayView).to.have.been.calledWith(name, {
       classNames: {
         darkTheme
-      }
+      },
     });
   });
 
