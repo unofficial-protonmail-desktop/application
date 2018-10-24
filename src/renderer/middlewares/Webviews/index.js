@@ -13,7 +13,8 @@ const WebviewsMiddleware = ({ dispatch }) => next => action => {
   switch (action.type) {
   case DISPLAY_WEBVIEW:
     if (!createdWebviews[action.name]) {
-      const webview = WebviewHandler.addWebview(action.name);
+      const url = action.useBeta ? WebviewHandler.protonMailBetaUrl : WebviewHandler.protonMailUrl;
+      const webview = WebviewHandler.addWebview(action.name, url);
       dispatch(monitorWebview(webview, action.name));
       createdWebviews[action.name] = true;
     }

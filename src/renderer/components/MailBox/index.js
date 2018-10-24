@@ -8,6 +8,7 @@ export default class MailBox extends React.Component {
     error: PropTypes.object,
     hideWebviews: PropTypes.func.isRequired,
     onReload: PropTypes.func.isRequired,
+    useProtonMailBeta: PropTypes.bool.isRequired,
     username: PropTypes.string.isRequired,
   };
 
@@ -50,6 +51,7 @@ export default class MailBox extends React.Component {
   handleDisplayWebview() {
     this.props.displayWebview({
       darkTheme: this.props.darkTheme,
+      useBeta: this.props.useProtonMailBeta,
     });
   }
 

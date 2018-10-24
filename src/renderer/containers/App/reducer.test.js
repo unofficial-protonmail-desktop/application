@@ -39,6 +39,7 @@ describe('containers/App/reducer', () => {
     expect(App(undefined, {}).settings).to.eql({
       darkTheme: false,
       hideSidebar: false,
+      useBeta: false,
     });
   });
 
