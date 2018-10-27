@@ -48,9 +48,16 @@
 }
 
 .SettingsTab {
-  @extend %tab-shared;
-
   font-size: 12px;
-  background-color: #5e63a5;
-  margin-top: auto;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  margin: auto 20px 20px;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-position: under;
+  }
+
 }
