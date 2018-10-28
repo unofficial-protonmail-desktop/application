@@ -92,7 +92,7 @@
     "build:main": "webpack --config config/webpack.main.js",
     "build": "npm run build:renderer && npm run build:main",
     "build:prod": "cross-env NAME=production npm run build",
-    "commitmsg": "commitlint --config config/commitlint.config.js -e $GIT_PARAMS",
+    "commitmsg": "commitlint --config config/commitlint.config.js -E HUSKY_GIT_PARAMS",
     "release": "electron-builder -p onTagOrDraft",
     "dist": "electron-builder",
     "lint": "npm run lint:js && npm run lint:style",
