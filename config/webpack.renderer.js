@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { spawn } = require('child_process');
 
 const env = process.env.NAME;
 
@@ -61,8 +62,28 @@ module.exports = {
   ],
 
   devServer: {
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    lazy: false,
+    compress: true,
+    noInfo: true,
+    stats: 'errors-only',
+    inline: true,
+    hot: true,
     historyApiFallback: {
       index: './app/index.html'
     },
+
+    before() {
+      // eslint-disable-next-line no-console
+      console.log('Starting Main Process...');
+      spawn('npm', ['run', 'start-main-dev'], {
+        shell: true,
+        env: process.env,
+        stdio: 'inherit'
+      })
+        .on('close', code => process.exit(code))
+        // eslint-disable-next-line no-console
+        .on('error', spawnError => console.error(spawnError));
+    }
   },
 };
