@@ -108,6 +108,7 @@
     "e2e": "mocha e2e/*.e2e.js --trace-warnings --full-trace --require @babel/register"
   },
   "dependencies": {
+    "@material-ui/core": "^3.3.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "dragula": "^3.7.2",
     "electron-context-menu": "^0.10.0",
