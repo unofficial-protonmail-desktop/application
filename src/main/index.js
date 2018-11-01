@@ -6,11 +6,19 @@ import createWindow from './helpers/window';
 import { migrateSettings } from './migrate-settings';
 import tray from './tray';
 import getMenu from './get-menu';
-import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
 const settings = require('electron-settings');
-
 require('electron-dl')({saveAs: true});
+
+const installExtensions = async () => {
+  const installer = require('electron-devtools-installer');
+  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
+
+  return Promise.all(
+    extensions.map(name => installer.default(installer[name], forceDownload))
+  );
+};
 
 migrateSettings();
 
@@ -95,15 +103,10 @@ function createMainWindow() {
   return win;
 }
 
-app.on('ready', () => {
+app.on('ready', async () => {
   if (process.env.NAME === 'development') {
     /* eslint-disable no-console */
-    [REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS]
-      .forEach(extension =>
-        installExtension(extension)
-          .then((name) => console.log(`Added Extension:  ${name}`))
-          .catch((err) => console.log('An error occurred: ', err))
-      );
+    await installExtensions();
     /* eslint-enable no-console */
   }
 
