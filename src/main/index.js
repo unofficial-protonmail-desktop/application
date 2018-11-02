@@ -105,7 +105,6 @@ function createMainWindow() {
 
 app.on('ready', async () => {
   if (process.env.NAME === 'development') {
-    /* eslint-disable no-console */
     await installExtensions();
     /* eslint-enable no-console */
   }
