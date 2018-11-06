@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Router, Route } from 'react-router-dom';
+import { Switch, Redirect, Router, Route } from 'react-router-dom';
 import webviewHandler from '../../lib/webview-handler';
 import history from '../../history';
 import AddAccount from '../../containers/AddAccount';
@@ -11,6 +11,9 @@ import MailBox from '../../containers/MailBox';
 
 export default class App extends React.Component {
   static propTypes = {
+    firstAccount: PropTypes.shape({
+      username: PropTypes.string.isRequired
+    }),
     onMount: PropTypes.func.isRequired,
   };
 
@@ -37,16 +40,19 @@ export default class App extends React.Component {
         <Wrapper>
           <Sidebar />
 
-          <Route path="/" component={Welcome} exact />
-          <Route path="/settings" component={Settings} />
-          <Route path="/add-account" component={AddAccount} />
-          <Route
-            path="/mailbox/:username"
-            render={props => this.state.webviewReady && <MailBox
-              webviewHandler={webviewHandler}
-              {...props.match.params}
-            />}
-          />
+          <Switch>
+            {!this.props.firstAccount && (<Redirect exact from="/" to="/add-account" />)}
+            {this.props.firstAccount && (<Redirect exact from="/" to={`/mailbox/${this.props.firstAccount.username}`} />)}
+            <Route path="/settings" component={Settings} />
+            <Route path="/add-account" component={AddAccount} />
+            <Route
+              path="/mailbox/:username"
+              render={props => this.state.webviewReady && <MailBox
+                webviewHandler={webviewHandler}
+                {...props.match.params}
+              />}
+            />
+          </Switch>
           <div ref={this.setWebviewContainerElem.bind(this)} />
         </Wrapper>
       </Router>
