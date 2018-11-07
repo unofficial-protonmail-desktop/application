@@ -30,17 +30,20 @@ const afterEach = function () {
   return undefined;
 };
 
-const saveErrorShot = function (e) {
+const saveErrorShot = async function (e) {
   if (this.app.browserWindow) {
     const filename = `errorShot-${this.test.parent.title}-${this.test.title}-${new Date().toISOString()}.png`
       .replace(/\s/g, '_')
       .replace(/:/g, '');
 
-    this.app.browserWindow.capturePage().then(imageBuffer => {
-      fs.writeFile(filename, imageBuffer, error => {
-        if (error) throw error;
+    await this.app.browserWindow.capturePage().then(imageBuffer => {
+      return new Promise(resolve => {
+        fs.writeFile(filename, imageBuffer, error => {
+          if (error) throw error;
 
-        console.info(`Screenshot saved: ${process.cwd()}/${filename}`);
+          console.info(`Screenshot saved: ${process.cwd()}/${filename}`);
+          resolve();
+        });
       });
     });
   }
