@@ -1,6 +1,7 @@
 import cssOverrides from '!!css-to-string-loader!css-loader!sass-loader!../styles/protonmail_com.scss';
 import prefillUsername from './webview-handler-prefill-username';
 import getInjectableClassNameToggler from './get-injectable-class-name-toggler';
+import * as webviewOnReady from './webview-on-ready';
 
 const webviewStyle = 'position: absolute; top: 0; right: 0; bottom: 0; left: 0; visibility: hidden;';
 const containerStyleVisible = 'position: relative; height: 100%;';
@@ -70,20 +71,19 @@ export class WebviewHandler {
     const webview = this._getWebview(name);
 
     if (classNames) {
-      const execJs = () => webview.executeJavaScript(getInjectableClassNameToggler(classNames));
-
-      try {
-        // This will throw an error if we're here before the element is properly
-        // attached to the DOM.
-        webview.isLoading();
-        execJs();
-      } catch (error) {
-        webview.addEventListener('dom-ready', execJs);
-      }
+      webviewOnReady.default(
+        webview,
+        () => webview.executeJavaScript(getInjectableClassNameToggler(classNames))
+      );
     }
+
+    webviewOnReady.default(
+      webview,
+      () => webview.focus()
+    );
+
     webview.style.visibility = 'visible';
     webview.setAttribute('data-active', true);
-    webview.focus();
   }
 
   _getWebview(name) {
