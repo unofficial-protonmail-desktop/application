@@ -8,28 +8,46 @@ describe('multiple accounts', function () {
   beforeEach(testUtils.beforeEach);
   afterEach(testUtils.afterEach);
 
-  it('creates a new tab when account is added', function () {
+  it('creates a new tab when account is added', async function () {
     const accountName = 'awesomeMail';
 
-    return this.app.client.waitUntilWindowLoaded()
-      .then(() => this.app.client.waitForVisible('.add-account', 10000))
+    await this.app.client.waitUntilWindowLoaded()
+      .waitForVisible('.add-account', 10000)
       .click('.add-account')
-      .then(() => this.app.client.waitForVisible('.add-account-form'))
+      .waitForVisible('.add-account-form')
       .setValue('[name=username]', accountName)
       .pause(500)
       .submitForm('.add-account-form')
       .pause(500)
-      .getText(`[href*='${accountName}']`)
-      .then(text => {
-        expect(typeof text).equal('string');
-        expect(text.toLowerCase()).equal(accountName.slice(0, 1).toLowerCase());
-      })
-      .windowByIndex(1)
-      .then(() => this.app.client.waitForVisible('#pm_login #username'))
-      .getValue('#pm_login #username')
-      .then(username => {
-        expect(username).equal(accountName);
-      })
-      .catch(testUtils.saveErrorShot.bind(this));
+
+    const actualTabName = await this.app.client
+      .getText(`[href*='${accountName}']`);
+
+    expect(typeof actualTabName).equal('string');
+    expect(actualTabName.toLowerCase()).equal(accountName.slice(0, 1).toLowerCase());
+  });
+
+  it('auto fills the username', async function () {
+    AddCommands.addAccount.call(this);
+
+    await this.app.client.waitUntilWindowLoaded();
+
+    const accountName = 'jesper';
+    await this.app.client.addAccount(accountName);
+
+    await this.app.client.pause(3000);
+
+    await this.app.client
+      .then(() => this.app.client.waitUntilWindowLoaded())
+      .getWindowCount()
+      .then(count => this.app.client.windowByIndex(count-1))
+      .waitForVisible('#pm_login #username');
+
+    await this.app.client.pause(1000);
+
+    const actualUsername = await this.app.client
+      .getValue('#pm_login #username');
+
+    expect(actualUsername).equal(accountName);
   });
 });
