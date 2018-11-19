@@ -1,16 +1,15 @@
 import { ipcRenderer, shell } from 'electron';
 import { updateIconBadge } from '../../containers/App/actions';
 import { UPDATE_UNREAD_EMAILS } from '../../containers/App/types';
+import getUnreadEmailCountFromTitle from './get-unread-email-count-from-title';
 import { WEBVIEW_ERROR } from './types';
 
 export const monitorWebview = (webview, name) => {
   return dispatch => {
     webview.addEventListener('page-title-updated', ({ title }) => {
-      const extractedTitle = title.match(/\(([0-9]+)\) Inbox/);
+      const unreadEmails = getUnreadEmailCountFromTitle(title);
 
-      if (!extractedTitle) return;
-
-      const unreadEmails = parseInt(extractedTitle[1]);
+      if (unreadEmails === null) return;
 
       dispatch({
         type: UPDATE_UNREAD_EMAILS,
