@@ -46,7 +46,7 @@ export class SidebarItem extends React.Component {
       >
         {username.charAt(0)}
 
-        {unreadEmails && <span className={`${styles.NotificationBadge} notifications`}>{unreadEmails}</span>}
+        {!!unreadEmails && <span className={`${styles.NotificationBadge} notifications`}>{unreadEmails}</span>}
       </Link>
     );
   }
