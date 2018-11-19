@@ -106,7 +106,6 @@ function createMainWindow() {
 app.on('ready', async () => {
   if (process.env.NAME === 'development') {
     await installExtensions();
-    /* eslint-enable no-console */
   }
 
   Menu.setApplicationMenu(getMenu());
