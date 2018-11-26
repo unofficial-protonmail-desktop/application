@@ -6,7 +6,7 @@ const initialState = {
   settings: {
     darkTheme: false,
     hideSidebar: false,
-    useBeta: false,
+    useProtonMailBeta: false,
   },
   webviewStatuses: {},
 };
