@@ -168,7 +168,7 @@
     "node-sass": "^4.7.2",
     "path": "^0.12.7",
     "sass-loader": "^7.1",
-    "sinon": "^6.3",
+    "sinon": "^7.1.1",
     "sinon-chai": "^3.2",
     "source-map-support": "^0.5",
     "spectron": "^5.0.0",
