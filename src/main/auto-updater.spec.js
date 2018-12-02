@@ -1,4 +1,4 @@
-const { app, dialog, shell }  = require('electron');
+const { app, dialog }  = require('electron');
 const { autoUpdater } = require('electron-updater');
 const chai = require('chai');
 const sinon = require('sinon');
@@ -44,36 +44,5 @@ describe('AutoUpdater', () => {
 
     expect(autoUpdater.on).to.have.been.called;
     expect(dialog.showMessageBox).to.have.been.called;
-  });
-
-  describe('auto update not supported', () => {
-    let onReady;
-
-    beforeEach(() => {
-      sandbox.stub(dialog, 'showMessageBox');
-      autoUpdater.checkForUpdatesAndNotify.returns(Promise.resolve(null));
-      onReady = sandbox.stub(app, 'on').withArgs('ready');
-    });
-
-    it('should show a dialog when update-available occurs', async () => {
-      initiateAutoUpdater();
-      await onReady.lastCall.args[1]();
-      autoUpdater.emit('update-available', { releaseNotes: '' });
-
-      expect(dialog.showMessageBox).to.have.been.called;
-    });
-
-    it('should open external application to download when the user clicks on the first button', async () => {
-      sandbox.stub(shell, 'openExternal');
-
-      initiateAutoUpdater();
-      await onReady.lastCall.args[1]();
-      autoUpdater.emit('update-available', { releaseNotes: '' });
-
-      const onDialogClick = dialog.showMessageBox.lastCall.args[2];
-      onDialogClick(0);
-
-      expect(shell.openExternal).to.have.been.calledWith(sinon.match(/https/));
-    });
   });
 });
