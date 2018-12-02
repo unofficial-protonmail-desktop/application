@@ -1,7 +1,8 @@
 skip_tags: true
 
 cache:
-  - "%LOCALAPPDATA%/Yarn"
+  - '%LOCALAPPDATA%\Yarn -> appveyor.yml,package.json,yarn.lock'
+  - 'node_modules -> appveyor.yml,package.json,yarn.lock'
   - '%USERPROFILE%\.electron'
 
 install:
