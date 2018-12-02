@@ -22,7 +22,9 @@ const beforeEach = function (env = {}) {
   return this.app.start();
 };
 
-const afterEach = function () {
+const afterEach = async function () {
+  await this.app.client.localStorage('DELETE');
+
   this.timeout(50000);
   if (this.app && this.app.isRunning()) {
     return this.app.stop();
