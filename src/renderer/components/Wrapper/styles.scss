@@ -1,7 +1,5 @@
-$sidebar-width: 80px;
-
 .container {
   height: 100vh;
   display: grid;
-  grid-template-columns: minmax($sidebar-width, max-content) repeat(auto-fit, minmax($sidebar-width, 1fr)) 0;
+  grid-template-columns: minmax(0, max-content) repeat(auto-fit, minmax(0, 1fr)) 0;
 }
