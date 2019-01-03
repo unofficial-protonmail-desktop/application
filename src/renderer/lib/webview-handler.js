@@ -1,4 +1,5 @@
 import cssOverrides from '!!css-to-string-loader!css-loader!sass-loader!../styles/protonmail_com.scss';
+import * as contextMenu from 'electron-context-menu';
 import prefillUsername from './webview-handler-prefill-username';
 import getInjectableClassNameToggler from './get-injectable-class-name-toggler';
 import * as webviewOnReady from './webview-on-ready';
@@ -110,6 +111,12 @@ export class WebviewHandler {
 
     this.container.appendChild(webview);
     this.addedWebviews = [...this.addedWebviews, name];
+
+    window.requestIdleCallback(() => {
+      contextMenu.default({
+        window: webview
+      });
+    });
 
     return webview;
   }
