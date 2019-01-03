@@ -9,6 +9,10 @@ import * as webviewOnReady from './webview-on-ready';
 describe('lib/WebviewHandler', () => {
   const sandbox = sinon.createSandbox();
 
+  beforeEach(() => {
+    window.requestIdleCallback = window.requestIdleCallback || (() => {});
+  });
+
   afterEach(() => {
     sandbox.restore();
   });
