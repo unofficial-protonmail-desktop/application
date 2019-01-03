@@ -37,16 +37,20 @@ describe('multiple accounts', function () {
 
     await this.app.client.pause(3000);
 
+    const inputSelector = '#pm_login #username';
+
     await this.app.client
       .then(() => this.app.client.waitUntilWindowLoaded())
       .getWindowCount()
       .then(count => this.app.client.windowByIndex(count-1))
-      .waitForVisible('#pm_login #username');
+      .waitForVisible(inputSelector);
 
+    await this.app.client
+      .waitUntil(async () => await !!this.app.client.getValue(inputSelector));
     await this.app.client.pause(1000);
 
     const actualUsername = await this.app.client
-      .getValue('#pm_login #username');
+      .getValue(inputSelector);
 
     expect(actualUsername).equal(accountName);
   });
