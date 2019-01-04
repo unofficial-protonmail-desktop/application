@@ -16,9 +16,6 @@ Native notifications are working for all OS, you will get a notification when yo
 
 ![Notifications on Windows 10](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/win-notification.png)![Notifications on Elementary OS](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/linux-notification.png)
 
-### Version
-
-Beta 0.5.1
 
 ## Dev and contributing
 
