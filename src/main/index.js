@@ -35,20 +35,6 @@ require('electron-context-menu')();
 let mainWindow;
 let isQuitting = false;
 
-const isAlreadyRunning = app.makeSingleInstance(() => {
-  if (mainWindow) {
-    if (mainWindow.isMinimized()) {
-      mainWindow.restore();
-    }
-
-    mainWindow.show();
-  }
-});
-
-if (isAlreadyRunning) {
-  app.exit();
-}
-
 function createMainWindow() {
   if (process.argv.indexOf('test') !== -1) {
     try {
@@ -103,36 +89,53 @@ function createMainWindow() {
   return win;
 }
 
-app.on('ready', async () => {
-  if (process.env.NAME === 'development') {
-    await installExtensions();
-  }
+const gotTheLock = app.requestSingleInstanceLock();
 
-  Menu.setApplicationMenu(getMenu());
-  mainWindow = createMainWindow();
-  tray.create(mainWindow);
+if (!gotTheLock) {
+  app.exit();
+} else {
+  app.on('second-instance', () => {
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) {
+        mainWindow.restore();
+      }
 
-  const page = mainWindow.webContents;
-
-  const argv = require('minimist')(process.argv.slice(1));
-
-  page.on('dom-ready', () => {
-    if (argv.minimize) {
-      mainWindow.minimize();
-    } else {
-      mainWindow.show();
-    }
-
-    if (process.env.NAME === 'development') {
-      mainWindow.openDevTools();
+      mainWindow.focus();
     }
   });
-});
 
-app.on('activate', () => {
-  mainWindow.show();
-});
 
-app.on('before-quit', () => {
-  isQuitting = true;
-});
+  app.on('ready', async () => {
+    if (process.env.NAME === 'development') {
+      await installExtensions();
+    }
+
+    Menu.setApplicationMenu(getMenu());
+    mainWindow = createMainWindow();
+    tray.create(mainWindow);
+
+    const page = mainWindow.webContents;
+
+    const argv = require('minimist')(process.argv.slice(1));
+
+    page.on('dom-ready', () => {
+      if (argv.minimize) {
+        mainWindow.minimize();
+      } else {
+        mainWindow.show();
+      }
+
+      if (process.env.NAME === 'development') {
+        mainWindow.openDevTools();
+      }
+    });
+  });
+
+  app.on('activate', () => {
+    mainWindow.show();
+  });
+
+  app.on('before-quit', () => {
+    isQuitting = true;
+  });
+}
