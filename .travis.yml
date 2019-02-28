@@ -42,7 +42,7 @@ before_install:
   - yarn --version
 
 install:
-  - yarn
+  - yarn --frozen-lockfile
 
 stages:
   - lint
