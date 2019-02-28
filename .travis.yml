@@ -17,6 +17,9 @@ env:
     - ELECTRON_CACHE=$HOME/.cache/electron
     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
+before_cache:
+  - rm -rf $HOME/.cache/electron-builder/wine
+
 cache:
   yarn: true
   directories:
@@ -34,37 +37,49 @@ after_failure:
   - artifacts upload $(git ls-files -o | grep -Fv -e node_modules -e dist -e app -e e2e)
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then artifacts upload /*.log); fi
 
+before_install:
+  - node --version
+  - yarn --version
+
 install:
   - yarn
 
-script:
-  - node --version
-  - yarn --version
-  - yarn commitlint-travis
-  - yarn lint
-  - yarn test
-  - yarn build:prod
-  - yarn e2e
-  - |
-    if [ ! -z "$TRAVIS_TAG" ]; then
-      if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-        yarn release
-      fi
-      if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-        docker run --rm \
-          --env-file <(env | grep -vE '\r|\n' | grep -iE 'NAME|DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CSC_|_TOKEN|_KEY|STRIP|BUILD_') \
-          --env ELECTRON_CACHE="/root/.cache/electron" \
-          --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder" \
-          -v ${PWD}:/project \
-          -v ~/.cache/electron:/root/.cache/electron \
-          -v ~/.cache/electron-builder:/root/.cache/electron-builder \
-          electronuserland/builder:wine-02.17 \
-          /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release --linux --win"
-      fi
-    fi
+stages:
+  - lint
+  - test
+  - e2e
+  - deploymac
+  - deploylinuxwin
 
-before_cache:
-  - rm -rf $HOME/.cache/electron-builder/wine
+jobs:
+  include:
+    - stage: lint
+      if: os = linux
+      script: yarn commitlint-travis
+    - script: yarn lint
+    - stage: test
+      script: yarn test
+    - stage: e2e
+      os: osx
+      script: yarn build:prod && yarn e2e
+    - stage: deploymac
+      if: tag IS present AND os = osx
+      name: "Deploy MacOS"
+      script: yarn release
+    - stage: deploylinuxwin
+      if: tag IS present AND os = linux
+      name: "Deploy Linux and Windows"
+      script:
+        - |
+          docker run --rm \
+            --env-file <(env | grep -vE '\r|\n' | grep -iE 'NAME|DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CSC_|_TOKEN|_KEY|STRIP|BUILD_') \
+            --env ELECTRON_CACHE="/root/.cache/electron" \
+            --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder" \
+            -v ${PWD}:/project \
+            -v ~/.cache/electron:/root/.cache/electron \
+            -v ~/.cache/electron-builder:/root/.cache/electron-builder \
+            electronuserland/builder:wine-02.17 \
+            /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release --linux --win"
 
 notifications:
   email:
