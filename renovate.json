@@ -1,5 +1,22 @@
 {
   "extends": [
     "config:base"
+  ],
+  "packageRules": [
+    {
+      "automerge": true,
+      "automergeType": "pr",
+      "packagePatterns": [
+        "babel-eslint",
+        "babel-jest",
+        "chai",
+        "enzyme",
+        "eslint",
+        "jest",
+        "mocha",
+        "sinon",
+        "spectron"
+      ]
+    }
   ]
 }
