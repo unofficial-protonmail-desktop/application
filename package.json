@@ -108,7 +108,7 @@
   "dependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
     "dragula": "^3.7.2",
-    "electron-context-menu": "^0.10.0",
+    "electron-context-menu": "^0.11.0",
     "electron-context-menu-handler": "^1.0.3",
     "electron-debug": "^2.0.0",
     "electron-dl": "^1.9.0",
