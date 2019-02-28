@@ -9,7 +9,7 @@ cache:
 
 install:
   - ps: Install-Product node 8
-  - yarn
+  - yarn --frozen-lockfile
 
 test_script:
   - node --version
