@@ -35,9 +35,12 @@ step-build: &step-build
 step-e2e: &step-e2e
   run: yarn e2e
 
-filter-tag-only: &filter-tag-only
+filter-tag: &filter-tag
   tags:
     only: /^v.*/
+
+filter-tag-only: &filter-tag-only
+  <<: *filter-tag
   branches:
     ignore: /.*/
 
@@ -80,6 +83,7 @@ jobs:
       - checkout
       - *step-restore-cache
       - *step-yarn-install
+      - *step-build
       - run: yarn release
   deploy-linux:
     docker:
@@ -88,17 +92,24 @@ jobs:
       - checkout
       - *step-restore-cache
       - *step-yarn-install
+      - *step-build
       - run: yarn release --linux --win 
 
 workflows:
   version: 2
   lint-test-build:
     jobs:
-      - lint
+      - lint:
+          filters:
+            <<: *filter-tag
       - test-linux:
+          filters:
+            <<: *filter-tag
           requires:
             - lint
       - test-macos:
+          filters:
+            <<: *filter-tag
           requires:
             - lint
       - deploy-linux:
