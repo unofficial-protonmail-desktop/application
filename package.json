@@ -161,7 +161,7 @@
     "istanbul": "0.4.5",
     "jest": "23.6.0",
     "minimist": "1.2.0",
-    "mocha": "5.2.0",
+    "mocha": "6.0.2",
     "node-sass": "4.11.0",
     "path": "0.12.7",
     "sass-loader": "7.1.0",
