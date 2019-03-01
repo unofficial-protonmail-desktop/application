@@ -1,0 +1,113 @@
+version: 2.1
+
+executors:
+  docker-env:
+    docker:
+      - image: circleci/node:10.15.2-jessie-browsers-legacy
+  macos-env:
+    macos:
+      xcode: "10.2.0"
+
+step-save-cache: &step-save-cache
+  save_cache:
+    paths:
+      - node_modules
+      - ~/.cache/yarn
+      - ~/.cache/electron
+      - ~/.cache/electron-builder
+    key: yarn-packages-v1-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
+
+step-restore-cache: &step-restore-cache
+  restore_cache:
+    keys:
+      - yarn-packages-v1-{{ arch }}--{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - yarn-packages-v1-{{ arch }}
+
+step-yarn-install: &step-yarn-install
+  run: yarn install --frozen-lockfile
+
+step-test: &step-test
+  run: yarn test
+
+step-build: &step-build
+  run: yarn build:prod
+
+step-e2e: &step-e2e
+  run: yarn e2e
+
+filter-tag-only: &filter-tag-only
+  tags:
+    only: /^v.*/
+  branches:
+    ignore: /.*/
+
+jobs:
+  lint:
+    executor: docker-env
+    steps:
+      - checkout
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export ELECTRON_CACHE="$HOME/.cache/electron"' >> $BASH_ENV
+            echo 'export ELECTRON_BUILDER_CACHE="$HOME/.cache/electron-builder"' >> $BASH_ENV
+      - *step-restore-cache
+      - *step-yarn-install
+      - *step-save-cache
+      - run: yarn lint
+  test-linux:
+    executor: docker-env
+    steps:
+      - checkout
+      - *step-restore-cache
+      - *step-yarn-install
+      - *step-test
+      - *step-build
+      - *step-e2e
+  test-macos:
+    executor: macos-env
+    steps:
+      - checkout
+      - *step-restore-cache
+      - *step-yarn-install
+      - *step-save-cache
+      - *step-test
+      - *step-build
+      - *step-e2e
+  deploy-macos:
+    executor: macos-env
+    steps:
+      - checkout
+      - *step-restore-cache
+      - *step-yarn-install
+      - run: yarn release
+  deploy-linux:
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - checkout
+      - *step-restore-cache
+      - *step-yarn-install
+      - run: yarn release --linux --win 
+
+workflows:
+  version: 2
+  lint-test-build:
+    jobs:
+      - lint
+      - test-linux:
+          requires:
+            - lint
+      - test-macos:
+          requires:
+            - lint
+      - deploy-linux:
+          requires:
+            - test-linux
+          filters:
+            <<: *filter-tag-only
+      - deploy-macos:
+          requires:
+            - test-macos
+          filters:
+            <<: *filter-tag-only
