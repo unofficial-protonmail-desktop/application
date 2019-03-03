@@ -1,4 +1,9 @@
 {
+    "env": {
+      "test_main": {
+        "plugins": ["istanbul"]
+      }
+    },
     "presets": [
       ["@babel/env", {
         "targets": { "node": 8 },

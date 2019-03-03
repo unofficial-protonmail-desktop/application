@@ -12,3 +12,5 @@ package-lock.json
 /dist
 
 /coverage
+coverage.json
+.nyc_output

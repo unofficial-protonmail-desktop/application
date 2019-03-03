@@ -26,9 +26,6 @@ step-restore-cache: &step-restore-cache
 step-yarn-install: &step-yarn-install
   run: yarn install --frozen-lockfile
 
-step-test: &step-test
-  run: yarn test
-
 step-build: &step-build
   run: yarn build:prod
 
@@ -64,7 +61,7 @@ jobs:
       - checkout
       - *step-restore-cache
       - *step-yarn-install
-      - *step-test
+      - run: yarn coverage:ci
       - *step-build
       - *step-e2e
   test-macos:
@@ -74,7 +71,7 @@ jobs:
       - *step-restore-cache
       - *step-yarn-install
       - *step-save-cache
-      - *step-test
+      - run: yarn test
       - *step-build
       - *step-e2e
   deploy-macos:
