@@ -1,4 +1,4 @@
-ProtonMail Desktop [![license](https://img.shields.io/github/license/beatplus/protonmail.svg?style=flat-square)]()
+ProtonMail Desktop [![license](https://img.shields.io/github/license/beatplus/protonmail.svg?style=flat-square)]() [![codecov](https://codecov.io/gh/protonmail-desktop/application/branch/master/graph/badge.svg)](https://codecov.io/gh/protonmail-desktop/application)
 ======
 ![Protonmail Desktop on Linux](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/linux-screenshot.png)
 
