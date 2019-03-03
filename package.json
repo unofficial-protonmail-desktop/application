@@ -79,7 +79,19 @@
       "yarn.lock"
     ]
   },
+  "nyc": {
+    "exclude": [
+      "src/main/**/*.spec.js"
+    ],
+    "instrument": false,
+    "sourceMap": false
+  },
   "jest": {
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text"
+    ],
     "setupFilesAfterEnv": [
       "<rootDir>/src/renderer/tests/setup.js"
     ],
@@ -93,6 +105,10 @@
     "build:main": "webpack --config config/webpack.main.js",
     "build": "npm run build:renderer && npm run build:main",
     "build:prod": "cross-env NAME=production npm run build",
+    "coverage": "yarn coverage:main && yarn coverage:renderer",
+    "coverage:ci": "yarn coverage && yarn nyc merge coverage && yarn codecov -f coverage.json",
+    "coverage:main": "cross-env NODE_ENV=test_main electron-mocha --require @babel/register src/main/tests/* src/main/*.spec.js",
+    "coverage:renderer": "yarn test:renderer --coverage",
     "release": "electron-builder -p onTagOrDraft",
     "dist": "electron-builder",
     "lint": "npm run lint:js && npm run lint:style",
@@ -104,7 +120,6 @@
     "test": "yarn test:main && yarn test:renderer",
     "test:main": "electron-mocha --require @babel/register src/main/**.spec.js",
     "test:renderer": "jest src/renderer",
-    "coverage": "yarn test -- -R scripts/istanbul-reporter",
     "e2e": "mocha e2e/*.e2e.js --trace-warnings --full-trace --require @babel/register"
   },
   "dependencies": {
@@ -139,8 +154,10 @@
     "babel-eslint": "10.0.1",
     "babel-jest": "24.1.0",
     "babel-loader": "8.0.5",
+    "babel-plugin-istanbul": "5.1.0",
     "chai": "4.2.0",
     "chai-enzyme": "1.0.0-beta.1",
+    "codecov": "^3.2.0",
     "commitizen": "3.0.7",
     "copy-webpack-plugin": "4.6.0",
     "cross-env": "5.2.0",
@@ -164,6 +181,7 @@
     "minimist": "1.2.0",
     "mocha": "6.0.2",
     "node-sass": "4.11.0",
+    "nyc": "^13.3.0",
     "path": "0.12.7",
     "sass-loader": "7.1.0",
     "sinon": "7.2.6",
