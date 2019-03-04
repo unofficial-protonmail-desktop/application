@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import sinon from 'sinon';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import Sidebar from './';
 
@@ -9,8 +11,10 @@ describe('components/Sidebar', () => {
     accounts: [],
     isHidden: false,
     location: {},
+    onChangePosition: () => null,
     onRemoveAccount: () => null
   };
+
   it('should display an accurate add account button', () => {
     const context = shallow(<Sidebar {...defaultProps} />);
 
@@ -25,15 +29,31 @@ describe('components/Sidebar', () => {
     ];
     const onRemoveAccount = () => null;
     const context = shallow(<Sidebar {...defaultProps} accounts={accounts} onRemoveAccount={onRemoveAccount} />);
+    const listWrapper = shallow(context.find(Droppable).props().children({}));
 
     accounts
       .forEach(({ username }, index) => {
-        const node = context.find(`[href="/mailbox/${username}"]`);
+        const itemWrapper = shallow(listWrapper.find({ draggableId: username }).props().children({}));
+        const node = itemWrapper.find(`[href="/mailbox/${username}"]`);
 
         expect(node.prop('username')).to.equal(accounts[index].username);
         expect(node.prop('unreadEmails')).to.equal(accounts[index].unreadEmails);
         expect(node.prop('onRemoveAccount')).to.equal(onRemoveAccount);
       });
+  });
+
+  it('should fire onChangePosition upon DragDropContext onDragEnd', () => {
+    const onChangePosition = sinon.spy();
+    const wrapper = shallow(<Sidebar {...defaultProps} onChangePosition={onChangePosition} />);
+
+    const from = 4;
+    const to = 12;
+    wrapper.find(DragDropContext).simulate('dragEnd', {
+      destination: { index: to },
+      source: { index: from }
+    });
+
+    expect(onChangePosition).to.have.been.calledWith({ from, to });
   });
 
   it('should display a settings button', () => {

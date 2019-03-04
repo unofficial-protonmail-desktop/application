@@ -1,5 +1,5 @@
 import { RELOAD_WEBVIEW, WEBVIEW_ERROR } from '../../middlewares/Webviews/types';
-import { ADD_ACCOUNT, REMOVE_ACCOUNT, TOGGLE_SIDEBAR, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
+import { ADD_ACCOUNT, REMOVE_ACCOUNT, TOGGLE_SIDEBAR, TOGGLE_SIDEBAR_ITEM_POSITION, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
 
 const initialState = {
   accounts: [],
@@ -34,6 +34,17 @@ export default (state = initialState, action) => {
         hideSidebar: !state.settings.hideSidebar,
       }
     };
+
+  case TOGGLE_SIDEBAR_ITEM_POSITION: {
+    const accounts = [...state.accounts];
+    accounts.splice(action.to, 0, ...accounts.splice(action.from, 1));
+
+    return {
+      ...state,
+      accounts
+    };
+  }
+
   case UPDATE_SETTINGS:
     return {
       ...state,

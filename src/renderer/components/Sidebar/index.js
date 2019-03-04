@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import SidebarItem from '../SidebarItem';
 import styles from './style.scss';
@@ -8,6 +9,7 @@ import styles from './style.scss';
 const Sidebar = ({
   accounts,
   isHidden,
+  onChangePosition,
   onRemoveAccount,
   location,
 }) =>
@@ -18,20 +20,34 @@ const Sidebar = ({
       </div>
     </Link>
 
-    {accounts
-      .map(account => ({ ...account, path: `/mailbox/${account.username}` }))
-      .map(account => ({ ...account, isActive: account.path === location.pathname }))
-      .map(({ username, unreadEmails, path, isActive }, index) => (
-        <SidebarItem
-          key={index}
-          href={path}
-          isActive={isActive}
-          onRemoveAccount={onRemoveAccount}
-          unreadEmails={unreadEmails}
-          username={username}
-        />
-      ))}
+    <DragDropContext onDragEnd={({ destination, source }) => onChangePosition({ from: source.index, to: destination.index })}>
+      <Droppable droppableId="mail-boxes">
+        {(provided) => (
+          <div ref={provided.innerRef}>
+            {accounts
+              .map(account => ({ ...account, path: `/mailbox/${account.username}` }))
+              .map(account => ({ ...account, isActive: account.path === location.pathname }))
+              .map(({ username, unreadEmails, path, isActive }, index) => (
+                <Draggable key={username} draggableId={username} index={index}>
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                      <SidebarItem
+                        key={username}
+                        href={path}
+                        isActive={isActive}
+                        onRemoveAccount={onRemoveAccount}
+                        unreadEmails={unreadEmails}
+                        username={username}
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
 
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
     <Link
       to="/settings"
       className={[styles.SettingsTab]}
@@ -43,6 +59,7 @@ const Sidebar = ({
 Sidebar.propTypes = {
   accounts: PropTypes.array.isRequired,
   isHidden: PropTypes.bool.isRequired,
+  onChangePosition: PropTypes.func.isRequired,
   onRemoveAccount: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
 };

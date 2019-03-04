@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { REMOVE_ACCOUNT } from './App/types';
+import { TOGGLE_SIDEBAR_ITEM_POSITION, REMOVE_ACCOUNT } from './App/types';
 import Sidebar from '../components/Sidebar';
 
 const mapStateToProps = state => {
@@ -10,6 +10,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  onChangePosition: ({ from, to }) => dispatch({
+    type: TOGGLE_SIDEBAR_ITEM_POSITION,
+    from,
+    to
+  }),
   onRemoveAccount: username => dispatch({
     type: REMOVE_ACCOUNT,
     username,
