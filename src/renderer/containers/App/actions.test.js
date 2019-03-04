@@ -14,10 +14,10 @@ describe('containers/App/actions', () => {
   describe('updateIconBadge', () => {
     it('should send an IPC message with accurate value', () => {
       const mockState = {
-        accounts: {
-          ove: { unreadEmails: 10 },
-          adam: { unreadEmails: 12 },
-        },
+        accounts: [
+          { unreadEmails: 10 },
+          { unreadEmails: 12 },
+        ],
       };
       sandbox.stub(ipcRenderer, 'send');
       updateIconBadge()(dispatch, () => mockState);
