@@ -1,4 +1,4 @@
-ProtonMail Desktop [![license](https://img.shields.io/github/license/beatplus/protonmail.svg?style=flat-square)]() [![codecov](https://codecov.io/gh/protonmail-desktop/application/branch/master/graph/badge.svg)](https://codecov.io/gh/protonmail-desktop/application)
+ProtonMail Desktop [![license](https://img.shields.io/github/license/beatplus/protonmail.svg?style=flat-square)]() <a href="https://snyk.io/test/github/protonmail-desktop/application"><img src="https://snyk.io/test/github/protonmail-desktop/application/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/protonmail-desktop/application" style="max-width:100%;"></a> [![codecov](https://codecov.io/gh/protonmail-desktop/application/branch/master/graph/badge.svg)](https://codecov.io/gh/protonmail-desktop/application)
 ======
 ![Protonmail Desktop on Linux](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/linux-screenshot.png)
 
