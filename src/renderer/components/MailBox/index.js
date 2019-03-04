@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './styles.scss';
 
 export default class MailBox extends React.Component {
   static propTypes = {
@@ -62,7 +63,7 @@ export default class MailBox extends React.Component {
   render() {
     if (this.props.error) {
       return (
-        <div>
+        <div className={styles.ErrorView}>
           <h1>Are you connected?</h1>
           <p>Login page couldnt be loaded due to the following error:</p>
           <p>{this.props.error.errorDescription}</p>
