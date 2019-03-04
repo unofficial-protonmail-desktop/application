@@ -3,7 +3,6 @@ import { app, Menu } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import electronDebug from 'electron-debug';
 import createWindow from './helpers/window';
-import { migrateSettings } from './migrate-settings';
 import tray from './tray';
 import getMenu from './get-menu';
 
@@ -19,8 +18,6 @@ const installExtensions = async () => {
     extensions.map(name => installer.default(installer[name], forceDownload))
   );
 };
-
-migrateSettings();
 
 if (process.env.NAME === 'development') {
   electronDebug({enabled: true});
