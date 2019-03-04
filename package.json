@@ -124,7 +124,6 @@
   },
   "dependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "dragula": "^3.7.2",
     "electron-context-menu": "^0.11.0",
     "electron-context-menu-handler": "^1.0.3",
     "electron-debug": "^2.0.0",
@@ -135,6 +134,7 @@
     "history": "^4.7.2",
     "minimist": "^1.2.0",
     "react": "^16.4",
+    "react-beautiful-dnd": "10.0.4",
     "react-dom": "^16.4",
     "react-hot-loader": "^4.0.0",
     "react-redux": "^5.0.7",

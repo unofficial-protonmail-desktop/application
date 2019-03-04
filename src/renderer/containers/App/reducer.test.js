@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { RELOAD_WEBVIEW, WEBVIEW_ERROR } from '../../middlewares/Webviews/types';
-import { ADD_ACCOUNT, REMOVE_ACCOUNT, TOGGLE_SIDEBAR, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
+import { ADD_ACCOUNT, REMOVE_ACCOUNT, TOGGLE_SIDEBAR, TOGGLE_SIDEBAR_ITEM_POSITION, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
 import App from './reducer';
 
 describe('containers/App/reducer', () => {
@@ -32,6 +32,22 @@ describe('containers/App/reducer', () => {
       }
     };
     expect(App(initialState, { type: TOGGLE_SIDEBAR }).settings.hideSidebar).to.equal(false);
+  });
+
+  it('should toggle account positions upon TOGGLE_SIDEBAR_ITEM_POSITION', () => {
+    const accounts = [
+      'a',
+      'b',
+      'c',
+    ];
+
+    expect(App({ accounts }, { type: TOGGLE_SIDEBAR_ITEM_POSITION, from: 0, to: 2 })).to.eql({
+      accounts: [
+        'b',
+        'c',
+        'a',
+      ],
+    });
   });
 
   it('should provide default settings as initial state', () => {
