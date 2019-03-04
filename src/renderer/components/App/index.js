@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Redirect, Router, Route } from 'react-router-dom';
+import { Switch, Redirect, Router, Route, withRouter } from 'react-router-dom';
 import webviewHandler from '../../lib/webview-handler';
 import history from '../../history';
 import AddAccount from '../../containers/AddAccount';
@@ -8,6 +8,8 @@ import Wrapper from '../Wrapper';
 import Sidebar from '../../containers/Sidebar';
 import Settings from '../../containers/Settings';
 import MailBox from '../../containers/MailBox';
+
+const RoutedSidebar = withRouter(Sidebar);
 
 export default class App extends React.Component {
   static propTypes = {
@@ -38,7 +40,7 @@ export default class App extends React.Component {
     return (
       <Router history={history}>
         <Wrapper>
-          <Sidebar />
+          <RoutedSidebar />
 
           <Switch>
             {!this.props.firstAccount && (<Redirect exact from="/" to="/add-account" />)}
