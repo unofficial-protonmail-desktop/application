@@ -6,7 +6,7 @@ import App from './reducer';
 
 describe('containers/App/reducer', () => {
   it('should provide empty accounts as initial state', () => {
-    expect(App(undefined, {}).accounts).to.eql({});
+    expect(App(undefined, {}).accounts).to.eql([]);
   });
 
   it('should store account upon ADD_ACCOUNT', () => {
@@ -14,16 +14,15 @@ describe('containers/App/reducer', () => {
       username: 'alice',
     };
 
-    expect(App(undefined, { account, type: ADD_ACCOUNT }).accounts).to.eql({
-      [account.username]: account,
-    });
+    expect(App(undefined, { account, type: ADD_ACCOUNT }).accounts).to.contain(account);
   });
 
   it('should remve account from store upon REMOVE_ACCOUNT', () => {
     const account = {
       username: 'bob',
     };
-    expect(App({ accounts: { [account.username]: account } }, { username: account.username, type: REMOVE_ACCOUNT }).accounts).to.eql({});
+
+    expect(App({ accounts: [account] }, { username: account.username, type: REMOVE_ACCOUNT }).accounts).to.eql([]);
   });
 
   it('should toggle hideSidebar upon TOGGLE_SIDEBAR', () => {
@@ -78,8 +77,11 @@ describe('containers/App/reducer', () => {
   it('should store unreadEmails upon UPDATE_UNREAD_EMAILS', () => {
     const username = 'mona';
     const unreadEmails = 2018;
-    const initialState = { accounts: { [username]: {} } };
+    const initialState = { accounts: [{ username }] };
 
-    expect(App(initialState, { type: UPDATE_UNREAD_EMAILS, username, unreadEmails }).accounts[username].unreadEmails).to.equal(unreadEmails);
+    expect(App(initialState, { type: UPDATE_UNREAD_EMAILS, username, unreadEmails }).accounts).to.deep.include({
+      unreadEmails,
+      username,
+    });
   });
 });

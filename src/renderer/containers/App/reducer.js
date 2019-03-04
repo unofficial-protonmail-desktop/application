@@ -2,7 +2,7 @@ import { RELOAD_WEBVIEW, WEBVIEW_ERROR } from '../../middlewares/Webviews/types'
 import { ADD_ACCOUNT, REMOVE_ACCOUNT, TOGGLE_SIDEBAR, UPDATE_SETTINGS, UPDATE_UNREAD_EMAILS } from './types';
 
 const initialState = {
-  accounts: {},
+  accounts: [],
   settings: {
     darkTheme: false,
     hideSidebar: false,
@@ -16,16 +16,15 @@ export default (state = initialState, action) => {
   case ADD_ACCOUNT:
     return {
       ...state,
-      accounts: {
+      accounts: [
         ...state.accounts,
-        [action.account.username]: action.account,
-      },
+        action.account,
+      ],
     };
   case REMOVE_ACCOUNT:
-    const { [action.username]: omit, ...accounts } = state.accounts;
     return {
       ...state,
-      accounts,
+      accounts: state.accounts.filter(a => a.username !== action.username),
     };
   case TOGGLE_SIDEBAR:
     return {
@@ -65,13 +64,8 @@ export default (state = initialState, action) => {
   case UPDATE_UNREAD_EMAILS:
     return {
       ...state,
-      accounts: {
-        ...state.accounts,
-        [action.username]: {
-          ...state.accounts[action.username],
-          unreadEmails: action.unreadEmails,
-        },
-      },
+      accounts: state.accounts
+        .map(a => a.username === action.username ? ({ ...a, unreadEmails: action.unreadEmails }) : a)
     };
   }
 

@@ -3,7 +3,7 @@ import { updateIconBadge } from './actions';
 import App from '../../components/App';
 
 const mapStateToProps = ({ accounts }) => ({
-  firstAccount: Object.values(accounts)[0]
+  firstAccount: accounts[0]
 });
 
 const mapDispatchToProps = dispatch => ({

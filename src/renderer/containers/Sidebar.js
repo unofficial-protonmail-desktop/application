@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar';
 
 const mapStateToProps = state => {
   return {
-    accounts: Object.values(state.accounts),
+    accounts: state.accounts,
     isHidden: state.settings.hideSidebar
   };
 };

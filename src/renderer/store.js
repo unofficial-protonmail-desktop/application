@@ -10,6 +10,10 @@ let initialState;
 
 try {
   initialState = JSON.parse(window.localStorage.getItem('appState')) || undefined;
+
+  if (initialState && 'accounts' in initialState && !Array.isArray(initialState.accounts)) {
+    initialState.accounts = Object.values(initialState.accounts);
+  }
 } catch (error) {
   initialState = undefined;
 }
