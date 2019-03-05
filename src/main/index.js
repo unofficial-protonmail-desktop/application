@@ -5,6 +5,7 @@ import electronDebug from 'electron-debug';
 import createWindow from './helpers/window';
 import tray from './tray';
 import getMenu from './get-menu';
+import pkgJson from '../../package.json';
 
 const settings = require('electron-settings');
 require('electron-dl')({saveAs: true});
@@ -105,6 +106,10 @@ if (!gotTheLock) {
   app.on('ready', async () => {
     if (process.env.NAME === 'development') {
       await installExtensions();
+    }
+
+    if (process.platform === 'win32') {
+      app.setAppUserModelId(pkgJson.build.appId);
     }
 
     Menu.setApplicationMenu(getMenu());
