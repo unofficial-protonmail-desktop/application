@@ -58,7 +58,7 @@
     },
     "mac": {
       "category": "public.app-category.productivity",
-      "icon": "src/main/images/Icon.icns"
+      "icon": "src/main/images/icon.icns"
     },
     "win": {
       "icon": "src/main/images/Icon.ico",
