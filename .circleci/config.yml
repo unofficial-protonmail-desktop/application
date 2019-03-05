@@ -11,17 +11,16 @@ executors:
 step-save-cache: &step-save-cache
   save_cache:
     paths:
-      - node_modules
       - ~/.cache/yarn
       - ~/.cache/electron
       - ~/.cache/electron-builder
-    key: yarn-packages-v1-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    key: yarn-packages-v2-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
 step-restore-cache: &step-restore-cache
   restore_cache:
     keys:
-      - yarn-packages-v1-{{ arch }}--{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - yarn-packages-v1-{{ arch }}
+      - yarn-packages-v2-{{ arch }}--{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - yarn-packages-v2-{{ arch }}
 
 step-yarn-install: &step-yarn-install
   run: yarn install --frozen-lockfile
