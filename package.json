@@ -73,6 +73,7 @@
       ]
     },
     "files": [
+      "package.json",
       "app/**/*",
       "app/static/*",
       "node_modules/**/*",
