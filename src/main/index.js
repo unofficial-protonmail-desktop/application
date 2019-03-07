@@ -96,6 +96,8 @@ if (!gotTheLock) {
     if (mainWindow) {
       if (mainWindow.isMinimized()) {
         mainWindow.restore();
+      } else if (process.platform === 'win32') {
+        mainWindow.show();
       }
 
       mainWindow.focus();
