@@ -1,4 +1,4 @@
-const { app }  = require('electron');
+const { app, BrowserWindow }  = require('electron');
 const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
@@ -46,5 +46,19 @@ describe('App', () => {
     await onReadyCb();
 
     expect(app.setAppUserModelId).to.have.been.calledWith(pkgJson.build.appId);
+  });
+
+  it('should call mainWindow.show when app is opened from taskbar in win32', () => {
+    app.requestSingleInstanceLock.returns(true);
+    require('./');
+
+    Object.defineProperty(process, 'platform', {
+      value: 'win32',
+    });
+    sandbox.spy(BrowserWindow.prototype, 'show');
+    sandbox.stub(BrowserWindow.prototype, 'isMinimized').returns(false);
+    app.emit('second-instance');
+
+    expect(BrowserWindow.prototype.show).to.have.been.called;
   });
 });
