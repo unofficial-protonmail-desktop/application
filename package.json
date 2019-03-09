@@ -106,7 +106,7 @@
     "build:prod": "cross-env NAME=production npm run build",
     "coverage": "yarn coverage:main && yarn coverage:renderer",
     "coverage:ci": "yarn coverage && yarn nyc merge coverage && yarn codecov -f coverage.json",
-    "coverage:main": "cross-env NODE_ENV=test_main electron-mocha --require @babel/register src/main/tests/* src/main/*.spec.js",
+    "coverage:main": "cross-env NODE_ENV=test_main yarn test:main",
     "coverage:renderer": "yarn test:renderer --coverage",
     "release": "electron-builder -p onTagOrDraft",
     "dist": "electron-builder",
@@ -117,7 +117,7 @@
     "start": "cross-env NAME=development webpack-dev-server --config config/webpack.renderer.js --hot",
     "start-main-dev": "cross-env NAME=development electron -r @babel/register src/main/index.js",
     "test": "yarn test:main && yarn test:renderer",
-    "test:main": "electron-mocha --require @babel/register src/main/**.spec.js",
+    "test:main": "electron-mocha --require @babel/register src/main/**/*.spec.js src/main/*.spec.js",
     "test:renderer": "jest src/renderer",
     "e2e": "mocha e2e/*.e2e.js --trace-warnings --full-trace --require @babel/register"
   },

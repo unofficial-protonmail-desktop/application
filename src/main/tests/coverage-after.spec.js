@@ -17,6 +17,8 @@ const loadSourceCode = () => {
 };
 
 after(() => {
-  loadSourceCode();
-  writeCoverageReport((global).__coverage__);
+  if (process.env.NODE_ENV === 'test_main') {
+    loadSourceCode();
+    writeCoverageReport((global).__coverage__);
+  }
 });
