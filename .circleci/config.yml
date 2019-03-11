@@ -3,7 +3,7 @@ version: 2.1
 executors:
   docker-env:
     docker:
-      - image: circleci/node:10.15.2-jessie-browsers-legacy
+      - image: circleci/node:10.15.3-jessie-browsers-legacy
   macos-env:
     macos:
       xcode: "10.2.0"
