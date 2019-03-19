@@ -8,6 +8,7 @@ import Wrapper from '../Wrapper';
 import Sidebar from '../../containers/Sidebar';
 import Settings from '../../containers/Settings';
 import MailBox from '../../containers/MailBox';
+import Welcome from '../Welcome';
 
 const RoutedSidebar = withRouter(Sidebar);
 
@@ -43,10 +44,11 @@ export default class App extends React.Component {
           <RoutedSidebar />
 
           <Switch>
-            {!this.props.firstAccount && (<Redirect exact from="/" to="/add-account" />)}
+            {!this.props.firstAccount && (<Redirect exact from="/" to="/welcome" />)}
             {this.props.firstAccount && (<Redirect exact from="/" to={`/mailbox/${this.props.firstAccount.username}`} />)}
             <Route path="/settings" component={Settings} />
             <Route path="/add-account" component={AddAccount} />
+            <Route path="/Welcome" component={Welcome} />
             <Route
               path="/mailbox/:username"
               render={props => this.state.webviewReady && <MailBox

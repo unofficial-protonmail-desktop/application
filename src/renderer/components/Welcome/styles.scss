@@ -1,0 +1,21 @@
+@import '../Sidebar/style.scss';
+
+.Welcome {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.AccountBadge {
+  @extend %tab-shared;
+
+  background: #9397cd;
+  border-radius: 4px;
+  display: inline-block;
+  font-weight: bold;
+  margin: 15px 0;
+  padding: 12px;
+  text-transform: uppercase;
+}
