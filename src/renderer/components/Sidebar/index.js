@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
+import SettingsIcon from './settings-icon.svg';
 import SidebarItem from '../SidebarItem';
 import styles from './style.scss';
 
@@ -52,7 +53,7 @@ const Sidebar = ({
       to="/settings"
       className={[styles.SettingsTab]}
     >
-      settings
+      <img src={SettingsIcon} width={30} />
     </Link>
   </div>;
 

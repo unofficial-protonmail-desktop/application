@@ -46,6 +46,13 @@ module.exports = {
         ],
       },
       {
+        test: /\.svg$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'file-loader',
+        },
+      },
+      {
         test: /\.png$/,
         use: {
           loader: 'url-loader',
