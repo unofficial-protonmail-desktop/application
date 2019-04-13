@@ -26,7 +26,7 @@ describe('containers/App', () => {
       store.getState.returns({ accounts });
       const wrapper = shallow(<App {...defaultProps} />);
 
-      expect(wrapper.props().firstAccount).to.eql(firstAccount);
+      expect(wrapper.dive().props().firstAccount).to.eql(firstAccount);
     });
   });
 });

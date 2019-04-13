@@ -26,13 +26,11 @@ describe('containers/Sidebar', () => {
   });
 
   it('should dispatch TOGGLE_SIDEBAR_ITEM_POSITION upon onChangePosition', () => {
-    const wrapper = shallow(<SidebarContainer {...defaultProps} />, {
-      context: { store }
-    });
+    const wrapper = shallow(<SidebarContainer {...defaultProps} store={store} />);
 
     const from = 12;
     const to = 15;
-    wrapper.props().onChangePosition({ from, to });
+    wrapper.dive().props().onChangePosition({ from, to });
 
     expect(store.dispatch).to.have.been.calledWith({
       type: TOGGLE_SIDEBAR_ITEM_POSITION,
