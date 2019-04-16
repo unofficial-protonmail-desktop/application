@@ -2029,14 +2029,14 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-istanbul@5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/babel-plugin-istanbul/-/babel-plugin-istanbul-5.1.1.tgz#7981590f1956d75d67630ba46f0c22493588c893"
-  integrity sha512-RNNVv2lsHAXJQsEJ5jonQwrJVWK8AcZpG1oxhnjCUaAjL7xahYLANhPUZbzEQHjKy1NMYUwn+0NPKQc8iSY4xQ==
+babel-plugin-istanbul@5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-istanbul/-/babel-plugin-istanbul-5.1.2.tgz#d8c2e2e83f72695d6bfdcd297719c66161d5f0f9"
+  integrity sha512-U3ZVajC+Z69Gim7ZzmD4Wcsq76i/1hqDamBfowc1tWzWjybRy70iWfngP2ME+1CrgcgZ/+muIbPY/Yi0dxdIkQ==
   dependencies:
     find-up "^3.0.0"
-    istanbul-lib-instrument "^3.0.0"
-    test-exclude "^5.0.0"
+    istanbul-lib-instrument "^3.2.0"
+    test-exclude "^5.2.2"
 
 babel-plugin-istanbul@^5.1.0:
   version "5.1.0"
@@ -11100,6 +11100,16 @@ test-exclude@^5.0.0:
     minimatch "^3.0.4"
     read-pkg-up "^4.0.0"
     require-main-filename "^1.0.1"
+
+test-exclude@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-5.2.2.tgz#7322f8ab037b0b93ad2aab35fe9068baf997a4c4"
+  integrity sha512-N2pvaLpT8guUpb5Fe1GJlmvmzH3x+DAKmmyEQmFP792QcLYoGE1syxztSvPD1V8yPe6VrcCt6YGQVjSRjCASsA==
+  dependencies:
+    glob "^7.1.3"
+    minimatch "^3.0.4"
+    read-pkg-up "^4.0.0"
+    require-main-filename "^2.0.0"
 
 test-exclude@^5.2.2:
   version "5.2.2"
