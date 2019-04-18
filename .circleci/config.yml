@@ -4,6 +4,7 @@ executors:
   docker-env:
     docker:
       - image: circleci/node:10.15.3-jessie-browsers-legacy
+      - image: cibuilds/snapcraft:stable
   macos-env:
     macos:
       xcode: "10.2.0"
@@ -89,11 +90,17 @@ jobs:
       - *step-restore-cache
       - *step-yarn-install
       - *step-build
-      - run: yarn release --linux --win 
+      - run:
+          name: deploy
+          command: |
+            yarn release --linux --win
+            mkdir .snap
+            echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
+            snapcraft push *.snap --release stable
 
 workflows:
   version: 2
-  lint-test-build:
+  lint-test-deploy:
     jobs:
       - lint:
           filters:
