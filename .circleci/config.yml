@@ -96,7 +96,7 @@ jobs:
             yarn release --linux --win
             mkdir .snapcraft
             echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
-            snapcraft push *.snap --release stable
+            snapcraft push dist/*.snap --release stable
 
 workflows:
   version: 2
