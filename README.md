@@ -16,11 +16,6 @@ Native notifications are working for all OS, you will get a notification when yo
 
 ![Notifications on Windows 10](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/win-notification.png)![Notifications on Elementary OS](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/linux-notification.png)
 
-##### Known bugs
-
-* View headers inside an email does not work
-
-
 ## Dev and contributing
 
 Built with [Electron](http://electron.atom.io) and React. Write unit tests for new functionality and add e2e test when appropriate.
