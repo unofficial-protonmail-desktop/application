@@ -94,7 +94,7 @@ jobs:
           name: deploy
           command: |
             yarn release --linux --win
-            mkdir .snap
+            mkdir .snapcraft
             echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
             snapcraft push *.snap --release stable
 
