@@ -2,6 +2,8 @@ ProtonMail Desktop [![license](https://img.shields.io/github/license/beatplus/pr
 ======
 ![Protonmail Desktop on Linux](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/linux-screenshot.png)
 
+[![Download from Snap Store](https://user-images.githubusercontent.com/45159366/54588580-a9b19400-49e0-11e9-86aa-7190fe124925.png)](https://snapcraft.io/protonmail-desktop-unofficial)
+
 ProtonMail Desktop is an **unofficial** app that emulates a native client for the ProtonMail e-mail service. Check out more about Protonmail in [their website](https://protonmail.com).
 
 We are not affiliated with ProtonMail team. All copyrights belong to their respective owners.
