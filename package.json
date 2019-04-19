@@ -1,6 +1,6 @@
 {
-  "name": "protonmail-desktop",
-  "productName": "Protonmail Desktop",
+  "name": "protonmail-desktop-unofficial",
+  "productName": "Protonmail Desktop (unofficial)",
   "description": "Unofficial Electron wrapper for ProtonMail",
   "version": "1.0.0",
   "author": {
