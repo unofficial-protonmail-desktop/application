@@ -9351,10 +9351,10 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.1, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-beautiful-dnd@11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-11.0.0.tgz#c7a9b7afe9824c6bdcaab84d41a1af7708fd7e0a"
-  integrity sha512-yL5YSE73e1Obl/aUYVZ/cBfcK2nF04r9POaJ75Fq6838DHqqeAUpYjOF8JvHiNXzUbIl3ALdoUoLCUbS0D+aWg==
+react-beautiful-dnd@11.0.1:
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-11.0.1.tgz#2790a1d5404f28555e4f53850257ca1c84f780bb"
+  integrity sha512-GEdXVO53IXUDVphEo+6wh1mmR1uRqCPRshUsguuQjcryeaczS8g5BEqoS5PlWfuNzFvsJZzG1SQQQbk6Q4tx1g==
   dependencies:
     "@babel/runtime-corejs2" "^7.4.3"
     css-box-model "^1.1.1"
@@ -9363,7 +9363,7 @@ react-beautiful-dnd@11.0.0:
     react-redux "^7.0.2"
     redux "^4.0.1"
     tiny-invariant "^1.0.4"
-    use-memo-one "^1.0.1"
+    use-memo-one "^1.1.0"
 
 react-dom@^16.4:
   version "16.8.3"
@@ -11622,10 +11622,10 @@ urlgrey@^0.4.4:
   resolved "https://registry.yarnpkg.com/urlgrey/-/urlgrey-0.4.4.tgz#892fe95960805e85519f1cd4389f2cb4cbb7652f"
   integrity sha1-iS/pWWCAXoVRnxzUOJ8stMu3ZS8=
 
-use-memo-one@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/use-memo-one/-/use-memo-one-1.0.1.tgz#e2aea0cb4b41e9292391908e951526998358bfa7"
-  integrity sha512-j4R9HCMUVktNm7D3qnNglesHs67Wnmib8z5rrvUXTlKsB4LcSYMKsmJes+rUrlKCdVqVyYuDHBRsmIcverwbDg==
+use-memo-one@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/use-memo-one/-/use-memo-one-1.1.0.tgz#9392ec84881af047f22aef4bcb9cd1c333899613"
+  integrity sha512-mGmKaX2vauOWpFas4mGXj65JXkueLcca3OsT2iBKwB/Nl7NQeABIzBYq/HzVkFvnHXsf/S59DNN5UEOU+Bp1uw==
 
 use@^3.1.0:
   version "3.1.1"
