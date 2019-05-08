@@ -762,10 +762,10 @@
     pirates "^4.0.0"
     source-map-support "^0.5.9"
 
-"@babel/runtime-corejs2@^7.4.3":
-  version "7.4.3"
-  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs2/-/runtime-corejs2-7.4.3.tgz#40271fc260e570fb356da984e42e5990bd275860"
-  integrity sha512-anTLTF7IK8Hd5f73zpPzt875I27UaaTWARJlfMGgnmQhvEe1uNHQRKBUbXL0Gc0VEYiVzsHsTPso5XdK8NGvFg==
+"@babel/runtime-corejs2@^7.4.4":
+  version "7.4.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs2/-/runtime-corejs2-7.4.4.tgz#4d4519a4c85e9d98fdff59f5371758a34ae07923"
+  integrity sha512-hE7oVwVsRws84u5/nkaWWdN2J4SXEGuXKjrAsP0E4nkYImjSbpdHfGTS2nvFc82aDGIuG6OzhAQMpIzTHuZeKA==
   dependencies:
     core-js "^2.6.5"
     regenerator-runtime "^0.13.2"
@@ -3449,12 +3449,12 @@ crypto-random-string@^1.0.0:
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-1.0.0.tgz#a230f64f568310e1498009940790ec99545bca7e"
   integrity sha1-ojD2T1aDEOFJgAmUB5DsmVRbyn4=
 
-css-box-model@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/css-box-model/-/css-box-model-1.1.1.tgz#c9fd8e7a8b1d59d41d6812fd1765433f671b2ee0"
-  integrity sha512-ZxbuLFeAPEDb0wPbGfT7783Vb00MVAkvOlMKwr0kA2PD5EGxk6P3MAhedvVuyVJCWb54bb+6HQ7pdPYENf8AZw==
+css-box-model@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/css-box-model/-/css-box-model-1.1.2.tgz#c0e2c9d23b1b2fd98759706b88cfd4e2c38db727"
+  integrity sha512-pFBTZXDPcr61VZzhZgZaulX1Ot0Q5CfXMjFjbWK5NuzZFsi9H4kBOyEZ9FiBvbe1TimJxIJO4WFsLP4/EBBtkg==
   dependencies:
-    tiny-invariant "^1.0.3"
+    tiny-invariant "^1.0.4"
 
 css-loader@2.1.1:
   version "2.1.1"
@@ -9339,16 +9339,16 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.1, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-beautiful-dnd@11.0.1:
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-11.0.1.tgz#2790a1d5404f28555e4f53850257ca1c84f780bb"
-  integrity sha512-GEdXVO53IXUDVphEo+6wh1mmR1uRqCPRshUsguuQjcryeaczS8g5BEqoS5PlWfuNzFvsJZzG1SQQQbk6Q4tx1g==
+react-beautiful-dnd@11.0.3:
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-11.0.3.tgz#5678bb3e725d8b56cb7cf57f56e952105fc4f2af"
+  integrity sha512-2FX2SnOlKMmfn90xUHCav7cxRWXwY7FeRa6TzdxWeX7DdP5JTvVQcsWgiOkdbJSj+J+1q1nA9QO4/HQ52D0DAA==
   dependencies:
-    "@babel/runtime-corejs2" "^7.4.3"
-    css-box-model "^1.1.1"
+    "@babel/runtime-corejs2" "^7.4.4"
+    css-box-model "^1.1.2"
     memoize-one "^5.0.4"
     raf-schd "^4.0.0"
-    react-redux "^7.0.2"
+    react-redux "^7.0.3"
     redux "^4.0.1"
     tiny-invariant "^1.0.4"
     use-memo-one "^1.1.0"
@@ -9410,10 +9410,10 @@ react-redux@^7.0.0:
     prop-types "^15.7.2"
     react-is "^16.8.6"
 
-react-redux@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.0.2.tgz#34b280a3482aaf60e7d4a504b1295165cbe6b86a"
-  integrity sha512-uKRuMgQt8dWbcz0U75oFK5tDo3boyAKrqvf/j94vpqRFFZfyDDy4kofUgloFIGyuKTq2Zz51zgK9RzOTFXk5ew==
+react-redux@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.0.3.tgz#983c5a6de81cb1e696bd1c090ba826545f9170f1"
+  integrity sha512-vYZA7ftOYlDk3NetitsI7fLjryt/widNl1SLXYvFenIpm7vjb4ryK0EeFrgn62usg5fYkyIAWNUPKnwWPevKLg==
   dependencies:
     "@babel/runtime" "^7.4.3"
     hoist-non-react-statics "^3.3.0"
@@ -11167,7 +11167,7 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-tiny-invariant@^1.0.2, tiny-invariant@^1.0.3:
+tiny-invariant@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.0.3.tgz#91efaaa0269ccb6271f0296aeedb05fc3e067b7a"
   integrity sha512-ytQx8T4DL8PjlX53yYzcIC0WhIZbpR0p1qcYjw2pHu3w6UtgWwFJQ/02cnhOnBBhlFx/edUIfcagCaQSe3KMWg==
