@@ -125,7 +125,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "electron-context-menu": "^0.12.0",
     "electron-context-menu-handler": "^1.0.3",
-    "electron-debug": "^2.0.0",
+    "electron-debug": "^3.0.0",
     "electron-dl": "^1.9.0",
     "electron-settings": "^3.2.0",
     "electron-updater": "4.0.6",
