@@ -61,7 +61,8 @@ function createMainWindow() {
     webPreferences: {
       preload: './renderer.js',
       nodeIntegration: true,
-      plugins: true
+      plugins: true,
+      webviewTag: true,
     }
   });
 
