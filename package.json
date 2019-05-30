@@ -104,6 +104,7 @@
     "build:main": "webpack --config config/webpack.main.js",
     "build": "npm run build:renderer && npm run build:main",
     "build:prod": "cross-env NAME=production npm run build",
+    "build-release": "electron-builder -p onTagOrDraft",
     "coverage": "yarn coverage:main && yarn coverage:renderer",
     "coverage:ci": "yarn coverage && yarn nyc merge coverage && yarn codecov -f coverage.json",
     "coverage:main": "cross-env NODE_ENV=test_main yarn test:main",

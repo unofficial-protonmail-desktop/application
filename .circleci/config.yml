@@ -81,7 +81,7 @@ jobs:
       - *step-restore-cache
       - *step-yarn-install
       - *step-build
-      - run: yarn release
+      - run: yarn build-release
   deploy-linux:
     docker:
       - image: electronuserland/builder:wine
@@ -93,7 +93,7 @@ jobs:
       - run:
           name: deploy
           command: |
-            yarn release --linux --win
+            yarn build-release --linux --win
             mkdir .snapcraft
             echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
             snapcraft push dist/*.snap --release stable
