@@ -17,6 +17,7 @@
   "main": "app/background.js",
   "build": {
     "appId": "com.beatplus.pronmail-desktop",
+    "afterPack": "scripts/after-pack.js",
     "publish": [
       "github"
     ],
