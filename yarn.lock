@@ -4247,13 +4247,6 @@ electron-chromedriver@~3.0.0:
     electron-download "^4.1.0"
     extract-zip "^1.6.5"
 
-electron-context-menu-handler@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/electron-context-menu-handler/-/electron-context-menu-handler-1.0.3.tgz#9b13a39767b3a4daf0cbe292a24bf450f955bc01"
-  integrity sha512-8gjXgnxpQb+8PystnK40jXw5Cbz6yZflVwTjt66Ou+e74E+SKFrZsQP7y/jgqhsg/ZSjGE6bUdRZrQc83UvElA==
-  dependencies:
-    electron-context-menu "^0.9.1"
-
 electron-context-menu@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-0.12.0.tgz#ee882a3e9bf219df0e0b9473ca041ef40940fccd"
@@ -4261,14 +4254,6 @@ electron-context-menu@^0.12.0:
   dependencies:
     electron-dl "^1.2.0"
     electron-is-dev "^1.0.1"
-
-electron-context-menu@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-0.9.1.tgz#ed4df20c080491c3c996abfcb363159946a38058"
-  integrity sha1-7U3yDAgEkcPJlqv8s2MVmUajgFg=
-  dependencies:
-    electron-dl "^1.2.0"
-    electron-is-dev "^0.1.1"
 
 electron-debug@^3.0.0:
   version "3.0.0"
@@ -4316,11 +4301,6 @@ electron-is-accelerator@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/electron-is-accelerator/-/electron-is-accelerator-0.1.2.tgz#509e510c26a56b55e17f863a4b04e111846ab27b"
   integrity sha1-UJ5RDCala1Xhf4Y6SwThEYRqsns=
-
-electron-is-dev@^0.1.1:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.1.2.tgz#8a1043e32b3a1da1c3f553dce28ce764246167e3"
-  integrity sha1-ihBD4ys6HaHD9VPc4oznZCRhZ+M=
 
 electron-is-dev@^1.0.1:
   version "1.0.1"
