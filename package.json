@@ -167,7 +167,7 @@
     "electron": "5.0.3",
     "electron-builder": "20.43.0",
     "electron-devtools-installer": "2.2.4",
-    "electron-mocha": "8.0.2",
+    "electron-mocha": "8.0.3",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
     "eslint": "5.16.0",
