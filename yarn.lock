@@ -4641,16 +4641,18 @@ eslint-plugin-mocha@5.3.0:
   dependencies:
     ramda "^0.26.1"
 
-eslint-plugin-react@7.13.0:
-  version "7.13.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.13.0.tgz#bc13fd7101de67996ea51b33873cd9dc2b7e5758"
-  integrity sha512-uA5LrHylu8lW/eAH3bEQe9YdzpPaFd9yAJTwTi/i/BKTD7j6aQMKVAdGM/ML72zD6womuSK7EiGtMKuK06lWjQ==
+eslint-plugin-react@7.14.1:
+  version "7.14.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.14.1.tgz#0b49bed8c18b5c2819ea4eb4fdda93e236643198"
+  integrity sha512-fQSIHJ3t0tYgctUyPbcjDPgNUTM6jNFguFKi73ctNjq+8KgqSynMMltakn60/VTtvmNSxOtju/j8Yby8mNn3bQ==
   dependencies:
     array-includes "^3.0.3"
     doctrine "^2.1.0"
     has "^1.0.3"
     jsx-ast-utils "^2.1.0"
+    object.entries "^1.1.0"
     object.fromentries "^2.0.0"
+    object.values "^1.1.0"
     prop-types "^15.7.2"
     resolve "^1.10.1"
 
