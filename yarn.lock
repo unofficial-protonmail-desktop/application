@@ -3051,6 +3051,14 @@ cli-cursor@^2.1.0:
   dependencies:
     restore-cursor "^2.0.0"
 
+cli-truncate@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/cli-truncate/-/cli-truncate-2.0.0.tgz#68ff6aaa53b203b52ad89b8b1a80f1f61ad1e1d5"
+  integrity sha512-C4hp+8GCIFVsUUiXcw+ce+7wexVWImw8rQrgMBFsqerx9LvvcGlwm6sMjQYAEmV/Xb87xc1b5Ttx505MSpZVqg==
+  dependencies:
+    slice-ansi "^2.1.0"
+    string-width "^4.1.0"
+
 cli-width@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
@@ -4336,11 +4344,12 @@ electron-chromedriver@^5.0.1:
     electron-download "^4.1.1"
     extract-zip "^1.6.7"
 
-electron-context-menu@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-0.12.0.tgz#ee882a3e9bf219df0e0b9473ca041ef40940fccd"
-  integrity sha512-kZEPG3a864UQOZDJnfsVUiWjhonIpfPPtH8Z7luvPUf7sra/Sz1x2n3aRnyzGN8jQhgRvQomJg/QKXHNbZZ/+g==
+electron-context-menu@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-0.13.0.tgz#4c8fc8b7193a794f187d4f58e88254431c56c3e9"
+  integrity sha512-a98UDykOn+tiyb2mQEz710ZNWj/L85wHv6jRUJFE9GNLSaRH5I5BR022RYoWInLTj1Mns66vh9SueyMPWc+aTQ==
   dependencies:
+    cli-truncate "^2.0.0"
     electron-dl "^1.2.0"
     electron-is-dev "^1.0.1"
 
