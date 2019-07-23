@@ -8,7 +8,7 @@ cache:
   - '%USERPROFILE%\.electron'
 
 install:
-  - ps: Install-Product node 8
+  - ps: Install-Product node 10.16.0
   - yarn --frozen-lockfile
 
 test_script:
