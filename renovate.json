@@ -15,7 +15,8 @@
         "jest",
         "mocha",
         "sinon",
-        "spectron"
+        "spectron",
+        "stylelint"
       ]
     }
   ]
