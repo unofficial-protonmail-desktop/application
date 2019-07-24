@@ -158,7 +158,7 @@
     "chai": "4.2.0",
     "chai-enzyme": "1.0.0-beta.1",
     "codecov": "3.5.0",
-    "commitizen": "3.1.2",
+    "commitizen": "4.0.3",
     "copy-webpack-plugin": "4.6.0",
     "cross-env": "5.2.0",
     "css-loader": "3.1.0",
