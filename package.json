@@ -190,7 +190,7 @@
     "source-map-support": "0.5.12",
     "spectron": "7.0.0",
     "standard-version": "7.0.0",
-    "style-loader": "0.23.1",
+    "style-loader": "1.0.0",
     "stylelint": "10.1.0",
     "stylelint-config-standard": "18.3.0",
     "url-loader": "2.1.0",
