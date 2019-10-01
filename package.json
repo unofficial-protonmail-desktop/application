@@ -170,7 +170,7 @@
     "electron-mocha": "8.1.2",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
-    "eslint": "6.5.0",
+    "eslint": "6.5.1",
     "eslint-plugin-mocha": "6.1.1",
     "eslint-plugin-react": "7.14.3",
     "file-loader": "4.2.0",
