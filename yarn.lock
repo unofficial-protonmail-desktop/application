@@ -11595,10 +11595,10 @@ stylelint-config-standard@19.0.0:
   dependencies:
     stylelint-config-recommended "^3.0.0"
 
-stylelint@11.1.0:
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-11.1.0.tgz#21fed4cee14cce7feb9632b71c4e55f07e53bfa8"
-  integrity sha512-P8kindQ6w41GXW+MxCusAE26/MV+ubgbRmiOGGGnhaBlOGbGCcF3x0oXtyySYNlK8SJnorO6smT5B8KkKHWKZA==
+stylelint@11.1.1:
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-11.1.1.tgz#6dbbb348036576ac6b033ddfedba72a877c1d6bb"
+  integrity sha512-Vx6TAJsxG6qksiFvxQTKriQhp1CqUWdpTDITEkAjTR+l+8Af7qNlvrUDXfpuFJgXh/ayF8xdMSKE+SstcsPmMA==
   dependencies:
     autoprefixer "^9.5.1"
     balanced-match "^1.0.0"
