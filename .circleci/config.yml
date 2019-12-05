@@ -3,7 +3,7 @@ version: 2.1
 executors:
   docker-env:
     docker:
-      - image: circleci/node:12.13.1-browsers
+      - image: circleci/node:12.13.0-browsers
   macos-env:
     macos:
       xcode: "10.2.0"
@@ -11,25 +11,34 @@ executors:
 step-save-cache: &step-save-cache
   save_cache:
     paths:
+      - ~/.nvm
       - ~/.cache/yarn
       - ~/.cache/electron
       - ~/.cache/electron-builder
-    key: yarn-packages-v3-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    key: yarn-packages-v3-{{ arch }}-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
 
 step-restore-cache: &step-restore-cache
   restore_cache:
     keys:
-      - yarn-packages-v3-{{ arch }}--{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - yarn-packages-v3-{{ arch }}--{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
       - yarn-packages-v3-{{ arch }}
 
+step-nvm-install: &step-nvm-install
+  run:
+    command: |
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash || true
+      echo ". ~/.nvm/nvm.sh" >> $BASH_ENV
+      . ~/.nvm/nvm.sh --install
+      nvm install
+
 step-yarn-install: &step-yarn-install
-  run: yarn install --frozen-lockfile
+  run: nvm use && yarn install --frozen-lockfile
 
 step-build: &step-build
-  run: yarn build:prod
+  run: nvm use && yarn build:prod
 
 step-e2e: &step-e2e
-  run: yarn e2e
+  run: nvm use && yarn e2e
 
 filter-tag: &filter-tag
   tags:
@@ -51,6 +60,7 @@ jobs:
             echo 'export ELECTRON_CACHE="$HOME/.cache/electron"' >> $BASH_ENV
             echo 'export ELECTRON_BUILDER_CACHE="$HOME/.cache/electron-builder"' >> $BASH_ENV
       - *step-restore-cache
+      - *step-nvm-install
       - *step-yarn-install
       - *step-save-cache
       - run: yarn lint
@@ -59,6 +69,7 @@ jobs:
     steps:
       - checkout
       - *step-restore-cache
+      - *step-nvm-install
       - *step-yarn-install
       - run: yarn coverage:ci
       - *step-build
@@ -68,6 +79,7 @@ jobs:
     steps:
       - checkout
       - *step-restore-cache
+      - *step-nvm-install
       - *step-yarn-install
       - *step-save-cache
       - run: yarn test
@@ -78,6 +90,7 @@ jobs:
     steps:
       - checkout
       - *step-restore-cache
+      - *step-nvm-install
       - *step-yarn-install
       - *step-build
       - run: yarn build-release
@@ -87,7 +100,9 @@ jobs:
     steps:
       - checkout
       - *step-restore-cache
+      - *step-nvm-install
       - *step-yarn-install
+      - *step-save-cache
       - *step-build
       - run:
           name: deploy
