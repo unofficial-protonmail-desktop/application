@@ -3,7 +3,7 @@ version: 2.1
 executors:
   docker-env:
     docker:
-      - image: circleci/node:10.16.0-jessie-browsers-legacy
+      - image: circleci/node:12.13.1-browsers-legacy
       - image: cibuilds/snapcraft:stable
   macos-env:
     macos:
