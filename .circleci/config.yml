@@ -107,7 +107,7 @@ jobs:
       - run:
           name: deploy
           command: |
-            yarn build-release --linux --win
+            yarn build-release --linux --win -c.snap.publish=github # https://github.com/electron-userland/electron-builder/issues/4142
             mkdir .snapcraft
             echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
             snapcraft push dist/*.snap --release stable
