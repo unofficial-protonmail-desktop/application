@@ -9,7 +9,6 @@ const beforeEach = function (env = {}) {
   this.app = new Application({
     path: electron,
     args: ['.', 'test'],
-    chromeDriverArgs: ['--no-sandbox'],
     startTimeout: 50000,
     waitTimeout: 50000,
     chromeDriverLogPath: process.cwd().concat('/chrome-driver.log'),
