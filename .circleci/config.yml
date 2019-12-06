@@ -4,6 +4,7 @@ executors:
   docker-env:
     docker:
       - image: circleci/node:12.18.2-browsers
+        user: node
   macos-env:
     macos:
       xcode: "10.2.0"
@@ -15,17 +16,19 @@ step-save-cache: &step-save-cache
       - ~/.cache/yarn
       - ~/.cache/electron
       - ~/.cache/electron-builder
-    key: yarn-packages-v3-{{ arch }}-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
+    key: yarn-packages-v4-{{ arch }}-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
 
 step-restore-cache: &step-restore-cache
   restore_cache:
     keys:
-      - yarn-packages-v3-{{ arch }}--{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
-      - yarn-packages-v3-{{ arch }}
+      - yarn-packages-v4-{{ arch }}--{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
+      - yarn-packages-v4-{{ arch }}
 
 step-nvm-install: &step-nvm-install
   run:
     command: |
+      sudo apt update
+      sudo apt install libxcomposite-dev libxcursor-dev libxtst-dev libgdk-pixbuf2.0-0 libgtk-3-dev libxss-dev libasound-dev libnss3-dev -y
       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash || true
       echo ". ~/.nvm/nvm.sh" >> $BASH_ENV
       . ~/.nvm/nvm.sh --install
