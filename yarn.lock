@@ -4732,10 +4732,10 @@ electron-dl@^1.2.0:
     pupa "^1.0.0"
     unused-filename "^1.0.0"
 
-electron-dl@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/electron-dl/-/electron-dl-2.0.0.tgz#54ffd6850bc1681949405497e0351fde824ba7a6"
-  integrity sha512-crv64+Z2ZCsHCoJHBBOypDKx8cy+4jTGMc5/rDDzIajihDN/wITkJOdb6XG8b43YlWr3NS1/r6j+IdwaFNmMiQ==
+electron-dl@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/electron-dl/-/electron-dl-3.0.0.tgz#42c5cb572af44e90b3aa4b709a14abe701bbc31c"
+  integrity sha512-TeBRv+vQgNVLGf/XLV4EYfYIBMI4TQcw84aDlM8xEm/1Lgxux3PUXDzaingivf+6jMvRojXSRPTHmiWI/6LrqQ==
   dependencies:
     ext-name "^5.0.0"
     pupa "^2.0.1"
