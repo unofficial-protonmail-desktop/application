@@ -184,7 +184,7 @@
     "node-sass": "4.13.0",
     "nyc": "15.0.0",
     "path": "0.12.7",
-    "sass-loader": "8.0.0",
+    "sass-loader": "8.0.2",
     "sinon": "8.1.1",
     "sinon-chai": "3.4.0",
     "source-map-support": "0.5.16",
