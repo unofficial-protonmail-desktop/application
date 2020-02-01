@@ -4724,10 +4724,10 @@ electron-chromedriver@^5.0.1:
     electron-download "^4.1.1"
     extract-zip "^1.6.7"
 
-electron-context-menu@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-0.15.0.tgz#0a5abe8e73aca9cd9b891ce62830c984ecedff51"
-  integrity sha512-XLdtbX90NPkWycG3IzwtCmfX4ggu+lofNOW1nVRStb+ScFs49WTourW1k77Z4DTyThR3gUHg3UPXVBMbW1gNsg==
+electron-context-menu@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-0.16.0.tgz#4f53b4640e321f536415a625505a908518f5dff7"
+  integrity sha512-lGr1/nRlNGmU8THc0hl2dYEB5bwXJpsi7vCjjsnsNGJKPZZLY8nHY3xvtjdtwKocErvp1h8wUb19moWenzoGPw==
   dependencies:
     cli-truncate "^2.0.0"
     electron-dl "^1.2.0"
