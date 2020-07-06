@@ -187,7 +187,7 @@
     "sass-loader": "8.0.0",
     "sinon": "8.1.1",
     "sinon-chai": "3.5.0",
-    "source-map-support": "0.5.16",
+    "source-map-support": "0.5.19",
     "spectron": "7.0.0",
     "standard-version": "7.1.0",
     "style-loader": "1.1.2",
