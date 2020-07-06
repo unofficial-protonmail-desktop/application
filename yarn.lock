@@ -5096,13 +5096,13 @@ electron-chromedriver@^5.0.1:
     electron-download "^4.1.1"
     extract-zip "^1.6.7"
 
-electron-context-menu@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-0.16.0.tgz#4f53b4640e321f536415a625505a908518f5dff7"
-  integrity sha512-lGr1/nRlNGmU8THc0hl2dYEB5bwXJpsi7vCjjsnsNGJKPZZLY8nHY3xvtjdtwKocErvp1h8wUb19moWenzoGPw==
+electron-context-menu@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/electron-context-menu/-/electron-context-menu-2.1.0.tgz#6066e2ee599d818f5ec6fd19404bee82065e5649"
+  integrity sha512-xnJS4C24W/h6rw2fbRYMiHCHWzbJeuhPTLJR88lJ+jSnO8VKY0oOolE2AeL/zTTiUYrOXF+3POcfpSoaF0d8Pw==
   dependencies:
     cli-truncate "^2.0.0"
-    electron-dl "^1.2.0"
+    electron-dl "^3.0.0"
     electron-is-dev "^1.0.1"
 
 electron-debug@^3.0.0:
@@ -5123,19 +5123,19 @@ electron-devtools-installer@2.2.4:
     rimraf "^2.5.2"
     semver "^5.3.0"
 
-electron-dl@^1.2.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/electron-dl/-/electron-dl-1.13.0.tgz#410981363fcee6909860acfd2b376f31ce0faa59"
-  integrity sha512-0sg/g7zOuH5TABWSgsqFB275jbRCkIxYq6Nz1lFqMQP/Z93EF2mOo+RPNL1CyFH0dEZLFOvPgwmSMqiPICVOyQ==
-  dependencies:
-    ext-name "^5.0.0"
-    pupa "^1.0.0"
-    unused-filename "^1.0.0"
-
 electron-dl@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/electron-dl/-/electron-dl-2.0.0.tgz#54ffd6850bc1681949405497e0351fde824ba7a6"
   integrity sha512-crv64+Z2ZCsHCoJHBBOypDKx8cy+4jTGMc5/rDDzIajihDN/wITkJOdb6XG8b43YlWr3NS1/r6j+IdwaFNmMiQ==
+  dependencies:
+    ext-name "^5.0.0"
+    pupa "^2.0.1"
+    unused-filename "^2.1.0"
+
+electron-dl@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/electron-dl/-/electron-dl-3.0.1.tgz#206b77a66f3a7450a0888d16b81bdd5021117241"
+  integrity sha512-JHEsUCusT7x/i682LNl1gJYWTiic71Sp3ykdvwbgywGuY19dLUd3VqkE5zI905e4Wy+G/pDcLjoeFo0SgCm3CA==
   dependencies:
     ext-name "^5.0.0"
     pupa "^2.0.1"
@@ -11073,11 +11073,6 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-pupa@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/pupa/-/pupa-1.0.0.tgz#9a9568a5af7e657b8462a6e9d5328743560ceff6"
-  integrity sha1-mpVopa9+ZXuEYqbp1TKHQ1YM7/Y=
-
 pupa@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pupa/-/pupa-2.0.1.tgz#dbdc9ff48ffbea4a26a069b6f9f7abb051008726"
@@ -13841,14 +13836,6 @@ unset-value@^1.0.0:
   dependencies:
     has-value "^0.3.1"
     isobject "^3.0.0"
-
-unused-filename@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/unused-filename/-/unused-filename-1.0.0.tgz#d340880f71ae2115ebaa1325bef05cc6684469c6"
-  integrity sha1-00CID3GuIRXrqhMlvvBcxmhEacY=
-  dependencies:
-    modify-filename "^1.1.0"
-    path-exists "^3.0.0"
 
 unused-filename@^2.1.0:
   version "2.1.0"
