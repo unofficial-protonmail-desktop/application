@@ -9,12 +9,12 @@
       "packagePatterns": [
         "babel-eslint",
         "babel-jest",
-        "chai",
-        "enzyme",
-        "eslint",
-        "jest",
-        "mocha",
-        "sinon",
+        "^chai",
+        "^enzyme",
+        "^eslint",
+        "^jest",
+        "^mocha",
+        "^sinon",
         "spectron",
         "stylelint"
       ]
