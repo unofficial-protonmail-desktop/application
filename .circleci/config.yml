@@ -16,13 +16,13 @@ step-save-cache: &step-save-cache
       - ~/.cache/yarn
       - ~/.cache/electron
       - ~/.cache/electron-builder
-    key: yarn-packages-v3-{{ arch }}-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
+    key: yarn-packages-v4-{{ arch }}-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
 
 step-restore-cache: &step-restore-cache
   restore_cache:
     keys:
-      - yarn-packages-v3-{{ arch }}--{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
-      - yarn-packages-v3-{{ arch }}
+      - yarn-packages-v4-{{ arch }}--{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
+      - yarn-packages-v4-{{ arch }}
 
 step-nvm-install: &step-nvm-install
   run:
