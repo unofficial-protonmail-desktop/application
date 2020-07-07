@@ -5138,15 +5138,6 @@ electron-devtools-installer@3.1.0:
     unzip-crx "^0.2.0"
 
 electron-dl@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/electron-dl/-/electron-dl-3.0.0.tgz#42c5cb572af44e90b3aa4b709a14abe701bbc31c"
-  integrity sha512-TeBRv+vQgNVLGf/XLV4EYfYIBMI4TQcw84aDlM8xEm/1Lgxux3PUXDzaingivf+6jMvRojXSRPTHmiWI/6LrqQ==
-  dependencies:
-    ext-name "^5.0.0"
-    pupa "^2.0.1"
-    unused-filename "^2.1.0"
-
-electron-dl@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/electron-dl/-/electron-dl-3.0.1.tgz#206b77a66f3a7450a0888d16b81bdd5021117241"
   integrity sha512-JHEsUCusT7x/i682LNl1gJYWTiic71Sp3ykdvwbgywGuY19dLUd3VqkE5zI905e4Wy+G/pDcLjoeFo0SgCm3CA==
@@ -5255,10 +5246,10 @@ electron-window@^0.8.0:
   dependencies:
     is-electron-renderer "^2.0.0"
 
-electron@7.1.3:
-  version "7.1.3"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-7.1.3.tgz#9f6779846ced5b145b6303f10dcf4bf7f84e7f27"
-  integrity sha512-FdzGNR/tX0kC53lQnL7K+ZrxwrxKHf9i8KdL+O2LF5yXHJ3M8oZWc0OM1+nfqQUWCBoBV+7UblMF0+6E/tplEg==
+electron@7.2.4:
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-7.2.4.tgz#9fc0446dae23ead897af8742470cb18da55c6ce9"
+  integrity sha512-Z+R692uTzXgP8AHrabE+kkrMlQJ6pnAYoINenwj9QSqaD2YbO8IuXU9DMCcUY0+VpA91ee09wFZJNUKYPMnCKg==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"
