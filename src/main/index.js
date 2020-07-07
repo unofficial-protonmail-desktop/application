@@ -36,14 +36,14 @@ let isQuitting = false;
 function createMainWindow() {
   if (process.argv.indexOf('test') !== -1) {
     try {
-      settings.deleteAll();
+      settings.unset();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
   }
 
-  const isDarkMode = settings.get('darkMode');
+  const isDarkMode = settings.getSync('darkMode');
 
   const win = new createWindow('main', {
     title: app.name,
@@ -53,7 +53,7 @@ function createMainWindow() {
     icon: process.platform === 'linux' && path.join(__dirname, 'images/Icon.png'),
     minWidth: 1000,
     minHeight: 700,
-    alwaysOnTop: settings.get('alwaysOnTop'),
+    alwaysOnTop: settings.getSync('alwaysOnTop'),
     titleBarStyle: 'hiddenInset',
     autoHideMenuBar: true,
     darkTheme: isDarkMode, // GTK+3
