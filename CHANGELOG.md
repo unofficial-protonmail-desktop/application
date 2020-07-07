@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.5](https://github.com/protonmail-desktop/application/compare/v1.0.4...v1.0.5) (2020-07-07)
+
+
+### Bug Fixes
+
+* package.json & yarn.lock to reduce vulnerabilities ([33afcdd](https://github.com/protonmail-desktop/application/commit/33afcdd756654e434dd0ab460cf3907420730546))
+* **deps:** update dependency electron-context-menu to ^0.16.0 ([cfa65f7](https://github.com/protonmail-desktop/application/commit/cfa65f71476fcc7211c671cb923342ef6bc8f80a))
+* **deps:** update dependency electron-context-menu to v2 ([41aa99d](https://github.com/protonmail-desktop/application/commit/41aa99d63b39f6ed02681f66f0e11028cf83c5d3))
+* **deps:** update dependency electron-dl to v3 ([68c13d0](https://github.com/protonmail-desktop/application/commit/68c13d05f47c0a80472554c078862f68f57a45f8))
+* **deps:** update dependency electron-updater to v4.3.1 ([7888631](https://github.com/protonmail-desktop/application/commit/7888631b000c54e0176a591550f401dd0b937fa7))
+* **deps:** update dependency react-beautiful-dnd to v13 ([e2b8a11](https://github.com/protonmail-desktop/application/commit/e2b8a11dacd7ceecaa1deee36ad0a0fefbeee939))
+* package.json & yarn.lock to reduce vulnerabilities ([58b3d67](https://github.com/protonmail-desktop/application/commit/58b3d67b69765065d7b1dd21cd732dbdda630b04))
+* package.json & yarn.lock to reduce vulnerabilities ([c0be679](https://github.com/protonmail-desktop/application/commit/c0be6796e5b02d33f481af1701fbb5f2de6969d1))
+
 ### [1.0.4](https://github.com/protonmail-desktop/application/compare/v1.0.3...v1.0.4) (2019-12-05)
 
 
