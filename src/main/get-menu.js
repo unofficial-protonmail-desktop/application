@@ -2,7 +2,7 @@ import os from 'os';
 import path from 'path';
 import { app, shell, Menu, dialog } from 'electron';
 
-const appName = app.getName();
+const appName = app.name;
 const settings = require('electron-settings');
 const packageJson = require('../../package.json');
 
@@ -12,7 +12,7 @@ const getMenu = () => {
 
   -
 
-  ${app.getName()} ${app.getVersion()}
+  ${app.name} ${app.getVersion()}
   Electron ${process.versions.electron}
   ${process.platform} ${process.arch} ${os.release()}
   `;
