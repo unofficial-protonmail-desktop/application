@@ -81,9 +81,9 @@ const getMenu = () => {
           type: 'checkbox',
           label: 'Always on Top',
           accelerator: 'Ctrl+Shift+T',
-          checked: settings.get('alwaysOnTop'),
+          checked: settings.getSync('alwaysOnTop'),
           click(item, focusedWindow) {
-            settings.set('alwaysOnTop', item.checked);
+            settings.setSync('alwaysOnTop', item.checked);
             focusedWindow.setAlwaysOnTop(item.checked);
           },
         },
