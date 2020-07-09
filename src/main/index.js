@@ -46,7 +46,7 @@ function createMainWindow() {
   const isDarkMode = settings.get('darkMode');
 
   const win = new createWindow('main', {
-    title: app.getName(),
+    title: app.name,
     show: false,
     width: 1300,
     height: 850,

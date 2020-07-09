@@ -36,7 +36,7 @@ export default {
     ]);
 
     tray = new Tray(ICONS.TRAY);
-    tray.setToolTip(`${app.getName()}`);
+    tray.setToolTip(`${app.name}`);
     tray.setContextMenu(contextMenu);
     tray.on('click', toggleWin);
   },

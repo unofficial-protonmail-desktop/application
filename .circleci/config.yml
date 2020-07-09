@@ -4,6 +4,7 @@ executors:
   docker-env:
     docker:
       - image: circleci/node:12.18.2-browsers
+        user: node
   macos-env:
     macos:
       xcode: "10.2.0"
@@ -15,13 +16,13 @@ step-save-cache: &step-save-cache
       - ~/.cache/yarn
       - ~/.cache/electron
       - ~/.cache/electron-builder
-    key: yarn-packages-v3-{{ arch }}-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
+    key: yarn-packages-v4-{{ arch }}-{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
 
 step-restore-cache: &step-restore-cache
   restore_cache:
     keys:
-      - yarn-packages-v3-{{ arch }}--{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
-      - yarn-packages-v3-{{ arch }}
+      - yarn-packages-v4-{{ arch }}--{{ .Branch }}-{{ checksum ".nvmrc" }}-{{ checksum "yarn.lock" }}
+      - yarn-packages-v4-{{ arch }}
 
 step-nvm-install: &step-nvm-install
   run:
@@ -108,6 +109,19 @@ jobs:
           name: deploy
           command: |
             yarn build-release --linux --win -c.snap.publish=github # https://github.com/electron-userland/electron-builder/issues/4142
+      - persist_to_workspace:
+          root: .
+          paths:
+            - "dist/*.snap"
+  deploy-linux-snapcraft:
+    docker:
+      - image: cibuilds/snapcraft:stable
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: publish
+          command: |
             mkdir .snapcraft
             echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
             snapcraft push dist/*.snap --release stable
@@ -132,6 +146,11 @@ workflows:
       - deploy-linux:
           requires:
             - test-linux
+          filters:
+            <<: *filter-tag-only
+      - deploy-linux-snapcraft:
+          requires:
+            - deploy-linux
           filters:
             <<: *filter-tag-only
       - deploy-macos:
