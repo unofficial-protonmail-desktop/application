@@ -1,11 +1,7 @@
 {
     "env": {
       "test_main": {
-        "plugins": [
-          ["istanbul", {
-            "coverageVariable": "__coverage__"
-          }]
-        ]
+        "plugins": ["istanbul"]
       }
     },
     "presets": [
