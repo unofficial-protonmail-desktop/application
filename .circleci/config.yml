@@ -151,6 +151,8 @@ workflows:
       - deploy-linux-snapcraft:
           requires:
             - deploy-linux
+          filters:
+            <<: *filter-tag-only
       - deploy-macos:
           requires:
             - test-macos
