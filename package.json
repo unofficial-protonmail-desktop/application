@@ -2,7 +2,7 @@
   "name": "protonmail-desktop-unofficial",
   "productName": "Protonmail Desktop (unofficial)",
   "description": "Unofficial Electron wrapper for ProtonMail",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": {
     "name": "Matthew Core <matcore@protonmail.com>",
     "email": "matcore@protonmail.com"
@@ -164,7 +164,7 @@
     "css-loader": "3.6.0",
     "css-to-string-loader": "0.1.3",
     "cz-conventional-changelog": "3.2.0",
-    "electron": "7.2.4",
+    "electron": "7.3.2",
     "electron-builder": "22.7.0",
     "electron-chromedriver": "7.0.0",
     "electron-devtools-installer": "3.1.0",
