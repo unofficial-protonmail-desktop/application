@@ -97,7 +97,7 @@ jobs:
       - run: yarn build-release
   deploy-linux:
     docker:
-      - image: electronuserland/builder:wine-01.19
+      - image: electronuserland/builder:wine
     steps:
       - checkout
       - *step-restore-cache
