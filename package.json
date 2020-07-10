@@ -82,9 +82,6 @@
     ]
   },
   "nyc": {
-    "exclude": [
-      "src/main/**/*.spec.js"
-    ],
     "sourceMap": false,
     "instrument": false
   },

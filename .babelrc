@@ -3,7 +3,8 @@
       "test_main": {
         "plugins": [
           ["istanbul", {
-            "coverageVariable": "__coverage__"
+            "coverageVariable": "__coverage__",
+            "exclude": ["**/*.spec.js"]
           }]
         ]
       }
