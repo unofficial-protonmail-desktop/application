@@ -14,12 +14,14 @@ module.exports = {
   },
 
   plugins: [
-    new CopyWebpackPlugin([
-      {
-        from: path.join(__dirname, '../src/main/images'),
-        to: path.join(__dirname, '../app/images'),
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, '../src/main/images'),
+          to: path.join(__dirname, '../app/images'),
+        },
+      ],
+    }),
     new webpack.EnvironmentPlugin({
 //      NODE_ENV: 'production',
 //      NAME: 'production',
