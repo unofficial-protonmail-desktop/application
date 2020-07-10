@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.6](https://github.com/protonmail-desktop/application/compare/v1.0.5...v1.0.6) (2020-07-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency electron-settings to v4 ([#574](https://github.com/protonmail-desktop/application/issues/574)) ([a7d84ed](https://github.com/protonmail-desktop/application/commit/a7d84edcdf4959712b09bd5700551f3b95b130b9))
+* **deps:** upgrade minimist to 1.2.5 ([f94dfe1](https://github.com/protonmail-desktop/application/commit/f94dfe1c3c4a6aaa1cea939a00830ff8fb6a6c19))
+
 ### [1.0.5](https://github.com/protonmail-desktop/application/compare/v1.0.4...v1.0.5) (2020-07-07)
 
 
