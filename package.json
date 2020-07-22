@@ -188,7 +188,7 @@
     "sinon-chai": "3.5.0",
     "source-map-support": "0.5.19",
     "spectron": "10.0.1",
-    "standard-version": "8.0.1",
+    "standard-version": "8.0.2",
     "style-loader": "1.2.1",
     "stylelint": "13.6.1",
     "stylelint-config-standard": "20.0.0",
