@@ -172,7 +172,7 @@
     "enzyme-adapter-react-16": "1.15.2",
     "eslint": "7.5.0",
     "eslint-plugin-mocha": "7.0.1",
-    "eslint-plugin-react": "7.20.3",
+    "eslint-plugin-react": "7.20.5",
     "file-loader": "6.0.0",
     "html-webpack-plugin": "4.3.0",
     "husky": "4.2.5",
