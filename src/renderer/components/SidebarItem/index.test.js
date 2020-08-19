@@ -10,6 +10,7 @@ describe('components/SidebarItem', () => {
     isActive: false,
     onOpenMenu: () => null,
     onRemoveAccount: () => null,
+    onReloadAccount: () => null,
     username: '',
   };
 

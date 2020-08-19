@@ -55,16 +55,25 @@ export class SidebarItem extends React.Component {
 export default class ConnectedSidebarItem extends React.Component {
   static propTypes = {
     onRemoveAccount: PropTypes.func.isRequired,
+    onReloadAccount: PropTypes.func.isRequired,
     username: PropTypes.string.isRequired,
   };
 
   menu = remote.Menu.buildFromTemplate([{
+    label: 'Reload',
+    visible: true,
+    click: () => {
+      this.props.onReloadAccount(this.props.username);
+    },
+  },
+  {
     label: 'Remove account',
     visible: true,
     click: () => {
       this.props.onRemoveAccount(this.props.username);
     },
-  }]);
+  },
+  ]);
 
   render() {
     return (
