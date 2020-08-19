@@ -51,7 +51,7 @@ function createMainWindow() {
     width: 1300,
     height: 850,
     icon: process.platform === 'linux' && path.join(__dirname, 'images/Icon.png'),
-    minWidth: 1000,
+    minWidth: 500,
     minHeight: 700,
     alwaysOnTop: settings.getSync('alwaysOnTop'),
     titleBarStyle: 'hiddenInset',
