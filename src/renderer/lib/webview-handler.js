@@ -1,4 +1,4 @@
-import cssOverrides from '!!css-to-string-loader!css-loader!sass-loader!../styles/protonmail_com.scss';
+import cssOverrides from '!!raw-loader!sass-loader!../styles/protonmail_com.scss';
 import * as contextMenu from 'electron-context-menu';
 import prefillUsername from './webview-handler-prefill-username';
 import getInjectableClassNameToggler from './get-injectable-class-name-toggler';
