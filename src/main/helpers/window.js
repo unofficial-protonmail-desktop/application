@@ -7,18 +7,17 @@ import { app, BrowserWindow, screen } from 'electron';
 import jetpack from 'fs-jetpack';
 
 export default function (name, options) {
-
-  var userDataDir = jetpack.cwd(app.getPath('userData'));
-  var stateStoreFile = 'window-state-' + name +'.json';
+  const userDataDir = jetpack.cwd(app.getPath('userData'));
+  const stateStoreFile = 'window-state-' + name +'.json';
   var defaultSize = {
     width: options.width,
     height: options.height
   };
-  var state = {};
-  var win;
+  let state = {};
+  let win;
 
   var restore = function () {
-    var restoredState = {};
+    let restoredState = {};
     try {
       restoredState = userDataDir.read(stateStoreFile, 'json');
     } catch (err) {
@@ -28,18 +27,19 @@ export default function (name, options) {
     return Object.assign({}, defaultSize, restoredState);
   };
 
-  var getCurrentPosition = function () {
-    var position = win.getPosition();
-    var size = win.getSize();
+  const getCurrentPosition = function () {
+    const [x, y] = win.getPosition();
+    const [width, height] = win.getSize();
+
     return {
-      x: position[0],
-      y: position[1],
-      width: size[0],
-      height: size[1]
+      x,
+      y,
+      width,
+      height,
     };
   };
 
-  var windowWithinBounds = function (windowState, bounds) {
+  const windowWithinBounds = function (windowState, bounds) {
     return windowState.x >= bounds.x &&
             windowState.y >= bounds.y &&
             windowState.x + windowState.width <= bounds.x + bounds.width &&
@@ -47,15 +47,15 @@ export default function (name, options) {
   };
 
   var resetToDefaults = function () {
-    var bounds = screen.getPrimaryDisplay().bounds;
+    const { bounds } = screen.getPrimaryDisplay();
     return Object.assign({}, defaultSize, {
       x: (bounds.width - defaultSize.width) / 2,
       y: (bounds.height - defaultSize.height) / 2
     });
   };
 
-  var ensureVisibleOnSomeDisplay = function (windowState) {
-    var visible = screen.getAllDisplays().some(function (display) {
+  const ensureVisibleOnSomeDisplay = function (windowState) {
+    const visible = screen.getAllDisplays().some(function (display) {
       return windowWithinBounds(windowState, display.bounds);
     });
     if (!visible) {
@@ -66,7 +66,7 @@ export default function (name, options) {
     return windowState;
   };
 
-  var saveState = function () {
+  const saveState = function () {
     if (!win.isMinimized()) {
       Object.assign(state, getCurrentPosition());
     }
