@@ -12,7 +12,8 @@ describe('components/Sidebar', () => {
     isHidden: false,
     location: {},
     onChangePosition: () => null,
-    onRemoveAccount: () => null
+    onRemoveAccount: () => null,
+    onReloadAccount: () => null,
   };
 
   it('should display an accurate add account button', () => {

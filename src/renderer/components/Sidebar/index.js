@@ -12,6 +12,7 @@ const Sidebar = ({
   isHidden,
   onChangePosition,
   onRemoveAccount,
+  onReloadAccount,
   location,
 }) =>
   <div className={[styles.container, isHidden && styles.containerHidden].filter(v => !!v).join(' ')}>
@@ -37,6 +38,7 @@ const Sidebar = ({
                         href={path}
                         isActive={isActive}
                         onRemoveAccount={onRemoveAccount}
+                        onReloadAccount={onReloadAccount}
                         unreadEmails={unreadEmails}
                         username={username}
                       />
@@ -62,6 +64,7 @@ Sidebar.propTypes = {
   isHidden: PropTypes.bool.isRequired,
   onChangePosition: PropTypes.func.isRequired,
   onRemoveAccount: PropTypes.func.isRequired,
+  onReloadAccount: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
 };
 

@@ -4,6 +4,7 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 
 import { TOGGLE_SIDEBAR_ITEM_POSITION } from './App/types';
+import { RELOAD_WEBVIEW } from '../middlewares/Webviews/types';
 import SidebarContainer from './Sidebar';
 
 describe('containers/Sidebar', () => {
@@ -36,6 +37,18 @@ describe('containers/Sidebar', () => {
       type: TOGGLE_SIDEBAR_ITEM_POSITION,
       from,
       to
+    });
+  });
+
+  it('should dispatch RELOAD_WEBVIEW upon onReloadAccount', () => {
+    const wrapper = shallow(<SidebarContainer {...defaultProps} store={store} />);
+
+    const name = 'dito';
+    wrapper.dive().props().onReloadAccount(name);
+
+    expect(store.dispatch).to.have.been.calledWith({
+      type: RELOAD_WEBVIEW,
+      name,
     });
   });
 });
