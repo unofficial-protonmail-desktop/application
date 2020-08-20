@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/protonmail-desktop/application/compare/v1.0.6...v1.1.0) (2020-08-20)
+
+
+### Features
+
+* **webview:** add reload option ([645267b](https://github.com/protonmail-desktop/application/commit/645267bdd636fd59e8decae6509d33856f4bcb33)), closes [#186](https://github.com/protonmail-desktop/application/issues/186)
+
+
+### Bug Fixes
+
+* **browserwindow:** decrease minWidth ([394117b](https://github.com/protonmail-desktop/application/commit/394117b003d26194e6f3acf12624108639d131e7)), closes [#203](https://github.com/protonmail-desktop/application/issues/203)
+* **deps:** update dependency electron-updater to v4.3.4 ([7238ee3](https://github.com/protonmail-desktop/application/commit/7238ee3fd8f845db0ea30393b83696162a56d8e4))
+* **deps:** update dependency fs-jetpack to v3 ([304202d](https://github.com/protonmail-desktop/application/commit/304202db430cdba2885dddc6248f8efdb007718c))
+* **webview:** load CSS overrides ([a489060](https://github.com/protonmail-desktop/application/commit/a489060451ae2c0e780572c0a73c8cd6d3df565c))
+* **window:** save maximized state ([10f156d](https://github.com/protonmail-desktop/application/commit/10f156d74426217fe69806eca860cbe7cf5854f0)), closes [#475](https://github.com/protonmail-desktop/application/issues/475)
+
 ### [1.0.6](https://github.com/protonmail-desktop/application/compare/v1.0.5...v1.0.6) (2020-07-10)
 
 
