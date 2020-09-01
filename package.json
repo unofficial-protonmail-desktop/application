@@ -167,7 +167,7 @@
     "cz-conventional-changelog": "3.2.0",
     "electron": "8.5.0",
     "electron-builder": "22.8.0",
-    "electron-chromedriver": "7.0.0",
+    "electron-chromedriver": "10.0.0",
     "electron-devtools-installer": "3.1.1",
     "electron-mocha": "9.1.0",
     "enzyme": "3.11.0",
