@@ -97,6 +97,10 @@ export class WebviewHandler {
     }
 
     const webview = document.createElement('webview');
+
+    const preloadPath = `file://${OUTPUT_DIR}/webview-preload.js`;
+
+    webview.setAttribute('preload', preloadPath);
     webview.setAttribute('src', url);
     webview.setAttribute('style', webviewStyle);
     webview.setAttribute('data-name', name);

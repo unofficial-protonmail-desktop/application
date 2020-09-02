@@ -1,3 +1,4 @@
+import { ipcRenderer } from 'electron';
 import WebviewHandler from '../../lib/webview-handler';
 import {
   DISPLAY_WEBVIEW,
@@ -17,6 +18,14 @@ const WebviewsMiddleware = ({ dispatch }) => next => action => {
       const webview = WebviewHandler.addWebview(action.name, url);
       dispatch(monitorWebview(webview, action.name));
       createdWebviews[action.name] = true;
+
+      webview.addEventListener('ipc-message', (event) => {
+        if (event.channel === 'notificationClick') {
+          ipcRenderer.send('notificationClick', event);
+
+          window.location.assign(`#/mailbox/${action.name}`);
+        }
+      });
     }
 
     WebviewHandler.show();

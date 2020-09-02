@@ -269,6 +269,7 @@ describe('lib/WebviewHandler', () => {
       expect(mockElem.setAttribute).to.have.been.calledWith('src', url);
       expect(mockElem.setAttribute).to.have.been.calledWith('style', sinon.match(/absolute/));
       expect(mockElem.setAttribute).to.have.been.calledWith('data-name', name);
+      expect(mockElem.setAttribute).to.have.been.calledWith('preload', sinon.match(/^file:\/\//));
 
       expect(webviewHandler.container.appendChild).to.have.been.calledWith(mockElem);
       expect(webviewHandler.addedWebviews).to.eql([name]);
