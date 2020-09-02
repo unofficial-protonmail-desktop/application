@@ -91,6 +91,9 @@
       "lcov",
       "text"
     ],
+    "globals": {
+      "OUTPUT_DIR": "/some/path"
+    },
     "setupFilesAfterEnv": [
       "<rootDir>/src/renderer/tests/setup.js"
     ],

@@ -1,4 +1,4 @@
-const { app, BrowserWindow }  = require('electron');
+const { app, ipcMain, BrowserWindow }  = require('electron');
 const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
@@ -10,9 +10,11 @@ chai.use(sinonChai);
 describe('App', () => {
   const sandbox = sinon.createSandbox();
   const originalPlatform = process.platform;
+  const getOnReadyCb = () => app.on.getCalls().find(call => call.args[0] === 'ready').args[1];
 
   beforeEach(() => {
     sandbox.stub(app, 'requestSingleInstanceLock').returns(true);
+    sandbox.stub(ipcMain, 'on');
   });
 
   afterEach(() => {
@@ -24,13 +26,29 @@ describe('App', () => {
     });
   });
 
+  it('should listen for ipcMain notificationClick', async () => {
+    sandbox.spy(BrowserWindow.prototype, 'show');
+    sandbox.stub(app, 'on');
+    require('./');
+    const onReadyCb = getOnReadyCb();
+
+    await onReadyCb();
+
+    expect(ipcMain.on).to.have.been.calledWith('notificationClick', sinon.match.func);
+    ipcMain.on.getCalls()
+      .find(call => call.args[0] === 'notificationClick')
+      .args[1]();
+
+    expect(BrowserWindow.prototype.show).to.have.been.called;
+  });
+
   it('should not throw an exception upon ready', async () => {
     sandbox.spy(app, 'on');
     require('./');
 
     expect(app.on).to.have.been.called;
 
-    const onReadyCb = app.on.getCalls().find(call => call.args[0] === 'ready').args[1];
+    const onReadyCb = getOnReadyCb();
     expect(async () => await onReadyCb()).to.not.throw();
   });
 
@@ -39,7 +57,7 @@ describe('App', () => {
     sandbox.spy(app, 'on');
     require('./');
 
-    const onReadyCb = app.on.getCalls().find(call => call.args[0] === 'ready').args[1];
+    const onReadyCb = getOnReadyCb();
     Object.defineProperty(process, 'platform', {
       value: 'win32',
     });

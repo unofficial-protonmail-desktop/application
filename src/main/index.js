@@ -1,5 +1,5 @@
 import path from 'path';
-import { app, Menu } from 'electron';
+import { app, ipcMain, Menu } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import electronDebug from 'electron-debug';
 import createWindow from './helpers/window';
@@ -32,6 +32,10 @@ require('electron-context-menu')();
 
 let mainWindow;
 let isQuitting = false;
+
+ipcMain.on('notificationClick', () => {
+  mainWindow.show();
+});
 
 function createMainWindow() {
   if (process.argv.indexOf('test') !== -1) {

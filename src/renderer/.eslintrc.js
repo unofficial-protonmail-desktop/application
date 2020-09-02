@@ -5,6 +5,7 @@ module.exports = {
   },
   globals: {
     module: true,
+    OUTPUT_DIR: true,
   },
   overrides: [
     {
