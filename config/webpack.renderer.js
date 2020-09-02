@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { spawn } = require('child_process');
 
-const env = process.env.NAME;
+const env = process.env.NAME || 'development';
 
 module.exports = {
   devtool: 'source-map',
