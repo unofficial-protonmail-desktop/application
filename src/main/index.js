@@ -128,6 +128,8 @@ if (!gotTheLock) {
     const argv = require('minimist')(process.argv.slice(1));
 
     page.on('dom-ready', () => {
+      if (!mainWindow) return;
+
       if (argv.minimize) {
         mainWindow.minimize();
       } else {

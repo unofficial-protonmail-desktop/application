@@ -14,6 +14,7 @@ describe('App', () => {
 
   beforeEach(() => {
     sandbox.stub(app, 'requestSingleInstanceLock').returns(true);
+    sandbox.stub(app, 'on');
     sandbox.stub(ipcMain, 'on');
   });
 
@@ -28,7 +29,6 @@ describe('App', () => {
 
   it('should listen for ipcMain notificationClick', async () => {
     sandbox.spy(BrowserWindow.prototype, 'show');
-    sandbox.stub(app, 'on');
     require('./');
     const onReadyCb = getOnReadyCb();
 
@@ -43,7 +43,6 @@ describe('App', () => {
   });
 
   it('should not throw an exception upon ready', async () => {
-    sandbox.spy(app, 'on');
     require('./');
 
     expect(app.on).to.have.been.called;
@@ -54,7 +53,6 @@ describe('App', () => {
 
   it('should call setAppUserModelId with accurate value upon ready in win32', async () => {
     sandbox.spy(app, 'setAppUserModelId');
-    sandbox.spy(app, 'on');
     require('./');
 
     const onReadyCb = getOnReadyCb();
@@ -66,7 +64,7 @@ describe('App', () => {
     expect(app.setAppUserModelId).to.have.been.calledWith(pkgJson.build.appId);
   });
 
-  it('should call mainWindow.show when app is opened from taskbar in win32', () => {
+  it('should call mainWindow.show when app is opened from taskbar in win32', async () => {
     app.requestSingleInstanceLock.returns(true);
     require('./');
 
@@ -75,7 +73,12 @@ describe('App', () => {
     });
     sandbox.spy(BrowserWindow.prototype, 'show');
     sandbox.stub(BrowserWindow.prototype, 'isMinimized').returns(false);
-    app.emit('second-instance');
+
+    await getOnReadyCb()();
+
+    app.on.getCalls()
+      .find(({ args }) => args[0] === 'second-instance')
+      .args[1]();
 
     expect(BrowserWindow.prototype.show).to.have.been.called;
   });
