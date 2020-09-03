@@ -168,7 +168,7 @@
     "cross-env": "7.0.2",
     "css-loader": "4.2.2",
     "cz-conventional-changelog": "3.3.0",
-    "electron": "8.5.0",
+    "electron": "8.5.1",
     "electron-builder": "22.8.0",
     "electron-chromedriver": "7.0.0",
     "electron-devtools-installer": "3.1.1",
