@@ -179,7 +179,7 @@
     "eslint-plugin-react": "7.20.6",
     "file-loader": "6.1.0",
     "html-webpack-plugin": "4.4.1",
-    "husky": "4.2.5",
+    "husky": "4.3.0",
     "identity-obj-proxy": "3.0.0",
     "istanbul": "0.4.5",
     "jest": "26.4.2",
