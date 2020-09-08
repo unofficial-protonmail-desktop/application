@@ -166,7 +166,7 @@
     "commitizen": "4.2.1",
     "copy-webpack-plugin": "6.1.0",
     "cross-env": "7.0.2",
-    "css-loader": "4.2.2",
+    "css-loader": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
     "electron": "8.5.1",
     "electron-builder": "22.8.0",
