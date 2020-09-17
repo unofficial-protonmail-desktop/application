@@ -133,7 +133,7 @@
     "electron-debug": "^3.0.0",
     "electron-dl": "^3.0.0",
     "electron-settings": "^4.0.0",
-    "electron-updater": "4.3.4",
+    "electron-updater": "4.3.5",
     "fs-jetpack": "^3.0.0",
     "history": "^4.7.2",
     "minimist": "1.2.5",
