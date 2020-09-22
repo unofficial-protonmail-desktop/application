@@ -16,6 +16,7 @@ describe('App', () => {
     sandbox.stub(app, 'requestSingleInstanceLock').returns(true);
     sandbox.stub(app, 'on');
     sandbox.stub(ipcMain, 'on');
+    sandbox.stub(BrowserWindow.prototype, 'loadURL');
   });
 
   afterEach(() => {
@@ -71,7 +72,7 @@ describe('App', () => {
     Object.defineProperty(process, 'platform', {
       value: 'win32',
     });
-    sandbox.spy(BrowserWindow.prototype, 'show');
+    sandbox.stub(BrowserWindow.prototype, 'show');
     sandbox.stub(BrowserWindow.prototype, 'isMinimized').returns(false);
 
     await getOnReadyCb()();
