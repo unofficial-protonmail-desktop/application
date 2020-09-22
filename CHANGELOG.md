@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/unofficial-protonmail-desktop/application/compare/v1.1.0...v1.2.0) (2020-09-22)
+
+
+### Features
+
+* focus window upon notification click ([bc95060](https://github.com/unofficial-protonmail-desktop/application/commit/bc95060222b24c11e2ebfaf9a609e766713c0c23)), closes [#411](https://github.com/unofficial-protonmail-desktop/application/issues/411)
+
+
+### Bug Fixes
+
+* package.json, yarn.lock & .snyk to reduce vulnerabilities ([96845f6](https://github.com/unofficial-protonmail-desktop/application/commit/96845f62044d98e2b101f2430f01b484bfd98ce7))
+
 ## [1.1.0](https://github.com/protonmail-desktop/application/compare/v1.0.6...v1.1.0) (2020-08-20)
 
 
