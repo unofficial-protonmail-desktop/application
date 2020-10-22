@@ -134,7 +134,7 @@
     "electron-dl": "^3.0.0",
     "electron-settings": "^4.0.0",
     "electron-updater": "4.3.5",
-    "fs-jetpack": "^3.0.0",
+    "fs-jetpack": "^4.0.0",
     "history": "^4.7.2",
     "minimist": "1.2.5",
     "react": "^16.4",
