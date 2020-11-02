@@ -182,7 +182,7 @@
     "husky": "4.3.0",
     "identity-obj-proxy": "3.0.0",
     "istanbul": "0.4.5",
-    "jest": "26.6.1",
+    "jest": "26.6.2",
     "mocha": "8.2.0",
     "node-sass": "4.14.1",
     "nyc": "15.1.0",
