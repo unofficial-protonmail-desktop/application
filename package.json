@@ -183,7 +183,7 @@
     "identity-obj-proxy": "3.0.0",
     "istanbul": "0.4.5",
     "jest": "26.6.2",
-    "mocha": "8.2.0",
+    "mocha": "8.2.1",
     "node-sass": "5.0.0",
     "nyc": "15.1.0",
     "path": "0.12.7",
