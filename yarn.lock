@@ -6030,10 +6030,10 @@ electron-window@^0.8.0:
   dependencies:
     is-electron-renderer "^2.0.0"
 
-electron@8.5.4:
-  version "8.5.4"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-8.5.4.tgz#6037abc0bb87705869a13f4d909f551ae041d3f3"
-  integrity sha512-cA0VLeeSQzILYcNqYcHSMfvpecnfgrMLY4bPRNuk1mPHdHpQ5pd9KO/mESNQJyrY+7lakpF+oC8X1+tby2LJ/Q==
+electron@8.5.5:
+  version "8.5.5"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-8.5.5.tgz#17b12bd70139c0099f750fc5de0d480bf03acb96"
+  integrity sha512-e355H+tRDial0m+X2v+l+0SnaATAPw4sNjv9qmdk/6MJz/glteVJwVJEnxTjPfEELIJSChrBWDBVpjdDvoBF4Q==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"
