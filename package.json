@@ -145,7 +145,7 @@
     "react-router-dom": "^5.0.1",
     "redux": "^4.0",
     "redux-thunk": "^2.2.0",
-    "snyk": "^1.384.0"
+    "snyk": "^1.425.4"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.1",
