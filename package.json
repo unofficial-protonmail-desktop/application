@@ -188,7 +188,7 @@
     "nyc": "15.1.0",
     "path": "0.12.7",
     "raw-loader": "4.0.2",
-    "sass-loader": "10.1.0",
+    "sass-loader": "10.1.1",
     "sinon": "9.2.3",
     "sinon-chai": "3.5.0",
     "source-map-support": "0.5.19",
