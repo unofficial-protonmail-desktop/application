@@ -148,11 +148,11 @@
     "snyk": "^1.384.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.12.1",
-    "@babel/plugin-proposal-object-rest-spread": "7.12.1",
-    "@babel/preset-env": "7.12.11",
-    "@babel/preset-react": "7.12.10",
-    "@babel/register": "7.12.10",
+    "@babel/plugin-proposal-class-properties": "7.12.13",
+    "@babel/plugin-proposal-object-rest-spread": "7.12.13",
+    "@babel/preset-env": "7.12.16",
+    "@babel/preset-react": "7.12.13",
+    "@babel/register": "7.12.13",
     "@commitlint/cli": "11.0.0",
     "@commitlint/config-conventional": "11.0.0",
     "babel-core": "7.0.0-bridge.0",
