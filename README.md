@@ -1,8 +1,10 @@
+# Deprecated
+
+⚠️ This application is deprecated and no longer maintained. We're recommending using [ProtonMail Bridge](https://protonmail.com/bridge/install) or [ElectronMail](https://github.com/vladimiry/ElectronMail). ⚠️
+
 Unofficial desktop client for ProtonMail [![license](https://img.shields.io/github/license/beatplus/protonmail.svg?style=flat-square)]() <a href="https://snyk.io/test/github/protonmail-desktop/application"><img src="https://snyk.io/test/github/protonmail-desktop/application/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/protonmail-desktop/application" style="max-width:100%;"></a> [![codecov](https://codecov.io/gh/protonmail-desktop/application/branch/master/graph/badge.svg)](https://codecov.io/gh/protonmail-desktop/application)
 ======
 ![Protonmail Desktop on Linux](https://raw.githubusercontent.com/protonmail-desktop/application/master/media/linux-screenshot.png)
-
-[![Download from Snap Store](https://user-images.githubusercontent.com/45159366/54588580-a9b19400-49e0-11e9-86aa-7190fe124925.png)](https://snapcraft.io/protonmail-desktop-unofficial)
 
 Unofficial desktop client for ProtonMail is an app that emulates a native client for the ProtonMail e-mail service. Check out more about Protonmail in [their website](https://protonmail.com).
 
